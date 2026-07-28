@@ -1,0 +1,22 @@
+{
+  "name": "AdLand Studio",
+  "short_name": "AdLand",
+  "description": "Where Creativity Has No Limits.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#C9A84C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
