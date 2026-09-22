@@ -1,4 +1,4 @@
-name: Build AdLand Nexus
+name: Build AdLand Nexus v1.1.0
 on:
   push:
     branches: ["release"]
@@ -25,14 +25,14 @@ jobs:
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
-          name: AdLand Nexus v1.0.0
+          tag_name: v1.1.0
+          name: AdLand Nexus v1.1.0
           body: |
-            AdLand Nexus v1.0.0 — desktop command center by AdLand Studio.
+            AdLand Nexus v1.1.0 — desktop command center by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-nexus/release/AdLand-Nexus-1.0.0-Setup.exe
-            adland-nexus/release/AdLand-Nexus-1.0.0-Portable.exe
+            adland-nexus/release/AdLand-Nexus-1.1.0-Setup.exe
+            adland-nexus/release/AdLand-Nexus-1.1.0-Portable.exe
           draft: false
           prerelease: false
