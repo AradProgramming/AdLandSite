@@ -99,13 +99,10 @@ statreak:'سلامت فضای کار',streakText:'ریتم را حفظ کن.',sh
 }};
 Object.assign(T.en,{board:'Board',boardDesc:'Move work through Backlog, Doing and Done.',backlog:'Backlog',doing:'Doing',boardDone:'Done',move:'Move',clear:'Clear',equals:'Equals',history:'History',emptyHistory:'No calculations yet.',developer:'Developer bench',developerDesc:'Generate a UUID and timestamp instantly.',generate:'Generate',copied:'Copied',sound:'Interface sounds',soundDesc:'Subtle clicks and completion tones.',soundOn:'On',soundOff:'Off',clearHistory:'Clear history',theme:'Vibe',themeDesc:'Choose the atmosphere of Nexus.',aurora:'Aurora',midnight:'Midnight',ember:'Ember',ocean:'Ocean',mono:'Mono'});
 Object.assign(T.fa,{board:'برد',boardDesc:'کارها را بین «در صف»، «در حال انجام» و «انجام‌شده» جابه‌جا کن.',backlog:'در صف',doing:'در حال انجام',boardDone:'انجام‌شده',move:'انتقال',clear:'پاک کردن',equals:'برابر',history:'تاریخچه',emptyHistory:'هنوز محاسبه‌ای انجام نشده است.',developer:'میز توسعه‌دهنده',developerDesc:'ساخت سریع UUID و زمان فعلی.',generate:'ساخت',copied:'کپی شد',sound:'صداهای رابط',soundDesc:'صداهای ظریف برای کلیک‌ها و تکمیل کارها.',soundOn:'روشن',soundOff:'خاموش',clearHistory:'پاک کردن تاریخچه',theme:'حال‌وهوا',themeDesc:'حال‌وهوای ظاهری Nexus را انتخاب کن.',aurora:'شفق',midnight:'نیمه‌شب',ember:'اخگر',ocean:'اقیانوس',mono:'تک‌رنگ'});
-store.soundOn = store.soundOn ?? true;
-store.calcExpr = store.calcExpr ?? '';
-store.calcHistory = Array.isArray(store.calcHistory) ? store.calcHistory : [];
 
 let store;
 const base={lang:'en',page:'overview',theme:'aurora',accent:'#78f7d0',tasks:[{id:1,title:'Build something worth keeping',project:'Nexus',p:'HIGH',done:false},{id:2,title:'Polish the release',project:'AdLand',p:'MID',done:true},{id:3,title:'Review tomorrow',project:'Personal',p:'LOW',done:false}],notes:[{id:1,title:'Nexus note',body:'Clarity is a feature. Keep the surface calm and the tools useful.',date:Date.now()}],snippets:[{id:1,title:'Git status',lang:'Shell',body:'git status\ngit diff --stat'}],activeNote:1,activeSnippet:1,focusSec:1500,focusMode:'Focus',focusRunning:false,defaultFocus:25,defaultBreak:5,autoBreak:false,reduced:false,soundOn:true,calcExpr:'',calcHistory:[],stopwatch:0,watchRunning:false};
-try{store=Object.assign({},base,JSON.parse(localStorage.getItem('adland-nexus')||'{}'))}catch(e){store=base}
+try{store=Object.assign({},base,JSON.parse(localStorage.getItem('adland-nexus')||'{}'))}catch(e){store=base}\nstore.soundOn = store.soundOn ?? true; store.calcExpr = store.calcExpr ?? ''; store.calcHistory = Array.isArray(store.calcHistory) ? store.calcHistory : []; store.defaultFocus=store.defaultFocus||25; store.defaultBreak=store.defaultBreak||5;
 function save(){localStorage.setItem('adland-nexus',JSON.stringify(store))}
 function tr(k){return (T[store.lang]||T.en)[k]||T.en[k]||k}
 function esc(v){return String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
