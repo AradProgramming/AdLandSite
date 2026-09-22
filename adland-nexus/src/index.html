@@ -201,8 +201,8 @@ const ex=document.getElementById('export');if(ex)ex.onclick=()=>{const a=documen
 const im=document.getElementById('import');if(im)im.onchange=async()=>{try{store=Object.assign({},base,JSON.parse(await im.files[0].text()));save();render();toast(tr('imported'))}catch(e){toast(tr('importFailed'))}};
 const wt=document.getElementById('watchToggle');if(wt)wt.onclick=()=>{store.watchRunning=!store.watchRunning;save();render();startWatchTimer()};
 const wr=document.getElementById('watchReset');if(wr)wr.onclick=()=>{store.stopwatch=0;store.watchRunning=false;save();render()};
-}
-// Nexus 1.2 interaction layer
+
+// Dynamic controls
 document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{const t=store.tasks.find(x=>x.id==b.dataset.move);if(!t)return;const order=['backlog','doing','done'];const st=t.status||(t.done?'done':'backlog');const ni=Math.max(0,Math.min(2,order.indexOf(st)+(Number(b.dataset.dir)||0)));t.status=order[ni];t.done=t.status==='done';save();sfx('success');render()});
 document.querySelectorAll('[data-calc]').forEach(b=>b.onclick=()=>calcPress(b.dataset.calc));
 document.querySelectorAll('[data-history]').forEach(b=>b.onclick=()=>{store.calcExpr=store.calcHistory[+b.dataset.history]?.expr||'';save();calcRender();sfx()});
@@ -213,6 +213,8 @@ const stamp=document.getElementById('stampOut');if(stamp&&(!stamp.textContent||s
 const stampCopy=document.getElementById('stampCopy');if(stampCopy)stampCopy.onclick=()=>{navigator.clipboard.writeText(document.getElementById('stampOut').textContent);toast(tr('copied'));sfx()};
 const soundToggle=document.getElementById('soundToggle');if(soundToggle)soundToggle.onclick=()=>{store.soundOn=!store.soundOn;save();render();if(store.soundOn)sfx('success')};
 
+document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{store.theme=b.dataset.theme;save();sfx('success');render()});
+}
 function startFocusTimer(){clearInterval(timer);if(!store.focusRunning)return;timer=setInterval(()=>{if(store.focusSec>0){store.focusSec--;save();const x=document.getElementById('time');if(x)x.textContent=fmtSec(store.focusSec)}else{store.focusRunning=false;clearInterval(timer);save();toast(store.focusMode==='Focus'?tr('focusComplete'):tr('breakComplete'));if(store.focusMode==='Focus'&&store.autoBreak){store.focusMode='Break';store.focusSec=store.defaultBreak*60;store.focusRunning=true;save();render();startFocusTimer()}else render()}},1000)}
 function startWatchTimer(){clearInterval(watchTimer);if(!store.watchRunning)return;watchTimer=setInterval(()=>{store.stopwatch+=1;save();const x=document.getElementById('watch');if(x)x.textContent=(Math.floor(store.stopwatch/600)).toString().padStart(2,'0')+':'+(Math.floor(store.stopwatch/10)%60).toString().padStart(2,'0')+'.'+(store.stopwatch%10)},100); }
 function openQuick(){document.getElementById('quickModal').classList.add('open');document.getElementById('quickTitle').value='';document.getElementById('quickBody').value='';document.getElementById('quickTitle').placeholder=tr('captureTitle');document.getElementById('quickBody').placeholder=tr('captureBody');document.getElementById('quickTitle').focus()}
