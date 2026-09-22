@@ -1,0 +1,61 @@
+{
+  "name": "adland-nexus",
+  "version": "1.0.0",
+  "description": "AdLand Nexus — a focused desktop command center by AdLand Studio.",
+  "author": "AdLand Studio",
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build:web": "vite build",
+    "build:desktop": "tsc -p electron/tsconfig.json && vite build",
+    "dist": "npm run build:desktop && electron-builder --win nsis portable",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "cmdk": "latest",
+    "framer-motion": "latest",
+    "lucide-react": "latest",
+    "sonner": "latest",
+    "zustand": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "build": {
+    "appId": "studio.adland.nexus",
+    "productName": "AdLand Nexus",
+    "artifactName": "AdLand-Nexus-${version}-${arch}.${ext}",
+    "compression": "maximum",
+    "asar": true,
+    "files": ["dist/**/*", "dist-electron/**/*", "package.json"],
+    "directories": { "output": "release" },
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "AdLand-Nexus-${version}-Setup.exe"
+    },
+    "portable": { "artifactName": "AdLand-Nexus-${version}-Portable.exe" },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AdLand Nexus"
+    }
+  }
+}
