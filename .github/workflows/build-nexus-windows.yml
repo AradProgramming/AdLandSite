@@ -2,6 +2,12 @@ name: Build AdLand Nexus v1.3.0
 on:
   push:
     branches: ["release"]
+    paths:
+      - "adland-nexus/**"
+      - ".github/workflows/build-nexus-windows.yml"
+  concurrency:
+    group: adland-nexus-build
+    cancel-in-progress: true
   workflow_dispatch:
 permissions:
   contents: write
