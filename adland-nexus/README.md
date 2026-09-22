@@ -1,8 +1,14 @@
-# AdLand Nexus v1.1.0
+# AdLand Nexus v1.2.0
 
 A polished Windows desktop command center made by **AdLand Studio**.
 
-## New in 1.1.0
+## New in 1.2.0
+
+- Animated Nexus Board for Backlog, Doing and Done
+- Full desktop-style calculator keypad with history, keyboard input and safe expression parsing
+- Developer bench for UUID and timestamp generation
+- Interface sound effects with a persistent on/off setting
+- Additional ambient motion and micro-interactions
 
 - Persian / English interface with RTL switching
 - Focus sessions with custom durations from 5–120 minutes
