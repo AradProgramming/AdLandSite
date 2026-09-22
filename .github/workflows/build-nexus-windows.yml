@@ -5,10 +5,10 @@ on:
     paths:
       - "adland-nexus/**"
       - ".github/workflows/build-nexus-windows.yml"
-  concurrency:
-    group: adland-nexus-build
-    cancel-in-progress: true
   workflow_dispatch:
+concurrency:
+  group: adland-nexus-build
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
