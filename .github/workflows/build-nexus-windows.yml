@@ -1,0 +1,38 @@
+name: Build AdLand Nexus
+on:
+  push:
+    branches: ["release"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: adland-nexus
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build Windows installer
+        run: npm run dist
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: AdLand Nexus v1.0.0
+          body: |
+            AdLand Nexus v1.0.0 — desktop command center by AdLand Studio.
+            
+            Windows x64 installer and portable build are attached below.
+          files: |
+            adland-nexus/release/AdLand-Nexus-1.0.0-Setup.exe
+            adland-nexus/release/AdLand-Nexus-1.0.0-Portable.exe
+          draft: false
+          prerelease: false
