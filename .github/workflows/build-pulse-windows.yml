@@ -1,0 +1,40 @@
+name: Build AdLand Pulse v1.0.0
+on:
+  push:
+    branches: ["release"]
+    paths:
+      - "adland-pulse/**"
+      - ".github/workflows/build-pulse-windows.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: adland-pulse-build
+  cancel-in-progress: true
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: adland-pulse
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: pulse-v1.0.0
+          name: AdLand Pulse v1.0.0
+          body: |
+            AdLand Pulse v1.0.0 — performance telemetry console by AdLand Studio.
+            
+            Windows x64 installer and portable build are attached below.
+          files: |
+            adland-pulse/release/AdLand-Pulse-1.0.0-Setup.exe
+            adland-pulse/release/AdLand-Pulse-1.0.0-Portable.exe
+          draft: false
+          prerelease: false
