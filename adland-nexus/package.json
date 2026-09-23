@@ -20,9 +20,9 @@
         {"target":"nsis","arch":["x64"]},
         {"target":"portable","arch":["x64"]}
       ],
-      "artifactName":"AdLand-Nexus-\u0024{version}-Setup.exe"
+      "artifactName":"AdLand-Nexus-${version}-Setup.exe"
     },
-    "portable":{"artifactName":"AdLand-Nexus-\u0024{version}-Portable.exe"},
+    "portable":{"artifactName":"AdLand-Nexus-${version}-Portable.exe"},
     "nsis":{
       "oneClick":false,
       "allowToChangeInstallationDirectory":true,
