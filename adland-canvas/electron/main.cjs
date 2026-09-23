@@ -1,0 +1,9 @@
+const{app,BrowserWindow,ipcMain,dialog,shell,clipboard,nativeTheme}=require('electron');const fs=require('fs/promises'),path=require('path'),os=require('os');let win;
+function create(){win=new BrowserWindow({width:1500,height:940,minWidth:1050,minHeight:680,frame:false,show:false,backgroundColor:'#f5f1e8',webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}});win.loadFile(path.join(__dirname,'../src/index.html'));win.once('ready-to-show',()=>win.show())}
+app.whenReady().then(()=>{nativeTheme.themeSource='light';create()});
+ipcMain.handle('window',(_,a)=>{if(!win)return false;if(a==='min')win.minimize();else if(a==='max')win.isMaximized()?win.unmaximize():win.maximize();else if(a==='close')win.close();return win.isMaximized()});
+ipcMain.handle('pickImages',async()=>{const r=await dialog.showOpenDialog(win,{title:'Add visual assets',properties:['openFile','multiSelections'],filters:[{name:'Images',extensions:['png','jpg','jpeg','webp','gif','bmp','svg','avif']}]});if(r.canceled)return[];return Promise.all(r.filePaths.map(async p=>{const st=await fs.stat(p);return{path:p,name:path.basename(p),type:path.extname(p).slice(1).toUpperCase(),size:st.size}}))});
+ipcMain.handle('readImage',async(_,p)=>{if(typeof p!=='string')throw new Error('Invalid path');const b=await fs.readFile(p);const e=path.extname(p).slice(1).toLowerCase();const mime=e==='jpg'||e==='jpeg'?'image/jpeg':e==='svg'?'image/svg+xml':e==='webp'?'image/webp':e==='gif'?'image/gif':e==='avif'?'image/avif':'image/png';return{data:'data:'+mime+';base64,'+b.toString('base64'),size:b.length}});
+ipcMain.handle('reveal',async(_,p)=>{if(typeof p==='string')shell.showItemInFolder(p)});
+ipcMain.handle('copy',async(_,p)=>{clipboard.writeText(String(p||''));return true});
+app.on('window-all-closed',()=>{if(process.platform!=='darwin')app.quit()});
