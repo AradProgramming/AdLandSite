@@ -1,363 +1,178 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AdLand Studio | جایی که خلاقیت هیچ مرزی نمی‌شناسد</title>
-    <meta name="description" content="AdLand is a creative software and technology studio dedicated to building innovative applications, AI-powered tools, educational content, and digital solutions." />
-    <meta name="keywords" content="AdLand, استودیو نرم‌افزار, هوش مصنوعی, آموزش برنامه‌نویسی, توسعه نرم‌افزار, Arad Khandel" />
-    <meta name="author" content="AdLand Studio" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="AdLand Studio | Where Creativity Has No Limits" />
-    <meta property="og:description" content="A creative software and technology studio dedicated to building innovative applications, AI-powered tools, and educational content." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AdLand Studio" />
-    <meta name="twitter:description" content="Where Creativity Has No Limits." />
-    <meta name="twitter:image" content="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" />
-    <link rel="manifest" href="/AdLandSite/manifest.json" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/AdLandSite/assets/index-B1q-P4J8.js?v=20260923"></script>
-    <link rel="stylesheet" crossorigin href="/AdLandSite/assets/index-bhBza2Ex.css?v=20260923">
-  </head>
-  <body>
-    <div id="root"></div>
-  <div id="nexus-board" aria-label="AdLand Nexus">
-<button id="nexus-board-launch"><span class="nPulse"></span><strong>ADLAND NEXUS</strong><small>LATEST · 1.4.2</small></button>
-<section id="nexus-board-panel">
-<div class="nb-orb"></div><div class="nb-top"><div><b id="nb-title">AdLand Nexus</b><small id="nb-sub">A new desktop workspace from AdLand Studio</small></div><button id="nb-close">×</button></div>
-<div class="nb-grid"><div><span>01</span><b id="nb-f1">Focus</b><p id="nb-d1">Custom focus sessions and deep-work tools.</p></div><div><span>02</span><b id="nb-f2">Workspace</b><p id="nb-d2">Tasks, notes, snippets and a visual board.</p></div><div><span>03</span><b id="nb-f3">Bilingual</b><p id="nb-d3">Persian and English with saved preferences.</p></div></div>
-<div class="nb-actions"><a id="nb-download" href="https://github.com/AradProgramming/AdLandSite/releases/download/v1.4.2/AdLand-Nexus-1.4.2-Setup.exe">Download for Windows</a><button id="nb-sound" aria-label="Toggle sound">♪</button></div><div class="nb-miniapp"><div><b>AdLand Frame</b><small id="nb-frame-text">Local image workspace · Windows x64</small></div><a id="nb-frame-download" href="https://github.com/AradProgramming/AdLandSite/releases/download/frame-v1.1.0/AdLand-Frame-1.1.0-Setup.exe">Frame ↗</a></div>
-<div class="nb-credit">AdLand Studio · Where Creativity Has No Limits.</div>
-</section></div>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="AdLand Studio — جایی که خلاقیت هیچ مرزی نمی‌شناسد.">
+<link rel="icon" href="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png">
+<title>AdLand Studio — Creative Digital Universe</title>
 <style>
-#nexus-board{position:fixed;right:22px;bottom:22px;z-index:99999;font-family:Inter,Vazirmatn,Arial,sans-serif}
-#nexus-board-launch{position:relative;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border:1px solid rgba(201,168,76,.35);border-radius:999px;background:linear-gradient(135deg,#0d1722f2,#0a1119f2);color:#f3efe1;box-shadow:0 18px 60px #0007,0 0 0 1px #fff1;backdrop-filter:blur(18px);cursor:pointer;transition:.3s;overflow:hidden}
-#nexus-board-launch:hover{transform:translateY(-4px);border-color:#c9a84c88;box-shadow:0 25px 80px #0009,0 0 28px #c9a84c28}
-#nexus-board-launch strong{font-size:10px;letter-spacing:.1em}.nPulse{width:7px;height:7px;border-radius:50%;background:#78f7d0;box-shadow:0 0 0 0 #78f7d066;animation:nbpulse 1.8s infinite}.nPulse+strong+small{color:#78f7d0;font-size:7px}
-#nexus-board-panel{position:absolute;right:0;bottom:56px;width:380px;max-width:calc(100vw - 28px);padding:17px;border:1px solid #c9a84c36;border-radius:18px;background:linear-gradient(145deg,#07121ceF,#101927ef);box-shadow:0 30px 120px #000c,0 0 60px #c9a84c12;backdrop-filter:blur(22px);opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;transition:.32s cubic-bezier(.16,1,.3,1);overflow:hidden}
-#nexus-board-panel.open{opacity:1;transform:none;pointer-events:auto}.nb-orb{position:absolute;right:-90px;top:-90px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,#78f7d018,transparent 68%);filter:blur(10px);animation:nborb 8s ease-in-out infinite}.nb-top{display:flex;justify-content:space-between;align-items:start;gap:10px;position:relative}.nb-top b{font-size:17px;letter-spacing:-.03em;color:#fff}.nb-top small{display:block;margin-top:4px;color:#81939a;font-size:8px;line-height:1.5}.nb-top button{width:28px;height:28px;border:1px solid #fff1;background:#fff1;color:#889aa0;border-radius:8px;cursor:pointer}.nb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:15px 0;position:relative}.nb-grid>div{padding:10px;border:1px solid #fff1;border-radius:11px;background:#fff2;transition:.25s}.nb-grid>div:hover{transform:translateY(-3px);border-color:#c9a84c44;background:#c9a84c08}.nb-grid span{font:700 7px Inter,Arial;color:#c9a84c}.nb-grid b{display:block;color:#e9f3f1;font-size:9px;margin-top:5px}.nb-grid p{color:#778b91;font-size:7px;line-height:1.55;margin:4px 0 0}.nb-actions{display:flex;gap:7px;position:relative}.nb-actions a{flex:1;height:37px;display:flex;align-items:center;justify-content:center;border-radius:10px;text-decoration:none;background:linear-gradient(135deg,#c9a84c,#f5c842);color:#071019;font-size:9px;font-weight:900;box-shadow:0 10px 32px #c9a84c22;transition:.25s}.nb-actions a:hover{transform:translateY(-2px);filter:brightness(1.06)}#nb-sound{width:38px;border:1px solid #c9a84c2c;border-radius:10px;background:#fff2;color:#e9dfba;cursor:pointer}#nb-sound.on{background:#c9a84c12;border-color:#c9a84c55}
-.nb-credit{position:relative;color:#546c75;font-size:7px;text-align:center;margin-top:10px}.nb-miniapp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;margin-top:8px;border:1px solid #ffffff0d;background:#ffffff03;border-radius:10px;position:relative}.nb-miniapp b{display:block;color:#e5f0ed;font-size:8px}.nb-miniapp small{display:block;color:#60767e;font-size:7px;margin-top:3px}.nb-miniapp a{color:#c9a84c;font-size:8px;font-weight:800;text-decoration:none}.nb-miniapp a:hover{color:#f5c842}
-.nb-sfx{animation:nbshake .22s ease}@keyframes nbpulse{0%{box-shadow:0 0 0 0 #78f7d055}70%{box-shadow:0 0 0 9px #78f7d000}100%{box-shadow:0 0 0 0 #78f7d000}}@keyframes nborb{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,22px)}}@keyframes nbshake{50%{transform:scale(.985)}}@media(max-width:650px){#nexus-board{right:12px;bottom:12px}#nexus-board-panel{width:calc(100vw - 24px)}.nb-grid{grid-template-columns:1fr}}
- .nb-canvas-row{margin-top:7px}.nb-canvas-row a{display:flex;align-items:center;justify-content:center;height:30px;border:1px solid #c9a84c20;background:#ffffff03;color:#d7cda9;text-decoration:none;border-radius:9px;font-size:8px;transition:.2s}.nb-canvas-row a:hover{background:#ffc85708;border-color:#c9a84c45;transform:translateY(-1px)}</style><script>
-(function(){const root=document.documentElement,btn=document.getElementById('nexus-board-launch'),panel=document.getElementById('nexus-board-panel'),close=document.getElementById('nb-close'),sound=document.getElementById('nb-sound'),down=document.getElementById('nb-download');let sfxOn=localStorage.getItem('adland-site-sfx')!=='off';
-const A=new Map([['en',{title:'AdLand Nexus',sub:'A new desktop workspace from AdLand Studio',f1:'Focus',d1:'Custom focus sessions and deep-work tools.',f2:'Workspace',d2:'Tasks, notes, snippets and a visual board.',f3:'Bilingual',d3:'Persian and English with saved preferences.',download:'Download for Windows',frame:'Local image workspace · Windows x64'}],['fa',{title:'AdLand Nexus',sub:'یک فضای کاری دسکتاپ جدید از AdLand Studio',f1:'تمرکز',d1:'جلسه‌های تمرکز سفارشی و ابزارهای کار عمیق.',f2:'فضای کار',d2:'کارها، یادداشت‌ها، اسنیپت‌ها و برد بصری.',f3:'دو زبانه',d3:'فارسی و انگلیسی با تنظیمات ذخیره‌شده.',download:'دانلود برای ویندوز',frame:'کارگاه محلی تصویر · ویندوز x64'}]]);
-function tone(){if(!sfxOn)return;try{const c=window.__nbAudio||(window.__nbAudio=new (window.AudioContext||window.webkitAudioContext)()),o=c.createOscillator(),g=c.createGain(),n=c.currentTime;o.frequency.setValueAtTime(340,n);o.frequency.exponentialRampToValueAtTime(520,n+.06);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(.025,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+.08);o.connect(g).connect(c.destination);o.start(n);o.stop(n+.09)}catch(e){}}
-function lang(){return root.lang==='fa'?'fa':'en'}function paint(){const x=A.get(lang());document.getElementById('nb-title').textContent=x.title;document.getElementById('nb-sub').textContent=x.sub;document.getElementById('nb-f1').textContent=x.f1;document.getElementById('nb-d1').textContent=x.d1;document.getElementById('nb-f2').textContent=x.f2;document.getElementById('nb-d2').textContent=x.d2;document.getElementById('nb-f3').textContent=x.f3;document.getElementById('nb-d3').textContent=x.d3;document.getElementById('nb-download').textContent=x.download;document.getElementById('nb-frame-text').textContent=x.frame;root.dir=lang()==='fa'?'rtl':'ltr';}
-btn.onclick=()=>{panel.classList.toggle('open');tone()};close.onclick=()=>{panel.classList.remove('open');tone()};down.onclick=()=>tone();sound.classList.toggle('on',sfxOn);sound.onclick=()=>{sfxOn=!sfxOn;localStorage.setItem('adland-site-sfx',sfxOn?'on':'off');sound.classList.toggle('on',sfxOn);tone()};paint();new MutationObserver(paint).observe(root,{attributes:true,attributeFilter:['lang']});document.addEventListener('pointerdown',e=>{if(sfxOn&&e.target.closest('a,button'))tone()},{passive:true});})();
-</script><canvas id="adland-vfx" aria-hidden="true"></canvas>
-<style>
-#adland-vfx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
-#root,#nexus-board{position:relative;z-index:2}
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{
+ --bg:#040506;--bg2:#080a0d;--gold:#d9b55d;--gold2:#f6df9a;--white:#f7f3e9;--muted:#7c858b;
+ --line:#ffffff12;--glass:#0a0d12cc;--mint:#7bf6df;--violet:#8c7cff;
+ --mx:50vw;--my:50vh;--scroll:0;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Vazirmatn,Inter,Segoe UI,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at var(--mx) var(--my),#d9b55d0b,transparent 24%),radial-gradient(circle at 15% 15%,#d9b55d0c,transparent 24%),radial-gradient(circle at 85% 70%,#8c7cff07,transparent 26%)}
+a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}
+#space{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-2}
+#scanlines{position:fixed;inset:0;pointer-events:none;z-index:30;opacity:.075;background:repeating-linear-gradient(180deg,transparent 0,transparent 3px,#fff 4px);mix-blend-mode:soft-light}
+#noise{position:fixed;inset:0;pointer-events:none;z-index:29;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2),#fff);z-index:60;box-shadow:0 0 24px #d9b55d}
+.container{width:min(1240px,calc(100% - 40px));margin:auto}
+.glass{border:1px solid var(--line);background:linear-gradient(145deg,#ffffff08,#ffffff02);backdrop-filter:blur(22px);box-shadow:0 28px 100px #0007}
+#nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1240px,calc(100% - 28px));height:66px;display:flex;align-items:center;gap:10px;padding:0 10px;border:1px solid #ffffff15;border-radius:19px;background:#070a0de6;backdrop-filter:blur(26px);z-index:50;box-shadow:0 18px 70px #0008}
+.brand{display:flex;align-items:center;gap:11px;padding:4px 7px;min-width:210px}.brand img{width:44px;height:44px;border-radius:13px;object-fit:cover;box-shadow:0 0 34px #d9b55d14}.brand b{display:block;font:900 11px Inter;letter-spacing:.16em}.brand small{display:block;margin-top:3px;color:#68737a;font:600 6px Inter;letter-spacing:.13em}.navlinks{display:flex;gap:3px;margin-inline:auto}.navlinks a{padding:10px 11px;border-radius:9px;color:#839099;font:700 8px Inter;transition:.25s}.navlinks a:hover,.navlinks a.active{color:#f4ead1;background:#d9b55d09}.navactions{display:flex;gap:5px}.miniBtn{height:36px;padding:0 10px;border:1px solid #ffffff12;border-radius:10px;background:#ffffff05;color:#aab2b6;font:800 7px Inter;letter-spacing:.04em;transition:.25s}.miniBtn:hover{border-color:#d9b55d44;color:#fff;transform:translateY(-2px)}
+#hero{min-height:100vh;display:grid;place-items:center;position:relative;padding:140px 20px 110px;overflow:hidden}.heroWrap{width:min(1240px,100%);display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
+.heroCopy{position:relative;z-index:3}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #d9b55d2e;background:#d9b55d08;color:var(--gold);border-radius:999px;font:800 7px Inter;letter-spacing:.23em}.eyebrow i{width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 1.7s infinite}
+.hero h1{font-size:clamp(48px,7vw,96px);line-height:.94;letter-spacing:-.075em;margin:20px 0 15px}.hero h1 span{background:linear-gradient(90deg,var(--gold),#fff4c2 40%,var(--gold2) 55%,var(--gold));background-size:240% auto;color:transparent;background-clip:text;animation:shine 5.5s linear infinite}.hero p{max-width:650px;color:#8c979d;font-size:12px;line-height:2}
+.heroActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}.btn{height:46px;padding:0 16px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:1px solid #d9b55d35;background:#d9b55d09;color:var(--gold);font:900 8px Inter;transition:.25s}.btn:hover{transform:translateY(-4px);box-shadow:0 22px 60px #d9b55d14;border-color:#d9b55d77}.btn.primary{background:linear-gradient(135deg,var(--gold),#b88b32);color:#120f08;border:0}.heroMeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.pill{padding:7px 9px;border:1px solid #ffffff10;border-radius:999px;background:#ffffff03;color:#77858c;font:700 7px Inter}.pill b{color:var(--white)}
+.heroCore{position:relative;min-height:590px;display:grid;place-items:center}.coreGlow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,#d9b55d1a 0, #d9b55d07 30%,transparent 67%);filter:blur(8px);animation:breath 5s ease-in-out infinite}.core{position:relative;width:min(410px,72vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center}.core:before,.core:after{content:"";position:absolute;border-radius:50%;inset:-35px;border:1px solid #d9b55d1f;animation:spin 18s linear infinite}.core:after{inset:-70px;border-style:dashed;border-color:#7bf6df20;animation-duration:28s;animation-direction:reverse}.ringA,.ringB,.ringC{position:absolute;border-radius:50%;border:1px solid #d9b55d18;inset:22px;animation:spin 12s linear infinite}.ringB{inset:54px;border-color:#fff10;animation-duration:17s;animation-direction:reverse}.ringC{inset:88px;border-color:#7bf6df22;animation-duration:25s}.core img{width:48%;aspect-ratio:1;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px #d9b55d3a,0 0 70px #d9b55d22,0 0 140px #d9b55d0d;z-index:2;animation:float 4s ease-in-out infinite}.orbitLabel{position:absolute;z-index:4;padding:7px 9px;border:1px solid #ffffff13;background:#070a0df0;border-radius:9px;color:#839099;font:700 6px Inter;letter-spacing:.12em;box-shadow:0 10px 30px #0008}.o1{top:7%;right:12%}.o2{bottom:13%;left:6%}.o3{top:39%;left:0}.o4{bottom:2%;right:25%}
+.scrollHint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;color:#5f6a71;font:700 6px Inter;letter-spacing:.2em}.scrollHint i{width:6px;height:22px;border:1px solid #d9b55d44;border-radius:8px;position:relative}.scrollHint i:after{content:"";position:absolute;left:1px;top:3px;width:2px;height:6px;border-radius:2px;background:var(--gold);animation:scrollDot 1.6s infinite}
+.section{padding:115px 20px;position:relative}.sectionHeader{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:42px}.sectionHeadMain small{color:var(--gold);font:800 7px Inter;letter-spacing:.24em}.sectionHeadMain h2{font-size:clamp(34px,5vw,62px);letter-spacing:-.065em;margin:10px 0 6px}.sectionHeadMain p{color:#748188;font-size:10px;line-height:1.9;max-width:620px}.sectionAside{max-width:280px;color:#647179;font:600 7px Inter;line-height:1.8;text-align:end}
+.studioGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}.story{padding:28px;border-radius:24px;min-height:430px;position:relative;overflow:hidden}.story:before{content:"";position:absolute;width:420px;height:420px;right:-180px;top:-200px;border-radius:50%;background:radial-gradient(circle,#d9b55d12,transparent 64%);animation:float 8s ease-in-out infinite}.storyText{position:relative;z-index:2;max-width:690px}.storyText h3{font-size:28px;margin:0 0 13px;letter-spacing:-.05em}.storyText p{color:#7d888f;font-size:11px;line-height:2.05}.storyRows{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:24px}.storyChip{padding:13px;border:1px solid #ffffff0d;border-radius:13px;background:#ffffff03}.storyChip b{display:block;color:var(--gold);font:800 8px Inter}.storyChip span{display:block;margin-top:7px;color:#707d84;font-size:7px;line-height:1.7}.signal{padding:20px;border-radius:24px}.signalHead{display:flex;justify-content:space-between;align-items:center}.signalHead b{font:800 8px Inter;letter-spacing:.13em}.signalLive{display:flex;align-items:center;gap:5px;color:var(--mint);font:700 6px Inter}.signalLive i{width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 11px var(--mint);animation:pulse 1.6s infinite}.bars{height:250px;display:flex;align-items:end;gap:4px;margin-top:18px;padding:12px;border:1px solid #ffffff0a;border-radius:15px;background:#05080b}.bars i{flex:1;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#d9b55d,#8b6828);height:20%;opacity:.76;animation:bar 1.6s ease-in-out infinite alternate}.bars i:nth-child(2n){animation-delay:.12s}.bars i:nth-child(3n){animation-delay:.26s}.bars i:nth-child(4n){animation-delay:.4s}.signalFoot{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}.metric{padding:11px;border:1px solid #ffffff0c;border-radius:11px;background:#ffffff03}.metric small{display:block;color:#66737b;font:700 6px Inter}.metric b{display:block;margin-top:4px;font:800 14px Inter}.metric em{color:var(--mint);font-style:normal;font-size:7px}
+.appsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.app{position:relative;overflow:hidden;border-radius:23px;padding:19px;min-height:300px;transition:.35s;transform-style:preserve-3d}.app:hover{box-shadow:0 36px 120px #000a}.app:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at var(--cx,50%) var(--cy,50%),color-mix(in srgb,var(--accent) 15%,transparent),transparent 25%);pointer-events:none}.appHead{display:flex;align-items:center;gap:12px;position:relative}.appIcon{width:58px;height:58px;border-radius:15px;overflow:hidden;border:1px solid #fff14;box-shadow:0 12px 40px #0006}.appIcon img{width:100%;height:100%;object-fit:cover}.appHead h3{margin:0;font-size:20px;letter-spacing:-.04em}.appHead small{display:block;margin-top:4px;color:#6d7a81;font:700 6px Inter;letter-spacing:.13em}.appTag{margin-inline-start:auto;color:var(--accent);font:800 7px Inter}.app p{position:relative;color:#77848b;font-size:9px;line-height:1.8;max-width:480px;margin:17px 0}.featureMini{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:relative}.featureMini span{padding:8px 9px;border:1px solid #ffffff0b;border-radius:9px;background:#ffffff03;color:#89949a;font-size:7px}.featureMini span:before{content:"✦";color:var(--accent);margin-left:5px}.appBottom{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:16px;position:relative}.version{color:#5e6a70;font:700 6px Inter}.appLink{height:36px;padding:0 11px;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:9px;color:var(--accent);display:flex;align-items:center;font:800 7px Inter;transition:.2s}.appLink:hover{background:color-mix(in srgb,var(--accent) 8%,transparent);transform:translateY(-2px)}
+.projectGrid{display:grid;grid-template-columns:1.35fr .85fr .85fr;grid-auto-rows:minmax(190px,auto);gap:9px}.project{position:relative;overflow:hidden;border-radius:19px;min-height:220px;border:1px solid #ffffff10;background:#080b0f;isolation:isolate}.project:first-child{grid-row:span 2}.project img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.75) contrast(1.1);transition:.45s}.project:hover img{transform:scale(1.06);opacity:.58}.project:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 20%,#030406dd 100%);z-index:1}.projectCopy{position:absolute;z-index:2;left:15px;right:15px;bottom:15px}.projectCopy small{color:var(--gold);font:700 6px Inter;letter-spacing:.15em}.projectCopy h3{margin:7px 0 4px;font-size:17px}.projectCopy p{margin:0;color:#8d979d;font-size:7px;line-height:1.6}
+.learnGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.course{padding:24px;border-radius:22px;position:relative;overflow:hidden}.course:before{content:"";position:absolute;inset:auto -80px -120px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#d9b55d13,transparent 65%)}.course h3{font-size:24px;margin:0}.course p{color:#77838a;font-size:9px;line-height:1.8}.course ul{list-style:none;padding:0;margin:15px 0;display:grid;gap:7px}.course li{display:flex;gap:8px;align-items:center;color:#8d989e;font-size:8px}.course li:before{content:"→";color:var(--gold);font-family:Inter}.contactRow{display:flex;gap:7px;flex-wrap:wrap}
+.teamGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.teamCard{padding:24px;border-radius:22px}.avatar{width:64px;height:64px;border-radius:18px;border:1px solid #d9b55d28;background:#d9b55d08;display:grid;place-items:center;color:var(--gold);font:900 21px Inter}.teamCard h3{margin:12px 0 3px;font-size:17px}.teamCard p{margin:0;color:#77848a;font-size:8px}.teamCard .btn{margin-top:13px;display:inline-flex}
+.faq{max-width:930px;margin:auto;display:grid;gap:7px}.faqItem{border:1px solid #ffffff10;border-radius:14px;background:#ffffff03;overflow:hidden}.faqQ{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border:0;background:transparent;color:#e7e1d4;text-align:right;font-size:9px}.faqQ span{width:25px;height:25px;border:1px solid #d9b55d20;border-radius:7px;color:var(--gold);display:grid;place-items:center;transition:.25s}.faqA{max-height:0;overflow:hidden;color:#6f7c83;font-size:8px;line-height:1.9;padding:0 16px;transition:max-height .3s,padding .3s}.faqItem.open .faqA{max-height:160px;padding:0 16px 15px}.faqItem.open .faqQ span{transform:rotate(45deg);background:#d9b55d09}
+.final{padding:90px 20px 35px}.finalCard{padding:35px;border-radius:28px;text-align:center;position:relative;overflow:hidden}.finalCard:before{content:"";position:absolute;width:480px;height:480px;left:50%;top:-280px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#d9b55d18,transparent 67%)}.finalCard small{position:relative;color:var(--gold);font:800 7px Inter;letter-spacing:.24em}.finalCard h2{position:relative;font-size:clamp(35px,6vw,65px);margin:10px 0;letter-spacing:-.06em}.finalCard p{position:relative;max-width:600px;margin:0 auto;color:#79868d;font-size:10px;line-height:1.8}.finalCard .heroActions{justify-content:center;position:relative}.footer{padding:20px 20px 45px}.footerIn{display:flex;justify-content:space-between;gap:15px;align-items:center;padding-top:18px;border-top:1px solid #ffffff0d;color:#66727a;font-size:7px}.footerBrand{color:#d9b55d;font:900 9px Inter}.footerLinks{display:flex;gap:7px}.footerLinks a{padding:7px 9px;border:1px solid #ffffff0d;border-radius:8px}
+#cursor{position:fixed;left:0;top:0;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,#d9b55d11,transparent 68%);filter:blur(3px);pointer-events:none;z-index:40;transform:translate(-50%,-50%);transition:opacity .25s}.cursorDot{position:fixed;left:0;top:0;width:6px;height:6px;border-radius:50%;background:#f2d88f;box-shadow:0 0 18px #d9b55d,0 0 3px #fff;pointer-events:none;z-index:41}
+#command{position:fixed;inset:0;display:grid;place-items:center;background:#020305bb;backdrop-filter:blur(18px);z-index:100;opacity:0;visibility:hidden;transition:.3s}.commandOpen{opacity:1!important;visibility:visible!important}.cmdCard{width:min(720px,calc(100% - 28px));padding:18px;border:1px solid #d9b55d35;border-radius:22px;background:#0a0f15f8;box-shadow:0 40px 150px #000f}.cmdTop{display:flex;justify-content:space-between;align-items:start}.cmdTop small{color:#72808a;font:700 6px Inter;letter-spacing:.2em}.cmdTop h3{font-size:23px;margin:7px 0 0}.cmdTop button{width:31px;height:31px;border:1px solid #ffffff10;border-radius:8px;background:#ffffff05;color:#87949a}.cmdSearch{height:44px;margin-top:14px;display:flex;gap:9px;align-items:center;padding:0 12px;border:1px solid #ffffff10;border-radius:11px;background:#ffffff03}.cmdSearch span{color:var(--gold);font:900 10px Inter}.cmdSearch input{flex:1;border:0;outline:0;background:transparent;color:#fff;font-size:10px}.cmdGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.cmdGrid a,.cmdGrid button{display:grid;grid-template-columns:31px 1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid #ffffff0d;border-radius:11px;background:#ffffff03;color:inherit;text-decoration:none;text-align:start;transition:.2s}.cmdGrid a:hover,.cmdGrid button:hover{border-color:#d9b55d44;background:#d9b55d08;transform:translateY(-2px)}.cmdGrid strong{width:31px;height:31px;border-radius:8px;background:#d9b55d08;color:var(--gold);display:grid;place-items:center}.cmdGrid b{font:800 8px Inter}.cmdGrid small{display:block;color:#65747d;font-size:6px;margin-top:3px}.cmdGrid i{color:#58666e;font:700 6px Inter;font-style:normal}.cmdFoot{margin-top:11px;padding-top:11px;border-top:1px solid #ffffff0d;display:flex;justify-content:space-between;align-items:center;gap:10px}.cmdFoot span{color:#607079;font:700 6px Inter}.cmdFoot em{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 9px var(--mint)}.cmdFoot div{display:flex;gap:5px}.cmdFoot button{height:29px;padding:0 9px;border:1px solid #d9b55d28;border-radius:8px;background:#d9b55d08;color:var(--gold);font:800 6px Inter}
+#boot{position:fixed;inset:0;z-index:200;background:#030405;display:grid;place-items:center;transition:opacity .8s,visibility .8s}.bootWrap{text-align:center}.bootLogo{width:140px;height:140px;border-radius:50%;overflow:hidden;margin:auto;box-shadow:0 0 0 1px #d9b55d28,0 0 75px #d9b55d14;animation:float 3.5s ease-in-out infinite}.bootLogo img{width:100%;height:100%;object-fit:cover}.bootWrap small{display:block;color:#a38a4e;font:800 7px Inter;letter-spacing:.32em;margin-top:20px}.bootTitle{font:900 23px Inter;margin-top:8px}.bootBar{width:min(370px,76vw);height:3px;margin:17px auto 8px;background:#ffffff0d;border-radius:20px;overflow:hidden}.bootBar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold),#fff0ac);box-shadow:0 0 17px var(--gold);transition:.15s}.bootMeta{display:flex;justify-content:space-between;color:#55636b;font:700 6px Inter;letter-spacing:.1em}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes shine{to{background-position:240% center}}@keyframes float{50%{transform:translateY(-8px)}}@keyframes breath{50%{transform:scale(1.06);opacity:.72}}@keyframes pulse{50%{opacity:.45;transform:scale(.78)}}@keyframes scrollDot{70%{transform:translateY(9px);opacity:.1}}@keyframes bar{from{height:15%}to{height:92%}}
+.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.16,1,.3,1)}.reveal.show{opacity:1;transform:none}
+@media(max-width:980px){.heroWrap{grid-template-columns:1fr}.heroCopy{text-align:center}.heroCopy p{margin-inline:auto}.heroActions,.heroMeta{justify-content:center}.heroCore{min-height:500px}.studioGrid,.teamGrid{grid-template-columns:1fr}.projectGrid{grid-template-columns:1fr 1fr}.project:first-child{grid-row:span 1}.navlinks{display:none}.brand{min-width:0}.sectionHeader{display:block}.sectionAside{max-width:none;text-align:start;margin-top:12px}}
+@media(max-width:650px){.container{width:min(100% - 24px,1240px)}#nav{top:8px;height:56px}.brand img{width:37px;height:37px}.brand b{font-size:9px}.brand small{display:none}.navactions .miniBtn:nth-child(1){display:none}.hero{padding-top:115px}.hero h1{font-size:52px}.heroCore{min-height:380px}.core{width:300px}.coreGlow{width:330px;height:330px}.o3{left:0}.section{padding:80px 12px}.sectionHeader{margin-bottom:27px}.storyRows,.signalFoot{grid-template-columns:1fr}.appsGrid,.learnGrid{grid-template-columns:1fr}.projectGrid{grid-template-columns:1fr}.project{min-height:230px}.cmdGrid{grid-template-columns:1fr}.final{padding:70px 12px 25px}.footerIn{display:block}.footerLinks{margin-top:10px}.cursorDot,#cursor{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.coreGlow,.core:before,.core:after,.ringA,.ringB,.ringC,.hero h1 span,.bootLogo,.bars i{animation:none!important}.reveal{transition:none!important}}
 </style>
-<script>
-(function(){const c=document.getElementById('adland-vfx');if(!c)return;const ctx=c.getContext('2d');let w=0,h=0,dpr=1,pts=[];const reduce=()=>window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
-function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);pts=Array.from({length:55},()=>({x:Math.random()*w,y:Math.random()*h,r:.5+Math.random()*1.8,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.12,a:.15+Math.random()*.42}))}
-function frame(){ctx.clearRect(0,0,w,h);if(reduce()){requestAnimationFrame(frame);return}for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<-5)p.x=w+5;if(p.x>w+5)p.x=-5;if(p.y<-5)p.y=h+5;if(p.y>h+5)p.y=-5;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+p.a+')';ctx.fill()}requestAnimationFrame(frame)}
-addEventListener('resize',resize,{passive:true});resize();frame();
-let mx=-999,my=-999;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;document.body.style.setProperty('--mx',mx+'px');document.body.style.setProperty('--my',my+'px')},{passive:true});
-})();
-</script><style>.image-safe[data-image-error="true"]:before{content:"Image unavailable";display:grid;place-items:center;height:100%;color:#ffffff33;font:600 11px Inter,Vazirmatn,Arial}.image-safe[data-image-error="true"] img{display:none!important}</style><!-- ADLAND STUDIO EXPERIENCE v2 -->
-<div id="studio-hub">
-  <button id="hub-launch" aria-label="Open AdLand app hub">
-    <span class="hub-ring"></span><span class="hub-dot"></span>
-    <span class="hub-copy"><b>ADLAND</b><small>APP ECOSYSTEM</small></span><span class="hub-arrow">↗</span>
-  </button>
-  <aside id="hub-panel" aria-hidden="true">
-    <div class="hub-glow"></div>
-    <header class="hub-head">
-      <div><div class="hub-kicker">STUDIO SYSTEM / 04</div><h3>AdLand Apps</h3><p id="hub-sub">ابزارهایی که برای ساختن ساخته شده‌اند.</p></div>
-      <button id="hub-close" aria-label="Close">×</button>
-    </header>
-    <div class="hub-grid">
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/nexus/">
-        <div class="hub-icon nexus"><span>N</span></div><div class="hub-info"><b>AdLand Nexus</b><small>Focus · Workspace · Relax</small></div><i>1.4.2</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/canvas/">
-        <div class="hub-icon canvas"><span>C</span></div><div class="hub-info"><b>AdLand Canvas</b><small>Visual library · Moodboard · Palette</small></div><i>1.1.0</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/pulse/">
-        <div class="hub-icon pulse"><span>P</span></div><div class="hub-info"><b>AdLand Pulse</b><small>CPU · Memory · Telemetry</small></div><i>1.0.0</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/frame/">
-        <div class="hub-icon frame"><span>F</span></div><div class="hub-info"><b>AdLand Frame</b><small>Image workshop · Effects · Export</small></div><i>1.1.0</i>
-      </a>
-    </div>
-    <div class="hub-foot">
-      <span><em class="online"></em> LOCAL-FIRST WINDOWS TOOLS</span>
-      <div><button id="hub-sound">SFX ON</button><a href="#apps">VIEW ON SITE</a></div>
-    </div>
-  </aside>
-</div>
-<div id="site-progress"><span></span></div>
-<div id="cursor-aura"></div>
-<div id="cursor-core"></div>
-<div id="studio-boot" aria-hidden="true">
-  <div class="boot-grid"></div>
-  <div class="boot-card">
-    <div class="boot-logo"><img src="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" alt="AdLand Studio"></div>
-    <div class="boot-line">ADLAND STUDIO</div>
-    <div class="boot-title">CREATIVE SYSTEM <span>ONLINE</span></div>
-    <div class="boot-bar"><i></i></div>
-    <div class="boot-meta"><span>INITIALIZING EXPERIENCE</span><b id="boot-pct">00%</b></div>
-    <button id="boot-skip">ENTER STUDIO ↗</button>
-  </div>
-</div>
+</head>
+<body>
+<div id="progress"></div><canvas id="space"></canvas><div id="scanlines"></div><div id="noise"></div><div id="cursor"></div><div class="cursorDot" id="cursorDot"></div>
 
-<style>
-:root{--ad-gold:#d7b35d;--ad-gold2:#f4d88a;--ad-ink:#07090d;--ad-cyan:#7bf6df;--ad-violet:#8a7dff}
-#site-progress{position:fixed;left:0;right:0;top:0;height:2px;z-index:100000;background:#ffffff07;pointer-events:none}
-#site-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ad-gold),var(--ad-gold2),#fff);box-shadow:0 0 18px #d7b35d99}
-#cursor-aura,#cursor-core{position:fixed;pointer-events:none;z-index:99998;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen}
-#cursor-aura{width:270px;height:270px;background:radial-gradient(circle,#d7b35d13 0,#d7b35d08 32%,transparent 68%);filter:blur(1px);transition:opacity .25s}
-#cursor-core{width:8px;height:8px;background:#f8dda0;box-shadow:0 0 20px #d7b35d,0 0 4px #fff;opacity:.8}
-#studio-hub{position:fixed;left:22px;bottom:22px;z-index:100001;font-family:Inter,Vazirmatn,Arial,sans-serif}
-#hub-launch{display:flex;align-items:center;gap:9px;padding:0 13px;height:48px;color:#f6efdc;border:1px solid #d7b35d42;border-radius:15px;background:linear-gradient(135deg,#0c1119f5,#111824ee);box-shadow:0 22px 65px #0008,0 0 0 1px #fff1;backdrop-filter:blur(20px);cursor:pointer;transition:.3s;overflow:hidden}
-#hub-launch:hover{transform:translateY(-4px);border-color:#d7b35d8a;box-shadow:0 28px 80px #000a,0 0 40px #d7b35d1c}
-.hub-ring{width:20px;height:20px;border:1px solid #d7b35d77;border-radius:50%;position:relative;animation:spinHub 7s linear infinite}.hub-ring:after{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid #7bf6df66}.hub-dot{width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 13px #7bf6df;position:absolute;left:22px}
-.hub-copy{display:flex;flex-direction:column;text-align:left}.hub-copy b{font:800 10px Inter,Arial;letter-spacing:.17em}.hub-copy small{font:500 6px Inter,Arial;color:#71808b;letter-spacing:.18em;margin-top:2px}.hub-arrow{font-size:14px;color:#d7b35d;transition:.2s}.hub-launch:hover .hub-arrow{transform:translate(2px,-2px)}
-#hub-panel{position:absolute;left:0;bottom:60px;width:400px;max-width:calc(100vw - 28px);padding:18px;border:1px solid #d7b35d38;border-radius:22px;background:linear-gradient(145deg,#091018fa,#121a26f5);box-shadow:0 35px 120px #000d,0 0 70px #d7b35d12;backdrop-filter:blur(24px);opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:.38s cubic-bezier(.16,1,.3,1);overflow:hidden}
-#hub-panel.open{opacity:1;transform:none;pointer-events:auto}
-.hub-glow{position:absolute;left:-130px;top:-130px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#d7b35d18,transparent 67%);filter:blur(14px);animation:hubGlow 9s ease-in-out infinite}
-.hub-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative}.hub-kicker{font:700 7px Inter,Arial;color:#778995;letter-spacing:.2em}.hub-head h3{margin:6px 0 3px;font:800 21px Inter,Vazirmatn,Arial;color:#f5f3eb;letter-spacing:-.04em}.hub-head p{margin:0;color:#788691;font:400 9px Vazirmatn,Inter,Arial;line-height:1.6}.hub-head button{width:32px;height:32px;border:1px solid #fff1;border-radius:10px;background:#fff2;color:#84939a;font-size:20px;cursor:pointer}.hub-head button:hover{border-color:#d7b35d55;color:#fff}
-.hub-grid{display:grid;gap:7px;margin-top:16px;position:relative}.hub-app{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid #fff10;border-radius:13px;background:#ffffff03;transition:.25s;position:relative;overflow:hidden}.hub-app:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#d7b35d08,transparent 52%);opacity:0;transition:.25s}.hub-app:hover{transform:translateX(4px);border-color:#d7b35d42;box-shadow:0 12px 35px #0004}.hub-app:hover:before{opacity:1}.hub-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;border:1px solid #fff2;font:bold 14px Inter;position:relative;z-index:1}.hub-icon.nexus{background:linear-gradient(135deg,#1c2733,#0a1119);color:#e3c266}.hub-icon.canvas{background:linear-gradient(135deg,#f2eadb,#c6d8cc);color:#1b2924}.hub-icon.pulse{background:linear-gradient(135deg,#09161a,#10352e);color:#7bf6df}.hub-icon.frame{background:linear-gradient(135deg,#241b16,#4d321e);color:#f1c978}.hub-info{position:relative;z-index:1}.hub-info b{display:block;color:#e8eee9;font-size:10px}.hub-info small{display:block;color:#70808a;font-size:7px;margin-top:3px}.hub-app i{position:relative;z-index:1;color:#d7b35d;font:700 7px Inter;font-style:normal}
-.hub-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid #fff10;position:relative}.hub-foot>span{font:600 6px Inter;color:#64747e;letter-spacing:.08em}.hub-foot em{display:inline-block;width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 10px #7bf6df;vertical-align:middle;margin-right:4px}.hub-foot>div{display:flex;gap:5px}.hub-foot button,.hub-foot a{height:29px;padding:0 9px;border:1px solid #d7b35d2b;background:#ffffff03;color:#d7b35d;border-radius:8px;font:700 7px Inter;cursor:pointer;display:flex;align-items:center}.hub-foot a{text-decoration:none}.hub-foot button:hover,.hub-foot a:hover{border-color:#d7b35d60;background:#d7b35d09}
-#studio-boot{position:fixed;inset:0;z-index:100010;background:#040507;display:grid;place-items:center;transition:opacity .7s,visibility .7s}.boot-grid{position:absolute;inset:0;background:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(circle at center,#000 10%,transparent 78%)}.boot-card{width:min(480px,calc(100% - 36px));text-align:center;position:relative;padding:30px 28px;border:1px solid #d7b35d22;border-radius:24px;background:linear-gradient(145deg,#080b10df,#10151cf0);box-shadow:0 40px 130px #000e,0 0 80px #d7b35d0e;backdrop-filter:blur(18px)}.boot-logo{width:120px;height:120px;margin:0 auto 18px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px #d7b35d2b,0 0 50px #d7b35d19;animation:bootFloat 4s ease-in-out infinite}.boot-logo img{width:100%;height:100%;object-fit:cover}.boot-line{font:700 8px Inter;color:#a38c54;letter-spacing:.34em}.boot-title{font:800 22px Inter;color:#ece8de;margin-top:8px;letter-spacing:-.035em}.boot-title span{color:#d7b35d}.boot-bar{height:3px;background:#fff10;border-radius:10px;overflow:hidden;margin:23px 0 9px}.boot-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8e7238,#f6d982);box-shadow:0 0 20px #d7b35d;transition:width .18s}.boot-meta{display:flex;justify-content:space-between;color:#65747e;font:600 7px Inter;letter-spacing:.12em}.boot-meta b{color:#d7b35d}.boot-card button{margin-top:18px;height:34px;padding:0 13px;border:1px solid #d7b35d44;border-radius:9px;background:#d7b35d0d;color:#d7b35d;font:800 8px Inter;cursor:pointer;opacity:0;transition:.3s}.boot-card button.ready{opacity:1}.boot-card button:hover{background:#d7b35d18;border-color:#d7b35d77}.boot-card:after{content:"";position:absolute;inset:-1px;border-radius:25px;border:1px solid transparent;background:linear-gradient(135deg,#d7b35d55,transparent 35%,transparent 65%,#7bf6df2e) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none}
-@keyframes spinHub{to{transform:rotate(360deg)}}@keyframes hubGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(35px,30px)}}@keyframes bootFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@media(max-width:650px){#studio-hub{left:12px;bottom:12px}#hub-panel{width:calc(100vw - 24px)}#cursor-aura,#cursor-core{display:none}}
-@media(prefers-reduced-motion:reduce){#cursor-aura,#cursor-core{display:none}#hub-panel,.boot-card{transition:none!important}.hub-ring,.boot-logo,.hub-glow{animation:none!important}}
-</style>
+<div id="boot"><div class="bootWrap"><div class="bootLogo"><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"></div><small>ADLAND STUDIO / CREATIVE CORE</small><div class="bootTitle">EXPERIENCE LOADING</div><div class="bootBar"><i id="bootFill"></i></div><div class="bootMeta"><span>INITIALIZING</span><b id="bootPct">00%</b></div></div></div>
+
+<nav id="nav">
+<a class="brand" href="#home"><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><div><b>ADLAND STUDIO</b><small>WHERE CREATIVITY HAS NO LIMITS</small></div></a>
+<div class="navlinks"><a href="#apps">APPS</a><a href="#studio">STUDIO</a><a href="#projects">PROJECTS</a><a href="#learning">LEARNING</a><a href="#team">TEAM</a><a href="#faq">FAQ</a></div>
+<div class="navactions"><button class="miniBtn" id="langBtn">FA → EN</button><button class="miniBtn" id="soundBtn">SFX ON</button><button class="miniBtn" id="cmdBtn">⌘ K</button></div>
+</nav>
+
+<main>
+<section id="home">
+<div class="hero container"><div class="heroWrap">
+<div class="heroCopy reveal">
+<div class="eyebrow"><i></i><span data-fa="استودیو خلاق دیجیتال" data-en="DIGITAL CREATIVE STUDIO">استودیو خلاق دیجیتال</span></div>
+<h1 data-fa="اینجا، <span>خلاقیت</span> تبدیل به تجربه می‌شود." data-en="Where <span>creativity</span> becomes an experience.">اینجا، <span>خلاقیت</span> تبدیل به تجربه می‌شود.</h1>
+<p data-fa="AdLand فقط یک سایت یا چند نرم‌افزار نیست؛ یک اکوسیستم از ابزارهای دسکتاپ، پروژه‌های دیجیتال و آموزش است که با حرکت، نور، صدا و جزئیات کوچک زنده می‌شود." data-en="AdLand is more than a site or a few apps — it is an ecosystem of desktop tools, digital projects and learning, brought to life with motion, light, sound and tiny details.">AdLand فقط یک سایت یا چند نرم‌افزار نیست؛ یک اکوسیستم از ابزارهای دسکتاپ، پروژه‌های دیجیتال و آموزش است که با حرکت، نور، صدا و جزئیات کوچک زنده می‌شود.</p>
+<div class="heroActions"><a class="btn primary" href="#apps" data-fa="ورود به دنیای اپ‌ها" data-en="ENTER THE APP UNIVERSE">ورود به دنیای اپ‌ها ↗</a><button class="btn" id="heroCmd" data-fa="باز کردن Command Center" data-en="OPEN COMMAND CENTER">باز کردن Command Center</button></div>
+<div class="heroMeta"><span class="pill"><b>4</b> DESKTOP APPS</span><span class="pill">WINDOWS 10 / 11 · x64</span><span class="pill">FA / EN</span><span class="pill">LOCAL-FIRST</span></div>
+</div>
+<div class="heroCore reveal"><div class="coreGlow"></div><div class="core"><span class="ringA"></span><span class="ringB"></span><span class="ringC"></span><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><span class="orbitLabel o1">CREATIVE CORE</span><span class="orbitLabel o2">SYSTEM ONLINE</span><span class="orbitLabel o3">04 PRODUCTS</span><span class="orbitLabel o4">ADLAND / 2026</span></div></div>
+</div></div>
+<div class="scrollHint"><span>SCROLL TO EXPLORE</span><i></i></div>
+</section>
+
+<section class="section" id="studio"><div class="container">
+<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>01 / THE STUDIO</small><h2 data-fa="یک استودیو، چند جهان." data-en="One studio. Many worlds.">یک استودیو، چند جهان.</h2><p data-fa="هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی." data-en="Every product has its own personality, but they share one design system: precise, fast, interactive and made for real use.">هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی.</p></div><div class="sectionAside">A living digital studio with local-first tools, experimental interfaces and learning experiences.</div></div>
+<div class="studioGrid"><article class="story glass reveal"><div class="storyText"><h3 data-fa="جزئیات، تفاوت را می‌سازند." data-en="Details make the difference.">جزئیات، تفاوت را می‌سازند.</h3><p data-fa="از صدای کلیک تا نور دنبال‌کننده‌ی نشانگر، از animationهای ورود تا دموهای تعاملی؛ هدف این است که سایت فقط دیده نشود، بلکه حس شود." data-en="From interaction tones to cursor light, entrance motion and living demos, the goal is for the site to be felt, not just seen.">از صدای کلیک تا نور دنبال‌کننده‌ی نشانگر، از animationهای ورود تا دموهای تعاملی؛ هدف این است که سایت فقط دیده نشود، بلکه حس شود.</p><div class="storyRows"><div class="storyChip"><b>MOTION</b><span>Parallax, orbital motion, reveal systems and responsive micro-interactions.</span></div><div class="storyChip"><b>SOUND</b><span>Generated interface tones with a global SFX control.</span></div><div class="storyChip"><b>CONTROL</b><span>Command palette, language toggle and motion settings.</span></div></div></div></article>
+<article class="signal glass reveal"><div class="signalHead"><b>STUDIO SIGNAL</b><span class="signalLive"><i></i>LIVE</span></div><div class="bars" id="signalBars"></div><div class="signalFoot"><div class="metric"><small>ENERGY</small><b id="energy">92</b><em>↑ ACTIVE</em></div><div class="metric"><small>CREATIONS</small><b>∞</b><em>NO LIMIT</em></div><div class="metric"><small>LANGUAGE</small><b>FA</b><em>READY</em></div></div></article></div>
+</div></section>
+
+<section class="section" id="apps"><div class="container">
+<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>02 / APP UNIVERSE</small><h2 data-fa="چهار ابزار. چهار شخصیت." data-en="Four tools. Four personalities.">چهار ابزار. چهار شخصیت.</h2><p data-fa="اپلیکیشن‌های ویندوزی AdLand هرکدام برای یک نوع کار طراحی شده‌اند؛ صفحه‌ی اختصاصی هر اپ، نسخه و دمو را هم نشان می‌دهد." data-en="AdLand's Windows apps each serve a different purpose. Every product page includes its own identity, version and interactive preview.">اپلیکیشن‌های ویندوزی AdLand هرکدام برای یک نوع کار طراحی شده‌اند؛ صفحه‌ی اختصاصی هر اپ، نسخه و دمو را هم نشان می‌دهد.</p></div><div class="sectionAside">Hover each card. The lighting follows your pointer and the cards respond in 3D.</div></div>
+<div class="appsGrid">
+<article class="app glass reveal" style="--accent:#78f7d0"><div class="appHead"><div class="appIcon"><img src="assets/icons/projects/AdLand_Nexus_icon.svg"></div><div><h3>AdLand Nexus</h3><small>FOCUS / WORKSPACE / RELAX</small></div><span class="appTag">1.4.2</span></div><p data-fa="مرکز فرمان دسکتاپ برای کار، تمرکز، یادداشت، برد، ابزارها و آرامش." data-en="A desktop command center for focus, notes, boards, tools and calm.">مرکز فرمان دسکتاپ برای کار، تمرکز، یادداشت، برد، ابزارها و آرامش.</p><div class="featureMini"><span>Focus sessions</span><span>Tasks + Board</span><span>Local playlists</span><span>7 vibe themes</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL-FIRST</span><a class="appLink" href="nexus/">OPEN PRODUCT ↗</a></div></article>
+<article class="app glass reveal" style="--accent:#c0783b"><div class="appHead"><div class="appIcon"><img src="assets/icons/projects/AdLand_Canvas_icon.svg"></div><div><h3>AdLand Canvas</h3><small>LIBRARY / MOODBOARD / PALETTE</small></div><span class="appTag">1.1.0</span></div><p data-fa="استودیوی تصویری برای جمع‌آوری دارایی‌ها، مودبرد، رنگ و خروجی." data-en="A visual studio for assets, moodboards, palettes and export.">استودیوی تصویری برای جمع‌آوری دارایی‌ها، مودبرد، رنگ و خروجی.</p><div class="featureMini"><span>Image library</span><span>Moodboard</span><span>Palette lab</span><span>PNG export</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL-FIRST</span><a class="appLink" href="canvas/">OPEN PRODUCT ↗</a></div></article>
+<article class="app glass reveal" style="--accent:#56f4ff"><div class="appHead"><div class="appIcon"><img src="assets/icons/projects/AdLand_Pulse_icon.svg"></div><div><h3>AdLand Pulse</h3><small>TELEMETRY / SIGNAL / SYSTEM</small></div><span class="appTag">1.0.0</span></div><p data-fa="پایانه‌ی زنده برای دیدن CPU، حافظه، پردازش، uptime و شبکه." data-en="A live console for CPU, memory, process, uptime and network telemetry.">پایانه‌ی زنده برای دیدن CPU، حافظه، پردازش، uptime و شبکه.</p><div class="featureMini"><span>CPU telemetry</span><span>Memory</span><span>Process RSS</span><span>Network signals</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><a class="appLink" href="pulse/">OPEN PRODUCT ↗</a></div></article>
+<article class="app glass reveal" style="--accent:#ffb86b"><div class="appHead"><div class="appIcon"><img src="assets/icons/projects/AdLand_Frame_icon.svg"></div><div><h3>AdLand Frame</h3><small>IMAGE / EFFECTS / EXPORT</small></div><span class="appTag">1.1.0</span></div><p data-fa="کارگاه محلی تصویر برای دیدن، اصلاح، مرتب‌سازی و خروجی گرفتن." data-en="A local image workshop for viewing, adjusting, organizing and exporting.">کارگاه محلی تصویر برای دیدن، اصلاح، مرتب‌سازی و خروجی گرفتن.</p><div class="featureMini"><span>Gallery + favorites</span><span>Image effects</span><span>Metadata</span><span>PNG export</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><a class="appLink" href="frame/">OPEN PRODUCT ↗</a></div></article>
+</div></div></section>
+
+<section class="section" id="projects"><div class="container">
+<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>03 / PROJECTS</small><h2 data-fa="چیزهایی که ساخته‌ایم." data-en="Things we've built.">چیزهایی که ساخته‌ایم.</h2><p data-fa="از پروژه‌های تصویری تا ابزارهای تعاملی؛ هر پروژه بخشی از آزمایش‌های AdLand است." data-en="From visual experiments to interactive tools, every project is part of the AdLand playground.">از پروژه‌های تصویری تا ابزارهای تعاملی؛ هر پروژه بخشی از آزمایش‌های AdLand است.</p></div></div>
+<div class="projectGrid">
+<article class="project reveal"><img src="assets/icons/projects/Image_show_down_icon.jpg"><div class="projectCopy"><small>WEB / PYTHON</small><h3>Image Showdown</h3><p data-fa="تبدیل ایده به تصویرهای واقع‌گرایانه." data-en="Turning ideas into realistic imagery.">تبدیل ایده به تصویرهای واقع‌گرایانه.</p></div></article>
+<article class="project reveal"><img src="assets/icons/projects/Pyramid_icon.jpg"><div class="projectCopy"><small>WEB</small><h3>Pyramid</h3><p>Voting · rankings · social competition.</p></div></article>
+<article class="project reveal"><img src="assets/icons/projects/AdLand_Nexus_icon.svg"><div class="projectCopy"><small>WINDOWS</small><h3>AdLand Nexus</h3><p>Focus · productivity · calm.</p></div></article>
+<article class="project reveal"><img src="assets/icons/projects/AdLand_Canvas_icon.svg"><div class="projectCopy"><small>WINDOWS</small><h3>AdLand Canvas</h3><p>Visual library · moodboard.</p></div></article>
+<article class="project reveal"><img src="assets/icons/projects/AdLand_Pulse_icon.svg"><div class="projectCopy"><small>WINDOWS</small><h3>AdLand Pulse</h3><p>Live telemetry · signals.</p></div></article>
+</div></div></section>
+
+<section class="section" id="learning"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>04 / LEARNING</small><h2 data-fa="ساختن را یاد بگیر." data-en="Learn to build.">ساختن را یاد بگیر.</h2><p data-fa="مسیرهای آموزشی برای شروع برنامه‌نویسی و ساخت پروژه." data-en="Learning paths for programming fundamentals and building projects.">مسیرهای آموزشی برای شروع برنامه‌نویسی و ساخت پروژه.</p></div></div><div class="learnGrid">
+<article class="course glass reveal"><small style="color:var(--gold);font:800 7px Inter">PYTHON / FOUNDATION → PROJECT</small><h3>Python</h3><p data-fa="از منطق برنامه‌نویسی تا ساخت پروژه‌های واقعی." data-en="From programming logic to real projects.">از منطق برنامه‌نویسی تا ساخت پروژه‌های واقعی.</p><ul><li>مبانی برنامه‌نویسی</li><li>داده‌ها و کتابخانه‌ها</li><li>پروژه‌ی شخصی</li></ul><div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank">Telegram ↗</a></div></article>
+<article class="course glass reveal"><small style="color:var(--gold);font:800 7px Inter">SCRATCH / LOGIC → CREATION</small><h3>Scratch</h3><p data-fa="شروع برنامه‌نویسی با منطق بصری، بازی و انیمیشن." data-en="A visual entry into programming logic, games and animation.">شروع برنامه‌نویسی با منطق بصری، بازی و انیمیشن.</p><ul><li>منطق برنامه</li><li>بازی و انیمیشن</li><li>پروژه‌ی شخصی</li></ul><div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank">Telegram ↗</a></div></article>
+</div></div></section>
+
+<section class="section" id="team"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>05 / TEAM</small><h2 data-fa="آدم‌های پشت استودیو." data-en="The people behind the studio.">آدم‌های پشت استودیو.</h2></div></div><div class="teamGrid">
+<article class="teamCard glass reveal"><div class="avatar">AK</div><h3>سید آراد خاندل</h3><p>Founder · Python · AI · Product</p><a class="btn" href="https://t.me/Arad_unk" target="_blank">CONTACT ↗</a></article>
+<article class="teamCard glass reveal"><div class="avatar">+</div><h3 data-fa="جای تو هم می‌تواند اینجا باشد." data-en="There is room for you.">جای تو هم می‌تواند اینجا باشد.</h3><p data-fa="برای همکاری و پیوستن به تیم با ما در تماس باش." data-en="Reach out about collaboration and joining the team.">برای همکاری و پیوستن به تیم با ما در تماس باش.</p><a class="btn primary" href="https://ble.ir/AdLandStudio" target="_blank">JOIN THE TEAM ↗</a></article>
+</div></div></section>
+
+<section class="section" id="faq"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>06 / FAQ</small><h2 data-fa="سوال داری؟" data-en="Questions?">سوال داری؟</h2></div></div><div class="faq">
+<div class="faqItem reveal"><button class="faqQ">AdLand چیست؟<span>＋</span></button><div class="faqA">AdLand یک استودیوی خلاق نرم‌افزار و فناوری است که روی ابزارهای دیجیتال، اپلیکیشن‌ها و آموزش تمرکز دارد.</div></div>
+<div class="faqItem reveal"><button class="faqQ">اپ‌ها برای چه پلتفرمی هستند؟<span>＋</span></button><div class="faqA">Nexus، Canvas، Pulse و Frame نسخه‌های دسکتاپ برای Windows 10/11 x64 دارند.</div></div>
+<div class="faqItem reveal"><button class="faqQ">آیا اپ‌ها داده‌ها را روی دستگاه نگه می‌دارند؟<span>＋</span></button><div class="faqA">هسته‌ی تجربه‌ی این محصولات local-first است؛ بعضی قابلیت‌ها برای کار با فایل‌ها و داده‌های محلی طراحی شده‌اند.</div></div>
+<div class="faqItem reveal"><button class="faqQ">چطور برای کلاس‌ها یا همکاری تماس بگیرم؟<span>＋</span></button><div class="faqA">برای کلاس‌ها می‌توانی از Telegram با Arad_unk تماس بگیری و برای همکاری/پیوستن به تیم از Bale استفاده کنی.</div></div>
+</div></div></section>
+
+<section class="final"><div class="container"><div class="finalCard glass reveal"><small>THE NEXT CREATION STARTS HERE</small><h2 data-fa="خلاقیت، ادامه دارد." data-en="Creativity never ends.">خلاقیت، ادامه دارد.</h2><p data-fa="محصول بعدی هنوز ساخته نشده. شاید ایده‌ی بعدی از تو بیاید." data-en="The next product has not been built yet. Maybe the next idea starts with you.">محصول بعدی هنوز ساخته نشده. شاید ایده‌ی بعدی از تو بیاید.</p><div class="heroActions"><a class="btn primary" href="https://ble.ir/AdLandStudio" target="_blank">JOIN ADLAND ↗</a><a class="btn" href="#apps">EXPLORE PRODUCTS</a></div></div></div></section>
+<footer class="footer"><div class="container"><div class="footerIn"><div><div class="footerBrand">ADLAND STUDIO</div><span>جایی که خلاقیت هیچ مرزی نمی‌شناسد.</span></div><div class="footerLinks"><a href="https://t.me/Arad_unk" target="_blank">Telegram</a><a href="https://ble.ir/AdLandStudio" target="_blank">Bale</a><a href="#home">↑ TOP</a></div></div></div></footer>
+</main>
+
+<div id="command"><div class="cmdCard"><div class="cmdTop"><div><small>ADLAND COMMAND CENTER</small><h3 data-fa="مسیرت را انتخاب کن." data-en="Choose your path.">مسیرت را انتخاب کن.</h3></div><button id="cmdClose">×</button></div><div class="cmdSearch"><span>⌘</span><input id="cmdInput" placeholder="Search AdLand..." autocomplete="off"></div><div class="cmdGrid">
+<a href="#home"><strong>⌂</strong><div><b>Home</b><small>شروع تجربه</small></div><i>01</i></a>
+<a href="#apps"><strong>◈</strong><div><b>Apps</b><small>چهار محصول دسکتاپ</small></div><i>02</i></a>
+<a href="#studio"><strong>✦</strong><div><b>Studio</b><small>سیستم طراحی</small></div><i>03</i></a>
+<a href="#projects"><strong>◇</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>04</i></a>
+<a href="#learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>05</i></a>
+<a href="#team"><strong>+</strong><div><b>Team</b><small>همکاری و عضویت</small></div><i>06</i></a>
+</div><div class="cmdFoot"><span><em></em> EXPERIENCE ENGINE ONLINE</span><div><button id="motionBtn">MOTION: HIGH</button><button id="fullBtn">FULLSCREEN</button></div></div></div></div>
+
 <script>
-(function(){
-  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
-  const root=document.documentElement;
-  let sfxOn=localStorage.getItem('adland-site-sfx')!=='off';
-  let reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
-  function audio(freq=440,type='sine',dur=.09,vol=.025){if(!sfxOn)return;try{const A=window.__adAudio||(window.__adAudio=new(window.AudioContext||window.webkitAudioContext)());if(A.state==='suspended')A.resume();const o=A.createOscillator(),g=A.createGain(),n=A.currentTime;o.type=type;o.frequency.setValueAtTime(freq,n);o.frequency.exponentialRampToValueAtTime(freq*1.35,n+dur*.55);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(vol,n+.012);g.gain.exponentialRampToValueAtTime(.0001,n+dur);o.connect(g).connect(A.destination);o.start(n);o.stop(n+dur+.01)}catch(e){}}
-  function uiSound(kind){if(kind==='open')audio(330,'sine',.13,.028);else if(kind==='close')audio(220,'sine',.09,.02);else if(kind==='nav')audio(520,'triangle',.07,.018);else audio(380,'sine',.065,.014)}
-  const panel=$('#hub-panel'),launch=$('#hub-launch'),close=$('#hub-close'),sound=$('#hub-sound');
-  function setHub(open){panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));uiSound(open?'open':'close')}
-  launch.addEventListener('click',()=>setHub(!panel.classList.contains('open')));
-  close.addEventListener('click',()=>setHub(false));
-  sound.textContent='SFX '+(sfxOn?'ON':'OFF');sound.addEventListener('click',()=>{sfxOn=!sfxOn;localStorage.setItem('adland-site-sfx',sfxOn?'on':'off');sound.textContent='SFX '+(sfxOn?'ON':'OFF');uiSound('open')});
-  $('.hub-app,.hub-foot a').forEach(a=>a.addEventListener('click',()=>uiSound('nav')));
-  $('a,button').forEach(el=>{el.addEventListener('pointerdown',()=>uiSound());});
-  const bar=$('#site-progress span');
-  function progress(){const d=document.documentElement.scrollHeight-innerHeight;bar.style.width=(d>0?(scrollY/d)*100:0)+'%'}
-  addEventListener('scroll',progress,{passive:true});progress();
-  const aura=$('#cursor-aura'),core=$('#cursor-core');let tx=0,ty=0,ax=0,ay=0;
-  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(aura){aura.style.left=tx+'px';aura.style.top=ty+'px';core.style.left=tx+'px';core.style.top=ty+'px'}document.body.style.setProperty('--ad-mx',tx+'px');document.body.style.setProperty('--ad-my',ty+'px')},{passive:true});
-  function cursorFrame(){if(aura){ax+=(tx-ax)*.12;ay+=(ty-ay)*.12;aura.style.transform='translate(-50%,-50%) translate('+(ax-tx)*.18+'px,'+(ay-ty)*.18+'px)'}requestAnimationFrame(cursorFrame)} if(!reduce)cursorFrame();
-  $('.hub-app').forEach(card=>{if(reduce)return;card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(650px) rotateX('+(-y*4)+'deg) rotateY('+(x*6)+'deg) translateX(4px)'}) ;card.addEventListener('pointerleave',()=>card.style.transform='')});
-  const boot=$('#studio-boot'),pct=$('#boot-pct'),fill=$('.boot-bar i'),skip=$('#boot-skip');
-  if(localStorage.getItem('adland-booted')==='1'||reduce){boot.style.opacity='0';boot.style.visibility='hidden'}else{
-    let p=0;const t=setInterval(()=>{p+=Math.round(Math.random()*16+6);p=Math.min(p,100);pct.textContent=String(p).padStart(2,'0')+'%';fill.style.width=p+'%';if(p>=100){clearInterval(t);skip.classList.add('ready');audio(620,'triangle',.14,.03)}},110);
-    function enter(){localStorage.setItem('adland-booted','1');boot.style.opacity='0';boot.style.visibility='hidden';uiSound('open')}
-    skip.addEventListener('click',enter);
-    setTimeout(()=>{if(skip.classList.contains('ready'))enter()},2100);
-  }
-  new MutationObserver(()=>{sound.textContent='SFX '+(sfxOn?'ON':'OFF')}).observe(root,{attributes:true,attributeFilter:['lang']});
-  root.classList.add('adland-experience');
+(()=> {
+const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
+const root=document.documentElement;
+let lang='fa',sfx=localStorage.getItem('adland-sfx')!=='off',motion=localStorage.getItem('adland-motion')!=='low',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const audioState={ctx:null};
+function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const o=C.createOscillator(),g=C.createGain(),n=C.currentTime;const table={tap:[360,500,.07,.012],open:[430,760,.12,.02],close:[250,330,.08,.014],nav:[520,850,.08,.016]};const [a,b,d,v]=table[kind]||table.tap;o.type=kind==='nav'?'triangle':'sine';o.frequency.setValueAtTime(a,n);o.frequency.exponentialRampToValueAtTime(b,n+d*.65);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(C.destination);o.start(n);o.stop(n+d+.01)}catch(e){}}
+function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';}
+function setSfx(){qs('#soundBtn').textContent='SFX '+(sfx?'ON':'OFF')}
+qs('#langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';applyLang();tone('open')};
+qs('#soundBtn').onclick=()=>{sfx=!sfx;localStorage.setItem('adland-sfx',sfx?'on':'off');setSfx();tone('open')};
+setSfx();applyLang();
+
+const command=qs('#command');const input=qs('#cmdInput');
+function openCmd(){command.classList.add('commandOpen');document.body.style.overflow='hidden';setTimeout(()=>input?.focus(),70);tone('open')}
+function closeCmd(){command.classList.remove('commandOpen');document.body.style.overflow='';tone('close')}
+qs('#cmdBtn').onclick=openCmd;qs('#heroCmd').onclick=openCmd;qs('#cmdClose').onclick=closeCmd;command.addEventListener('click',e=>{if(e.target===command)closeCmd()});
+addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();command.classList.contains('commandOpen')?closeCmd():openCmd()}if(e.key==='Escape'&&command.classList.contains('commandOpen'))closeCmd()});
+input.addEventListener('input',()=>{const v=input.value.trim().toLowerCase();qsa('.cmdGrid a').forEach(a=>a.style.display=!v||a.textContent.toLowerCase().includes(v)?'grid':'none')});
+qsa('.cmdGrid a').forEach(a=>a.addEventListener('click',()=>{closeCmd();tone('nav')}));
+
+qs('#motionBtn').onclick=e=>{motion=!motion;localStorage.setItem('adland-motion',motion?'high':'low');e.target.textContent='MOTION: '+(motion?'HIGH':'LOW');tone('tap')};
+qs('#fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();tone('open')}catch(e){}};
+
+const boot=qs('#boot');if(localStorage.getItem('adland-boot-seen')==='1'||reduced){boot.remove()}else{let p=0;const id=setInterval(()=>{p=Math.min(100,p+Math.round(7+Math.random()*17));qs('#bootFill').style.width=p+'%';qs('#bootPct').textContent=String(p).padStart(2,'0')+'%';if(p>=100){clearInterval(id);localStorage.setItem('adland-boot-seen','1');boot.style.opacity='0';boot.style.visibility='hidden';setTimeout(()=>boot.remove(),850);tone('open')}},85)}
+
+let mx=innerWidth/2,my=innerHeight/2,ax=mx,ay=my;const cursor=qs('#cursor'),dot=qs('#cursorDot');
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;root.style.setProperty('--mx',mx+'px');root.style.setProperty('--my',my+'px')},{passive:true});
+function pointerLoop(){ax+=(mx-ax)*.12;ay+=(my-ay)*.12;cursor.style.left=ax+'px';cursor.style.top=ay+'px';dot.style.left=mx+'px';dot.style.top=my+'px';requestAnimationFrame(pointerLoop)}if(!reduced)pointerLoop();
+qsa('a,button').forEach((el,i)=>el.addEventListener('pointerdown',()=>tone(i%4===0?'open':'tap'),{passive:true}));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.09});qsa('.reveal').forEach(x=>io.observe(x));
+const navLinks=[...qsa('.navlinks a')],sections=['apps','studio','projects','learning','team','faq'].map(id=>qs('#'+id)).filter(Boolean);const activeIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -45% 0px'});sections.forEach(s=>activeIO.observe(s));
+function scroll(){const d=document.documentElement.scrollHeight-innerHeight;qs('#progress').style.width=(d>0?scrollY/d*100:0)+'%'}addEventListener('scroll',scroll,{passive:true});scroll();
+
+qsa('.app').forEach(card=>{card.addEventListener('pointermove',e=>{if(reduced)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*7)+'deg) translateZ(4px)';card.style.setProperty('--cx',(x+0.5)*100+'%');card.style.setProperty('--cy',(y+0.5)*100+'%')},{passive:true});card.addEventListener('pointerleave',()=>card.style.transform='')});
+qsa('.project').forEach(x=>x.addEventListener('pointerdown',()=>tone('open'),{passive:true}));
+qsa('.faqQ').forEach(b=>b.onclick=()=>{b.parentElement.classList.toggle('open');tone('tap')});
+
+const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.createElement('i');s.style.height=(18+Math.random()*70)+'%';bars.appendChild(s)}setInterval(()=>{qsa('#signalBars i').forEach(x=>x.style.height=(18+Math.random()*78)+'%');qs('#energy').textContent=String(82+Math.floor(Math.random()*17))},1250)}
+
+let dataCount=0;
+setInterval(()=>{dataCount++;root.style.setProperty('--scroll',scrollY)},240);
 })();
 </script>
-
-<!-- ADLAND ULTRA EXPERIENCE -->
-<div id="adland-ultra" aria-hidden="false">
-  <canvas id="al-supernova"></canvas>
-  <div class="al-scan"></div>
-  <div class="al-vignette"></div>
-  <div class="al-topline"><span>ADLAND STUDIO</span><i></i><b id="al-clock">00:00:00</b><span>CREATIVE CORE / ONLINE</span></div>
-  <div class="al-logo-orbit" id="al-orbit">
-    <span class="al-orbit-ring r1"></span><span class="al-orbit-ring r2"></span><span class="al-orbit-ring r3"></span>
-    <span class="al-orbit-dot d1"></span><span class="al-orbit-dot d2"></span><span class="al-orbit-dot d3"></span>
-    <img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" alt="AdLand">
-  </div>
-  <div class="al-dock" id="al-dock">
-    <button class="al-dock-home" data-go="#home"><span>⌂</span><b>ADLAND</b></button>
-    <button data-go="#apps"><span>01</span><b>APPS</b></button>
-    <button data-go="#projects"><span>02</span><b>PROJECTS</b></button>
-    <button data-go="#learning"><span>03</span><b>LEARN</b></button>
-    <button data-go="#team"><span>04</span><b>TEAM</b></button>
-    <button id="al-command"><span>⌘</span><b>COMMAND</b></button>
-  </div>
-  <button id="al-mini" aria-label="Open command center"><span></span><b>AL</b></button>
-  <div id="al-command-modal" aria-hidden="true">
-    <div class="al-modal-backdrop"></div>
-    <div class="al-command-card">
-      <div class="al-corner c1"></div><div class="al-corner c2"></div>
-      <header><div><small>ADLAND COMMAND CENTER</small><h3>جای بعدی را انتخاب کن</h3></div><button id="al-cmd-close">×</button></header>
-      <div class="al-command-search"><span>⌘</span><input id="al-cmd-input" placeholder="Search the studio..." autocomplete="off"></div>
-      <div class="al-command-grid">
-        <a href="#home" data-cmd="home"><strong>⌂</strong><div><b>Home</b><small>بازگشت به آغاز تجربه</small></div><i>01</i></a>
-        <a href="#apps" data-cmd="apps"><strong>◈</strong><div><b>Apps</b><small>محصولات و دانلودها</small></div><i>02</i></a>
-        <a href="#projects" data-cmd="projects"><strong>✦</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>03</i></a>
-        <a href="#learning" data-cmd="learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>04</i></a>
-        <a href="#team" data-cmd="team"><strong>+</strong><div><b>Team</b><small>همکاری و پیوستن</small></div><i>05</i></a>
-        <a href="#faq" data-cmd="faq"><strong>?</strong><div><b>FAQ</b><small>پاسخ‌های سریع</small></div><i>06</i></a>
-      </div>
-      <footer><span><em></em> EXPERIENCE ENGINE READY</span><div><button id="al-fullscreen">FULLSCREEN</button><button id="al-lower-motion">MOTION: HIGH</button></div></footer>
-    </div>
-  </div>
-</div>
-<style>
-#root{position:relative;z-index:3}#nexus-board{z-index:10002!important}#adland-ultra{position:fixed;inset:0;z-index:1;pointer-events:none;font-family:Inter,"Segoe UI",sans-serif;color:#e9e3d6}
-#al-supernova{position:absolute;inset:0;width:100%;height:100%;opacity:.72}.al-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,#d7b35d03 45%,transparent 48%,#fff01 49%,transparent 50%);background-size:100% 12px;mix-blend-mode:screen;opacity:.16;animation:alScan 12s linear infinite}.al-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 40%,#02030555 100%)}
-.al-topline{position:absolute;top:5px;left:50%;transform:translateX(-50%);height:20px;display:flex;align-items:center;gap:8px;color:#7b8791;font:700 6px Inter;letter-spacing:.18em;opacity:.58;white-space:nowrap}.al-topline i{width:4px;height:4px;border-radius:50%;background:#78f7d0;box-shadow:0 0 9px #78f7d0}.al-topline b{color:#d7b35d;font-size:7px}
-.al-logo-orbit{position:absolute;right:24px;top:94px;width:132px;height:132px;opacity:.18;transition:.35s;pointer-events:auto}.al-logo-orbit:hover{opacity:.62;transform:scale(1.04)}.al-logo-orbit img{position:absolute;inset:29px;width:74px;height:74px;border-radius:50%;object-fit:cover;box-shadow:0 0 40px #d7b35d22}.al-orbit-ring{position:absolute;border:1px solid #d7b35d33;border-radius:50%;inset:15px;animation:alSpin 18s linear infinite}.al-orbit-ring.r2{inset:7px;border-color:#78f7d028;animation-duration:26s;animation-direction:reverse}.al-orbit-ring.r3{inset:26px;border-color:#fff118;animation-duration:11s}.al-orbit-dot{position:absolute;width:4px;height:4px;border-radius:50%;background:#d7b35d;box-shadow:0 0 10px #d7b35d}.al-orbit-dot.d1{left:14px;top:44px}.al-orbit-dot.d2{right:17px;bottom:38px;background:#78f7d0;box-shadow:0 0 10px #78f7d0}.al-orbit-dot.d3{right:45px;top:4px;background:#fff}
-.al-dock{position:fixed;bottom:21px;left:50%;transform:translateX(-50%);display:flex;align-items:stretch;gap:3px;padding:4px;border:1px solid #ffffff12;border-radius:16px;background:#080c12df;backdrop-filter:blur(24px);box-shadow:0 24px 80px #0009,0 0 0 1px #ffffff03;pointer-events:auto;transition:.35s;z-index:6}.al-dock:hover{border-color:#d7b35d2b;box-shadow:0 28px 100px #000b,0 0 35px #d7b35d0d}.al-dock button{min-width:66px;height:42px;border:0;border-radius:11px;background:transparent;color:#788590;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;cursor:pointer;transition:.24s}.al-dock button:hover{background:#d7b35d08;color:#e8ddbf;transform:translateY(-2px)}.al-dock button span{font-size:8px;color:#d7b35d}.al-dock button b{font-size:6px;letter-spacing:.15em}.al-dock .al-dock-home{border:1px solid #d7b35d23;background:linear-gradient(135deg,#d7b35d0d,#78f7d005);color:#cdbb88}.al-dock .al-dock-home span{color:#f0d781}.al-dock button:last-child{border-left:1px solid #fff10;margin-left:3px}
-#al-mini{position:fixed;right:19px;bottom:22px;width:45px;height:45px;border-radius:14px;border:1px solid #d7b35d33;background:#0a0f16df;color:#d7b35d;display:none;align-items:center;justify-content:center;gap:5px;box-shadow:0 20px 65px #0009;pointer-events:auto;cursor:pointer;z-index:7}.al-mini b{font:900 9px Inter}.al-mini span{width:5px;height:5px;border-radius:50%;background:#78f7d0;box-shadow:0 0 9px #78f7d0;animation:alPulse 1.6s infinite}
-#al-command-modal{position:fixed;inset:0;display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:.35s;z-index:20}.al-modal-backdrop{position:absolute;inset:0;background:#020305b8;backdrop-filter:blur(20px)}#al-command-modal.open{opacity:1;visibility:visible;pointer-events:auto}.al-command-card{position:relative;width:min(660px,calc(100% - 28px));padding:20px;border:1px solid #d7b35d35;border-radius:22px;background:linear-gradient(145deg,#091019fa,#131a25f7);box-shadow:0 50px 150px #000e,0 0 90px #d7b35d11;overflow:hidden;transform:translateY(12px) scale(.98);transition:.4s cubic-bezier(.16,1,.3,1)}#al-command-modal.open .al-command-card{transform:none}.al-command-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,#d7b35d08,transparent 30%,transparent 65%,#78f7d006)}.al-corner{position:absolute;width:38px;height:38px;border-color:#d7b35d55}.al-corner.c1{top:8px;left:8px;border-top:1px solid;border-left:1px solid}.al-corner.c2{right:8px;bottom:8px;border-right:1px solid;border-bottom:1px solid}.al-command-card header{position:relative;display:flex;justify-content:space-between;gap:10px}.al-command-card header small{font:700 7px Inter;color:#7e8b95;letter-spacing:.2em}.al-command-card header h3{font:800 24px Vazirmatn,Inter;margin:7px 0 0;color:#f0ece1}.al-command-card header button{width:30px;height:30px;border-radius:9px;border:1px solid #fff12;background:#fff2;color:#87949c;cursor:pointer;font-size:18px}.al-command-search{position:relative;display:flex;align-items:center;gap:9px;margin-top:16px;padding:0 12px;height:44px;border:1px solid #ffffff13;border-radius:11px;background:#ffffff04}.al-command-search span{color:#d7b35d;font:900 11px Inter}.al-command-search input{flex:1;border:0;outline:0;background:transparent;color:#e8ece8;font:500 10px Inter,Vazirmatn}.al-command-search input::placeholder{color:#596872}.al-command-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.al-command-grid a{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;padding:10px;border:1px solid #ffffff0f;border-radius:12px;background:#ffffff03;color:inherit;text-decoration:none;transition:.22s}.al-command-grid a:hover{border-color:#d7b35d42;background:#d7b35d08;transform:translateY(-2px)}.al-command-grid a strong{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#d7b35d08;color:#d7b35d;border:1px solid #d7b35d1b}.al-command-grid a b{font:800 10px Inter}.al-command-grid a small{display:block;color:#6f7e88;font:400 7px Vazirmatn;margin-top:3px}.al-command-grid a i{font:700 7px Inter;color:#65737d;font-style:normal}.al-command-card footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid #fff10;color:#61717c;font:600 6px Inter;letter-spacing:.08em}.al-command-card footer em{display:inline-block;width:5px;height:5px;border-radius:50%;background:#78f7d0;box-shadow:0 0 10px #78f7d0}.al-command-card footer>div{display:flex;gap:5px}.al-command-card footer button{height:28px;padding:0 9px;border-radius:8px;border:1px solid #d7b35d25;background:#fff2;color:#bba769;font:800 7px Inter;cursor:pointer}.al-command-card footer button:hover{border-color:#d7b35d55;background:#d7b35d09}
-body.al-hud-lock{overflow:hidden}.al-ripple{position:fixed;width:8px;height:8px;border-radius:50%;border:1px solid #d7b35d;pointer-events:none;z-index:99999;animation:alRipple .55s ease-out forwards}
-#root .reveal{will-change:transform,opacity}#root a,#root button{transition-timing-function:cubic-bezier(.16,1,.3,1)}
-@keyframes alSpin{to{transform:rotate(360deg)}}@keyframes alPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.45);opacity:1}}@keyframes alScan{from{background-position:0 -100%}to{background-position:0 100%}}@keyframes alRipple{to{transform:scale(8);opacity:0}}
-@media(max-width:760px){.al-topline{display:none}.al-logo-orbit{display:none}.al-dock{left:12px;right:12px;bottom:12px;transform:none;justify-content:space-between}.al-dock button{flex:1;min-width:0;height:48px}.al-dock .al-dock-home{max-width:74px}.al-dock button span{font-size:7px}.al-dock button b{font-size:5px}.al-dock button:last-child{display:none}#al-mini{display:flex;bottom:72px}.al-command-grid{grid-template-columns:1fr}.al-command-card{padding:15px}}
-@media(prefers-reduced-motion:reduce){.al-logo-orbit,.al-scan,.al-orbit-ring,.al-orbit-dot{animation:none!important}.al-ripple{display:none}.al-dock button:hover{transform:none}}
-</style>
-<script>
-(function(){
-  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
-  const root=document.documentElement, modal=qs('#al-command-modal'), dock=qs('#al-dock'), mini=qs('#al-mini'), cmd=qs('#al-command'), close=qs('#al-cmd-close'), input=qs('#al-cmd-input');
-  let motion=localStorage.getItem('adland-motion')!=='low', sfx=localStorage.getItem('adland-site-sfx')!=='off';
-  const A=[{f:260,t:430,d:.07,v:.013},{f:370,t:620,d:.08,v:.016},{f:510,t:860,d:.09,v:.018}];
-  function tone(i=0){if(!sfx)return;try{const c=window.__alAudio||(window.__alAudio=new(window.AudioContext||window.webkitAudioContext)());if(c.state==='suspended')c.resume();const x=A[i%A.length],o=c.createOscillator(),g=c.createGain(),n=c.currentTime;o.type=i===1?'triangle':'sine';o.frequency.setValueAtTime(x.f,n);o.frequency.exponentialRampToValueAtTime(x.t,n+x.d*.7);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(x.v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+x.d);o.connect(g).connect(c.destination);o.start(n);o.stop(n+x.d+.01)}catch(e){}}
-  function open(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('al-hud-lock');tone(1);setTimeout(()=>input&&input.focus(),80)}
-  function shut(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('al-hud-lock');tone(0)}
-  [cmd,mini].forEach(x=>x&&x.addEventListener('click',open));close&&close.addEventListener('click',shut);qs('.al-modal-backdrop')?.addEventListener('click',shut);
-  qsa('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();document.querySelector(b.dataset.go)?.scrollIntoView({behavior:motion?'smooth':'auto',block:'start'});tone(1)}));
-  qsa('[data-cmd]').forEach(a=>a.addEventListener('click',()=>{shut();tone(2)}));
-  qsa('a,button').forEach((el,i)=>el.addEventListener('pointerdown',e=>{tone(i+1);if(motion&&el.tagName==='BUTTON'){const s=document.createElement('span');s.className='al-ripple';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),600)}} ,{passive:true}));
-  input&&input.addEventListener('input',()=>{const v=input.value.trim().toLowerCase();qsa('[data-cmd]').forEach(a=>a.style.display=(!v||a.textContent.toLowerCase().includes(v))?'grid':'none')});
-  addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();modal.classList.contains('open')?shut():open()}if(e.key==='Escape'&&modal.classList.contains('open'))shut()});
-  qs('#al-fullscreen')?.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();tone(1)}catch(e){}});
-  qs('#al-lower-motion')?.addEventListener('click',e=>{motion=!motion;localStorage.setItem('adland-motion',motion?'high':'low');e.target.textContent='MOTION: '+(motion?'HIGH':'LOW');tone(1)});
-  function clock(){const d=new Date();qs('#al-clock').textContent=[d.getHours(),d.getMinutes(),d.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':')}setInterval(clock,1000);clock();
-  const canvas=qs('#al-supernova');if(canvas){
-    const c=canvas.getContext('2d');let w=0,h=0,d=1,p=[],stars=[];
-    function resize(){d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*d;canvas.height=h*d;c.setTransform(d,0,0,d,0,0);p=Array.from({length:motion?75:22},()=>({x:Math.random()*w,y:Math.random()*h,r:.3+Math.random()*1.7,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.12,a:.1+Math.random()*.45}));stars=Array.from({length:motion?14:5},()=>({x:Math.random()*w,y:Math.random()*h,rx:80+Math.random()*180,ry:30+Math.random()*90,a:Math.random()*Math.PI*2,v:.0002+Math.random()*.0007}))}
-    function tick(){c.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;c.beginPath();c.ellipse(s.x,s.y,s.rx,s.ry,s.a,0,Math.PI*2);c.strokeStyle='rgba(215,179,93,.035)';c.stroke()}for(let i=0;i<p.length;i++){const x=p[i];x.x+=x.vx;x.y+=x.vy;if(x.x<-4)x.x=w+4;if(x.x>w+4)x.x=-4;if(x.y<-4)x.y=h+4;if(x.y>h+4)x.y=-4;c.beginPath();c.arc(x.x,x.y,x.r,0,Math.PI*2);c.fillStyle='rgba(232,216,166,'+x.a+')';c.fill();if(i%4===0){let q=p[(i+7)%p.length],dx=x.x-q.x,dy=x.y-q.y,dist=Math.hypot(dx,dy);if(dist<110){c.beginPath();c.moveTo(x.x,x.y);c.lineTo(q.x,q.y);c.strokeStyle='rgba(215,179,93,'+(0.03*(1-dist/110))+')';c.stroke()}}}requestAnimationFrame(tick)}
-    resize();addEventListener('resize',resize,{passive:true});tick();
-    addEventListener('pointermove',e=>{document.body.style.setProperty('--ad-pointer-x',e.clientX+'px');document.body.style.setProperty('--ad-pointer-y',e.clientY+'px')},{passive:true});
-  }
-})();
-</script>
-</body>
-</html>
-</script><canvas id="adland-vfx" aria-hidden="true"></canvas>
-<style>
-#adland-vfx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
-#root,#nexus-board{position:relative;z-index:2}
-</style>
-<script>
-(function(){const c=document.getElementById('adland-vfx');if(!c)return;const ctx=c.getContext('2d');let w=0,h=0,dpr=1,pts=[];const reduce=()=>window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
-function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);pts=Array.from({length:55},()=>({x:Math.random()*w,y:Math.random()*h,r:.5+Math.random()*1.8,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.12,a:.15+Math.random()*.42}))}
-function frame(){ctx.clearRect(0,0,w,h);if(reduce()){requestAnimationFrame(frame);return}for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<-5)p.x=w+5;if(p.x>w+5)p.x=-5;if(p.y<-5)p.y=h+5;if(p.y>h+5)p.y=-5;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+p.a+')';ctx.fill()}requestAnimationFrame(frame)}
-addEventListener('resize',resize,{passive:true});resize();frame();
-let mx=-999,my=-999;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;document.body.style.setProperty('--mx',mx+'px');document.body.style.setProperty('--my',my+'px')},{passive:true});
-})();
-</script><style>.image-safe[data-image-error="true"]:before{content:"Image unavailable";display:grid;place-items:center;height:100%;color:#ffffff33;font:600 11px Inter,Vazirmatn,Arial}.image-safe[data-image-error="true"] img{display:none!important}</style><!-- ADLAND STUDIO EXPERIENCE v2 -->
-<div id="studio-hub">
-  <button id="hub-launch" aria-label="Open AdLand app hub">
-    <span class="hub-ring"></span><span class="hub-dot"></span>
-    <span class="hub-copy"><b>ADLAND</b><small>APP ECOSYSTEM</small></span><span class="hub-arrow">↗</span>
-  </button>
-  <aside id="hub-panel" aria-hidden="true">
-    <div class="hub-glow"></div>
-    <header class="hub-head">
-      <div><div class="hub-kicker">STUDIO SYSTEM / 04</div><h3>AdLand Apps</h3><p id="hub-sub">ابزارهایی که برای ساختن ساخته شده‌اند.</p></div>
-      <button id="hub-close" aria-label="Close">×</button>
-    </header>
-    <div class="hub-grid">
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/nexus/">
-        <div class="hub-icon nexus"><span>N</span></div><div class="hub-info"><b>AdLand Nexus</b><small>Focus · Workspace · Relax</small></div><i>1.4.2</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/canvas/">
-        <div class="hub-icon canvas"><span>C</span></div><div class="hub-info"><b>AdLand Canvas</b><small>Visual library · Moodboard · Palette</small></div><i>1.1.0</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/pulse/">
-        <div class="hub-icon pulse"><span>P</span></div><div class="hub-info"><b>AdLand Pulse</b><small>CPU · Memory · Telemetry</small></div><i>1.0.0</i>
-      </a>
-      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/frame/">
-        <div class="hub-icon frame"><span>F</span></div><div class="hub-info"><b>AdLand Frame</b><small>Image workshop · Effects · Export</small></div><i>1.1.0</i>
-      </a>
-    </div>
-    <div class="hub-foot">
-      <span><em class="online"></em> LOCAL-FIRST WINDOWS TOOLS</span>
-      <div><button id="hub-sound">SFX ON</button><a href="#apps">VIEW ON SITE</a></div>
-    </div>
-  </aside>
-</div>
-<div id="site-progress"><span></span></div>
-<div id="cursor-aura"></div>
-<div id="cursor-core"></div>
-<div id="studio-boot" aria-hidden="true">
-  <div class="boot-grid"></div>
-  <div class="boot-card">
-    <div class="boot-logo"><img src="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" alt="AdLand Studio"></div>
-    <div class="boot-line">ADLAND STUDIO</div>
-    <div class="boot-title">CREATIVE SYSTEM <span>ONLINE</span></div>
-    <div class="boot-bar"><i></i></div>
-    <div class="boot-meta"><span>INITIALIZING EXPERIENCE</span><b id="boot-pct">00%</b></div>
-    <button id="boot-skip">ENTER STUDIO ↗</button>
-  </div>
-</div>
-
-<style>
-:root{--ad-gold:#d7b35d;--ad-gold2:#f4d88a;--ad-ink:#07090d;--ad-cyan:#7bf6df;--ad-violet:#8a7dff}
-#site-progress{position:fixed;left:0;right:0;top:0;height:2px;z-index:100000;background:#ffffff07;pointer-events:none}
-#site-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ad-gold),var(--ad-gold2),#fff);box-shadow:0 0 18px #d7b35d99}
-#cursor-aura,#cursor-core{position:fixed;pointer-events:none;z-index:99998;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen}
-#cursor-aura{width:270px;height:270px;background:radial-gradient(circle,#d7b35d13 0,#d7b35d08 32%,transparent 68%);filter:blur(1px);transition:opacity .25s}
-#cursor-core{width:8px;height:8px;background:#f8dda0;box-shadow:0 0 20px #d7b35d,0 0 4px #fff;opacity:.8}
-#studio-hub{position:fixed;left:22px;bottom:22px;z-index:100001;font-family:Inter,Vazirmatn,Arial,sans-serif}
-#hub-launch{display:flex;align-items:center;gap:9px;padding:0 13px;height:48px;color:#f6efdc;border:1px solid #d7b35d42;border-radius:15px;background:linear-gradient(135deg,#0c1119f5,#111824ee);box-shadow:0 22px 65px #0008,0 0 0 1px #fff1;backdrop-filter:blur(20px);cursor:pointer;transition:.3s;overflow:hidden}
-#hub-launch:hover{transform:translateY(-4px);border-color:#d7b35d8a;box-shadow:0 28px 80px #000a,0 0 40px #d7b35d1c}
-.hub-ring{width:20px;height:20px;border:1px solid #d7b35d77;border-radius:50%;position:relative;animation:spinHub 7s linear infinite}.hub-ring:after{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid #7bf6df66}.hub-dot{width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 13px #7bf6df;position:absolute;left:22px}
-.hub-copy{display:flex;flex-direction:column;text-align:left}.hub-copy b{font:800 10px Inter,Arial;letter-spacing:.17em}.hub-copy small{font:500 6px Inter,Arial;color:#71808b;letter-spacing:.18em;margin-top:2px}.hub-arrow{font-size:14px;color:#d7b35d;transition:.2s}.hub-launch:hover .hub-arrow{transform:translate(2px,-2px)}
-#hub-panel{position:absolute;left:0;bottom:60px;width:400px;max-width:calc(100vw - 28px);padding:18px;border:1px solid #d7b35d38;border-radius:22px;background:linear-gradient(145deg,#091018fa,#121a26f5);box-shadow:0 35px 120px #000d,0 0 70px #d7b35d12;backdrop-filter:blur(24px);opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:.38s cubic-bezier(.16,1,.3,1);overflow:hidden}
-#hub-panel.open{opacity:1;transform:none;pointer-events:auto}
-.hub-glow{position:absolute;left:-130px;top:-130px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#d7b35d18,transparent 67%);filter:blur(14px);animation:hubGlow 9s ease-in-out infinite}
-.hub-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative}.hub-kicker{font:700 7px Inter,Arial;color:#778995;letter-spacing:.2em}.hub-head h3{margin:6px 0 3px;font:800 21px Inter,Vazirmatn,Arial;color:#f5f3eb;letter-spacing:-.04em}.hub-head p{margin:0;color:#788691;font:400 9px Vazirmatn,Inter,Arial;line-height:1.6}.hub-head button{width:32px;height:32px;border:1px solid #fff1;border-radius:10px;background:#fff2;color:#84939a;font-size:20px;cursor:pointer}.hub-head button:hover{border-color:#d7b35d55;color:#fff}
-.hub-grid{display:grid;gap:7px;margin-top:16px;position:relative}.hub-app{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid #fff10;border-radius:13px;background:#ffffff03;transition:.25s;position:relative;overflow:hidden}.hub-app:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#d7b35d08,transparent 52%);opacity:0;transition:.25s}.hub-app:hover{transform:translateX(4px);border-color:#d7b35d42;box-shadow:0 12px 35px #0004}.hub-app:hover:before{opacity:1}.hub-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;border:1px solid #fff2;font:bold 14px Inter;position:relative;z-index:1}.hub-icon.nexus{background:linear-gradient(135deg,#1c2733,#0a1119);color:#e3c266}.hub-icon.canvas{background:linear-gradient(135deg,#f2eadb,#c6d8cc);color:#1b2924}.hub-icon.pulse{background:linear-gradient(135deg,#09161a,#10352e);color:#7bf6df}.hub-icon.frame{background:linear-gradient(135deg,#241b16,#4d321e);color:#f1c978}.hub-info{position:relative;z-index:1}.hub-info b{display:block;color:#e8eee9;font-size:10px}.hub-info small{display:block;color:#70808a;font-size:7px;margin-top:3px}.hub-app i{position:relative;z-index:1;color:#d7b35d;font:700 7px Inter;font-style:normal}
-.hub-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid #fff10;position:relative}.hub-foot>span{font:600 6px Inter;color:#64747e;letter-spacing:.08em}.hub-foot em{display:inline-block;width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 10px #7bf6df;vertical-align:middle;margin-right:4px}.hub-foot>div{display:flex;gap:5px}.hub-foot button,.hub-foot a{height:29px;padding:0 9px;border:1px solid #d7b35d2b;background:#ffffff03;color:#d7b35d;border-radius:8px;font:700 7px Inter;cursor:pointer;display:flex;align-items:center}.hub-foot a{text-decoration:none}.hub-foot button:hover,.hub-foot a:hover{border-color:#d7b35d60;background:#d7b35d09}
-#studio-boot{position:fixed;inset:0;z-index:100010;background:#040507;display:grid;place-items:center;transition:opacity .7s,visibility .7s}.boot-grid{position:absolute;inset:0;background:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(circle at center,#000 10%,transparent 78%)}.boot-card{width:min(480px,calc(100% - 36px));text-align:center;position:relative;padding:30px 28px;border:1px solid #d7b35d22;border-radius:24px;background:linear-gradient(145deg,#080b10df,#10151cf0);box-shadow:0 40px 130px #000e,0 0 80px #d7b35d0e;backdrop-filter:blur(18px)}.boot-logo{width:120px;height:120px;margin:0 auto 18px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px #d7b35d2b,0 0 50px #d7b35d19;animation:bootFloat 4s ease-in-out infinite}.boot-logo img{width:100%;height:100%;object-fit:cover}.boot-line{font:700 8px Inter;color:#a38c54;letter-spacing:.34em}.boot-title{font:800 22px Inter;color:#ece8de;margin-top:8px;letter-spacing:-.035em}.boot-title span{color:#d7b35d}.boot-bar{height:3px;background:#fff10;border-radius:10px;overflow:hidden;margin:23px 0 9px}.boot-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8e7238,#f6d982);box-shadow:0 0 20px #d7b35d;transition:width .18s}.boot-meta{display:flex;justify-content:space-between;color:#65747e;font:600 7px Inter;letter-spacing:.12em}.boot-meta b{color:#d7b35d}.boot-card button{margin-top:18px;height:34px;padding:0 13px;border:1px solid #d7b35d44;border-radius:9px;background:#d7b35d0d;color:#d7b35d;font:800 8px Inter;cursor:pointer;opacity:0;transition:.3s}.boot-card button.ready{opacity:1}.boot-card button:hover{background:#d7b35d18;border-color:#d7b35d77}.boot-card:after{content:"";position:absolute;inset:-1px;border-radius:25px;border:1px solid transparent;background:linear-gradient(135deg,#d7b35d55,transparent 35%,transparent 65%,#7bf6df2e) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none}
-@keyframes spinHub{to{transform:rotate(360deg)}}@keyframes hubGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(35px,30px)}}@keyframes bootFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@media(max-width:650px){#studio-hub{left:12px;bottom:12px}#hub-panel{width:calc(100vw - 24px)}#cursor-aura,#cursor-core{display:none}}
-@media(prefers-reduced-motion:reduce){#cursor-aura,#cursor-core{display:none}#hub-panel,.boot-card{transition:none!important}.hub-ring,.boot-logo,.hub-glow{animation:none!important}}
-</style>
-<script>
-(function(){
-  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
-  const root=document.documentElement;
-  let sfxOn=localStorage.getItem('adland-site-sfx')!=='off';
-  let reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
-  function audio(freq=440,type='sine',dur=.09,vol=.025){if(!sfxOn)return;try{const A=window.__adAudio||(window.__adAudio=new(window.AudioContext||window.webkitAudioContext)());if(A.state==='suspended')A.resume();const o=A.createOscillator(),g=A.createGain(),n=A.currentTime;o.type=type;o.frequency.setValueAtTime(freq,n);o.frequency.exponentialRampToValueAtTime(freq*1.35,n+dur*.55);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(vol,n+.012);g.gain.exponentialRampToValueAtTime(.0001,n+dur);o.connect(g).connect(A.destination);o.start(n);o.stop(n+dur+.01)}catch(e){}}
-  function uiSound(kind){if(kind==='open')audio(330,'sine',.13,.028);else if(kind==='close')audio(220,'sine',.09,.02);else if(kind==='nav')audio(520,'triangle',.07,.018);else audio(380,'sine',.065,.014)}
-  const panel=$('#hub-panel'),launch=$('#hub-launch'),close=$('#hub-close'),sound=$('#hub-sound');
-  function setHub(open){panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));uiSound(open?'open':'close')}
-  launch.addEventListener('click',()=>setHub(!panel.classList.contains('open')));
-  close.addEventListener('click',()=>setHub(false));
-  sound.textContent='SFX '+(sfxOn?'ON':'OFF');sound.addEventListener('click',()=>{sfxOn=!sfxOn;localStorage.setItem('adland-site-sfx',sfxOn?'on':'off');sound.textContent='SFX '+(sfxOn?'ON':'OFF');uiSound('open')});
-  $('.hub-app,.hub-foot a').forEach(a=>a.addEventListener('click',()=>uiSound('nav')));
-  $('a,button').forEach(el=>{el.addEventListener('pointerdown',()=>uiSound());});
-  const bar=$('#site-progress span');
-  function progress(){const d=document.documentElement.scrollHeight-innerHeight;bar.style.width=(d>0?(scrollY/d)*100:0)+'%'}
-  addEventListener('scroll',progress,{passive:true});progress();
-  const aura=$('#cursor-aura'),core=$('#cursor-core');let tx=0,ty=0,ax=0,ay=0;
-  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(aura){aura.style.left=tx+'px';aura.style.top=ty+'px';core.style.left=tx+'px';core.style.top=ty+'px'}document.body.style.setProperty('--ad-mx',tx+'px');document.body.style.setProperty('--ad-my',ty+'px')},{passive:true});
-  function cursorFrame(){if(aura){ax+=(tx-ax)*.12;ay+=(ty-ay)*.12;aura.style.transform='translate(-50%,-50%) translate('+(ax-tx)*.18+'px,'+(ay-ty)*.18+'px)'}requestAnimationFrame(cursorFrame)} if(!reduce)cursorFrame();
-  $('.hub-app').forEach(card=>{if(reduce)return;card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(650px) rotateX('+(-y*4)+'deg) rotateY('+(x*6)+'deg) translateX(4px)'}) ;card.addEventListener('pointerleave',()=>card.style.transform='')});
-  const boot=$('#studio-boot'),pct=$('#boot-pct'),fill=$('.boot-bar i'),skip=$('#boot-skip');
-  if(localStorage.getItem('adland-booted')==='1'||reduce){boot.style.opacity='0';boot.style.visibility='hidden'}else{
-    let p=0;const t=setInterval(()=>{p+=Math.round(Math.random()*16+6);p=Math.min(p,100);pct.textContent=String(p).padStart(2,'0')+'%';fill.style.width=p+'%';if(p>=100){clearInterval(t);skip.classList.add('ready');audio(620,'triangle',.14,.03)}},110);
-    function enter(){localStorage.setItem('adland-booted','1');boot.style.opacity='0';boot.style.visibility='hidden';uiSound('open')}
-    skip.addEventListener('click',enter);
-    setTimeout(()=>{if(skip.classList.contains('ready'))enter()},2100);
-  }
-  new MutationObserver(()=>{sound.textContent='SFX '+(sfxOn?'ON':'OFF')}).observe(root,{attributes:true,attributeFilter:['lang']});
-  root.classList.add('adland-experience');
-})();
-</script>
-</body>
-</html>
+</body></html>
