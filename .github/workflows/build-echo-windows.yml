@@ -1,0 +1,28 @@
+name: Build Echo v1.0.0
+on:
+  push:
+    branches: ["release"]
+    paths: ["adland-echo/**",".github/workflows/build-echo-windows.yml"]
+  workflow_dispatch:
+permissions: {contents: write}
+concurrency: {group: adland-echo-build, cancel-in-progress: true}
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults: {run: {working-directory: adland-echo}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: echo-v1.0.0
+          name: Echo v1.0.0
+          body: |
+            Echo v1.0.0 — local voice recorder by AdLand Studio.
+          files: |
+            adland-echo/release/*.exe
+          draft: false
+          prerelease: false
