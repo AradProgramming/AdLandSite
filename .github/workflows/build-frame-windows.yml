@@ -1,4 +1,4 @@
-name: Build AdLand Frame
+name: Build Frame v1.1.2
 on:
   push:
     branches: ["release"]
@@ -27,14 +27,14 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: frame-v1.1.1
-          name: AdLand Frame v1.1.1
+          tag_name: frame-v1.1.2
+          name: Build Frame v1.1.2
           body: |
-            AdLand Frame v1.1.1 — local image workspace by AdLand Studio.
+            Build Frame v1.1.2 — local image workspace by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-frame/release/AdLand-Frame-1.1.1-Setup.exe
-            adland-frame/release/AdLand-Frame-1.1.1-Portable.exe
+            adland-frame/release/AdLand-Frame-1.1.2
+            adland-frame/release/AdLand-Frame-1.1.2
           draft: false
           prerelease: false
