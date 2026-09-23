@@ -1,0 +1,1 @@
+const{contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('canvas',{window:a=>ipcRenderer.invoke('window',a),pickImages:()=>ipcRenderer.invoke('pickImages'),readImage:p=>ipcRenderer.invoke('readImage',p),reveal:p=>ipcRenderer.invoke('reveal',p),copy:p=>ipcRenderer.invoke('copy',p)});
