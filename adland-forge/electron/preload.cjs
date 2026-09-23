@@ -1,0 +1,1 @@
+const{contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('forge',{window:k=>ipcRenderer.send('win',{args:k})});
