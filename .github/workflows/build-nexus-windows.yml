@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: adland-nexus-build
+  group: adland-nexus-v142-build
   cancel-in-progress: true
 jobs:
   windows:
