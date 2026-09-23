@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adlandstudio.com/sitemap.xml
+Sitemap: https://aradprogramming.github.io/AdLandSite/sitemap.xml
