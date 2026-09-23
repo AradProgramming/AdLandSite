@@ -25,7 +25,7 @@ jobs:
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-forge/release/Forge-1.0.1-Setup.exe
-            adland-forge/release/Forge-1.0.1-Portable.exe
+            adland-forge/release/*.exe
           draft: false
           prerelease: false
+# publish-all-exe-forge
