@@ -34,9 +34,10 @@ jobs:
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-frame/release/AdLand-Frame-1.1.2
-            adland-frame/release/AdLand-Frame-1.1.2
+            adland-frame/release/*.exe
           draft: false
           prerelease: false
 
 # force rebuild after icon configuration fix
+
+# publish-all-exe-frame
