@@ -1,0 +1,32 @@
+name: Build Atlas v1.0.0
+on:
+  push:
+    branches: ["release"]
+    paths: ["adland-atlas/**",".github/workflows/build-atlas-windows.yml"]
+  workflow_dispatch:
+permissions: {contents: write}
+concurrency: {group: adland-atlas-build, cancel-in-progress: true}
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults: {run: {working-directory: adland-atlas}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: atlas-v1.0.0
+          name: Atlas v1.0.0
+          body: |
+            Atlas v1.0.0 — local file intelligence by AdLand Studio.
+            
+            Windows x64 installer and portable build are attached below.
+          files: |
+            adland-atlas/release/Atlas-1.0.0-Setup.exe
+            adland-atlas/release/Atlas-1.0.0-Portable.exe
+          draft: false
+          prerelease: false
