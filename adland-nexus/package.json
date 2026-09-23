@@ -15,7 +15,7 @@
     "files":["electron/**/*","src/index.html","package.json"],
     "asar":true,
     "compression":"maximum",
-    "win":{
+    "win":{"icon":"build/icon.svg",
       "target":[
         {"target":"nsis","arch":["x64"]},
         {"target":"portable","arch":["x64"]}
