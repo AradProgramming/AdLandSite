@@ -10,7 +10,7 @@
   "devDependencies":{"electron":"latest","electron-builder":"latest"},
   "build":{
     "appId":"studio.adland.nexus",
-    "productName":"AdLand Nexus",
+    "productName":"Nexus",
     "directories":{"output":"release"},
     "files":["electron/**/*","src/index.html","package.json"],
     "asar":true,
@@ -28,7 +28,7 @@
       "allowToChangeInstallationDirectory":true,
       "createDesktopShortcut":true,
       "createStartMenuShortcut":true,
-      "shortcutName":"AdLand Nexus"
+      "shortcutName":"Nexus"
     }
   }
 }
