@@ -1,4 +1,4 @@
-name: Build AdLand Nexus v1.4.3
+name: Build Build AdLand Nexus v1.4.3
 on:
   push:
     branches: ["release"]
@@ -32,9 +32,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.4.3
-          name: AdLand Nexus v1.4.3
+          name: Build AdLand Nexus v1.4.3
           body: |
-            AdLand Nexus v1.4.3 — desktop command center by AdLand Studio.
+            Build AdLand Nexus v1.4.3 — desktop command center by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
