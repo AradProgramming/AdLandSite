@@ -1,0 +1,40 @@
+name: Build AdLand Canvas v1.1.0
+on:
+  push:
+    branches: ["release"]
+    paths:
+      - "adland-canvas/**"
+      - ".github/workflows/build-canvas-windows.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: adland-canvas-build
+  cancel-in-progress: true
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: adland-canvas
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: canvas-v1.1.0
+          name: AdLand Canvas v1.1.0
+          body: |
+            AdLand Canvas v1.1.0 — visual asset studio by AdLand Studio.
+            
+            Windows x64 installer and portable build are attached below.
+          files: |
+            adland-canvas/release/AdLand-Canvas-1.1.0-Setup.exe
+            adland-canvas/release/AdLand-Canvas-1.1.0-Portable.exe
+          draft: false
+          prerelease: false
