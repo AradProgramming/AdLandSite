@@ -1,0 +1,1 @@
+const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('relay',{clipboard:{read:()=>ipcRenderer.invoke('clipboard:read'),write:t=>ipcRenderer.invoke('clipboard:write',t)},window:{min:()=>ipcRenderer.invoke('window').then(x=>x.min()),max:()=>ipcRenderer.invoke('window').then(x=>x.max()),close:()=>ipcRenderer.invoke('window').then(x=>x.close())}});
