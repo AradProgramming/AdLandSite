@@ -1,4 +1,4 @@
-name: Build AdLand Canvas v1.1.0
+name: Build AdLand Canvas v1.1.1
 on:
   push:
     branches: ["release"]
@@ -27,14 +27,14 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: canvas-v1.1.0
-          name: AdLand Canvas v1.1.0
+          tag_name: canvas-v1.1.1
+          name: AdLand Canvas v1.1.1
           body: |
-            AdLand Canvas v1.1.0 — visual asset studio by AdLand Studio.
+            AdLand Canvas v1.1.1 — visual asset studio by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-canvas/release/AdLand-Canvas-1.1.0-Setup.exe
-            adland-canvas/release/AdLand-Canvas-1.1.0-Portable.exe
+            adland-canvas/release/AdLand-Canvas-1.1.1-Setup.exe
+            adland-canvas/release/AdLand-Canvas-1.1.1-Portable.exe
           draft: false
           prerelease: false
