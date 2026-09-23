@@ -38,3 +38,5 @@ jobs:
             adland-frame/release/AdLand-Frame-1.1.2
           draft: false
           prerelease: false
+
+# force rebuild after icon configuration fix
