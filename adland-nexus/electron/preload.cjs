@@ -1,2 +1,2 @@
 const {contextBridge,ipcRenderer}=require('electron');
-contextBridge.exposeInMainWorld('nexus',{window:a=>ipcRenderer.invoke('window',a),system:()=>ipcRenderer.invoke('sys'),onPalette:fn=>{const cb=()=>fn();ipcRenderer.on('palette',cb);return()=>ipcRenderer.removeListener('palette',cb)}});
+contextBridge.exposeInMainWorld('nexus',{window:a=>ipcRenderer.invoke('window',a),system:()=>ipcRenderer.invoke('sys'),pickAudio:()=>ipcRenderer.invoke('pickAudio'),readAudio:p=>ipcRenderer.invoke('readAudio'),onPalette:fn=>{const cb=()=>fn();ipcRenderer.on('palette',cb);return()=>ipcRenderer.removeListener('palette',cb)}});
