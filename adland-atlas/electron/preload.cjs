@@ -1,0 +1,1 @@
+const{contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('atlas',{pickFolder:()=>ipcRenderer.invoke('pick'),scan:dir=>ipcRenderer.invoke('scan',dir),reveal:p=>ipcRenderer.send('reveal',p),open:p=>ipcRenderer.send('open',p),window:k=>ipcRenderer.send('win',{args:k})});
