@@ -1,4 +1,4 @@
-name: Build Frame v1.1.2
+name: Build Frame v1.1.3
 on:
   push:
     branches: ["release"]
@@ -27,10 +27,10 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: frame-v1.1.2
-          name: Build Frame v1.1.2
+          tag_name: frame-v1.1.3
+          name: Build Frame v1.1.3
           body: |
-            Build Frame v1.1.2 — local image workspace by AdLand Studio.
+            Build Frame v1.1.3 — local image workspace by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
