@@ -132,7 +132,123 @@ let mx=-999,my=-999;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY
 </style>
 <script>
 (function(){
-  const $=s=>document.querySelector(s), $=s=>document.querySelectorAll(s);
+  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
+  const root=document.documentElement;
+  let sfxOn=localStorage.getItem('adland-site-sfx')!=='off';
+  let reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
+  function audio(freq=440,type='sine',dur=.09,vol=.025){if(!sfxOn)return;try{const A=window.__adAudio||(window.__adAudio=new(window.AudioContext||window.webkitAudioContext)());if(A.state==='suspended')A.resume();const o=A.createOscillator(),g=A.createGain(),n=A.currentTime;o.type=type;o.frequency.setValueAtTime(freq,n);o.frequency.exponentialRampToValueAtTime(freq*1.35,n+dur*.55);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(vol,n+.012);g.gain.exponentialRampToValueAtTime(.0001,n+dur);o.connect(g).connect(A.destination);o.start(n);o.stop(n+dur+.01)}catch(e){}}
+  function uiSound(kind){if(kind==='open')audio(330,'sine',.13,.028);else if(kind==='close')audio(220,'sine',.09,.02);else if(kind==='nav')audio(520,'triangle',.07,.018);else audio(380,'sine',.065,.014)}
+  const panel=$('#hub-panel'),launch=$('#hub-launch'),close=$('#hub-close'),sound=$('#hub-sound');
+  function setHub(open){panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));uiSound(open?'open':'close')}
+  launch.addEventListener('click',()=>setHub(!panel.classList.contains('open')));
+  close.addEventListener('click',()=>setHub(false));
+  sound.textContent='SFX '+(sfxOn?'ON':'OFF');sound.addEventListener('click',()=>{sfxOn=!sfxOn;localStorage.setItem('adland-site-sfx',sfxOn?'on':'off');sound.textContent='SFX '+(sfxOn?'ON':'OFF');uiSound('open')});
+  $('.hub-app,.hub-foot a').forEach(a=>a.addEventListener('click',()=>uiSound('nav')));
+  $('a,button').forEach(el=>{el.addEventListener('pointerdown',()=>uiSound());});
+  const bar=$('#site-progress span');
+  function progress(){const d=document.documentElement.scrollHeight-innerHeight;bar.style.width=(d>0?(scrollY/d)*100:0)+'%'}
+  addEventListener('scroll',progress,{passive:true});progress();
+  const aura=$('#cursor-aura'),core=$('#cursor-core');let tx=0,ty=0,ax=0,ay=0;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(aura){aura.style.left=tx+'px';aura.style.top=ty+'px';core.style.left=tx+'px';core.style.top=ty+'px'}document.body.style.setProperty('--ad-mx',tx+'px');document.body.style.setProperty('--ad-my',ty+'px')},{passive:true});
+  function cursorFrame(){if(aura){ax+=(tx-ax)*.12;ay+=(ty-ay)*.12;aura.style.transform='translate(-50%,-50%) translate('+(ax-tx)*.18+'px,'+(ay-ty)*.18+'px)'}requestAnimationFrame(cursorFrame)} if(!reduce)cursorFrame();
+  $('.hub-app').forEach(card=>{if(reduce)return;card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(650px) rotateX('+(-y*4)+'deg) rotateY('+(x*6)+'deg) translateX(4px)'}) ;card.addEventListener('pointerleave',()=>card.style.transform='')});
+  const boot=$('#studio-boot'),pct=$('#boot-pct'),fill=$('.boot-bar i'),skip=$('#boot-skip');
+  if(localStorage.getItem('adland-booted')==='1'||reduce){boot.style.opacity='0';boot.style.visibility='hidden'}else{
+    let p=0;const t=setInterval(()=>{p+=Math.round(Math.random()*16+6);p=Math.min(p,100);pct.textContent=String(p).padStart(2,'0')+'%';fill.style.width=p+'%';if(p>=100){clearInterval(t);skip.classList.add('ready');audio(620,'triangle',.14,.03)}},110);
+    function enter(){localStorage.setItem('adland-booted','1');boot.style.opacity='0';boot.style.visibility='hidden';uiSound('open')}
+    skip.addEventListener('click',enter);
+    setTimeout(()=>{if(skip.classList.contains('ready'))enter()},2100);
+  }
+  new MutationObserver(()=>{sound.textContent='SFX '+(sfxOn?'ON':'OFF')}).observe(root,{attributes:true,attributeFilter:['lang']});
+  root.classList.add('adland-experience');
+})();
+</script>
+</body>
+</html>
+</script><canvas id="adland-vfx" aria-hidden="true"></canvas>
+<style>
+#adland-vfx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
+#root,#nexus-board{position:relative;z-index:2}
+</style>
+<script>
+(function(){const c=document.getElementById('adland-vfx');if(!c)return;const ctx=c.getContext('2d');let w=0,h=0,dpr=1,pts=[];const reduce=()=>window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
+function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);pts=Array.from({length:55},()=>({x:Math.random()*w,y:Math.random()*h,r:.5+Math.random()*1.8,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.12,a:.15+Math.random()*.42}))}
+function frame(){ctx.clearRect(0,0,w,h);if(reduce()){requestAnimationFrame(frame);return}for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<-5)p.x=w+5;if(p.x>w+5)p.x=-5;if(p.y<-5)p.y=h+5;if(p.y>h+5)p.y=-5;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+p.a+')';ctx.fill()}requestAnimationFrame(frame)}
+addEventListener('resize',resize,{passive:true});resize();frame();
+let mx=-999,my=-999;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;document.body.style.setProperty('--mx',mx+'px');document.body.style.setProperty('--my',my+'px')},{passive:true});
+})();
+</script><style>.image-safe[data-image-error="true"]:before{content:"Image unavailable";display:grid;place-items:center;height:100%;color:#ffffff33;font:600 11px Inter,Vazirmatn,Arial}.image-safe[data-image-error="true"] img{display:none!important}</style><!-- ADLAND STUDIO EXPERIENCE v2 -->
+<div id="studio-hub">
+  <button id="hub-launch" aria-label="Open AdLand app hub">
+    <span class="hub-ring"></span><span class="hub-dot"></span>
+    <span class="hub-copy"><b>ADLAND</b><small>APP ECOSYSTEM</small></span><span class="hub-arrow">↗</span>
+  </button>
+  <aside id="hub-panel" aria-hidden="true">
+    <div class="hub-glow"></div>
+    <header class="hub-head">
+      <div><div class="hub-kicker">STUDIO SYSTEM / 04</div><h3>AdLand Apps</h3><p id="hub-sub">ابزارهایی که برای ساختن ساخته شده‌اند.</p></div>
+      <button id="hub-close" aria-label="Close">×</button>
+    </header>
+    <div class="hub-grid">
+      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/nexus/">
+        <div class="hub-icon nexus"><span>N</span></div><div class="hub-info"><b>AdLand Nexus</b><small>Focus · Workspace · Relax</small></div><i>1.4.2</i>
+      </a>
+      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/canvas/">
+        <div class="hub-icon canvas"><span>C</span></div><div class="hub-info"><b>AdLand Canvas</b><small>Visual library · Moodboard · Palette</small></div><i>1.1.0</i>
+      </a>
+      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/pulse/">
+        <div class="hub-icon pulse"><span>P</span></div><div class="hub-info"><b>AdLand Pulse</b><small>CPU · Memory · Telemetry</small></div><i>1.0.0</i>
+      </a>
+      <a class="hub-app" href="https://aradprogramming.github.io/AdLandSite/frame/">
+        <div class="hub-icon frame"><span>F</span></div><div class="hub-info"><b>AdLand Frame</b><small>Image workshop · Effects · Export</small></div><i>1.1.0</i>
+      </a>
+    </div>
+    <div class="hub-foot">
+      <span><em class="online"></em> LOCAL-FIRST WINDOWS TOOLS</span>
+      <div><button id="hub-sound">SFX ON</button><a href="#apps">VIEW ON SITE</a></div>
+    </div>
+  </aside>
+</div>
+<div id="site-progress"><span></span></div>
+<div id="cursor-aura"></div>
+<div id="cursor-core"></div>
+<div id="studio-boot" aria-hidden="true">
+  <div class="boot-grid"></div>
+  <div class="boot-card">
+    <div class="boot-logo"><img src="/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" alt="AdLand Studio"></div>
+    <div class="boot-line">ADLAND STUDIO</div>
+    <div class="boot-title">CREATIVE SYSTEM <span>ONLINE</span></div>
+    <div class="boot-bar"><i></i></div>
+    <div class="boot-meta"><span>INITIALIZING EXPERIENCE</span><b id="boot-pct">00%</b></div>
+    <button id="boot-skip">ENTER STUDIO ↗</button>
+  </div>
+</div>
+
+<style>
+:root{--ad-gold:#d7b35d;--ad-gold2:#f4d88a;--ad-ink:#07090d;--ad-cyan:#7bf6df;--ad-violet:#8a7dff}
+#site-progress{position:fixed;left:0;right:0;top:0;height:2px;z-index:100000;background:#ffffff07;pointer-events:none}
+#site-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ad-gold),var(--ad-gold2),#fff);box-shadow:0 0 18px #d7b35d99}
+#cursor-aura,#cursor-core{position:fixed;pointer-events:none;z-index:99998;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen}
+#cursor-aura{width:270px;height:270px;background:radial-gradient(circle,#d7b35d13 0,#d7b35d08 32%,transparent 68%);filter:blur(1px);transition:opacity .25s}
+#cursor-core{width:8px;height:8px;background:#f8dda0;box-shadow:0 0 20px #d7b35d,0 0 4px #fff;opacity:.8}
+#studio-hub{position:fixed;left:22px;bottom:22px;z-index:100001;font-family:Inter,Vazirmatn,Arial,sans-serif}
+#hub-launch{display:flex;align-items:center;gap:9px;padding:0 13px;height:48px;color:#f6efdc;border:1px solid #d7b35d42;border-radius:15px;background:linear-gradient(135deg,#0c1119f5,#111824ee);box-shadow:0 22px 65px #0008,0 0 0 1px #fff1;backdrop-filter:blur(20px);cursor:pointer;transition:.3s;overflow:hidden}
+#hub-launch:hover{transform:translateY(-4px);border-color:#d7b35d8a;box-shadow:0 28px 80px #000a,0 0 40px #d7b35d1c}
+.hub-ring{width:20px;height:20px;border:1px solid #d7b35d77;border-radius:50%;position:relative;animation:spinHub 7s linear infinite}.hub-ring:after{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid #7bf6df66}.hub-dot{width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 13px #7bf6df;position:absolute;left:22px}
+.hub-copy{display:flex;flex-direction:column;text-align:left}.hub-copy b{font:800 10px Inter,Arial;letter-spacing:.17em}.hub-copy small{font:500 6px Inter,Arial;color:#71808b;letter-spacing:.18em;margin-top:2px}.hub-arrow{font-size:14px;color:#d7b35d;transition:.2s}.hub-launch:hover .hub-arrow{transform:translate(2px,-2px)}
+#hub-panel{position:absolute;left:0;bottom:60px;width:400px;max-width:calc(100vw - 28px);padding:18px;border:1px solid #d7b35d38;border-radius:22px;background:linear-gradient(145deg,#091018fa,#121a26f5);box-shadow:0 35px 120px #000d,0 0 70px #d7b35d12;backdrop-filter:blur(24px);opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:.38s cubic-bezier(.16,1,.3,1);overflow:hidden}
+#hub-panel.open{opacity:1;transform:none;pointer-events:auto}
+.hub-glow{position:absolute;left:-130px;top:-130px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#d7b35d18,transparent 67%);filter:blur(14px);animation:hubGlow 9s ease-in-out infinite}
+.hub-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative}.hub-kicker{font:700 7px Inter,Arial;color:#778995;letter-spacing:.2em}.hub-head h3{margin:6px 0 3px;font:800 21px Inter,Vazirmatn,Arial;color:#f5f3eb;letter-spacing:-.04em}.hub-head p{margin:0;color:#788691;font:400 9px Vazirmatn,Inter,Arial;line-height:1.6}.hub-head button{width:32px;height:32px;border:1px solid #fff1;border-radius:10px;background:#fff2;color:#84939a;font-size:20px;cursor:pointer}.hub-head button:hover{border-color:#d7b35d55;color:#fff}
+.hub-grid{display:grid;gap:7px;margin-top:16px;position:relative}.hub-app{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid #fff10;border-radius:13px;background:#ffffff03;transition:.25s;position:relative;overflow:hidden}.hub-app:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#d7b35d08,transparent 52%);opacity:0;transition:.25s}.hub-app:hover{transform:translateX(4px);border-color:#d7b35d42;box-shadow:0 12px 35px #0004}.hub-app:hover:before{opacity:1}.hub-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;border:1px solid #fff2;font:bold 14px Inter;position:relative;z-index:1}.hub-icon.nexus{background:linear-gradient(135deg,#1c2733,#0a1119);color:#e3c266}.hub-icon.canvas{background:linear-gradient(135deg,#f2eadb,#c6d8cc);color:#1b2924}.hub-icon.pulse{background:linear-gradient(135deg,#09161a,#10352e);color:#7bf6df}.hub-icon.frame{background:linear-gradient(135deg,#241b16,#4d321e);color:#f1c978}.hub-info{position:relative;z-index:1}.hub-info b{display:block;color:#e8eee9;font-size:10px}.hub-info small{display:block;color:#70808a;font-size:7px;margin-top:3px}.hub-app i{position:relative;z-index:1;color:#d7b35d;font:700 7px Inter;font-style:normal}
+.hub-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid #fff10;position:relative}.hub-foot>span{font:600 6px Inter;color:#64747e;letter-spacing:.08em}.hub-foot em{display:inline-block;width:5px;height:5px;border-radius:50%;background:#7bf6df;box-shadow:0 0 10px #7bf6df;vertical-align:middle;margin-right:4px}.hub-foot>div{display:flex;gap:5px}.hub-foot button,.hub-foot a{height:29px;padding:0 9px;border:1px solid #d7b35d2b;background:#ffffff03;color:#d7b35d;border-radius:8px;font:700 7px Inter;cursor:pointer;display:flex;align-items:center}.hub-foot a{text-decoration:none}.hub-foot button:hover,.hub-foot a:hover{border-color:#d7b35d60;background:#d7b35d09}
+#studio-boot{position:fixed;inset:0;z-index:100010;background:#040507;display:grid;place-items:center;transition:opacity .7s,visibility .7s}.boot-grid{position:absolute;inset:0;background:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(circle at center,#000 10%,transparent 78%)}.boot-card{width:min(480px,calc(100% - 36px));text-align:center;position:relative;padding:30px 28px;border:1px solid #d7b35d22;border-radius:24px;background:linear-gradient(145deg,#080b10df,#10151cf0);box-shadow:0 40px 130px #000e,0 0 80px #d7b35d0e;backdrop-filter:blur(18px)}.boot-logo{width:120px;height:120px;margin:0 auto 18px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px #d7b35d2b,0 0 50px #d7b35d19;animation:bootFloat 4s ease-in-out infinite}.boot-logo img{width:100%;height:100%;object-fit:cover}.boot-line{font:700 8px Inter;color:#a38c54;letter-spacing:.34em}.boot-title{font:800 22px Inter;color:#ece8de;margin-top:8px;letter-spacing:-.035em}.boot-title span{color:#d7b35d}.boot-bar{height:3px;background:#fff10;border-radius:10px;overflow:hidden;margin:23px 0 9px}.boot-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8e7238,#f6d982);box-shadow:0 0 20px #d7b35d;transition:width .18s}.boot-meta{display:flex;justify-content:space-between;color:#65747e;font:600 7px Inter;letter-spacing:.12em}.boot-meta b{color:#d7b35d}.boot-card button{margin-top:18px;height:34px;padding:0 13px;border:1px solid #d7b35d44;border-radius:9px;background:#d7b35d0d;color:#d7b35d;font:800 8px Inter;cursor:pointer;opacity:0;transition:.3s}.boot-card button.ready{opacity:1}.boot-card button:hover{background:#d7b35d18;border-color:#d7b35d77}.boot-card:after{content:"";position:absolute;inset:-1px;border-radius:25px;border:1px solid transparent;background:linear-gradient(135deg,#d7b35d55,transparent 35%,transparent 65%,#7bf6df2e) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none}
+@keyframes spinHub{to{transform:rotate(360deg)}}@keyframes hubGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(35px,30px)}}@keyframes bootFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@media(max-width:650px){#studio-hub{left:12px;bottom:12px}#hub-panel{width:calc(100vw - 24px)}#cursor-aura,#cursor-core{display:none}}
+@media(prefers-reduced-motion:reduce){#cursor-aura,#cursor-core{display:none}#hub-panel,.boot-card{transition:none!important}.hub-ring,.boot-logo,.hub-glow{animation:none!important}}
+</style>
+<script>
+(function(){
+  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
   const root=document.documentElement;
   let sfxOn=localStorage.getItem('adland-site-sfx')!=='off';
   let reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches||localStorage.getItem('adland-reduced-motion')==='1';
