@@ -1,0 +1,1 @@
+const{contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('pulse',{window:a=>ipcRenderer.invoke('window',a),snapshot:()=>ipcRenderer.invoke('snapshot')});
