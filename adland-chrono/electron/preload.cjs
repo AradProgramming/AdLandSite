@@ -1,0 +1,1 @@
+const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('chrono',{window:{min:()=>ipcRenderer.invoke('window','min'),max:()=>ipcRenderer.invoke('window','max'),close:()=>ipcRenderer.invoke('window','close')}});
