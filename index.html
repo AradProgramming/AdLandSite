@@ -163,6 +163,86 @@ let mx=-999,my=-999;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY
   root.classList.add('adland-experience');
 })();
 </script>
+
+<!-- ADLAND ULTRA EXPERIENCE -->
+<div id="adland-ultra" aria-hidden="false">
+  <canvas id="al-supernova"></canvas>
+  <div class="al-scan"></div>
+  <div class="al-vignette"></div>
+  <div class="al-topline"><span>ADLAND STUDIO</span><i></i><b id="al-clock">00:00:00</b><span>CREATIVE CORE / ONLINE</span></div>
+  <div class="al-logo-orbit" id="al-orbit">
+    <span class="al-orbit-ring r1"></span><span class="al-orbit-ring r2"></span><span class="al-orbit-ring r3"></span>
+    <span class="al-orbit-dot d1"></span><span class="al-orbit-dot d2"></span><span class="al-orbit-dot d3"></span>
+    <img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png" alt="AdLand">
+  </div>
+  <div class="al-dock" id="al-dock">
+    <button class="al-dock-home" data-go="#home"><span>⌂</span><b>ADLAND</b></button>
+    <button data-go="#apps"><span>01</span><b>APPS</b></button>
+    <button data-go="#projects"><span>02</span><b>PROJECTS</b></button>
+    <button data-go="#learning"><span>03</span><b>LEARN</b></button>
+    <button data-go="#team"><span>04</span><b>TEAM</b></button>
+    <button id="al-command"><span>⌘</span><b>COMMAND</b></button>
+  </div>
+  <button id="al-mini" aria-label="Open command center"><span></span><b>AL</b></button>
+  <div id="al-command-modal" aria-hidden="true">
+    <div class="al-modal-backdrop"></div>
+    <div class="al-command-card">
+      <div class="al-corner c1"></div><div class="al-corner c2"></div>
+      <header><div><small>ADLAND COMMAND CENTER</small><h3>جای بعدی را انتخاب کن</h3></div><button id="al-cmd-close">×</button></header>
+      <div class="al-command-search"><span>⌘</span><input id="al-cmd-input" placeholder="Search the studio..." autocomplete="off"></div>
+      <div class="al-command-grid">
+        <a href="#home" data-cmd="home"><strong>⌂</strong><div><b>Home</b><small>بازگشت به آغاز تجربه</small></div><i>01</i></a>
+        <a href="#apps" data-cmd="apps"><strong>◈</strong><div><b>Apps</b><small>محصولات و دانلودها</small></div><i>02</i></a>
+        <a href="#projects" data-cmd="projects"><strong>✦</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>03</i></a>
+        <a href="#learning" data-cmd="learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>04</i></a>
+        <a href="#team" data-cmd="team"><strong>+</strong><div><b>Team</b><small>همکاری و پیوستن</small></div><i>05</i></a>
+        <a href="#faq" data-cmd="faq"><strong>?</strong><div><b>FAQ</b><small>پاسخ‌های سریع</small></div><i>06</i></a>
+      </div>
+      <footer><span><em></em> EXPERIENCE ENGINE READY</span><div><button id="al-fullscreen">FULLSCREEN</button><button id="al-lower-motion">MOTION: HIGH</button></div></footer>
+    </div>
+  </div>
+</div>
+<style>
+#root{position:relative;z-index:3}#nexus-board{z-index:10002!important}#adland-ultra{position:fixed;inset:0;z-index:1;pointer-events:none;font-family:Inter,"Segoe UI",sans-serif;color:#e9e3d6}
+#al-supernova{position:absolute;inset:0;width:100%;height:100%;opacity:.72}.al-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,#d7b35d03 45%,transparent 48%,#fff01 49%,transparent 50%);background-size:100% 12px;mix-blend-mode:screen;opacity:.16;animation:alScan 12s linear infinite}.al-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 40%,#02030555 100%)}
+.al-topline{position:absolute;top:5px;left:50%;transform:translateX(-50%);height:20px;display:flex;align-items:center;gap:8px;color:#7b8791;font:700 6px Inter;letter-spacing:.18em;opacity:.58;white-space:nowrap}.al-topline i{width:4px;height:4px;border-radius:50%;background:#78f7d0;box-shadow:0 0 9px #78f7d0}.al-topline b{color:#d7b35d;font-size:7px}
+.al-logo-orbit{position:absolute;right:24px;top:94px;width:132px;height:132px;opacity:.18;transition:.35s;pointer-events:auto}.al-logo-orbit:hover{opacity:.62;transform:scale(1.04)}.al-logo-orbit img{position:absolute;inset:29px;width:74px;height:74px;border-radius:50%;object-fit:cover;box-shadow:0 0 40px #d7b35d22}.al-orbit-ring{position:absolute;border:1px solid #d7b35d33;border-radius:50%;inset:15px;animation:alSpin 18s linear infinite}.al-orbit-ring.r2{inset:7px;border-color:#78f7d028;animation-duration:26s;animation-direction:reverse}.al-orbit-ring.r3{inset:26px;border-color:#fff118;animation-duration:11s}.al-orbit-dot{position:absolute;width:4px;height:4px;border-radius:50%;background:#d7b35d;box-shadow:0 0 10px #d7b35d}.al-orbit-dot.d1{left:14px;top:44px}.al-orbit-dot.d2{right:17px;bottom:38px;background:#78f7d0;box-shadow:0 0 10px #78f7d0}.al-orbit-dot.d3{right:45px;top:4px;background:#fff}
+.al-dock{position:fixed;bottom:21px;left:50%;transform:translateX(-50%);display:flex;align-items:stretch;gap:3px;padding:4px;border:1px solid #ffffff12;border-radius:16px;background:#080c12df;backdrop-filter:blur(24px);box-shadow:0 24px 80px #0009,0 0 0 1px #ffffff03;pointer-events:auto;transition:.35s;z-index:6}.al-dock:hover{border-color:#d7b35d2b;box-shadow:0 28px 100px #000b,0 0 35px #d7b35d0d}.al-dock button{min-width:66px;height:42px;border:0;border-radius:11px;background:transparent;color:#788590;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;cursor:pointer;transition:.24s}.al-dock button:hover{background:#d7b35d08;color:#e8ddbf;transform:translateY(-2px)}.al-dock button span{font-size:8px;color:#d7b35d}.al-dock button b{font-size:6px;letter-spacing:.15em}.al-dock .al-dock-home{border:1px solid #d7b35d23;background:linear-gradient(135deg,#d7b35d0d,#78f7d005);color:#cdbb88}.al-dock .al-dock-home span{color:#f0d781}.al-dock button:last-child{border-left:1px solid #fff10;margin-left:3px}
+#al-mini{position:fixed;right:19px;bottom:22px;width:45px;height:45px;border-radius:14px;border:1px solid #d7b35d33;background:#0a0f16df;color:#d7b35d;display:none;align-items:center;justify-content:center;gap:5px;box-shadow:0 20px 65px #0009;pointer-events:auto;cursor:pointer;z-index:7}.al-mini b{font:900 9px Inter}.al-mini span{width:5px;height:5px;border-radius:50%;background:#78f7d0;box-shadow:0 0 9px #78f7d0;animation:alPulse 1.6s infinite}
+#al-command-modal{position:fixed;inset:0;display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:.35s;z-index:20}.al-modal-backdrop{position:absolute;inset:0;background:#020305b8;backdrop-filter:blur(20px)}#al-command-modal.open{opacity:1;visibility:visible;pointer-events:auto}.al-command-card{position:relative;width:min(660px,calc(100% - 28px));padding:20px;border:1px solid #d7b35d35;border-radius:22px;background:linear-gradient(145deg,#091019fa,#131a25f7);box-shadow:0 50px 150px #000e,0 0 90px #d7b35d11;overflow:hidden;transform:translateY(12px) scale(.98);transition:.4s cubic-bezier(.16,1,.3,1)}#al-command-modal.open .al-command-card{transform:none}.al-command-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,#d7b35d08,transparent 30%,transparent 65%,#78f7d006)}.al-corner{position:absolute;width:38px;height:38px;border-color:#d7b35d55}.al-corner.c1{top:8px;left:8px;border-top:1px solid;border-left:1px solid}.al-corner.c2{right:8px;bottom:8px;border-right:1px solid;border-bottom:1px solid}.al-command-card header{position:relative;display:flex;justify-content:space-between;gap:10px}.al-command-card header small{font:700 7px Inter;color:#7e8b95;letter-spacing:.2em}.al-command-card header h3{font:800 24px Vazirmatn,Inter;margin:7px 0 0;color:#f0ece1}.al-command-card header button{width:30px;height:30px;border-radius:9px;border:1px solid #fff12;background:#fff2;color:#87949c;cursor:pointer;font-size:18px}.al-command-search{position:relative;display:flex;align-items:center;gap:9px;margin-top:16px;padding:0 12px;height:44px;border:1px solid #ffffff13;border-radius:11px;background:#ffffff04}.al-command-search span{color:#d7b35d;font:900 11px Inter}.al-command-search input{flex:1;border:0;outline:0;background:transparent;color:#e8ece8;font:500 10px Inter,Vazirmatn}.al-command-search input::placeholder{color:#596872}.al-command-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.al-command-grid a{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;padding:10px;border:1px solid #ffffff0f;border-radius:12px;background:#ffffff03;color:inherit;text-decoration:none;transition:.22s}.al-command-grid a:hover{border-color:#d7b35d42;background:#d7b35d08;transform:translateY(-2px)}.al-command-grid a strong{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#d7b35d08;color:#d7b35d;border:1px solid #d7b35d1b}.al-command-grid a b{font:800 10px Inter}.al-command-grid a small{display:block;color:#6f7e88;font:400 7px Vazirmatn;margin-top:3px}.al-command-grid a i{font:700 7px Inter;color:#65737d;font-style:normal}.al-command-card footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid #fff10;color:#61717c;font:600 6px Inter;letter-spacing:.08em}.al-command-card footer em{display:inline-block;width:5px;height:5px;border-radius:50%;background:#78f7d0;box-shadow:0 0 10px #78f7d0}.al-command-card footer>div{display:flex;gap:5px}.al-command-card footer button{height:28px;padding:0 9px;border-radius:8px;border:1px solid #d7b35d25;background:#fff2;color:#bba769;font:800 7px Inter;cursor:pointer}.al-command-card footer button:hover{border-color:#d7b35d55;background:#d7b35d09}
+body.al-hud-lock{overflow:hidden}.al-ripple{position:fixed;width:8px;height:8px;border-radius:50%;border:1px solid #d7b35d;pointer-events:none;z-index:99999;animation:alRipple .55s ease-out forwards}
+#root .reveal{will-change:transform,opacity}#root a,#root button{transition-timing-function:cubic-bezier(.16,1,.3,1)}
+@keyframes alSpin{to{transform:rotate(360deg)}}@keyframes alPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.45);opacity:1}}@keyframes alScan{from{background-position:0 -100%}to{background-position:0 100%}}@keyframes alRipple{to{transform:scale(8);opacity:0}}
+@media(max-width:760px){.al-topline{display:none}.al-logo-orbit{display:none}.al-dock{left:12px;right:12px;bottom:12px;transform:none;justify-content:space-between}.al-dock button{flex:1;min-width:0;height:48px}.al-dock .al-dock-home{max-width:74px}.al-dock button span{font-size:7px}.al-dock button b{font-size:5px}.al-dock button:last-child{display:none}#al-mini{display:flex;bottom:72px}.al-command-grid{grid-template-columns:1fr}.al-command-card{padding:15px}}
+@media(prefers-reduced-motion:reduce){.al-logo-orbit,.al-scan,.al-orbit-ring,.al-orbit-dot{animation:none!important}.al-ripple{display:none}.al-dock button:hover{transform:none}}
+</style>
+<script>
+(function(){
+  const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
+  const root=document.documentElement, modal=qs('#al-command-modal'), dock=qs('#al-dock'), mini=qs('#al-mini'), cmd=qs('#al-command'), close=qs('#al-cmd-close'), input=qs('#al-cmd-input');
+  let motion=localStorage.getItem('adland-motion')!=='low', sfx=localStorage.getItem('adland-site-sfx')!=='off';
+  const A=[{f:260,t:430,d:.07,v:.013},{f:370,t:620,d:.08,v:.016},{f:510,t:860,d:.09,v:.018}];
+  function tone(i=0){if(!sfx)return;try{const c=window.__alAudio||(window.__alAudio=new(window.AudioContext||window.webkitAudioContext)());if(c.state==='suspended')c.resume();const x=A[i%A.length],o=c.createOscillator(),g=c.createGain(),n=c.currentTime;o.type=i===1?'triangle':'sine';o.frequency.setValueAtTime(x.f,n);o.frequency.exponentialRampToValueAtTime(x.t,n+x.d*.7);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(x.v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+x.d);o.connect(g).connect(c.destination);o.start(n);o.stop(n+x.d+.01)}catch(e){}}
+  function open(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('al-hud-lock');tone(1);setTimeout(()=>input&&input.focus(),80)}
+  function shut(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('al-hud-lock');tone(0)}
+  [cmd,mini].forEach(x=>x&&x.addEventListener('click',open));close&&close.addEventListener('click',shut);qs('.al-modal-backdrop')?.addEventListener('click',shut);
+  qsa('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();document.querySelector(b.dataset.go)?.scrollIntoView({behavior:motion?'smooth':'auto',block:'start'});tone(1)}));
+  qsa('[data-cmd]').forEach(a=>a.addEventListener('click',()=>{shut();tone(2)}));
+  qsa('a,button').forEach((el,i)=>el.addEventListener('pointerdown',e=>{tone(i+1);if(motion&&el.tagName==='BUTTON'){const s=document.createElement('span');s.className='al-ripple';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),600)}} ,{passive:true}));
+  input&&input.addEventListener('input',()=>{const v=input.value.trim().toLowerCase();qsa('[data-cmd]').forEach(a=>a.style.display=(!v||a.textContent.toLowerCase().includes(v))?'grid':'none')});
+  addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();modal.classList.contains('open')?shut():open()}if(e.key==='Escape'&&modal.classList.contains('open'))shut()});
+  qs('#al-fullscreen')?.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();tone(1)}catch(e){}});
+  qs('#al-lower-motion')?.addEventListener('click',e=>{motion=!motion;localStorage.setItem('adland-motion',motion?'high':'low');e.target.textContent='MOTION: '+(motion?'HIGH':'LOW');tone(1)});
+  function clock(){const d=new Date();qs('#al-clock').textContent=[d.getHours(),d.getMinutes(),d.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':')}setInterval(clock,1000);clock();
+  const canvas=qs('#al-supernova');if(canvas){
+    const c=canvas.getContext('2d');let w=0,h=0,d=1,p=[],stars=[];
+    function resize(){d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*d;canvas.height=h*d;c.setTransform(d,0,0,d,0,0);p=Array.from({length:motion?75:22},()=>({x:Math.random()*w,y:Math.random()*h,r:.3+Math.random()*1.7,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.12,a:.1+Math.random()*.45}));stars=Array.from({length:motion?14:5},()=>({x:Math.random()*w,y:Math.random()*h,rx:80+Math.random()*180,ry:30+Math.random()*90,a:Math.random()*Math.PI*2,v:.0002+Math.random()*.0007}))}
+    function tick(){c.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;c.beginPath();c.ellipse(s.x,s.y,s.rx,s.ry,s.a,0,Math.PI*2);c.strokeStyle='rgba(215,179,93,.035)';c.stroke()}for(let i=0;i<p.length;i++){const x=p[i];x.x+=x.vx;x.y+=x.vy;if(x.x<-4)x.x=w+4;if(x.x>w+4)x.x=-4;if(x.y<-4)x.y=h+4;if(x.y>h+4)x.y=-4;c.beginPath();c.arc(x.x,x.y,x.r,0,Math.PI*2);c.fillStyle='rgba(232,216,166,'+x.a+')';c.fill();if(i%4===0){let q=p[(i+7)%p.length],dx=x.x-q.x,dy=x.y-q.y,dist=Math.hypot(dx,dy);if(dist<110){c.beginPath();c.moveTo(x.x,x.y);c.lineTo(q.x,q.y);c.strokeStyle='rgba(215,179,93,'+(0.03*(1-dist/110))+')';c.stroke()}}}requestAnimationFrame(tick)}
+    resize();addEventListener('resize',resize,{passive:true});tick();
+    addEventListener('pointermove',e=>{document.body.style.setProperty('--ad-pointer-x',e.clientX+'px');document.body.style.setProperty('--ad-pointer-y',e.clientY+'px')},{passive:true});
+  }
+})();
+</script>
 </body>
 </html>
 </script><canvas id="adland-vfx" aria-hidden="true"></canvas>
