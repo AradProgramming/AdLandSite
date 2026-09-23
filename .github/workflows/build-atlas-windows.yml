@@ -30,3 +30,4 @@ jobs:
             adland-atlas/release/Atlas-1.0.1-Portable.exe
           draft: false
           prerelease: false
+# rebuild 1.0.1 after typography and sound polish
