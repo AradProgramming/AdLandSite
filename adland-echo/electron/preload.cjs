@@ -1,0 +1,1 @@
+const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('echo',{window:{min:()=>ipcRenderer.invoke('window','min'),max:()=>ipcRenderer.invoke('window','max'),close:()=>ipcRenderer.invoke('window','close')}});
