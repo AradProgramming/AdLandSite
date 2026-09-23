@@ -1,4 +1,4 @@
-name: Build Forge v1.0.0
+name: Build Forge v1.0.1
 on:
   push:
     branches: ["release"]
@@ -18,14 +18,14 @@ jobs:
       - run: npm run dist
       - uses: softprops/action-gh-release@v2
         with:
-          tag_name: forge-v1.0.0
-          name: Forge v1.0.0
+          tag_name: forge-v1.0.1
+          name: Forge v1.0.1
           body: |
-            Forge v1.0.0 — developer workbench by AdLand Studio.
+            Forge v1.0.1 — developer workbench by AdLand Studio.
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-forge/release/Forge-1.0.0-Setup.exe
-            adland-forge/release/Forge-1.0.0-Portable.exe
+            adland-forge/release/Forge-1.0.1-Setup.exe
+            adland-forge/release/Forge-1.0.1-Portable.exe
           draft: false
           prerelease: false
