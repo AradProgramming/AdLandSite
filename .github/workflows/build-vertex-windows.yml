@@ -1,4 +1,4 @@
-name: Build Vertex v1.0.0
+name: Build Orbit v1.0.0
 on:
   push:
     branches: ["release"]
@@ -19,13 +19,13 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: vertex-v1.0.0
-          name: Vertex v1.0.0
+          tag_name: orbit-v1.0.0
+          name: Orbit v1.0.0
           body: |
-            Vertex v1.0.0 — AdLand application center.
+            Orbit v1.0.0 — AdLand application center.
             
             Windows x64 installer and portable build are attached below.
           files: |
-            adland-vertex/release/*.exe
+            adland-vertex/release/Orbit-*.exe
           draft: false
           prerelease: false
