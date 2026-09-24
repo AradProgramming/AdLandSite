@@ -93,4 +93,11 @@ ipcMain.handle('download-release',async(e,args={})=>{
 });
 
 
-ipcMain.handle('open-download',(_,target)=>{try{const safe=String(target||'');if(!safe||!path.isAbsolute(safe))return {ok:false,error:'Invalid path'};return {ok:shell.openPath(safe).then(err=>({ok:!err,error:err||null}))}}catch(err){return {ok:false,error:err.message}}});
+ipcMain.handle('open-download',async(_,target)=>{
+  try{
+    const safe=String(target||'');
+    if(!safe||!path.isAbsolute(safe))return {ok:false,error:'Invalid path'};
+    const err=await shell.openPath(safe);
+    return {ok:!err,error:err||null};
+  }catch(err){return {ok:false,error:err.message}}
+});
