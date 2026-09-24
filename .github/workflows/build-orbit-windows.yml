@@ -1,4 +1,4 @@
-name: Build Orbit v1.0.1
+name: Build Orbit v1.0.2
 on:
   push:
     branches: ["release"]
@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: adland-orbit-v101-build
+  group: adland-orbit-v102-build
   cancel-in-progress: true
 jobs:
   windows:
@@ -27,14 +27,14 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: orbit-v1.0.1
+          tag_name: orbit-v1.0.2
           name: Orbit v1.0.1
           body: |
             Orbit v1.0.1 — application center by AdLand Studio.
             Local boot is independent of online update checks.
             Windows x64 installer and portable builds are attached.
           files: |
-            adland-orbit/release/Orbit-1.0.1-Setup.exe
-            adland-orbit/release/Orbit-1.0.1-Portable.exe
+            adland-orbit/release/Orbit-1.0.2-Setup.exe
+            adland-orbit/release/Orbit-1.0.2-Portable.exe
           draft: false
           prerelease: false
