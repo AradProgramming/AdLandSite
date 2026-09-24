@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: adland-orbit-v102-build
+  group: adland-orbit-v102-final
   cancel-in-progress: true
 jobs:
   windows:
