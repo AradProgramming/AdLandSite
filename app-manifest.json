@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "generatedAt": "2026-09-24",
   "manager": {
-    "name": "Vertex",
+    "name": "Orbit",
     "version": "1.0.0",
-    "tag": "vertex-v1.0.0"
+    "tag": "orbit-v1.0.0"
   },
   "apps": [
     {
@@ -118,11 +118,11 @@
       "portable": "Relay-1.0.0-Portable.exe"
     },
     {
-      "name": "Vertex",
+      "name": "Orbit",
       "version": "1.0.0",
-      "tag": "vertex-v1.0.0",
-      "icon": "assets/icons/projects/Vertex_icon.svg",
-      "site": "vertex/",
+      "tag": "orbit-v1.0.0",
+      "icon": "assets/icons/projects/Orbit_icon.svg",
+      "site": "orbit/",
       "descFa": "مرکز مدیریت، نسخه و دانلود همه‌ی ابزارها.",
       "descEn": "App management, versions, sites and downloads.",
       "installer": "Vertex-1.0.0-Setup.exe",
