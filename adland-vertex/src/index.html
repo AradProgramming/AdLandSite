@@ -27,6 +27,13 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-in
 #downloadTray{position:fixed;right:22px;bottom:22px;width:360px;max-width:calc(100vw - 44px);z-index:30;border:1px solid #dfbc6733;border-radius:16px;background:#080c12f4;backdrop-filter:blur(22px);box-shadow:0 30px 100px #000b;padding:10px;opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:.3s}
 #downloadTray.open{opacity:1;transform:none;pointer-events:auto}
 .trayHead{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 8px}.trayHead b{font:800 8px Inter;letter-spacing:.14em;color:#dfbc67}.trayHead button{border:1px solid #ffffff10;background:#ffffff03;color:#74818a;border-radius:7px;height:27px;padding:0 8px;font-size:9px}.downloadItem{padding:10px;border:1px solid #ffffff0b;border-radius:11px;background:#ffffff03;margin-top:6px}.downloadTop{display:flex;justify-content:space-between;gap:8px;align-items:center}.downloadTop b{font-size:10px}.downloadTop span{color:#dfbc67;font:800 8px Inter}.downloadBar{height:4px;background:#ffffff09;border-radius:99px;overflow:hidden;margin-top:8px}.downloadBar i{display:block;width:0;height:100%;background:linear-gradient(90deg,#dfbc67,#fff0ad);box-shadow:0 0 12px #dfbc67;transition:width .15s}.downloadMeta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:#66747d;font-size:8px}.downloadMeta button{height:26px;padding:0 8px;border:1px solid #dfbc6730;border-radius:7px;background:#dfbc6708;color:#dfbc67;font-size:8px}.downloadMeta button:hover{border-color:#dfbc6760}.downloadDone .downloadBar i{background:linear-gradient(90deg,#78f7d0,#9cfde6)}.downloadError .downloadBar i{background:#ff8e8e}@media(max-width:640px){#downloadTray{right:12px;bottom:12px;max-width:calc(100vw - 24px)}}
+</style><style id="readability-pack">
+html,body{font-size:15px!important}
+body{line-height:1.5!important}
+h1{font-size:clamp(30px,3vw,42px)!important}h2{font-size:30px!important}h3{font-size:20px!important}
+p,li{font-size:13px!important;line-height:1.7!important}
+button,input,textarea,select{font-size:13px!important;line-height:1.35!important}
+small{font-size:10px!important}.nav button,.nav a{font-size:12px!important}
 </style></head><body>
 <canvas id="fx"></canvas>
 <div class="loader" id="loader"><div class="loaderCard"><div class="loaderLogo"><img src="../assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"></div><small>ADLAND STUDIO / APP CENTER</small><b>ORBIT</b><div class="loaderBar"><i id="loaderBar"></i></div><div style="color:#5f6b73;font-size:9px" id="loaderPct">00%</div></div></div>
