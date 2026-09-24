@@ -1,6 +1,6 @@
 {
   "name": "adland-orbit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Orbit application center by AdLand Studio.",
   "author": "AdLand Studio",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "files": [
       "electron/**/*",
       "src/index.html",
+      "assets/**/*",
       "build/icon.svg",
       "package.json"
     ],
