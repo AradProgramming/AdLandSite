@@ -22,3 +22,37 @@ ipcMain.handle('manifest',async()=>{
     return await res.json();
   }catch(err){return {error:err.message||'Network request failed'};}
 });
+
+const fs=require('fs');
+function candidates(name){
+  const roots=[
+    process.env.LOCALAPPDATA?path.join(process.env.LOCALAPPDATA,'Programs',name):null,
+    process.env.ProgramFiles?path.join(process.env.ProgramFiles,name):null,
+    process.env['ProgramFiles(x86)']?path.join(process.env['ProgramFiles(x86)'],name):null
+  ].filter(Boolean);
+  return roots.flatMap(dir=>[
+    path.join(dir,name+'.exe'),
+    path.join(dir,'resources','app.asar','package.json'),
+    path.join(dir,'app.asar','package.json')
+  ]);
+}
+function readInstalled(name){
+  for(const p of candidates(name)){
+    try{
+      if(p.endsWith('package.json')) {
+        const pkg=JSON.parse(fs.readFileSync(p,'utf8'));
+        if(pkg.name||pkg.version)return {version:String(pkg.version||''),path:p};
+      } else if(fs.existsSync(p)) return {version:'installed',path:p};
+    }catch{}
+  }
+  return null;
+}
+ipcMain.handle('scan-installed',(_,names)=>{
+  const out={}; for(const name of (Array.isArray(names)?names:[])) out[name]=readInstalled(String(name)); return out;
+});
+ipcMain.handle('launch-app',(_,name)=>{
+  const hit=readInstalled(String(name));
+  if(!hit) return {ok:false,error:'Application is not installed in a standard Windows location.'};
+  const exe=hit.path.endsWith('package.json')?path.join(path.dirname(path.dirname(hit.path)),String(name)+'.exe'):hit.path;
+  try{shell.openPath(exe);return {ok:true,path:exe}}catch(err){return {ok:false,error:err.message}};
+});
