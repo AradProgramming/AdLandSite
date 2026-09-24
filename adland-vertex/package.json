@@ -1,0 +1,35 @@
+{
+  "name":"adland-vertex",
+  "version":"1.0.0",
+  "description":"Vertex — application center, version manager and download hub by AdLand Studio.",
+  "author":"AdLand Studio",
+  "license":"MIT",
+  "private":true,
+  "main":"electron/main.cjs",
+  "scripts":{"dist":"electron-builder --win nsis portable"},
+  "devDependencies":{"electron":"latest","electron-builder":"latest"},
+  "build":{
+    "appId":"studio.adland.vertex",
+    "productName":"Vertex",
+    "directories":{"output":"release"},
+    "files":["electron/**/*","src/index.html","package.json"],
+    "asar":true,
+    "compression":"maximum",
+    "win":{
+      "icon":"build/icon.svg",
+      "target":[
+        {"target":"nsis","arch":["x64"]},
+        {"target":"portable","arch":["x64"]}
+      ],
+      "artifactName":"Vertex-${version}-Setup.exe"
+    },
+    "portable":{"artifactName":"Vertex-${version}-Portable.exe"},
+    "nsis":{
+      "oneClick":false,
+      "allowToChangeInstallationDirectory":true,
+      "createDesktopShortcut":true,
+      "createStartMenuShortcut":true,
+      "shortcutName":"Vertex"
+    }
+  }
+}
