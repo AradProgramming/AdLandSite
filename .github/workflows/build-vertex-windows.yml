@@ -1,0 +1,31 @@
+name: Build Vertex v1.0.0
+on:
+  push:
+    branches: ["release"]
+    paths: ["adland-vertex/**",".github/workflows/build-vertex-windows.yml"]
+  workflow_dispatch:
+permissions: {contents: write}
+concurrency: {group: adland-vertex-build, cancel-in-progress: true}
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults: {run: {working-directory: adland-vertex}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: vertex-v1.0.0
+          name: Vertex v1.0.0
+          body: |
+            Vertex v1.0.0 — AdLand application center.
+            
+            Windows x64 installer and portable build are attached below.
+          files: |
+            adland-vertex/release/*.exe
+          draft: false
+          prerelease: false
