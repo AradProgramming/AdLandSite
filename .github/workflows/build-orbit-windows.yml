@@ -1,0 +1,40 @@
+name: Build Orbit v1.0.1
+on:
+  push:
+    branches: ["release"]
+    paths:
+      - "adland-orbit/**"
+      - ".github/workflows/build-orbit-windows.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: adland-orbit-v101-build
+  cancel-in-progress: true
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: adland-orbit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run dist
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: orbit-v1.0.1
+          name: Orbit v1.0.1
+          body: |
+            Orbit v1.0.1 — application center by AdLand Studio.
+            Local boot is independent of online update checks.
+            Windows x64 installer and portable builds are attached.
+          files: |
+            adland-orbit/release/Orbit-1.0.1-Setup.exe
+            adland-orbit/release/Orbit-1.0.1-Portable.exe
+          draft: false
+          prerelease: false
