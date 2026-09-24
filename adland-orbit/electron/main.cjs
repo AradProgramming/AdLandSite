@@ -1,5 +1,5 @@
 const {app,BrowserWindow,ipcMain,nativeTheme,shell}=require('electron');
-const path=require('path'),https=require('https');let win;
+const path=require('path'),https=require('https'),fs=require('fs'),{spawn}=require('child_process');let win;
 const repo='AradProgramming/AdLandSite';
 const products={
 Nexus:{version:'1.4.4',tag:'v1.4.4',installer:'AdLand-Nexus-1.4.4-Setup.exe',portable:'AdLand-Nexus-1.4.4-Portable.exe',filePrefix:'AdLand-Nexus-',site:'nexus/'},
@@ -14,10 +14,10 @@ Chrono:{version:'1.0.0',tag:'chrono-v1.0.0',installer:'Chrono-1.0.0-Setup.exe',p
 Echo:{version:'1.0.0',tag:'echo-v1.0.0',installer:'Echo-1.0.0-Setup.exe',portable:'Echo-1.0.0-Portable.exe',filePrefix:'Echo-',site:'echo/'},
 Orbit:{version:'1.0.1',tag:'orbit-v1.0.1',installer:'Orbit-1.0.1-Setup.exe',portable:'Orbit-1.0.1-Portable.exe',filePrefix:'Orbit-',site:'orbit/'}
 };
-function create(){win=new BrowserWindow({width:1460,height:920,minWidth:1040,minHeight:680,frame:false,show:false,backgroundColor:'#05070a',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}});win.loadFile(path.join(__dirname,'../src/index.html'));win.once('ready-to-show',()=>win.show())}
+\nconst executableMap={Nexus:'adland-nexus',Canvas:'adland-canvas',Pulse:'adland-pulse',Frame:'adland-frame',Atlas:'adland-atlas',Forge:'adland-forge',Prism:'adland-prism',Relay:'adland-relay',Chrono:'adland-chrono',Echo:'adland-echo',Orbit:'adland-orbit'};\nfunction findInstalled(name){const pkg=executableMap[name]||('adland-'+name.toLowerCase()),roots=[];for(const base of [process.env.LOCALAPPDATA,process.env.ProgramFiles,process.env['ProgramFiles(x86)']]){if(!base)continue;for(const dir of [name,pkg]){roots.push(path.join(base,'Programs',dir,name+'.exe'));roots.push(path.join(base,'Programs',dir,pkg+'.exe'));roots.push(path.join(base,dir,name+'.exe'));roots.push(path.join(base,dir,pkg+'.exe'));}}return [...new Set(roots)].find(x=>fs.existsSync(x))||null}\nfunction launchInstalled(name){const exe=findInstalled(name);if(!exe)return {ok:false,notInstalled:true};try{const child=spawn(exe,[],{detached:true,stdio:'ignore',windowsHide:false});child.unref();return {ok:true,path:exe}}catch(e){return {ok:false,error:e.message||'Launch failed'}}}\nfunction create(){win=new BrowserWindow({width:1460,height:920,minWidth:1040,minHeight:680,frame:false,show:false,backgroundColor:'#05070a',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}});win.loadFile(path.join(__dirname,'../src/index.html'));win.once('ready-to-show',()=>win.show())}
 function json(url){return new Promise((resolve,reject)=>{const req=https.get(url,{headers:{'User-Agent':'Orbit-AdLand'}},res=>{let d='';res.on('data',x=>d+=x);res.on('end',()=>{if(res.statusCode<200||res.statusCode>=300)return reject(new Error('HTTP '+res.statusCode));try{resolve(JSON.parse(d))}catch(e){reject(e)}})});req.on('error',reject);req.setTimeout(9000,()=>req.destroy(new Error('Request timeout')))})}
 ipcMain.handle('window',(_,a)=>{if(!win)return false;if(a==='min')win.minimize();else if(a==='max')win.isMaximized()?win.unmaximize():win.maximize();else if(a==='close')win.close();return win.isMaximized()});
-ipcMain.handle('open',(_,url)=>{if(typeof url!=='string')return false;shell.openExternal(url);return true});
+ipcMain.handle('open',(_,url)=>{if(typeof url!=='string')return false;shell.openExternal(url);return true});\nipcMain.handle('launch-app',(_,name)=>{if(!products[name])return {ok:false,error:'Unknown application'};return launchInstalled(name)});
 ipcMain.handle('check-updates',async()=>{
   const out={ok:false,checkedAt:new Date().toISOString(),items:[],error:null};
   function ver(s){const m=String(s||'').match(/(\d+)\.(\d+)\.(\d+)/);return m?[+m[1],+m[2],+m[3]]:[0,0,0]}
