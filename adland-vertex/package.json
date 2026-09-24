@@ -1,7 +1,7 @@
 {
-  "name":"adland-vertex",
+  "name":"adland-orbit",
   "version":"1.0.0",
-  "description":"Vertex — application center, version manager and download hub by AdLand Studio.",
+  "description":"Orbit — application center, version manager and download hub by AdLand Studio.",
   "author":"AdLand Studio",
   "license":"MIT",
   "private":true,
@@ -9,27 +9,27 @@
   "scripts":{"dist":"electron-builder --win nsis portable"},
   "devDependencies":{"electron":"latest","electron-builder":"latest"},
   "build":{
-    "appId":"studio.adland.vertex",
-    "productName":"Vertex",
+    "appId":"studio.adland.orbit",
+    "productName":"Orbit",
     "directories":{"output":"release"},
     "files":["electron/**/*","src/index.html","package.json"],
     "asar":true,
     "compression":"maximum",
     "win":{
-      "icon":"build/icon.svg",
+      "icon":"build/orbit-icon.svg",
       "target":[
         {"target":"nsis","arch":["x64"]},
         {"target":"portable","arch":["x64"]}
       ],
-      "artifactName":"Vertex-${version}-Setup.exe"
+      "artifactName":"Orbit-${version}-Setup.exe"
     },
-    "portable":{"artifactName":"Vertex-${version}-Portable.exe"},
+    "portable":{"artifactName":"Orbit-${version}-Portable.exe"},
     "nsis":{
       "oneClick":false,
       "allowToChangeInstallationDirectory":true,
       "createDesktopShortcut":true,
       "createStartMenuShortcut":true,
-      "shortcutName":"Vertex"
+      "shortcutName":"Orbit"
     }
   }
 }
