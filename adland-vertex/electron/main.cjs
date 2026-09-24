@@ -57,3 +57,37 @@ ipcMain.handle('launch-app',(_,name)=>{
   if(!hit)return {ok:false,error:'Application is not installed in a standard Windows location.'};
   try{shell.openPath(hit.exe);return {ok:true,path:hit.exe}}catch(err){return {ok:false,error:err.message}};
 });
+
+const {finished}=require('stream/promises');
+ipcMain.handle('download-release',async(e,args={})=>{
+  try{
+    const raw=String(args.url||'');
+    if(!/^https:\/\/github\.com\//i.test(raw)) throw new Error('Only GitHub release downloads are supported.');
+    const safeName=path.basename(String(args.name||'Orbit-download.exe')).replace(/[^a-zA-Z0-9._-]/g,'_');
+    const target=path.join(app.getPath('downloads'),safeName);
+    const res=await net.fetch(raw,{headers:{'Cache-Control':'no-cache'}});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const out=fs.createWriteStream(target);
+    const total=Number(res.headers.get('content-length'))||0;
+    let received=0;
+    if(!res.body) throw new Error('No response body.');
+    const reader=res.body.getReader();
+    try{
+      while(true){
+        const {done,value}=await reader.read();
+        if(done)break;
+        const chunk=Buffer.from(value);
+        received+=chunk.length;
+        if(!out.write(chunk)) await new Promise(resolve=>out.once('drain',resolve));
+        e.sender.send('download-progress',{name:safeName,received,total});
+      }
+    }finally{reader.releaseLock()}
+    out.end();
+    await finished(out);
+    e.sender.send('download-complete',{name:safeName,path:target});
+    return {ok:true,path:target};
+  }catch(err){
+    e.sender.send('download-error',{name:String(args.name||'download'),error:err.message||'Download failed'});
+    return {ok:false,error:err.message||'Download failed'};
+  }
+});
