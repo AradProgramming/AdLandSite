@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-24",
+  "manager": {
+    "name": "Vertex",
+    "version": "1.0.0",
+    "tag": "vertex-v1.0.0"
+  },
+  "apps": [
+    {
+      "name": "Nexus",
+      "version": "1.4.4",
+      "tag": "v1.4.4",
+      "icon": "assets/icons/projects/AdLand_Nexus_icon.svg",
+      "site": "nexus/",
+      "descFa": "مرکز فرمان تمرکز، کار و آرامش.",
+      "descEn": "Command center for focus, work and calm.",
+      "installer": "AdLand-Nexus-1.4.4-Setup.exe",
+      "portable": "AdLand-Nexus-1.4.4-Portable.exe"
+    },
+    {
+      "name": "Canvas",
+      "version": "1.1.1",
+      "tag": "canvas-v1.1.1",
+      "icon": "assets/icons/projects/AdLand_Canvas_icon.svg",
+      "site": "canvas/",
+      "descFa": "استودیوی تصویری و مودبرد.",
+      "descEn": "Visual asset studio and moodboard.",
+      "installer": "AdLand-Canvas-1.1.1-Setup.exe",
+      "portable": "AdLand-Canvas-1.1.1-Portable.exe"
+    },
+    {
+      "name": "Pulse",
+      "version": "1.0.3",
+      "tag": "pulse-v1.0.3",
+      "icon": "assets/icons/projects/AdLand_Pulse_icon.svg",
+      "site": "pulse/",
+      "descFa": "پایش زنده‌ی عملکرد سیستم.",
+      "descEn": "Live system performance telemetry.",
+      "installer": "AdLand-Pulse-1.0.3-Setup.exe",
+      "portable": "AdLand-Pulse-1.0.3-Portable.exe"
+    },
+    {
+      "name": "Frame",
+      "version": "1.1.3",
+      "tag": "frame-v1.1.3",
+      "icon": "assets/icons/projects/AdLand_Frame_icon.svg",
+      "site": "frame/",
+      "descFa": "کارگاه محلی تصویر.",
+      "descEn": "Local image workshop.",
+      "installer": "AdLand-Frame-1.1.3-Setup.exe",
+      "portable": "AdLand-Frame-1.1.3-Portable.exe"
+    },
+    {
+      "name": "Atlas",
+      "version": "1.0.1",
+      "tag": "atlas-v1.0.1",
+      "icon": "assets/icons/projects/Atlas_icon.svg",
+      "site": "atlas/",
+      "descFa": "جست‌وجو و مدیریت هوشمند فایل‌ها.",
+      "descEn": "Local file intelligence and search.",
+      "installer": "Atlas-1.0.1-Setup.exe",
+      "portable": "Atlas-1.0.1-Portable.exe"
+    },
+    {
+      "name": "Forge",
+      "version": "1.0.1",
+      "tag": "forge-v1.0.1",
+      "icon": "assets/icons/projects/Forge_icon.svg",
+      "site": "forge/",
+      "descFa": "میزکار JSON، متن و تبدیل داده.",
+      "descEn": "JSON, text and data conversion workbench.",
+      "installer": "Forge-1.0.1-Setup.exe",
+      "portable": "Forge-1.0.1-Portable.exe"
+    },
+    {
+      "name": "Prism",
+      "version": "1.0.1",
+      "tag": "prism-v1.0.1",
+      "icon": "assets/icons/projects/Prism_icon.svg",
+      "site": "prism/",
+      "descFa": "لابراتوار رنگ و کنتراست.",
+      "descEn": "Color and contrast laboratory.",
+      "installer": "Prism-1.0.1-Setup.exe",
+      "portable": "Prism-1.0.1-Portable.exe"
+    },
+    {
+      "name": "Chrono",
+      "version": "1.0.0",
+      "tag": "chrono-v1.0.0",
+      "icon": "assets/icons/projects/Chrono_icon.svg",
+      "site": "chrono/",
+      "descFa": "ساعت جهانی، کرنومتر و شمارش‌معکوس.",
+      "descEn": "World clocks, stopwatch and countdown.",
+      "installer": "Chrono-1.0.0-Setup.exe",
+      "portable": "Chrono-1.0.0-Portable.exe"
+    },
+    {
+      "name": "Echo",
+      "version": "1.0.0",
+      "tag": "echo-v1.0.0",
+      "icon": "assets/icons/projects/Echo_icon.svg",
+      "site": "echo/",
+      "descFa": "ضبط و نگهداری یادداشت‌های صوتی.",
+      "descEn": "Local voice notes and recordings.",
+      "installer": "Echo-1.0.0-Setup.exe",
+      "portable": "Echo-1.0.0-Portable.exe"
+    },
+    {
+      "name": "Relay",
+      "version": "1.0.0",
+      "tag": "relay-v1.0.0",
+      "icon": "assets/icons/projects/Relay_icon.svg",
+      "site": "relay/",
+      "descFa": "تاریخچه‌ی کلیپ‌بورد و کپی سریع.",
+      "descEn": "Clipboard history and instant reuse.",
+      "installer": "Relay-1.0.0-Setup.exe",
+      "portable": "Relay-1.0.0-Portable.exe"
+    },
+    {
+      "name": "Vertex",
+      "version": "1.0.0",
+      "tag": "vertex-v1.0.0",
+      "icon": "assets/icons/projects/Vertex_icon.svg",
+      "site": "vertex/",
+      "descFa": "مرکز مدیریت، نسخه و دانلود همه‌ی ابزارها.",
+      "descEn": "App management, versions, sites and downloads.",
+      "installer": "Vertex-1.0.0-Setup.exe",
+      "portable": "Vertex-1.0.0-Portable.exe"
+    }
+  ]
+}
