@@ -6,5 +6,5 @@ contextBridge.exposeInMainWorld('vertex',{
   downloadRelease:(url,name)=>ipcRenderer.invoke('download-release',{url,name}),
   onDownloadProgress:cb=>{const fn=(_,data)=>cb(data);ipcRenderer.on('download-progress',fn);return()=>ipcRenderer.removeListener('download-progress',fn)},
   onDownloadComplete:cb=>{const fn=(_,data)=>cb(data);ipcRenderer.on('download-complete',fn);return()=>ipcRenderer.removeListener('download-complete',fn)},
-  onDownloadError:cb=>{const fn=(_,data)=>cb(data);ipcRenderer.on('download-error',fn);return()=>ipcRenderer.removeListener('download-error',fn)}
+  onDownloadError:cb=>{const fn=(_,data)=>cb(data);ipcRenderer.on('download-error',fn);return()=>ipcRenderer.removeListener('download-error',fn)},openDownload:target=>ipcRenderer.invoke('open-download',target)
 });
