@@ -1,0 +1,2 @@
+const {contextBridge,ipcRenderer}=require('electron');
+contextBridge.exposeInMainWorld('orbit',{window:a=>ipcRenderer.invoke('window',a),open:u=>ipcRenderer.invoke('open',u),checkUpdates:()=>ipcRenderer.invoke('check-updates')});
