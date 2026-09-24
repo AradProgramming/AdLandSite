@@ -30,20 +30,22 @@ function candidates(name){
     process.env.ProgramFiles?path.join(process.env.ProgramFiles,name):null,
     process.env['ProgramFiles(x86)']?path.join(process.env['ProgramFiles(x86)'],name):null
   ].filter(Boolean);
-  return roots.flatMap(dir=>[
-    path.join(dir,name+'.exe'),
-    path.join(dir,'resources','app.asar','package.json'),
-    path.join(dir,'app.asar','package.json')
-  ]);
+  return roots.map(dir=>({
+    dir,
+    pkg:path.join(dir,'resources','app.asar','package.json'),
+    pkgAlt:path.join(dir,'app.asar','package.json'),
+    exe:path.join(dir,name+'.exe')
+  }));
 }
 function readInstalled(name){
-  for(const p of candidates(name)){
-    try{
-      if(p.endsWith('package.json')) {
+  for(const x of candidates(name)){
+    for(const p of [x.pkg,x.pkgAlt]){
+      try{
         const pkg=JSON.parse(fs.readFileSync(p,'utf8'));
-        if(pkg.name||pkg.version)return {version:String(pkg.version||''),path:p};
-      } else if(fs.existsSync(p)) return {version:'installed',path:p};
-    }catch{}
+        if(pkg&&pkg.version)return {version:String(pkg.version),path:p,exe:x.exe};
+      }catch{}
+    }
+    try{if(fs.existsSync(x.exe))return {version:'installed',path:x.exe,exe:x.exe};}catch{}
   }
   return null;
 }
@@ -52,7 +54,6 @@ ipcMain.handle('scan-installed',(_,names)=>{
 });
 ipcMain.handle('launch-app',(_,name)=>{
   const hit=readInstalled(String(name));
-  if(!hit) return {ok:false,error:'Application is not installed in a standard Windows location.'};
-  const exe=hit.path.endsWith('package.json')?path.join(path.dirname(path.dirname(hit.path)),String(name)+'.exe'):hit.path;
-  try{shell.openPath(exe);return {ok:true,path:exe}}catch(err){return {ok:false,error:err.message}};
+  if(!hit)return {ok:false,error:'Application is not installed in a standard Windows location.'};
+  try{shell.openPath(hit.exe);return {ok:true,path:hit.exe}}catch(err){return {ok:false,error:err.message}};
 });
