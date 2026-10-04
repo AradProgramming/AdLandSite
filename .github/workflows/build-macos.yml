@@ -21,6 +21,10 @@ on:
       - "relay/**"
   workflow_dispatch:
 
+concurrency:
+  group: adland-macos-build
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
