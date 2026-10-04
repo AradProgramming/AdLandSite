@@ -587,7 +587,7 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
     const deviceId=getOrCreateDeviceId();
     qs('#arcadePlayerName')&&(qs('#arcadePlayerName').textContent=name);
     qs('#arcadeDeviceId')&&(qs('#arcadeDeviceId').textContent=deviceId);
-    qs('#arcadePlayerMode')&&(qs('#arcadePlayerMode').textContent=name==='Guest'?text('نام ثبت نشده','Name not set'):text('پروفایل این دستگاه','This device profile'));
+    qs('#arcadePlayerMode')&&(qs('#arcadePlayerMode').textContent=name==='Guest'?(root.lang==='fa'?'نام ثبت نشده':'Name not set'):(root.lang==='fa'?'پروفایل این دستگاه':'This device profile'));
     const rb=Number(localStorage.getItem('adland-arcade-best-reflex')||0);
     const mb=Number(localStorage.getItem('adland-arcade-best-memory')||0);
     const xb=Number(localStorage.getItem('adland-arcade-best-meteor')||0);
