@@ -29,26 +29,91 @@
     document.getElementById('al-copy-message').onclick=async()=>{const name=document.getElementById('al-name').value.trim()||text('بدون نام','No name'),subject=document.getElementById('al-subject').value.trim()||text('پیام AdLand','AdLand message'),message=document.getElementById('al-message').value.trim();if(!message){document.getElementById('al-status').textContent=text('لطفاً پیام را بنویس.','Please write a message first.');return}const ref='AL-'+Date.now().toString(36).slice(-7).toUpperCase();const body=[text('شناسه پیگیری','Reference')+': '+ref,text('نام','Name')+': '+name,text('موضوع','Subject')+': '+subject,'',message].join('\\n');try{await navigator.clipboard.writeText(body);document.getElementById('al-status').textContent=text('پیام آماده و کپی شد؛ حالا آن را در Telegram یا Bale بفرست.','Message prepared and copied; paste it into Telegram or Bale.')}catch(e){document.getElementById('al-status').textContent=body}const refEl=document.createElement('div');refEl.className='al-support-ref';refEl.textContent=text('شناسه پیگیری: ','Reference: ')+ref;document.getElementById('al-status').appendChild(refEl)};
     setLocalized(panel);setLocalized(launcher);
   }
+
+  const MAC_RELEASE='mac-v1.0.0';
+  const MAC_RELEASE_URL='https://github.com/AradProgramming/AdLandSite/releases/tag/'+MAC_RELEASE;
+  const macAsset=file=> 'https://github.com/AradProgramming/AdLandSite/releases/download/'+MAC_RELEASE+'/'+file+'-1.0.0-universal';
+  const slugFromHref=href=>{try{const p=new URL(href,location.href).pathname.split('/').filter(Boolean);return p[p.length-1]==='index.html'?p[p.length-2]||'':p[p.length-1]||''}catch(e){return ''}};
   function productPlatform(){
-    if(!product)return;style();
+    if(!product)return;
+    style();
+    let anchor=document.querySelector('.hero-meta,.heroMeta');
+    const actions=document.querySelector('#download .actions,#download .heroActions,.hero .actions,.hero .heroActions,.release .actions,.actions');
+    if(!anchor&&actions){anchor=document.createElement('div');anchor.className='al-platform-anchor';actions.parentElement.appendChild(anchor)}
+    if(anchor){
+      let rail=anchor.querySelector('.al-platform-rail');
+      if(!rail){
+        rail=document.createElement('div');
+        rail.className='al-platform-rail';
+        rail.innerHTML='<div class="al-platform live"><b><span class="al-dot"></span><span data-fa="Windows 10 / 11 · x64" data-en="Windows 10 / 11 · x64">Windows 10 / 11 · x64</span></b><small data-fa="نسخه دسکتاپ آماده است" data-en="Desktop release is live">نسخه دسکتاپ آماده است</small></div><div class="al-platform mac live"><b><span class="al-dot"></span><span data-fa="macOS · نسخه native منتشر شد" data-en="macOS · native edition is live">macOS · نسخه native منتشر شد</span></b><small data-fa="Apple Silicon + Intel · Universal" data-en="Apple Silicon + Intel · Universal">Apple Silicon + Intel · Universal</small></div>';
+        anchor.appendChild(rail);
+      }
+      setLocalized(rail);
+    }
+    if(actions&&product.file){
+      let b=actions.querySelector('.al-mac-action');
+      if(!b){b=document.createElement('a');b.className='al-mac-action';actions.appendChild(b)}
+      b.classList.remove('disabled');
+      b.removeAttribute('aria-disabled');
+      b.href=macAsset(product.file)+'.dmg';
+      b.target='_blank';
+      b.rel='noopener noreferrer';
+      b.textContent=text('⌘ دانلود برای macOS','⌘ Download for macOS');
+      b.title=text('نسخه Universal برای Apple Silicon و Intel','Universal build for Apple Silicon and Intel');
+    }
     if(slug==='ai-tools'){
       const meta=document.querySelector('.heroMeta,.hero-meta');
-      const actions=document.querySelector('.hero .actions,.hero .heroActions');
-      const target=meta||actions;
-      if(target&&!target.querySelector('.al-platform')){const s=document.createElement('span');s.className='pill al-platform';s.innerHTML='⌘ macOS / Web';target.appendChild(s)}
-      const download=actions||document.querySelector('.actions');
-      if(download&&!download.querySelector('.al-mac-action')){const b=document.createElement('a');b.className='al-mac-action disabled';b.setAttribute('aria-disabled','true');b.href='#';b.textContent=text('macOS · در حال آماده‌شدن','macOS · Preparing');download.appendChild(b)}
+      if(meta&&!meta.querySelector('.al-web-mac-live')){
+        const s=document.createElement('span');
+        s.className='pill al-web-mac-live';
+        s.textContent='⌘ macOS / Web · LIVE';
+        meta.appendChild(s);
+      }
     }
-    let anchor=document.querySelector('.hero-meta,.heroMeta');
-    if(!anchor){const actions=document.querySelector('.hero .actions,.hero .heroActions');if(actions){anchor=document.createElement('div');anchor.className='al-platform-anchor';actions.parentElement.appendChild(anchor)}}
-    if(anchor&&!anchor.querySelector('.al-platform-rail')){const rail=document.createElement('div');rail.className='al-platform-rail';rail.innerHTML='<div class="al-platform"><b><span class="al-dot"></span><span data-fa="Windows 10 / 11 · x64" data-en="Windows 10 / 11 · x64">Windows 10 / 11 · x64</span></b><small data-fa="نسخه دسکتاپ فعلی" data-en="Current desktop release">نسخه دسکتاپ فعلی</small></div><div class="al-platform mac"><b><span class="al-dot"></span><span data-fa="macOS · نسخه native" data-en="macOS · native edition">macOS · نسخه native</span></b><small data-fa="در حال آماده‌سازی برای Apple Silicon و Intel" data-en="In preparation for Apple Silicon and Intel">در حال آماده‌سازی برای Apple Silicon و Intel</small></div>';anchor.appendChild(rail);setLocalized(rail)}
-    const download=document.querySelector('#download .actions, #download .heroActions, .release .actions, .actions');
-    if(download&&!download.querySelector('.al-mac-action')){const b=document.createElement('a');b.className='al-mac-action disabled';b.setAttribute('aria-disabled','true');b.href='#';b.textContent=text('macOS · در حال انتشار','macOS · Publishing');b.title=text('تا زمان آماده‌شدن Release، لینک فعال نمی‌شود.','The link activates after the macOS release is available.');download.appendChild(b)}
   }
-  function homeMac(){if(product)return;style();const grid=document.querySelector('.appsGrid');if(grid){[...grid.querySelectorAll('.app')].forEach(card=>{if(card.querySelector('.al-card-platforms'))return;const row=document.createElement('div');row.className='al-card-platforms';row.innerHTML='<span class="al-card-platform">Windows 10/11</span><span class="al-card-platform mac">⌘ macOS · '+esc(text('به‌زودی','in preparation'))+'</span>';const bottom=card.querySelector('.appBottom');if(bottom)bottom.parentElement.insertBefore(row,bottom);else card.appendChild(row)})}if(!document.getElementById('al-mac-panel')){const anchor=document.querySelector('#apps .appsGrid')||grid;if(anchor){const p=document.createElement('div');p.id='al-mac-panel';p.className='al-mac-panel';p.innerHTML='<small> ADLAND / macOS</small><h3 data-fa="اکوسیستم AdLand برای مک هم آماده می‌شود." data-en="The AdLand ecosystem is coming to macOS.">اکوسیستم AdLand برای مک هم آماده می‌شود.</h3><p data-fa="در نسخه فعلی، لینک‌های native مک عمداً تا انتشار واقعی فایل‌ها غیرفعال نگه داشته شده‌اند. در همین حال، نسخه‌های وب و دموهای محصولات روی Mac قابل استفاده‌اند و ساختار سایت برای انتشار نسخه‌های Apple Silicon و Intel آماده شده است." data-en="Native macOS download links stay disabled until real files are published. In the meantime, product web editions and demos remain usable on Mac, and the site is prepared for Apple Silicon and Intel releases.">در نسخه فعلی، لینک‌های native مک عمداً تا انتشار واقعی فایل‌ها غیرفعال نگه داشته شده‌اند. در همین حال، نسخه‌های وب و دموهای محصولات روی Mac قابل استفاده‌اند و ساختار سایت برای انتشار نسخه‌های Apple Silicon و Intel آماده شده است.</p><div class="al-mac-meta"><span class="al-mac-pill" data-fa="Apple Silicon" data-en="Apple Silicon">Apple Silicon</span><span class="al-mac-pill" data-fa="Intel Mac" data-en="Intel Mac">Intel Mac</span><span class="al-mac-pill" data-fa="نسخه native: در حال آماده‌سازی" data-en="Native build: in preparation">نسخه native: در حال آماده‌سازی</span></div>';anchor.insertAdjacentElement('afterend',p);setLocalized(p)}}}
-  function upgradeUniverse(){const menu=document.getElementById('asMenu');if(!menu)return;const existing=new Set([...menu.querySelectorAll('a')].map(a=>a.getAttribute('href')));const add=(href,no,fa,en)=>{if(existing.has(href))return;const a=document.createElement('a');a.href=href;a.innerHTML='<b>'+no+'</b><span><span class="al-fa">'+fa+'</span><span class="al-en">'+en+'</span></span>';menu.insertBefore(a,document.getElementById('asFoot'));existing.add(href)};add('../orbit/','11','Orbit','Orbit');add('../ai-tools/','12','AI Tools','AI Tools');const foot=document.getElementById('asFoot');if(foot)foot.textContent=text('۱۲ ابزار/محصول · پشتیبانی مستقیم','12 tools/products · direct support');menu.querySelectorAll('.al-fa').forEach(e=>e.style.display=lang()==='fa'?'inline':'none');menu.querySelectorAll('.al-en').forEach(e=>e.style.display=lang()==='en'?'inline':'none')}
-  function heroHome(){if(product)return;const meta=document.querySelector('.heroMeta');if(meta&&!meta.querySelector('.al-home-mac')){const p=document.createElement('span');p.className='pill al-home-mac';p.innerHTML='<span data-fa="macOS · نسخه native در حال آماده‌سازی" data-en="macOS · native edition in preparation">macOS · نسخه native در حال آماده‌سازی</span>';meta.appendChild(p);setLocalized(p)}}
-  async function activateMac(){try{const r=await fetch('https://api.github.com/repos/AradProgramming/AdLandSite/releases/tags/mac-v1.0.0',{headers:{Accept:'application/vnd.github+json'}});if(!r.ok)return;const d=await r.json();const assets=new Map((d.assets||[]).map(a=>[a.name,a.browser_download_url]));const key=product?.file?product.file:'AdLand-'+(product?.name||'');const url=product?assets.get(key+'-1.0.0-universal.dmg'):null;const b=document.querySelector('.al-mac-action');if(b&&url){b.classList.remove('disabled');b.removeAttribute('aria-disabled');b.href=url;b.target='_blank';b.rel='noopener';b.textContent=text('دانلود برای macOS','Download for macOS')}document.querySelectorAll('.al-mac-card[data-mac-file]').forEach(x=>{const u=assets.get(x.dataset.macFile+'-1.0.0-universal.dmg');if(u){x.classList.remove('disabled');x.removeAttribute('aria-disabled');x.href=u;x.target='_blank';x.rel='noopener';x.textContent='⌘ macOS · '+text('دانلود','Download')}})}catch(e){}}
+  function homeMac(){
+    if(product)return;
+    style();
+    const grid=document.querySelector('.appsGrid');
+    if(grid){
+      [...grid.querySelectorAll('.app')].forEach(card=>{
+        const href=card.querySelector('a[href]')?.getAttribute('href')||'';
+        const key=slugFromHref(href)||(card.getAttribute('data-app')||'').toLowerCase();
+        const meta=products[key];
+        const file=meta?.file;
+        if(!file)return;
+        let row=card.querySelector('.al-card-platforms');
+        if(!row){
+          row=document.createElement('div');
+          row.className='al-card-platforms';
+          const bottom=card.querySelector('.appBottom');
+          if(bottom)bottom.parentElement.insertBefore(row,bottom); else card.appendChild(row);
+        }
+        row.innerHTML='<span class="al-card-platform">Windows 10/11</span><a class="al-card-platform mac mac-download" href="'+macAsset(file)+'.dmg" target="_blank" rel="noopener noreferrer">⌘ macOS · '+esc(text('دانلود','Download'))+'</a>';
+      });
+    }
+    const anchor=document.querySelector('#apps .appsGrid')||grid;
+    if(anchor&&!document.getElementById('al-mac-panel')){
+      const p=document.createElement('div');
+      p.id='al-mac-panel';
+      p.className='al-mac-panel live';
+      p.innerHTML='<div class="al-release-live"><span class="al-live-dot"></span><strong data-fa="macOS LIVE" data-en="macOS LIVE">macOS LIVE</strong><span>mac-v1.0.0</span></div><h3 data-fa="نسخه مک اکوسیستم AdLand منتشر شد." data-en="The AdLand macOS ecosystem is now live.">نسخه مک اکوسیستم AdLand منتشر شد.</h3><p data-fa="نسخه Universal همهٔ ۱۲ محصول دسکتاپ اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است." data-en="The Universal build of all 12 desktop products is now available for Macs with Apple Silicon and Intel. Every product card has a direct DMG download, with ZIP packages also available from the release page.">نسخه Universal همهٔ ۱۲ محصول دسکتاپ اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است.</p><div class="al-mac-meta"><span class="al-mac-pill">Apple Silicon</span><span class="al-mac-pill">Intel Mac</span><span class="al-mac-pill" data-fa="Universal · نسخه ۱.۰.۰" data-en="Universal · v1.0.0">Universal · نسخه ۱.۰.۰</span></div><div class="al-release-actions"><a class="al-release-btn primary" href="'+MAC_RELEASE_URL+'" target="_blank" rel="noopener noreferrer" data-fa="مشاهده Release ↗" data-en="Open Release ↗">مشاهده Release ↗</a><span class="al-release-note" data-fa="DMG مستقیم از کارت هر محصول" data-en="Direct DMG from every product card">DMG مستقیم از کارت هر محصول</span></div>';
+      anchor.insertAdjacentElement('afterend',p);
+      setLocalized(p);
+    }
+  }
+  function heroHome(){
+    if(product)return;
+    const meta=document.querySelector('.heroMeta');
+    if(meta&&!meta.querySelector('.al-home-mac')){
+      const p=document.createElement('span');
+      p.className='pill al-home-mac live';
+      p.innerHTML='<span data-fa="macOS · نسخه native منتشر شد" data-en="macOS · native edition is live">macOS · نسخه native منتشر شد</span>';
+      meta.appendChild(p);
+      setLocalized(p);
+    }
+  }
+  function activateMac(){}
   function adminFeed(){if(document.querySelector('script[data-al-admin]'))return;const s=document.createElement('script');s.src=new URL('../assets/adland-admin.js',document.currentScript?.src||location.href).href;s.defer=true;s.dataset.alAdmin='1';document.head.appendChild(s)}
   function sync(){setLocalized();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
   document.addEventListener('adland:language',sync);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{support();sync()});else{support();sync()}
