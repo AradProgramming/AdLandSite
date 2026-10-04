@@ -45,7 +45,7 @@ main{min-width:0;grid-column:2;grid-row:2;overflow:auto;padding:26px 28px 48px;p
 <header class="titlebar">
   <div class="brand"><img src="../assets/AniDiary_icon.svg" alt="AniDiary"><div class="brandText"><strong>AniDiary</strong><span>ANIME JOURNAL · ADLAND STUDIO</span></div></div>
   <div class="windowActions">
-    <button class="windowBtn langQuick" id="langQuick" aria-label="Change language">文 ↔</button><button class="windowBtn" id="minBtn aria-label="Minimize">−</button>
+    <button class="windowBtn langQuick" id="langQuick" aria-label="Change language">文 ↔</button><button class="windowBtn" id="minBtn" aria-label="Minimize">−</button>
     <button class="windowBtn" id="maxBtn" aria-label="Maximize">□</button>
     <button class="windowBtn close" id="closeBtn" aria-label="Close">×</button>
   </div>
@@ -97,7 +97,69 @@ const searchOnlinePosters=async()=>{const q=($('fName').value||'').trim();if(!q)
 $('onlinePosterBtn').addEventListener('click',searchOnlinePosters);$('googlePosterBtn').addEventListener('click',function(){const q=($('fName').value||'anime poster').trim();const url='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q+' anime poster');if(window.aniDesktop?.openExternal)window.aniDesktop.openExternal(url);else window.open(url,'_blank','noopener');});
 $('genreSearch').addEventListener('input',renderGenreControls);
 $('posterDrop').addEventListener('click',function(){$('posterFile').click()});$('posterFile').addEventListener('change',function(e){pickPoster(e.target.files[0])});['dragenter','dragover'].forEach(function(ev){$('posterDrop').addEventListener(ev,function(e){e.preventDefault();$('posterDrop').classList.add('drag')})});['dragleave','drop'].forEach(function(ev){$('posterDrop').addEventListener(ev,function(e){e.preventDefault();$('posterDrop').classList.remove('drag')})});$('posterDrop').addEventListener('drop',function(e){pickPoster(e.dataTransfer.files[0])});
-$('langToggle').addEventListener('click',function(){settings.lang=settings.lang==='fa'?'en':'fa';saveSettings();applyLanguage();toast(text('زبان تغییر کرد.','Language changed.'))});
+
+/* AniDiary language upgrade: FA + EN + JA (Japanese is intentionally AniDiary-only). */
+const jaMap={
+  "Dashboard":"ダッシュボード","My Diary":"マイダイアリー","Add Anime":"アニメを追加","Discover":"作品を探す","Settings":"設定",
+  "Score":"評価","Progress":"進捗","Episode":"エピソード","Time":"時間","Favorite":"お気に入り","Details":"詳細","Edit":"編集","Delete":"削除","Next episode":"次のエピソード",
+  "Watching":"視聴中","Completed":"完了","Planned":"視聴予定","Paused":"一時停止","Dropped":"中止",
+  "Series":"シリーズ","Movie":"映画","Special":"スペシャル","Type":"種類","Status":"状態","Rating":"評価","Year":"公開年","Total episodes":"全エピソード","Current episode":"現在のエピソード",
+  "Start date":"開始日","End date":"終了日","Tags":"タグ","Notes":"メモ","Poster":"ポスター","Poster URL":"ポスターURL",
+  "Search":"検索","Search posters":"ポスターを検索","Google Images":"Google画像","Choose file":"ファイルを選択","Save":"保存","Reset":"リセット","Add Anime":"アニメを追加",
+  "Themes":"テーマ","Language":"言語","Sound effects":"効果音","Reduced motion":"モーションを減らす","Backup":"バックアップ","Export":"書き出し","Import":"読み込み","Delete all":"すべて削除",
+  "No notes":"メモなし","Open in editor":"編集で開く","Your diary is empty or has no matches.":"日記が空、または条件に一致する作品がありません。",
+  "Add a title or change the filters.":"作品を追加するか、フィルターを変更してください。","Poster selected ✦":"ポスターを選択しました ✦","Language changed.":"言語を変更しました。",
+  "Saved to your diary ✦":"日記に保存しました ✦","Progress updated.":"進捗を更新しました。","Deleted.":"削除しました。","Diary cleared.":"日記を消去しました。",
+  "Enter an anime title.":"アニメのタイトルを入力してください。","Enter a title first.":"最初にタイトルを入力してください。",
+  "Action":"アクション","Adventure":"アドベンチャー","Comedy":"コメディ","Drama":"ドラマ","Fantasy":"ファンタジー","Horror":"ホラー",
+  "Mystery":"ミステリー","Romance":"ロマンス","Sci-Fi":"SF","Sports":"スポーツ","Music":"音楽","Historical":"歴史","Slice of Life":"日常系",
+  "Mecha":"メカ","Supernatural":"超常現象","Psychological":"心理","Thriller":"スリラー","Cyberpunk":"サイバーパンク","School":"学園",
+  "Shounen":"少年","Shoujo":"少女","Isekai":"異世界","Mahou Shoujo":"魔法少女","Space":"宇宙","Military":"ミリタリー","Crime":"クライム",
+  "Ecchi":"エッチ","Seinen":"青年","Josei":"女性向け","Samurai":"侍","Vampire":"ヴァンパイア"
+};
+let __aniJaApplying=false;
+function paintAniLanguage(){
+  const b=$('langQuick'); if(!b)return;
+  const labels={fa:'FA ↔ EN',en:'EN ↔ JA',ja:'JA ↔ FA'};
+  b.textContent=labels[settings.lang]||labels.fa;
+  b.title=settings.lang==='fa'?'English':settings.lang==='en'?'日本語':'فارسی';
+  const s=document.getElementById('langToggle'); if(s)s.textContent=settings.lang==='fa'?'English / 日本語':settings.lang==='en'?'日本語 / فارسی':'فارسی / English';
+}
+function applyAniDiaryJapanese(){
+  if(__aniJaApplying||settings.lang!=='ja')return;
+  __aniJaApplying=true;
+  document.documentElement.lang='ja';
+  document.documentElement.dir='ltr';
+  document.body.classList.remove('rtl');
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const en=el.getAttribute('data-en');
+    if(Object.prototype.hasOwnProperty.call(jaMap,en))el.innerHTML=jaMap[en];
+  });
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const nodes=[];let n;
+  while(n=walker.nextNode()){
+    if(!n.parentElement||['SCRIPT','STYLE','TEXTAREA'].includes(n.parentElement.tagName))continue;
+    const t=n.nodeValue.trim();if(t&&Object.prototype.hasOwnProperty.call(jaMap,t))nodes.push([n,t]);
+  }
+  nodes.forEach(([node,t])=>{node.nodeValue=node.nodeValue.replace(t,jaMap[t])});
+  document.querySelectorAll('option').forEach(o=>{
+    const t=o.textContent.trim();if(jaMap[t])o.textContent=jaMap[t];
+  });
+  paintAniLanguage();
+  __aniJaApplying=false;
+}
+function cycleAniLanguage(){
+  settings.lang=settings.lang==='fa'?'en':settings.lang==='en'?'ja':'fa';
+  saveSettings();
+  applyLanguage();
+  applyTheme();
+  paintAniLanguage();
+  if(settings.lang==='ja')applyAniDiaryJapanese();
+}
+const __aniJaObserver=new MutationObserver(()=>{if(settings.lang==='ja')applyAniDiaryJapanese()});
+__aniJaObserver.observe(document.body,{subtree:true,childList:true});
+
+$('langToggle').addEventListener('click',function(){cycleAniLanguage();toast(settings.lang==='ja'?'言語を変更しました。':text('زبان تغییر کرد.','Language changed.'))});
 $('sfxToggle').addEventListener('click',function(){settings.sfx=!settings.sfx;saveSettings();applyTheme();if(settings.sfx)sfx('success')});
 $('motionToggle').addEventListener('click',function(){settings.motion=!settings.motion;saveSettings();applyTheme()});
 $('themeGrid').innerHTML=themes.map(function(t,i){return '<button class="themeBtn" data-theme="'+i+'" style="--c1:'+t.a+';--c2:'+t.b+'"><span></span><b>'+esc(t.name)+'</b></button>'}).join('');
@@ -106,8 +168,8 @@ $('exportBtn').addEventListener('click',exportData);$('importBtn').addEventListe
 $('minBtn').addEventListener('click',function(){window.aniDesktop?.minimize()});$('maxBtn').addEventListener('click',function(){window.aniDesktop?.toggleMaximize()});$('closeBtn').addEventListener('click',function(){window.aniDesktop?.close()});
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();nav('diary');$('search').focus()}if(e.key.toLowerCase()==='n'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();nav('add')}if(e.key==='Escape'){$('detailModal').classList.remove('open')}});
 if(window.matchMedia){window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',function(){})}
-$('langQuick').addEventListener('click',function(){settings.lang=settings.lang==='fa'?'en':'fa';saveSettings();applyLanguage();applyTheme();});
-clearForm();applyLanguage();renderAll();
+$('langQuick').addEventListener('click',cycleAniLanguage);
+clearForm();applyLanguage();renderAll();paintAniLanguage();if(settings.lang==='ja')applyAniDiaryJapanese();
 })();
 </script>
 </body>
