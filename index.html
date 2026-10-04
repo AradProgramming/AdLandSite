@@ -48,6 +48,84 @@ a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:poi
 @media(max-width:650px){.container{width:min(100% - 24px,1240px)}#nav{top:8px;height:56px}.brand img{width:37px;height:37px}.brand b{font-size:9px}.brand small{display:none}.navactions .miniBtn:nth-child(1){display:none}.hero{padding-top:115px}.hero h1{font-size:52px}.heroCore{min-height:380px}.core{width:300px}.coreGlow{width:330px;height:330px}.o3{left:0}.section{padding:80px 12px}.sectionHeader{margin-bottom:27px}.storyRows,.signalFoot{grid-template-columns:1fr}.appsGrid,.learnGrid{grid-template-columns:1fr}.projectGrid{grid-template-columns:1fr}.project{min-height:230px}.cmdGrid{grid-template-columns:1fr}.final{padding:70px 12px 25px}.footerIn{display:block}.footerLinks{margin-top:10px}.cursorDot,#cursor{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.coreGlow,.core:before,.core:after,.ringA,.ringB,.ringC,.hero h1 span,.bootLogo,.bars i{animation:none!important}.reveal{transition:none!important}}
 .aniArt{position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,#d9b55d28,transparent 24%),linear-gradient(145deg,#11141b,#201a2c);display:grid;place-items:center;z-index:0}.aniArt span{font:900 70px Manrope;color:#d9b55d;text-shadow:0 0 40px #d9b55d22}.aniArt small{position:absolute;left:15px;top:15px;color:#8e7b4c;font:800 6px Inter;letter-spacing:.22em}.aniProject:after{background:linear-gradient(180deg,transparent 15%,#030406dd 100%)}
+
+/* ADLAND 2026 — readability + arcade layer */
+body{font-size:14px}
+.navlinks a{font-size:10px;letter-spacing:.01em}
+.miniBtn{font-size:9px}
+.brand b{font-size:13px}
+.brand small{font-size:8px}
+.eyebrow{font-size:9px}
+.hero p{font-size:14px;line-height:2.05}
+.pill{font-size:9px}
+.sectionHeadMain small{font-size:9px}
+.sectionHeadMain p{font-size:13px}
+.sectionAside{font-size:9px}
+.storyText p{font-size:13px}
+.storyChip b{font-size:10px}.storyChip span{font-size:9px}
+.signalHead b{font-size:10px}.signalLive{font-size:8px}
+.metric small{font-size:8px}.metric b{font-size:17px}.metric em{font-size:9px}
+.appHead small{font-size:8px}.appTag{font-size:9px}.app p{font-size:11px}
+.featureMini span{font-size:9px}.version{font-size:8px}.appLink{font-size:9px}
+.projectCopy small{font-size:8px}.projectCopy h3{font-size:19px}.projectCopy p{font-size:9px}
+.course p{font-size:11px}.course li{font-size:9px}.course li:before{font-size:11px}
+.teamCard p{font-size:10px}
+.faqQ{font-size:11px}.faqA{font-size:10px}
+.footerIn{font-size:9px}.footerBrand{font-size:11px}
+.cmdTop small{font-size:8px}.cmdSearch input{font-size:12px}.cmdGrid b{font-size:10px}.cmdGrid small{font-size:8px}.cmdGrid i{font-size:8px}.cmdFoot span,.cmdFoot button{font-size:8px}
+
+.arcadeSection{padding-top:95px}
+.arcadeTicker{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:-10px 0 25px;padding:12px 15px;border:1px solid #ffffff10;border-radius:16px;background:linear-gradient(90deg,#d9b55d07,#ffffff03,#7bf6df06)}
+.arcadeTicker .arcadeSignal{display:flex;align-items:center;gap:8px;color:var(--mint);font:800 9px Inter;letter-spacing:.12em}
+.arcadeTicker .arcadeSignal i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);animation:pulse 1.5s infinite}
+.arcadeTicker p{margin:0;color:#748188;font-size:10px}
+.arcadeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.gameCard{padding:18px;border-radius:23px;min-height:560px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.gameCard:before{content:"";position:absolute;inset:-50% auto auto -20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#d9b55d12,transparent 68%);pointer-events:none}
+.gameHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:2}
+.gameKicker{color:var(--gold);font:800 8px Inter;letter-spacing:.18em}
+.gameHeader h3{margin:6px 0 5px;font-size:21px;letter-spacing:-.04em}
+.gameHeader p{margin:0;color:#748188;font-size:10px;line-height:1.7;max-width:310px}
+.gameBadge{padding:6px 8px;border:1px solid #ffffff10;border-radius:999px;color:#8c979d;font:800 8px Inter;white-space:nowrap}
+.gameStage{position:relative;margin-top:16px;min-height:310px;border:1px solid #ffffff10;border-radius:18px;background:radial-gradient(circle at 50% 30%,#d9b55d08,transparent 45%),#05080b;overflow:hidden}
+.gameControls{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-top:13px}
+.gameControls .btn{height:42px;font-size:9px}
+.gameStatRow{display:flex;gap:7px;flex-wrap:wrap}
+.gameStat{padding:8px 10px;border:1px solid #ffffff0e;border-radius:10px;background:#ffffff03}
+.gameStat small{display:block;color:#65737b;font-size:7px}.gameStat b{display:block;margin-top:3px;font-size:13px}
+.gameMessage{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:25px;color:#718089;font-size:11px;line-height:1.9}
+.gameMessage strong{display:block;color:#d9b55d;font-size:16px;margin-bottom:5px}
+.reflexTarget{position:absolute;display:none;width:64px;height:64px;border-radius:50%;border:1px solid #f6df9a99;background:radial-gradient(circle at 35% 30%,#fff6cf,#d9b55d 35%,#8f641e 80%);box-shadow:0 0 0 8px #d9b55d08,0 0 35px #d9b55d66;transform:translate(-50%,-50%);animation:targetPulse 1s ease-in-out infinite}
+.reflexTarget.show{display:block}
+.reflexTarget:after{content:"";position:absolute;inset:14px;border:1px solid #fff8d9aa;border-radius:50%}
+@keyframes targetPulse{50%{transform:translate(-50%,-50%) scale(.86)}}
+.memoryBoard{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px;height:100%}
+.memoryCell{border:1px solid #ffffff10;border-radius:13px;background:linear-gradient(145deg,#ffffff05,#ffffff01);position:relative;transition:.18s;min-height:82px}
+.memoryCell:before{content:"";position:absolute;inset:14px;border-radius:9px;background:radial-gradient(circle at 35% 30%,#ffffff12,transparent 55%);opacity:.7}
+.memoryCell.lit{background:linear-gradient(145deg,#f6df9a33,#d9b55d0e);border-color:#d9b55d88;box-shadow:inset 0 0 28px #d9b55d10,0 0 24px #d9b55d22;transform:translateY(-2px)}
+.memoryCell.locked{pointer-events:none}
+.memoryCell.correct{border-color:#7bf6df88;box-shadow:0 0 28px #7bf6df20}
+.memoryCell.wrong{border-color:#ff8e8e88;animation:shake .22s linear 2}
+@keyframes shake{25%{transform:translateX(4px)}75%{transform:translateX(-4px)}}
+.memoryStage{padding:0}
+.meteorStage{display:flex;align-items:center;justify-content:center}
+#meteorCanvas{width:100%;height:100%;display:block;touch-action:none}
+.meteorHint{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);padding:5px 8px;border:1px solid #ffffff0e;border-radius:999px;background:#030406b8;color:#6e7b83;font-size:8px;white-space:nowrap;pointer-events:none}
+.arcadeFooterNote{margin-top:14px;color:#5f6c74;font-size:9px;line-height:1.8}
+@media(max-width:980px){.arcadeGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){
+  .arcadeGrid{grid-template-columns:1fr}
+  .gameCard{min-height:0}
+  .gameStage{min-height:290px}
+  .memoryCell{min-height:72px}
+  .navlinks a{font-size:9px}
+  .brand b{font-size:11px}
+  .hero p{font-size:13px}
+  .sectionHeadMain p{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .reflexTarget,.memoryCell,.arcadeTicker .arcadeSignal i{animation:none!important}
+}
 </style>
 <style id="adland-type">
 html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
@@ -106,7 +184,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 
 <nav id="nav">
 <a class="brand" href="#home"><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><div><b>ADLAND STUDIO</b><small>WHERE CREATIVITY HAS NO LIMITS</small></div></a>
-<div class="navlinks"><a href="#apps" data-fa="اپ‌ها" data-en="APPS">اپ‌ها</a><a href="#studio" data-fa="استودیو" data-en="STUDIO">استودیو</a><a href="#projects" data-fa="پروژه‌ها" data-en="PROJECTS">پروژه‌ها</a><a href="orbit/" data-fa="مرکز اپ‌ها" data-en="APP CENTER">مرکز اپ‌ها</a><a href="#learning" data-fa="آموزش" data-en="LEARNING">آموزش</a><a href="#team" data-fa="تیم" data-en="TEAM">تیم</a><a href="#faq" data-fa="سوالات" data-en="FAQ">سوالات</a><a href="#contact" data-fa="ارتباط" data-en="CONTACT">ارتباط</a></div>
+<div class="navlinks"><a href="#apps" data-fa="اپ‌ها" data-en="APPS">اپ‌ها</a><a href="#arcade" data-fa="آرکید" data-en="ARCADE">آرکید</a><a href="#studio" data-fa="استودیو" data-en="STUDIO">استودیو</a><a href="#projects" data-fa="پروژه‌ها" data-en="PROJECTS">پروژه‌ها</a><a href="orbit/" data-fa="مرکز اپ‌ها" data-en="APP CENTER">مرکز اپ‌ها</a><a href="#learning" data-fa="آموزش" data-en="LEARNING">آموزش</a><a href="#team" data-fa="تیم" data-en="TEAM">تیم</a><a href="#faq" data-fa="سوالات" data-en="FAQ">سوالات</a><a href="#contact" data-fa="ارتباط" data-en="CONTACT">ارتباط</a></div>
 <div class="navactions"><button class="miniBtn" id="langBtn">FA → EN</button><button class="miniBtn" id="soundBtn">SFX ON</button><button class="miniBtn" id="cmdBtn">⌘ K</button></div>
 </nav>
 
@@ -123,7 +201,92 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 <div class="heroCore reveal"><div class="coreGlow"></div><div class="core"><span class="ringA"></span><span class="ringB"></span><span class="ringC"></span><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><span class="orbitLabel o1">CREATIVE CORE</span><span class="orbitLabel o2">SYSTEM ONLINE</span><span class="orbitLabel o3">11 PRODUCTS</span><span class="orbitLabel o4">ADLAND / 2026</span></div></div>
 </div></div>
 <div class="scrollHint"><span>SCROLL TO EXPLORE</span><i></i></div>
+
 </section>
+
+<section class="section arcadeSection" id="arcade">
+<div class="container">
+  <div class="sectionHeader reveal">
+    <div class="sectionHeadMain">
+      <small>LIVE / ADLAND ARCADE</small>
+      <h2 data-fa="بازی کن. رکورد بزن. دوباره شروع کن." data-en="Play. Chase the record. Run it again.">بازی کن. رکورد بزن. دوباره شروع کن.</h2>
+      <p data-fa="چند بازی کوچک و سریع داخل خود سایت؛ بدون نصب، مناسب دسکتاپ و موبایل، با رکوردهایی که روی همین مرورگر ذخیره می‌شوند." data-en="A few fast games built right into the site — no install, desktop and mobile friendly, with local high scores saved in your browser.">چند بازی کوچک و سریع داخل خود سایت؛ بدون نصب، مناسب دسکتاپ و موبایل، با رکوردهایی که روی همین مرورگر ذخیره می‌شوند.</p>
+    </div>
+    <div class="sectionAside">سه تجربه‌ی کوتاه، اما واقعی: واکنش، حافظه و مهارت حرکتی.</div>
+  </div>
+
+  <div class="arcadeTicker reveal">
+    <span class="arcadeSignal"><i></i><b>ARCADE ONLINE</b></span>
+    <p data-fa="رکوردها محلی ذخیره می‌شوند؛ هیچ حسابی لازم نیست." data-en="Scores are stored locally; no account required.">رکوردها محلی ذخیره می‌شوند؛ هیچ حسابی لازم نیست.</p>
+    <div class="gameStatRow">
+      <div class="gameStat"><small>BEST REFLEX</small><b id="arcadeBestReflex">—</b></div>
+      <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
+      <div class="gameStat"><small>METEOR SCORE</small><b id="arcadeBestMeteor">—</b></div>
+    </div>
+  </div>
+
+  <div class="arcadeGrid">
+    <article class="gameCard glass reveal">
+      <div class="gameHeader">
+        <div><span class="gameKicker">01 / REFLEX CORE</span><h3 data-fa="هسته‌ی واکنش" data-en="Reflex Core">هسته‌ی واکنش</h3><p data-fa="به محض روشن شدن هدف، سریع کلیک کن. پنج راند داری و میانگین واکنشت ثبت می‌شود." data-en="Click the target the moment it appears. You get five rounds and your average reaction is tracked.">به محض روشن شدن هدف، سریع کلیک کن. پنج راند داری و میانگین واکنشت ثبت می‌شود.</p></div>
+        <span class="gameBadge">REACTION</span>
+      </div>
+      <div class="gameStage" id="reflexStage">
+        <div class="gameMessage" id="reflexMessage"><div><strong data-fa="آماده‌ای؟" data-en="Ready?">آماده‌ای؟</strong><span data-fa="شروع را بزن و منتظر هدف بمان." data-en="Press start, then wait for the target.">شروع را بزن و منتظر هدف بمان.</span></div></div>
+        <button class="reflexTarget" id="reflexTarget" aria-label="Target"></button>
+      </div>
+      <div class="gameControls">
+        <button class="btn primary" id="reflexStart" data-fa="شروع چالش" data-en="Start challenge">شروع چالش</button>
+        <div class="gameStatRow">
+          <div class="gameStat"><small>ROUND</small><b id="reflexRound">0 / 5</b></div>
+          <div class="gameStat"><small>LAST</small><b id="reflexLast">—</b></div>
+          <div class="gameStat"><small>AVG</small><b id="reflexAvg">—</b></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="gameCard glass reveal">
+      <div class="gameHeader">
+        <div><span class="gameKicker">02 / MEMORY PULSE</span><h3 data-fa="پالس حافظه" data-en="Memory Pulse">پالس حافظه</h3><p data-fa="خانه‌هایی که روشن می‌شوند را به همان ترتیب تکرار کن. هر مرحله، یک قدم سخت‌تر می‌شود." data-en="Repeat the glowing tiles in the same order. Each round adds one more step.">خانه‌هایی که روشن می‌شوند را به همان ترتیب تکرار کن. هر مرحله، یک قدم سخت‌تر می‌شود.</p></div>
+        <span class="gameBadge">MEMORY</span>
+      </div>
+      <div class="gameStage memoryStage">
+        <div class="memoryBoard" id="memoryBoard">
+          <button class="memoryCell" data-index="0" aria-label="Memory tile 1"></button><button class="memoryCell" data-index="1" aria-label="Memory tile 2"></button><button class="memoryCell" data-index="2" aria-label="Memory tile 3"></button>
+          <button class="memoryCell" data-index="3" aria-label="Memory tile 4"></button><button class="memoryCell" data-index="4" aria-label="Memory tile 5"></button><button class="memoryCell" data-index="5" aria-label="Memory tile 6"></button>
+          <button class="memoryCell" data-index="6" aria-label="Memory tile 7"></button><button class="memoryCell" data-index="7" aria-label="Memory tile 8"></button><button class="memoryCell" data-index="8" aria-label="Memory tile 9"></button>
+        </div>
+        <div class="gameMessage" id="memoryMessage"><div><strong data-fa="حافظه را روشن کن." data-en="Power up your memory.">حافظه را روشن کن.</strong><span data-fa="شروع را بزن و الگو را دنبال کن." data-en="Press start and follow the pattern.">شروع را بزن و الگو را دنبال کن.</span></div></div>
+      </div>
+      <div class="gameControls">
+        <button class="btn primary" id="memoryStart" data-fa="شروع الگو" data-en="Start pattern">شروع الگو</button>
+        <div class="gameStatRow">
+          <div class="gameStat"><small>LEVEL</small><b id="memoryLevel">0</b></div>
+          <div class="gameStat"><small>BEST</small><b id="memoryBest">0</b></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="gameCard glass reveal">
+      <div class="gameHeader">
+        <div><span class="gameKicker">03 / METEOR RUN</span><h3 data-fa="فرار از شهاب‌ها" data-en="Meteor Run">فرار از شهاب‌ها</h3><p data-fa="مربع نورانی را هدایت کن و از شهاب‌ها دور بمان. با کلیدها یا لمس داخل میدان حرکت کن." data-en="Steer the glowing square and avoid the meteors. Use keys or drag inside the field to move.">مربع نورانی را هدایت کن و از شهاب‌ها دور بمان. با کلیدها یا لمس داخل میدان حرکت کن.</p></div>
+        <span class="gameBadge">SKILL</span>
+      </div>
+      <div class="gameStage meteorStage">
+        <canvas id="meteorCanvas" width="600" height="370" aria-label="Meteor Run game"></canvas>
+        <span class="meteorHint" data-fa="WASD / ← ↑ → ↓ / لمس" data-en="WASD / Arrow Keys / Touch">WASD / ← ↑ → ↓ / لمس</span>
+      </div>
+      <div class="gameControls">
+        <button class="btn primary" id="meteorStart" data-fa="شروع پرواز" data-en="Start run">شروع پرواز</button>
+        <div class="gameStatRow">
+          <div class="gameStat"><small>SCORE</small><b id="meteorScore">0</b></div>
+          <div class="gameStat"><small>BEST</small><b id="meteorBest">0</b></div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="arcadeFooterNote reveal" data-fa="نکته: این بازی‌ها هیچ حساب یا سرور جانبی لازم ندارند؛ رکوردها فقط در همین مرورگر باقی می‌مانند." data-en="Note: these games need no account or external server; scores stay only in this browser.">نکته: این بازی‌ها هیچ حساب یا سرور جانبی لازم ندارند؛ رکوردها فقط در همین مرورگر باقی می‌مانند.</div>
+</div>
 
 <section class="section" id="studio"><div class="container">
 <div class="sectionHeader reveal"><div class="sectionHeadMain"><small>01 / THE STUDIO</small><h2 data-fa="یک استودیو، چند جهان." data-en="One studio. Many worlds.">یک استودیو، چند جهان.</h2><p data-fa="هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی." data-en="Every product has its own personality, but they share one design system: precise, fast, interactive and made for real use.">هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی.</p></div><div class="sectionAside">A living studio system built around tools, experiments and polished interactions.</div></div>
@@ -185,6 +348,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 <a href="#home"><strong>⌂</strong><div><b>Home</b><small>شروع تجربه</small></div><i>01</i></a>
 <a href="#apps"><strong>◈</strong><div><b>Apps</b><small>یازده محصول دسکتاپ</small></div><i>02</i></a>
 <a href="#studio"><strong>✦</strong><div><b>Studio</b><small>سیستم طراحی</small></div><i>03</i></a>
+<a href="#arcade"><strong>⚡</strong><div><b>Arcade</b><small data-fa="بازی‌های درون سایت" data-en="Playable web games">بازی‌های درون سایت</small></div><i>03</i></a>
 <a href="#projects"><strong>◇</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>04</i></a>
 <a href="#learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>05</i></a>
 <a href="#team"><strong>+</strong><div><b>Team</b><small>همکاری و عضویت</small></div><i>06</i></a><a href="#contact"><strong>✉</strong><div><b>Contact Admin</b><small>ارسال پیام به ادمین</small></div><i>07</i></a><a href="atlas/" data-cmd="atlas"><strong>◎</strong><div><b>Atlas</b><small>Local file intelligence</small></div><i>07</i></a><a href="forge/" data-cmd="forge"><strong>⌘</strong><div><b>Forge</b><small>Developer workbench</small></div><i>08</i></a><a href="prism/" data-cmd="prism"><strong>◇</strong><div><b>Prism</b><small>Color intelligence lab</small></div><i>09</i></a><a href="ai-tools/" data-cmd="ai-tools"><strong>✦</strong><div><b>AI Tools</b><small>Prompt + developer utility lab</small></div><i>10</i></a>
@@ -200,7 +364,7 @@ const core=qs('.core');addEventListener('pointermove',e=>{if(core&&window.innerW
 let lang=(localStorage.getItem('adland-language-v2')||((navigator.languages?.[0]||navigator.language||'fa').toLowerCase().startsWith('en')?'en':'fa')),sfx=localStorage.getItem('adland-sfx')!=='off',motion=localStorage.getItem('adland-motion')!=='low',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const audioState={ctx:null};
 function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const o=C.createOscillator(),g=C.createGain(),n=C.currentTime;const table={tap:[360,500,.07,.012],open:[430,760,.12,.02],close:[250,330,.08,.014],nav:[520,850,.08,.016]};const [a,b,d,v]=table[kind]||table.tap;o.type=kind==='nav'?'triangle':'sine';o.frequency.setValueAtTime(a,n);o.frequency.exponentialRampToValueAtTime(b,n+d*.65);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(C.destination);o.start(n);o.stop(n+d+.01)}catch(e){}}
-function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';}
+function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';if(window.__refreshArcadeLang)window.__refreshArcadeLang();}
 function setSfx(){qs('#soundBtn').textContent='SFX '+(sfx?'ON':'OFF')}
 qs('#langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';applyLang();tone('open')};
 qs('#soundBtn').onclick=()=>{sfx=!sfx;localStorage.setItem('adland-sfx',sfx?'on':'off');setSfx();tone('open')};
@@ -225,7 +389,7 @@ function pointerLoop(){ax+=(mx-ax)*.12;ay+=(my-ay)*.12;cursor.style.left=ax+'px'
 qsa('a,button').forEach((el,i)=>el.addEventListener('pointerdown',()=>tone(i%4===0?'open':'tap'),{passive:true}));
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.09});qsa('.reveal').forEach(x=>io.observe(x));
-const navLinks=[...qsa('.navlinks a')],sections=['apps','studio','projects','learning','team','faq','contact'].map(id=>qs('#'+id)).filter(Boolean);const activeIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -45% 0px'});sections.forEach(s=>activeIO.observe(s));
+const navLinks=[...qsa('.navlinks a')],sections=['apps','arcade','studio','projects','learning','team','faq','contact'].map(id=>qs('#'+id)).filter(Boolean);const activeIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -45% 0px'});sections.forEach(s=>activeIO.observe(s));
 function scroll(){const d=document.documentElement.scrollHeight-innerHeight;qs('#progress').style.width=(d>0?scrollY/d*100:0)+'%'}addEventListener('scroll',scroll,{passive:true});scroll();
 
 qsa('.app').forEach(card=>{card.addEventListener('pointermove',e=>{if(reduced)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*7)+'deg) translateZ(4px)';card.style.setProperty('--cx',(x+0.5)*100+'%');card.style.setProperty('--cy',(y+0.5)*100+'%')},{passive:true});card.addEventListener('pointerleave',()=>card.style.transform='')});
@@ -234,6 +398,195 @@ qsa('.faqQ').forEach(b=>b.onclick=()=>{b.parentElement.classList.toggle('open');
 
 const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.createElement('i');s.style.height=(18+Math.random()*70)+'%';bars.appendChild(s)}setInterval(()=>{qsa('#signalBars i').forEach(x=>x.style.height=(18+Math.random()*78)+'%');qs('#energy').textContent=String(82+Math.floor(Math.random()*17))},1250)}
 
+
+
+/* ADLAND ARCADE ENGINE */
+(()=>{
+  const bestKey={reflex:'adland-arcade-best-reflex',memory:'adland-arcade-best-memory',meteor:'adland-arcade-best-meteor'};
+  const readBest=k=>Number(localStorage.getItem(bestKey[k])||0);
+  const writeBest=(k,v)=>{const prev=readBest(k);if(v>prev){localStorage.setItem(bestKey[k],String(v));return v}return prev};
+  const els={
+    reflexStage:qs('#reflexStage'), reflexTarget:qs('#reflexTarget'), reflexStart:qs('#reflexStart'),
+    reflexMessage:qs('#reflexMessage'), reflexRound:qs('#reflexRound'), reflexLast:qs('#reflexLast'), reflexAvg:qs('#reflexAvg'), arcadeBestReflex:qs('#arcadeBestReflex'),
+    memoryBoard:qs('#memoryBoard'), memoryStart:qs('#memoryStart'), memoryMessage:qs('#memoryMessage'), memoryLevel:qs('#memoryLevel'), memoryBest:qs('#memoryBest'), arcadeBestMemory:qs('#arcadeBestMemory'),
+    meteorCanvas:qs('#meteorCanvas'), meteorStart:qs('#meteorStart'), meteorScore:qs('#meteorScore'), meteorBest:qs('#meteorBest'), arcadeBestMeteor:qs('#arcadeBestMeteor')
+  };
+  const t=(fa,en)=>root.lang==='fa'?fa:en;
+  const refreshBest=()=>{
+    const rb=readBest('reflex');els.arcadeBestReflex&&(els.arcadeBestReflex.textContent=rb?rb+' ms':'—');
+    const mb=readBest('memory');els.arcadeBestMemory&&(els.arcadeBestMemory.textContent=mb||'—');
+    const xb=readBest('meteor');els.arcadeBestMeteor&&(els.arcadeBestMeteor.textContent=xb||'—');
+  };
+  window.__refreshArcadeLang=()=>{
+    refreshBest();
+    if(els.reflexMessage&&els.reflexTarget&&!reflex.running){
+      els.reflexMessage.querySelector('strong').textContent=t('آماده‌ای؟','Ready?');
+      els.reflexMessage.querySelector('span').textContent=t('شروع را بزن و منتظر هدف بمان.','Press start, then wait for the target.');
+    }
+    if(els.memoryMessage&&!memory.running){
+      els.memoryMessage.querySelector('strong').textContent=t('حافظه را روشن کن.','Power up your memory.');
+      els.memoryMessage.querySelector('span').textContent=t('شروع را بزن و الگو را دنبال کن.','Press start and follow the pattern.');
+    }
+    if(els.reflexStart&&!reflex.running)els.reflexStart.textContent=t('شروع چالش','Start challenge');
+    if(els.memoryStart&&!memory.running)els.memoryStart.textContent=t('شروع الگو','Start pattern');
+    if(els.meteorStart&&!meteor.running)els.meteorStart.textContent=t('شروع پرواز','Start run');
+  };
+
+  /* Reflex Core */
+  const reflex={running:false,round:0,times:[],armed:false,startTime:0,timer:null};
+  const resetReflex=()=>{
+    clearTimeout(reflex.timer);reflex.running=false;reflex.round=0;reflex.times=[];reflex.armed=false;
+    els.reflexTarget.classList.remove('show');els.reflexRound.textContent='0 / 5';els.reflexLast.textContent='—';els.reflexAvg.textContent='—';
+    els.reflexMessage.style.display='grid';
+    els.reflexMessage.querySelector('strong').textContent=t('آماده‌ای؟','Ready?');
+    els.reflexMessage.querySelector('span').textContent=t('شروع را بزن و منتظر هدف بمان.','Press start, then wait for the target.');
+    els.reflexStart.textContent=t('شروع چالش','Start challenge');
+  };
+  const nextReflexRound=()=>{
+    if(reflex.round>=5){
+      const avg=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length);
+      els.reflexAvg.textContent=avg+' ms';writeBest('reflex',Math.max(1,Math.min(9999,10000-avg)));
+      const bestRaw=readBest('reflex');els.arcadeBestReflex.textContent=bestRaw+'';
+      els.reflexMessage.style.display='grid';
+      els.reflexMessage.querySelector('strong').textContent=t('پایان چالش','Challenge complete');
+      els.reflexMessage.querySelector('span').textContent=t('میانگین شما '+avg+' میلی‌ثانیه بود. دوباره شروع کن و رکوردت را بهتر کن.','Your average was '+avg+' ms. Run it again and beat your record.');
+      reflex.running=false;reflexStartIdle();return;
+    }
+    reflex.armed=false;els.reflexTarget.classList.remove('show');
+    els.reflexMessage.style.display='grid';
+    els.reflexMessage.querySelector('strong').textContent=t('منتظر بمان…','Wait…');
+    els.reflexMessage.querySelector('span').textContent=t('هنوز روی هدف کلیک نکن.','Do not click the target yet.');
+    const delay=650+Math.random()*1800;
+    reflex.timer=setTimeout(()=>{
+      if(!reflex.running)return;
+      const r=els.reflexStage.getBoundingClientRect();
+      const pad=55;
+      els.reflexTarget.style.left=(pad+Math.random()*Math.max(40,r.width-pad*2))+'px';
+      els.reflexTarget.style.top=(pad+Math.random()*Math.max(40,r.height-pad*2))+'px';
+      els.reflexMessage.style.display='none';
+      els.reflexTarget.classList.add('show');
+      reflex.startTime=performance.now();reflex.armed=true;
+    },delay);
+  };
+  const startReflex=()=>{
+    reflex.running=true;reflex.round=0;reflex.times=[];els.reflexStart.textContent=t('شروع مجدد','Restart');
+    nextReflexRound();
+  };
+  const reflexStartIdle=()=>{els.reflexStart.textContent=t('شروع چالش','Start challenge');els.reflexRound.textContent='5 / 5';};
+  els.reflexStart?.addEventListener('click',()=>{tone('open');startReflex()});
+  els.reflexTarget?.addEventListener('click',()=>{
+    if(!reflex.running||!reflex.armed)return;
+    const ms=Math.max(1,Math.round(performance.now()-reflex.startTime));reflex.armed=false;reflex.times.push(ms);reflex.round++;
+    els.reflexRound.textContent=reflex.round+' / 5';els.reflexLast.textContent=ms+' ms';
+    if(reflex.times.length)els.reflexAvg.textContent=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length)+' ms';
+    tone('tap');nextReflexRound();
+  });
+
+  /* Memory Pulse */
+  const memory={running:false,sequence:[],step:0,locked:false};
+  const cells=[...qsa('.memoryCell')];
+  const lightCell=(idx,duration=280)=>new Promise(resolve=>{const cell=cells[idx];cell.classList.add('lit');setTimeout(()=>{cell.classList.remove('lit');resolve()},duration)});
+  const runPattern=async()=>{
+    memory.locked=true;els.memoryMessage.style.display='grid';
+    els.memoryMessage.querySelector('strong').textContent=t('دقت کن','Watch closely');
+    els.memoryMessage.querySelector('span').textContent=t('الگو را به خاطر بسپار…','Memorize the sequence…');
+    await new Promise(r=>setTimeout(r,250));
+    for(const idx of memory.sequence){await lightCell(idx,310);await new Promise(r=>setTimeout(r,90));}
+    memory.step=0;memory.locked=false;els.memoryMessage.style.display='none';
+  };
+  const startMemory=()=>{
+    memory.running=true;memory.sequence=[];memory.step=0;
+    els.memoryLevel.textContent='0';els.memoryBest.textContent=String(readBest('memory'));
+    els.memoryStart.textContent=t('شروع مجدد','Restart');
+    for(const c of cells)c.classList.remove('wrong','correct','lit');
+    addMemoryStep();
+  };
+  const addMemoryStep=()=>{
+    memory.sequence.push(Math.floor(Math.random()*9));els.memoryLevel.textContent=String(memory.sequence.length);
+    tone('open');runPattern();
+  };
+  cells.forEach(cell=>cell.addEventListener('click',()=>{
+    if(!memory.running||memory.locked)return;
+    const idx=Number(cell.dataset.index);
+    if(idx===memory.sequence[memory.step]){
+      cell.classList.add('correct');setTimeout(()=>cell.classList.remove('correct'),180);tone('tap');memory.step++;
+      if(memory.step>=memory.sequence.length){
+        const level=memory.sequence.length;const best=writeBest('memory',level);els.memoryBest.textContent=String(best);
+        els.memoryMessage.style.display='grid';
+        els.memoryMessage.querySelector('strong').textContent=t('درست بود!','Correct!');
+        els.memoryMessage.querySelector('span').textContent=t('مرحله بعدی سخت‌تر است.','The next round gets harder.');
+        setTimeout(()=>{if(memory.running){els.memoryMessage.style.display='none';addMemoryStep()}},380);
+      }
+    }else{
+      cell.classList.add('wrong');setTimeout(()=>cell.classList.remove('wrong'),300);tone('close');
+      memory.running=false;memory.locked=false;els.memoryMessage.style.display='grid';
+      els.memoryMessage.querySelector('strong').textContent=t('الگو شکست خورد','Sequence broken');
+      els.memoryMessage.querySelector('span').textContent=t('تا سطح '+memory.sequence.length+' رسیدی. دوباره تلاش کن.','You reached level '+memory.sequence.length+'. Try again.');
+      els.memoryStart.textContent=t('تلاش دوباره','Try again');
+    }
+  }));
+  els.memoryStart?.addEventListener('click',()=>{tone('open');startMemory()});
+
+  /* Meteor Run */
+  const canvas=els.meteorCanvas,ctx=canvas?.getContext('2d');
+  const meteor={running:false,raf:0,last:0,score:0,player:{x:300,y:310,r:10},keys:new Set(),rocks:[],spawn:0};
+  function resizeMeteor(){
+    if(!canvas)return;
+    const rect=canvas.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,2);
+    canvas.width=Math.max(1,Math.floor(rect.width*d));canvas.height=Math.max(1,Math.floor(rect.height*d));ctx.setTransform(d,0,0,d,0,0);
+  }
+  const meteorW=()=>canvas?.getBoundingClientRect().width||600, meteorH=()=>canvas?.getBoundingClientRect().height||370;
+  function resetMeteor(){
+    meteor.score=0;meteor.rocks=[];meteor.spawn=0;meteor.player.x=meteorW()/2;meteor.player.y=meteorH()-45;els.meteorScore.textContent='0';
+  }
+  function spawnRock(){
+    const w=meteorW();meteor.rocks.push({x:15+Math.random()*(w-30),y:-25,r:7+Math.random()*13,vy:80+Math.random()*120+Math.min(110,meteor.score*1.6)});
+  }
+  function drawMeteor(dt){
+    const w=meteorW(),h=meteorH();ctx.clearRect(0,0,w,h);
+    const g=ctx.createRadialGradient(w*.5,h*.2,5,w*.5,h*.2,Math.max(w,h)*.8);g.addColorStop(0,'rgba(217,181,93,.08)');g.addColorStop(1,'rgba(4,5,6,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;
+    for(let y=20;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+    const speed=190;
+    if(meteor.keys.has('arrowleft')||meteor.keys.has('a'))meteor.player.x-=speed*dt;
+    if(meteor.keys.has('arrowright')||meteor.keys.has('d'))meteor.player.x+=speed*dt;
+    if(meteor.keys.has('arrowup')||meteor.keys.has('w'))meteor.player.y-=speed*dt;
+    if(meteor.keys.has('arrowdown')||meteor.keys.has('s'))meteor.player.y+=speed*dt;
+    meteor.player.x=Math.max(15,Math.min(w-15,meteor.player.x));meteor.player.y=Math.max(15,Math.min(h-15,meteor.player.y));
+    meteor.spawn+=dt;if(meteor.spawn>.52){meteor.spawn=0;spawnRock()}
+    for(const rock of meteor.rocks){rock.y+=rock.vy*dt;ctx.beginPath();ctx.arc(rock.x,rock.y,rock.r,0,Math.PI*2);ctx.fillStyle='rgba(246,223,154,.78)';ctx.fill();ctx.beginPath();ctx.arc(rock.x-rock.r*.28,rock.y-rock.r*.28,Math.max(1.5,rock.r*.22),0,Math.PI*2);ctx.fillStyle='rgba(255,248,219,.8)';ctx.fill();}
+    meteor.rocks=meteor.rocks.filter(r=>r.y< h+35);
+    for(const r of meteor.rocks)if(Math.hypot(r.x-meteor.player.x,r.y-meteor.player.y)<r.r+meteor.player.r){
+      endMeteor();return;
+    }
+    meteor.score+=dt*10;els.meteorScore.textContent=String(Math.floor(meteor.score));
+    const p=meteor.player;const glow=ctx.createRadialGradient(p.x,p.y,1,p.x,p.y,28);glow.addColorStop(0,'rgba(246,223,154,.8)');glow.addColorStop(1,'rgba(217,181,93,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,28,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#f6df9a';ctx.fillRect(p.x-7,p.y-7,14,14);
+    ctx.strokeStyle='#fff7d6';ctx.strokeRect(p.x-7,p.y-7,14,14);
+  }
+  function meteorLoop(now){
+    if(!meteor.running)return;
+    const dt=Math.min(.035,(now-meteor.last)/1000||.016);meteor.last=now;drawMeteor(dt);meteor.raf=requestAnimationFrame(meteorLoop);
+  }
+  function startMeteor(){
+    meteor.running=true;resetMeteor();resizeMeteor();els.meteorStart.textContent=t('شروع مجدد','Restart');tone('open');meteor.last=performance.now();meteor.raf=requestAnimationFrame(meteorLoop);
+  }
+  function endMeteor(){
+    meteor.running=false;cancelAnimationFrame(meteor.raf);const score=Math.floor(meteor.score);const best=writeBest('meteor',score);els.meteorBest.textContent=String(best);els.arcadeBestMeteor.textContent=String(best);tone('close');
+    if(ctx){const w=meteorW(),h=meteorH();ctx.fillStyle='rgba(3,4,5,.72)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f6df9a';ctx.font='800 18px Manrope';ctx.textAlign='center';ctx.fillText(t('پایان پرواز · امتیاز '+score,'Run over · Score '+score),w/2,h/2);ctx.font='11px Manrope';ctx.fillStyle='#78858d';ctx.fillText(t('دوباره شروع کن و رکورد را بشکن.','Restart and beat the record.'),w/2,h/2+25);}
+    els.meteorStart.textContent=t('تلاش دوباره','Try again');
+  }
+  els.meteorStart?.addEventListener('click',startMeteor);
+  addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s','A','D','W','S'].includes(e.key)){meteor.keys.add(e.key.toLowerCase());if(meteor.running)e.preventDefault()}});
+  addEventListener('keyup',e=>meteor.keys.delete(e.key.toLowerCase()));
+  canvas?.addEventListener('pointermove',e=>{if(!meteor.running)return;const r=canvas.getBoundingClientRect();meteor.player.x=Math.max(15,Math.min(r.width-15,e.clientX-r.left));meteor.player.y=Math.max(15,Math.min(r.height-15,e.clientY-r.top));});
+  canvas?.addEventListener('pointerdown',e=>{if(!meteor.running){startMeteor();return}const r=canvas.getBoundingClientRect();meteor.player.x=Math.max(15,Math.min(r.width-15,e.clientX-r.left));meteor.player.y=Math.max(15,Math.min(r.height-15,e.clientY-r.top));});
+  addEventListener('resize',resizeMeteor,{passive:true});
+  setTimeout(resizeMeteor,80);
+
+  refreshBest();
+  resetReflex();
+})();
 
 let dataCount=0;
 setInterval(()=>{dataCount++;root.style.setProperty('--scroll',scrollY)},240);
