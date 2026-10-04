@@ -68,6 +68,10 @@
       #al-backtop:hover{transform:translateY(-3px);border-color:#d9b55d45;box-shadow:0 24px 75px #000b}
       #al-share{position:fixed;left:18px;top:134px;width:34px;height:34px;z-index:99996;border:1px solid #ffffff12;border-radius:10px;background:#090d12dd;color:#8d999f;backdrop-filter:blur(16px);cursor:pointer;font-weight:900;font-size:14px;transition:.22s}
       #al-share:hover{color:#d9b55d;border-color:#d9b55d45;transform:translateY(-2px)}
+      #al-sfx-toggle{position:fixed;left:60px;top:134px;width:74px;height:34px;z-index:99996;border:1px solid #ffffff12;border-radius:10px;background:#090d12dd;color:#8d999f;backdrop-filter:blur(16px);cursor:pointer;font:800 10px/1 Manrope,Vazirmatn,sans-serif;transition:.22s}
+      #al-sfx-toggle.on{color:#d9b55d;border-color:#d9b55d35;background:#d9b55d09}
+      #al-sfx-toggle:hover{transform:translateY(-2px);border-color:#d9b55d45}
+
       #al-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);z-index:100005;max-width:min(520px,calc(100% - 30px));padding:10px 14px;border:1px solid #d9b55d35;border-radius:12px;background:#080d12f4;color:#e9e3d5;backdrop-filter:blur(18px);box-shadow:0 20px 80px #000b;font-size:12px;line-height:1.5;opacity:0;visibility:hidden;transition:.25s}
       #al-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
 
@@ -165,6 +169,11 @@
         for(let i=0;i<3;i++){const s=document.createElement('i');s.className='al-spark';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.setProperty('--dx',(Math.random()*34-17)+'px');s.style.setProperty('--dy',(Math.random()*-34-8)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),700)}
       },{passive:true});
     });
+    if(!document.getElementById('al-sfx-toggle')){
+      const b=document.createElement('button');b.id='al-sfx-toggle';b.type='button';
+      const render=()=>{const on=sfxEnabled();b.classList.toggle('on',on);b.textContent='SFX '+(on?'ON':'OFF');b.setAttribute('aria-label',text(on?'خاموش کردن صداهای سایت':'روشن کردن صداهای سایت',on?'Turn site sounds off':'Turn site sounds on'))};
+      b.onclick=()=>{const on=!sfxEnabled();localStorage.setItem(SFX_KEY,on?'on':'off');render();if(on)sfxTone('success')};document.body.appendChild(b);render();
+    }
     if(product && !document.getElementById('al-share')){
       const s=document.createElement('button');s.id='al-share';s.type='button';s.textContent='↗';s.title=text('اشتراک‌گذاری صفحه','Share this page');s.setAttribute('aria-label',s.title);
       s.onclick=async()=>{
