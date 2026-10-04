@@ -43,7 +43,7 @@
     if(persist) save(lang);
     document.dispatchEvent(new CustomEvent('adland:language',{detail:{lang}}));
   }
-  const initial=stored()||'fa';
+  const initial=stored()==='en'?'en':'fa';
   apply(initial,false);
   const btn=langButton();
   if(btn) btn.onclick=()=>apply(root.lang==='fa'?'en':'fa',true);
