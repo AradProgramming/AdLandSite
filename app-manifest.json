@@ -25,12 +25,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Nexus-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Nexus-1.0.0-universal.zip"
         }
       }
     },
@@ -52,12 +54,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Canvas-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Canvas-1.0.0-universal.zip"
         }
       }
     },
@@ -79,12 +83,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Pulse-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Pulse-1.0.0-universal.zip"
         }
       }
     },
@@ -106,12 +112,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Frame-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Frame-1.0.0-universal.zip"
         }
       }
     },
@@ -133,12 +141,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Atlas-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Atlas-1.0.0-universal.zip"
         }
       }
     },
@@ -160,12 +170,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Forge-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Forge-1.0.0-universal.zip"
         }
       }
     },
@@ -187,12 +199,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Prism-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Prism-1.0.0-universal.zip"
         }
       }
     },
@@ -214,12 +228,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Chrono-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Chrono-1.0.0-universal.zip"
         }
       }
     },
@@ -241,12 +257,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Echo-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Echo-1.0.0-universal.zip"
         }
       }
     },
@@ -268,12 +286,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Relay-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Relay-1.0.0-universal.zip"
         }
       }
     },
@@ -295,12 +315,14 @@
           ]
         },
         "macos": {
-          "status": "in-preparation",
+          "status": "available",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ],
-          "nativeDownload": null
+          "version": "1.0.0",
+          "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Orbit-1.0.0-universal.dmg",
+          "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Orbit-1.0.0-universal.zip"
         }
       }
     }
@@ -313,12 +335,12 @@
       ]
     },
     "macos": {
-      "status": "in-preparation",
+      "status": "available",
       "architectures": [
         "Apple Silicon",
         "Intel"
       ],
-      "nativeDownload": null
+      "releaseTag": "mac-v1.0.0"
     }
   },
   "webTools": [
