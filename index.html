@@ -789,6 +789,7 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
       els.reflexAvg.textContent=avg+' ms';
       const previous=readBest('reflex');const best=(previous===0||avg<previous)?avg:previous;
       localStorage.setItem(bestKey.reflex,String(best));els.arcadeBestReflex.textContent=best+' ms';
+      window.__submitGlobalArcadeScore?.('reflex',best);window.__loadGlobalArcade?.();
       els.reflexMessage.style.display='grid';
       els.reflexMessage.querySelector('strong').textContent=t('چالش کامل شد','Challenge complete');
       els.reflexMessage.querySelector('span').textContent=t('میانگین '+avg+' میلی‌ثانیه · '+reflex.early+' شروع زودهنگام. دوباره تلاش کن و رکوردت را بشکن.','Average '+avg+' ms · '+reflex.early+' early clicks. Run again and beat your record.');
@@ -890,6 +891,7 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
       cell.classList.add('correct');setTimeout(()=>cell.classList.remove('correct'),150);tone('tap');memory.step++;
       if(memory.step>=memory.sequence.length){
         const level=memory.sequence.length;const best=writeBest('memory',level);els.memoryBest.textContent=String(best);
+        window.__submitGlobalArcadeScore?.('memory',best);window.__loadGlobalArcade?.();
         els.memoryMessage.style.display='grid';
         els.memoryMessage.querySelector('strong').textContent=t('دقیق بود!','Perfect!');
         els.memoryMessage.querySelector('span').textContent=t('مرحله بعدی سریع‌تر پخش می‌شود. جان: '+memory.lives,'The next level plays faster. Lives: '+memory.lives);
@@ -985,6 +987,7 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   function endMeteor(){
     meteor.running=false;cancelAnimationFrame(meteor.raf);
     const score=Math.floor(meteor.score);const best=writeBest('meteor',score);els.meteorBest.textContent=String(best);els.arcadeBestMeteor.textContent=String(best);tone('close');
+    window.__submitGlobalArcadeScore?.('meteor',best);window.__loadGlobalArcade?.();
     if(ctx){const w=meteorW(),h=meteorH();ctx.fillStyle='rgba(3,4,5,.72)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f6df9a';ctx.font='800 18px Manrope';ctx.textAlign='center';ctx.fillText(t('پایان پرواز · امتیاز '+score,'Run over · Score '+score),w/2,h/2);ctx.font='11px Manrope';ctx.fillStyle='#78858d';ctx.fillText(t('زمان '+meteor.elapsed.toFixed(1)+' ثانیه · نزدیک‌رد شدن '+meteor.near,'Time '+meteor.elapsed.toFixed(1)+'s · Near misses '+meteor.near),w/2,h/2+25);ctx.fillText(t('سرعت تا پایان به‌تدریج بیشتر شد.','Speed increased progressively until the end.'),w/2,h/2+45);}
     els.meteorStart.textContent=t('تلاش دوباره','Try again');
   }
