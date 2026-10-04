@@ -33,6 +33,13 @@
       .al-spark{position:fixed;pointer-events:none;z-index:100002;width:5px;height:5px;border-radius:50%;background:#f6df9a;box-shadow:0 0 16px #d9b55d;animation:alSpark .65s ease-out forwards}
       @keyframes alSpark{to{transform:translate(var(--dx),var(--dy)) scale(.1);opacity:0}}
       @media(max-width:700px){#al-backtop{left:10px;bottom:10px;width:40px;height:40px}#al-page-progress{height:2px}}
+      .al-update-cockpit{margin-top:18px;padding:20px;border:1px solid #d9b55d24;border-radius:22px;background:radial-gradient(circle at 8% 10%,#8ff9dc0a,transparent 30%),radial-gradient(circle at 90% 0%,#d9b55d12,transparent 35%),linear-gradient(145deg,#ffffff08,#ffffff02);box-shadow:0 25px 95px #0008;position:relative;overflow:hidden}
+      .al-update-cockpit:before{content:"UPDATE";position:absolute;inset:-8px 16px auto auto;color:#d9b55d08;font:900 78px/1 Manrope,sans-serif;letter-spacing:.08em;pointer-events:none}
+      .al-update-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}.al-update-kicker{color:#d9b55d;font-size:10px;font-weight:900;letter-spacing:.16em}.al-update-head h3{margin:5px 0 4px;font-size:24px;line-height:1.3}.al-update-head p{margin:0;color:#7f8b92;font-size:12px;line-height:1.8;max-width:760px}
+      .al-update-version{display:flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid #ffffff10;border-radius:11px;background:#ffffff04;color:#e9e0cc;white-space:nowrap}.al-update-version small{color:#6f7b82;font-size:9px}.al-update-version b{color:#d9b55d;font-size:14px}
+      .al-update-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px;position:relative}.al-update-os{padding:14px;border:1px solid #ffffff0d;border-radius:16px;background:#05080c8c}.al-update-os-head{display:flex;align-items:center;gap:9px}.al-update-os-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;border:1px solid #ffffff10;background:#ffffff06;font-size:16px}.al-update-os strong{display:block;font-size:13px}.al-update-os small{display:block;margin-top:2px;color:#748188;font-size:10px}
+      .al-update-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}.al-update-btn{min-height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #ffffff10;border-radius:10px;background:#ffffff04;color:#aab3b7;font-size:11px;font-weight:800}.al-update-btn.primary{border-color:#d9b55d40;background:#d9b55d0b;color:#e6ce8c}.al-update-btn:hover{transform:translateY(-2px);border-color:#d9b55d45}.al-update-foot{margin-top:12px;padding-top:11px;border-top:1px solid #ffffff0b;color:#66747b;font-size:10px;line-height:1.7}
+      @media(max-width:700px){.al-update-grid{grid-template-columns:1fr}.al-update-head{display:block}.al-update-version{display:inline-flex;margin-top:10px}.al-update-actions{grid-template-columns:1fr}}
 
     `;document.head.appendChild(s);
   }
@@ -164,7 +171,21 @@
       z.textContent=text('ZIP · macOS','ZIP · macOS');
       z.title=text('نسخه ZIP برای macOS','ZIP package for macOS');
     }
-    if(slug==='ai-tools'){
+    if(product.file && !document.getElementById('al-update-cockpit')){
+      const downloadHost=document.querySelector('#download,.download,.release,.panel');
+      const mount=downloadHost||actions?.parentElement||document.querySelector('.hero');
+      if(mount){
+        const box=document.createElement('section');box.id='al-update-cockpit';box.className='al-update-cockpit';
+        const version=product.version||'1.0.0';
+        const win=actions?.querySelector('a[href*="Setup.exe"],a[href*="setup"],a[href*="installer"]');
+        const release=actions?.querySelector('a[href*="/releases/"]');
+        const winHref=win?.href||release?.href||'';
+        const relHref=release?.href||('https://github.com/AradProgramming/AdLandSite/releases');
+        box.innerHTML='<div class="al-update-head"><div><small class="al-update-kicker">ADLAND UPDATE CENTER</small><h3 data-fa="آپدیت همین‌جاست." data-en="Your update, in one place.">آپدیت همین‌جاست.</h3><p data-fa="نسخهٔ فعلی و دریافت Windows و macOS را یک‌جا گذاشتیم؛ دیگه لازم نیست بین چند لینک بگردی." data-en="Current version plus Windows and macOS downloads are grouped here, so you do not have to hunt through several links.">نسخهٔ فعلی و دریافت Windows و macOS را یک‌جا گذاشتیم؛ دیگه لازم نیست بین چند لینک بگردی.</p></div><div class="al-update-version"><small>VERSION</small><b>v'+esc(version)+'</b></div></div><div class="al-update-grid"><div class="al-update-os"><div class="al-update-os-head"><span class="al-update-os-icon">▣</span><div><strong>Windows</strong><small>10 / 11 · x64</small></div></div><div class="al-update-actions">'+(winHref?'<a class="al-update-btn primary" href="'+esc(winHref)+'" target="_blank" rel="noopener noreferrer" data-fa="دریافت Windows" data-en="Download Windows">دریافت Windows</a>':'<span class="al-update-btn" data-fa="لینک نصب بالا" data-en="Installer link above">لینک نصب بالا</span>')+'<a class="al-update-btn" href="'+esc(relHref)+'" target="_blank" rel="noopener noreferrer" data-fa="Release ↗" data-en="Release ↗">Release ↗</a></div></div><div class="al-update-os"><div class="al-update-os-head"><span class="al-update-os-icon">⌘</span><div><strong>macOS</strong><small>Universal · Apple Silicon + Intel</small></div></div><div class="al-update-actions"><a class="al-update-btn primary" href="'+macAsset(product.file)+'.dmg" target="_blank" rel="noopener noreferrer" data-fa="DMG مک" data-en="macOS DMG">DMG مک</a><a class="al-update-btn" href="'+macAsset(product.file)+'.zip" target="_blank" rel="noopener noreferrer" data-fa="ZIP مک" data-en="macOS ZIP">ZIP مک</a></div></div></div><div class="al-update-foot" data-fa="این پنل لینک‌های انتشار فعلی سایت را جمع می‌کند. جزئیات بعضی قابلیت‌های محلی ممکن است بین دو سیستم‌عامل فرق داشته باشد." data-en="This panel groups the current release links wired into the site. Some local features can still differ between operating systems.">این پنل لینک‌های انتشار فعلی سایت را جمع می‌کند. جزئیات بعضی قابلیت‌های محلی ممکن است بین دو سیستم‌عامل فرق داشته باشد.</div>';
+        mount.insertAdjacentElement('afterend',box);setLocalized(box);
+      }
+    }
+        if(slug==='ai-tools'){
       const meta=document.querySelector('.heroMeta,.hero-meta');
       if(meta&&!meta.querySelector('.al-web-mac-live')){
         const s=document.createElement('span');
