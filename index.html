@@ -561,7 +561,7 @@ const core=qs('.core');addEventListener('pointermove',e=>{if(core&&window.innerW
 }
 let lang=(localStorage.getItem('adland-language-v2')||((navigator.languages?.[0]||navigator.language||'fa').toLowerCase().startsWith('en')?'en':'fa')),sfx=localStorage.getItem('adland-sfx')!=='off',motion=localStorage.getItem('adland-motion')!=='low',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const audioState={ctx:null};
-function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const o=C.createOscillator(),g=C.createGain(),n=C.currentTime;const table={tap:[360,500,.07,.012],open:[430,760,.12,.02],close:[250,330,.08,.014],nav:[520,850,.08,.016]};const [a,b,d,v]=table[kind]||table.tap;o.type=kind==='nav'?'triangle':'sine';o.frequency.setValueAtTime(a,n);o.frequency.exponentialRampToValueAtTime(b,n+d*.65);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(C.destination);o.start(n);o.stop(n+d+.01)}catch(e){}}
+function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const n=C.currentTime,table={tap:[390,560,.055,.009,'sine'],open:[420,780,.12,.014,'sine'],close:[300,210,.09,.012,'sine'],nav:[480,700,.065,.007,'triangle'],success:[460,920,.18,.014,'triangle'],error:[210,120,.16,.012,'sawtooth'],toggle:[330,520,.07,.008,'square'],tick:[620,620,.035,.005,'sine']},q=table[kind]||table.tap,o=C.createOscillator(),g=C.createGain(),f=C.createBiquadFilter();o.type=q[4];o.frequency.setValueAtTime(q[0],n);o.frequency.exponentialRampToValueAtTime(Math.max(70,q[1]),n+q[2]*.72);f.type='lowpass';f.frequency.setValueAtTime(2600,n);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(q[3],n+.008);g.gain.exponentialRampToValueAtTime(.0001,n+q[2]);o.connect(f).connect(g).connect(C.destination);o.start(n);o.stop(n+q[2]+.015)}catch(e){}}
 function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';if(window.__refreshArcadeLang)window.__refreshArcadeLang();if(window.__renderArcadePlayer)window.__renderArcadePlayer();}
 function setSfx(){qs('#soundBtn').textContent='SFX '+(sfx?'ON':'OFF')}
 qs('#langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';applyLang();tone('open')};
@@ -584,7 +584,13 @@ const boot=qs('#boot');if(localStorage.getItem('adland-boot-seen')==='1'||reduce
 let mx=innerWidth/2,my=innerHeight/2,ax=mx,ay=my;const cursor=qs('#cursor'),dot=qs('#cursorDot');
 addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;root.style.setProperty('--mx',mx+'px');root.style.setProperty('--my',my+'px')},{passive:true});
 function pointerLoop(){ax+=(mx-ax)*.12;ay+=(my-ay)*.12;cursor.style.left=ax+'px';cursor.style.top=ay+'px';dot.style.left=mx+'px';dot.style.top=my+'px';requestAnimationFrame(pointerLoop)}if(!reduced)pointerLoop();
-qsa('a,button').forEach((el,i)=>el.addEventListener('pointerdown',()=>tone(i%4===0?'open':'tap'),{passive:true}));
+qsa('a,button').forEach(el=>{
+  if(el.dataset.alSfxBound==='1'||el.dataset.sfxIgnore==='1'||el.closest('.arcadeSection,.arcadeGrid'))return;
+  el.dataset.alSfxBound='1';
+  const id=(el.id||'').toLowerCase(),txt=(el.textContent||'').toLowerCase();
+  const kind=/lang|sound|sfx/.test(id+' '+txt)?'toggle':/close|cancel|back|بازگشت|بستن|لغو/.test(id+' '+txt)?'close':/save|copy|success|ذخیره|کپی/.test(id+' '+txt)?'success':/open|start|download|install|view|شروع|دانلود|نصب|ورود/.test(id+' '+txt)?'open':el.closest('.navlinks,.navactions')?'nav':'tap';
+  el.addEventListener('pointerdown',()=>tone(kind),{passive:true});
+});
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.09});qsa('.reveal').forEach(x=>io.observe(x));
 const navLinks=[...qsa('.navlinks a')],sections=['apps','arcade','studio','projects','learning','team','faq','contact'].map(id=>qs('#'+id)).filter(Boolean);const activeIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -45% 0px'});sections.forEach(s=>activeIO.observe(s));
