@@ -295,7 +295,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
   <div class="arcadeTicker reveal">
     <span class="arcadeSignal"><i></i><b>ARCADE ONLINE</b></span>
     <div class="arcadePlayer"><span class="playerIcon">◎</span><div><small id="arcadePlayerMode" data-fa="نام ثبت نشده" data-en="Name not set">نام ثبت نشده</small><strong id="arcadePlayerName">Guest</strong><em id="arcadeDeviceId"></em></div><button class="playerEdit" id="arcadePlayerEdit" type="button" data-fa="تغییر نام" data-en="Change name">تغییر نام</button></div>
-    <p data-fa="نامت را یک‌بار ثبت کن تا این دستگاه با همان Player ID شناخته شود و رکوردهایش با نام تو نمایش داده شوند." data-en="Set your name once so this device keeps the same Player ID and your records keep your chosen name.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
+    <p data-fa="نامت را یک‌بار ثبت کن؛ رکوردها در جدول جهانی ثبت می‌شوند و از دستگاه‌های مختلف قابل مشاهده‌اند." data-en="Set your name once; your scores are published to the shared global leaderboard across devices.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
     <div class="gameStatRow">
       <div class="gameStat"><small>BEST REFLEX</small><b id="arcadeBestReflex">—</b></div>
       <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
@@ -701,7 +701,44 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   renderPlayer();
 })();
 
-/* ADLAND ARCADE ENGINE */
+/* GLOBAL ARCADE LEADERBOARD */
+(()=>{
+  const SUPA_URL='https://pnfenluypujlqidwreyd.supabase.co';
+  const SUPA_KEY='sb_publishable_oSZNJe0LLKoIVqOIMymu7w_lDFOxPe2';
+  const headers={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'};
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  let game='reflex';
+  const label=()=>{const n=(localStorage.getItem('adland-arcade-player-name')||'Guest').trim().slice(0,18);return n||'Guest'};
+  const scoreText=(g,s)=>g==='reflex'?Math.round(s)+' ms':String(Math.round(s));
+  const load=async()=>{
+    const box=qs('#leaderTable');if(!box)return;
+    box.innerHTML='<div class="leaderLoading">'+(root.lang==='fa'?'در حال دریافت رکوردهای جهانی…':'Loading global records…')+'</div>';
+    try{
+      const order=game==='reflex'?'score.asc,created_at.asc':'score.desc,created_at.asc';
+      const u=SUPA_URL+'/rest/v1/arcade_scores?select=player_name,score,created_at&game=eq.'+encodeURIComponent(game)+'&order='+encodeURIComponent(order)+'&limit=10';
+      const res=await fetch(u,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+      if(!res.ok)throw new Error('leaderboard '+res.status);
+      const rows=await res.json();
+      if(!rows.length){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'هنوز رکوردی ثبت نشده. اولین نفر باش!':'No records yet. Be the first!')+'</div>';return}
+      const head=root.lang==='fa'?['رتبه','بازیکن','امتیاز','زمان']:['Rank','Player','Score','Date'];
+      let h='<div class="leaderRow head"><span>'+head[0]+'</span><span>'+head[1]+'</span><span>'+head[2]+'</span><span>'+head[3]+'</span></div>';
+      rows.forEach((r,i)=>{const d=new Date(r.created_at);h+='<div class="leaderRow"><span class="leaderRank">#'+(i+1)+'</span><span class="leaderName">'+esc(r.player_name||'Guest')+'</span><span class="leaderScore">'+esc(scoreText(game,r.score))+'</span><span class="leaderTime">'+esc(d.toLocaleDateString(root.lang==='fa'?'fa-IR':'en-US',{month:'short',day:'numeric'}))+'</span></div>'});
+      box.innerHTML=h;
+    }catch(e){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'اتصال Leaderboard فعلاً در دسترس نیست.':'Global leaderboard is temporarily unavailable.')+'</div>'}
+  };
+  const submit=async(g,score)=>{
+    const name=label();if(name==='Guest')return;
+    try{
+      await fetch(SUPA_URL+'/rest/v1/arcade_scores',{method:'POST',headers,body:JSON.stringify({game:g,player_name:name,player_key:crypto.randomUUID(),score:Math.round(score),device_label:navigator.platform})});
+      if(g===game)load();
+    }catch(e){}
+  };
+  window.__submitGlobalArcadeScore=submit;window.__loadGlobalArcade=load;
+  qsa('.leaderTab').forEach(b=>b.addEventListener('click',()=>{qsa('.leaderTab').forEach(x=>x.classList.remove('active'));b.classList.add('active');game=b.dataset.game;load();tone('tap')}));
+  qs('#leaderRefresh')?.addEventListener('click',()=>{load();tone('open')});
+  load();
+})();
+\n/* ADLAND ARCADE ENGINE */
 (()=>{
   const bestKey={reflex:'adland-arcade-best-reflex',memory:'adland-arcade-best-memory',meteor:'adland-arcade-best-meteor'};
   const readBest=k=>Number(localStorage.getItem(bestKey[k])||0);
