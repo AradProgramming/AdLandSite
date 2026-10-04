@@ -334,8 +334,10 @@
     }
   ],
   "support": {
-    "email": "aradprogramming@gmail.com",
-    "telegram": "Arad_unk",
-    "bale": "https://ble.ir/AdLandStudio"
+    "channels": {
+      "telegram": "https://t.me/Arad_unk",
+      "bale": "https://ble.ir/AdLandStudio"
+    },
+    "publicEmailExposure": false
   }
 }
