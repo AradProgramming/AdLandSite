@@ -277,7 +277,7 @@
       const p=document.createElement('div');
       p.id='al-mac-panel';
       p.className='al-mac-panel live';
-      p.innerHTML='<div class="al-release-live"><span class="al-live-dot"></span><strong data-fa="macOS LIVE" data-en="macOS LIVE">macOS LIVE</strong><span>mac-v1.0.0</span></div><h3 data-fa="نسخه مک اکوسیستم AdLand منتشر شد." data-en="The AdLand macOS ecosystem is now live.">نسخه مک اکوسیستم AdLand منتشر شد.</h3><p data-fa="نسخه Universal همهٔ ۱۲ محصول/ابزار AdLand اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است." data-en="The Universal build of all 12 AdLand products and tools is now available for Macs with Apple Silicon and Intel. Every product card has a direct DMG download, with ZIP packages also available from the release page.">نسخه Universal همهٔ ۱۲ محصول/ابزار AdLand اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است.</p><div class="al-mac-meta"><span class="al-mac-pill">Apple Silicon</span><span class="al-mac-pill">Intel Mac</span><span class="al-mac-pill" data-fa="Universal · نسخه ۱.۰.۰" data-en="Universal · v1.0.0">Universal · نسخه ۱.۰.۰</span></div><div class="al-release-actions"><a class="al-release-btn primary" href="'+MAC_RELEASE_URL+'" target="_blank" rel="noopener noreferrer" data-fa="مشاهده Release ↗" data-en="Open Release ↗">مشاهده Release ↗</a><span class="al-release-note" data-fa="DMG مستقیم از کارت هر محصول" data-en="Direct DMG from every product card">DMG مستقیم از کارت هر محصول</span></div>';
+      p.innerHTML='<div class="al-release-live"><span class="al-live-dot"></span><strong data-fa="macOS LIVE" data-en="macOS LIVE">macOS LIVE</strong><span>mac-v1.0.0</span></div><h3 data-fa="نسخه مک اکوسیستم AdLand منتشر شد." data-en="The AdLand macOS ecosystem is now live.">نسخه مک اکوسیستم AdLand منتشر شد.</h3><p data-fa="نسخه Universal همهٔ ۱۳ محصول/ابزار AdLand اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است." data-en="The Universal build of all 13 AdLand products and tools is now available for Macs with Apple Silicon and Intel. Every product card has a direct DMG download, with ZIP packages also available from the release page.">نسخه Universal همهٔ ۱۲ محصول/ابزار AdLand اکنون برای Mac با پردازنده‌های Apple Silicon و Intel آماده دانلود است. هر کارت محصول لینک مستقیم DMG دارد و فایل ZIP هم از صفحهٔ Release در دسترس است.</p><div class="al-mac-meta"><span class="al-mac-pill">Apple Silicon</span><span class="al-mac-pill">Intel Mac</span><span class="al-mac-pill" data-fa="Universal · نسخه ۱.۰.۰" data-en="Universal · v1.0.0">Universal · نسخه ۱.۰.۰</span></div><div class="al-release-actions"><a class="al-release-btn primary" href="'+MAC_RELEASE_URL+'" target="_blank" rel="noopener noreferrer" data-fa="مشاهده Release ↗" data-en="Open Release ↗">مشاهده Release ↗</a><span class="al-release-note" data-fa="DMG مستقیم از کارت هر محصول" data-en="Direct DMG from every product card">DMG مستقیم از کارت هر محصول</span></div>';
       anchor.insertAdjacentElement('afterend',p);
       setLocalized(p);
     }
@@ -309,6 +309,25 @@
       }
     });
   }
-function sync(){setLocalized();experience();globalShortcuts();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
+
+  function iconIntegrity(){
+    const makeFallback=(img)=>{
+      if(!img||img.dataset.alIconFallback==='1')return;
+      img.dataset.alIconFallback='1';
+      img.addEventListener('error',()=>{
+        if(img.dataset.alIconReplaced==='1')return;
+        img.dataset.alIconReplaced='1';
+        const label=(img.getAttribute('alt')||'A').trim().slice(0,1).toUpperCase();
+        const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7df97"/><stop offset="1" stop-color="#9f772e"/></linearGradient></defs><rect width="128" height="128" rx="28" fill="#080a0e"/><circle cx="64" cy="64" r="39" fill="none" stroke="url(#g)" stroke-width="3"/><text x="64" y="75" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="46" font-weight="900" fill="url(#g)">'+label+'</text></svg>';
+        img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+      });
+    };
+    document.querySelectorAll('img[src*="/icons/"],img[src*="/logo/"]').forEach(makeFallback);
+    if(window.__alIconObserver)return;
+    window.__alIconObserver=new MutationObserver(()=>document.querySelectorAll('img[src*="/icons/"],img[src*="/logo/"]').forEach(makeFallback));
+    window.__alIconObserver.observe(document.body,{subtree:true,childList:true});
+  }
+
+function sync(){iconIntegrity();setLocalized();experience();globalShortcuts();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
   document.addEventListener('adland:language',sync);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{support();sync()});else{support();sync()}
 })();
