@@ -79,6 +79,12 @@ body{font-size:14px}
 .arcadeTicker .arcadeSignal{display:flex;align-items:center;gap:8px;color:var(--mint);font:800 9px Inter;letter-spacing:.12em}
 .arcadeTicker .arcadeSignal i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);animation:pulse 1.5s infinite}
 .arcadeTicker p{margin:0;color:#748188;font-size:10px}
+.arcadeVibe{display:flex;align-items:center;gap:12px;margin:-10px 0 14px;padding:13px 15px;border:1px solid #d9b55d1f;border-radius:16px;background:linear-gradient(90deg,#d9b55d09,#ffffff03,#7bf6df06);position:relative;overflow:hidden}
+.arcadeVibe:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#ffffff06,transparent);transform:translateX(-110%);animation:arcadeSweep 5s ease-in-out infinite}
+.arcadeVibeIcon{width:32px;height:32px;display:grid;place-items:center;border:1px solid #d9b55d2d;border-radius:10px;color:var(--gold);background:#d9b55d08;box-shadow:0 0 25px #d9b55d14;flex:none}
+.arcadeVibe strong{display:block;font-size:12px;color:#e8e0cf}.arcadeVibe small{display:block;margin-top:3px;color:#748188;font-size:10px}.arcadeVibeTag{margin-inline-start:auto;padding:7px 9px;border:1px solid #ffffff10;border-radius:999px;color:#77838a;font:800 8px Inter;letter-spacing:.1em;white-space:nowrap}
+@keyframes arcadeSweep{55%,100%{transform:translateX(110%)}}
+@media(max-width:650px){.arcadeVibe{align-items:flex-start}.arcadeVibeTag{display:none}.arcadeVibe strong{font-size:11px}.arcadeVibe small{font-size:9px}}
 .arcadeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .gameCard{padding:18px;border-radius:23px;min-height:560px;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .gameCard:before{content:"";position:absolute;inset:-50% auto auto -20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#d9b55d12,transparent 68%);pointer-events:none}
@@ -283,6 +289,12 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       <div class="identityActions"><button class="btn primary" id="arcadeIdentitySave" type="button" data-fa="ذخیره نام" data-en="Save name">ذخیره نام</button><button class="btn" id="arcadeIdentityGuest" type="button" data-fa="ادامه به‌عنوان مهمان" data-en="Continue as guest">ادامه به‌عنوان مهمان</button></div>
       <div class="identityNote" data-fa="این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد." data-en="This name is saved to this device profile and remains after refresh or returning to the site.">این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد.</div>
     </div>
+  </div>
+
+  <div class="arcadeVibe reveal" id="arcadeVibe">
+    <span class="arcadeVibeIcon">✦</span>
+    <div><strong id="arcadeVibeTitle" data-fa="امروز رکوردت رو می‌خوایم 😎" data-en="Today, we are hunting your record 😎">امروز رکوردت رو می‌خوایم 😎</strong><small id="arcadeVibeText" data-fa="بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه." data-en="No excuses; run it one more time and see what happens.">بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه.</small></div>
+    <span class="arcadeVibeTag">RANDOM MISSION</span>
   </div>
 
   <div class="arcadeGrid">
@@ -562,6 +574,21 @@ function scroll(){const d=document.documentElement.scrollHeight-innerHeight;qs('
 qsa('.app').forEach(card=>{card.addEventListener('pointermove',e=>{if(reduced)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*7)+'deg) translateZ(4px)';card.style.setProperty('--cx',(x+0.5)*100+'%');card.style.setProperty('--cy',(y+0.5)*100+'%')},{passive:true});card.addEventListener('pointerleave',()=>card.style.transform='')});
 qsa('.project').forEach(x=>x.addEventListener('pointerdown',()=>tone('open'),{passive:true}));
 qsa('.faqQ').forEach(b=>b.onclick=()=>{b.parentElement.classList.toggle('open');tone('tap')});
+
+const arcadeVibeData=[
+  ['امروز رکوردت رو می‌خوایم 😎','بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه.','Today, we are hunting your record 😎','No excuses; run it one more time and see what happens.'],
+  ['این دفعه جدی بازی کن 🔥','سه تا بازی هست؛ حداقل یکی‌ش رو تا آخر برو.','Take this run seriously 🔥','Three games are waiting; take at least one all the way.'],
+  ['رفلکس یا حافظه؟ 🤔','ببین کدوم یکی بیشتر کم میاره!','Reflex or memory? 🤔','Let’s see which one gives up first!'],
+  ['شهاب‌ها منتظرن 🚀','یه دور Meteor Run بزن؛ فقط حواست به سرعت باشه.','The meteors are waiting 🚀','Try Meteor Run; just keep an eye on the speed.'],
+  ['فقط یه رکورد دیگه... 👀','آره، همون جمله‌ای که همیشه باعث یه دور اضافه می‌شه.','Just one more record... 👀','Yep, the sentence that always turns into one extra run.']
+];
+let arcadeVibeIndex=(new Date().getDate()+new Date().getMonth())%arcadeVibeData.length;
+function rotateArcadeVibe(){
+  const title=qs('#arcadeVibeTitle'),copy=qs('#arcadeVibeText');if(!title||!copy)return;
+  const v=arcadeVibeData[arcadeVibeIndex++%arcadeVibeData.length];
+  const en=root.lang==='en';title.textContent=en?v[2]:v[0];copy.textContent=en?v[3]:v[1];
+}
+rotateArcadeVibe();setInterval(rotateArcadeVibe,6500);
 
 const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.createElement('i');s.style.height=(18+Math.random()*70)+'%';bars.appendChild(s)}setInterval(()=>{qsa('#signalBars i').forEach(x=>x.style.height=(18+Math.random()*78)+'%');qs('#energy').textContent=String(82+Math.floor(Math.random()*17))},1250)}
 
