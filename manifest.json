@@ -10,14 +10,14 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/AdLandSite/assets/logo/adland-logo-transparent.webp",
+      "sizes": "126x128",
+      "type": "image/webp"
     },
     {
-      "src": "/AdLandSite/assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/AdLandSite/assets/logo/adland-logo-transparent.webp",
+      "sizes": "126x128",
+      "type": "image/webp"
     }
   ]
 }
