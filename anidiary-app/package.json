@@ -24,16 +24,19 @@
     "files":["main.cjs","renderer/**","assets/**","package.json"],
     "artifactName":"AniDiary-${version}-${os}-${arch}.${ext}",
     "win":{
-      "target":[{"target":"nsis","arch":["x64"]},{"target":"portable","arch":["x64"]}],
-      "artifactName":"AniDiary-${version}-Windows-${arch}.${ext}"
+      "target":[{"target":"nsis","arch":["x64"]},{"target":"portable","arch":["x64"]}]
     },
     "nsis":{
+      "artifactName":"AniDiary-${version}-Windows-${arch}-Setup.${ext}",
       "oneClick":false,
       "allowToChangeInstallationDirectory":true,
       "perMachine":false,
       "createDesktopShortcut":true,
       "createStartMenuShortcut":true,
       "shortcutName":"AniDiary"
+    },
+    "portable":{
+      "artifactName":"AniDiary-${version}-Windows-${arch}-Portable.${ext}"
     },
     "mac":{
       "target":[{"target":"dmg","arch":["universal"]},{"target":"zip","arch":["universal"]}],
