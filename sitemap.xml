@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aradprogramming.github.io/AdLandSite/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/nexus/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/canvas/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/pulse/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/frame/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/atlas/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/forge/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/prism/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/chrono/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/echo/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/relay/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://aradprogramming.github.io/AdLandSite/orbit/</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/</loc><lastmod>2026-10-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/ai-tools/</loc><lastmod>2026-10-04</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/nexus/</loc><lastmod>2026-10-04</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/orbit/</loc><lastmod>2026-10-04</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/canvas/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/pulse/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/frame/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/atlas/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/forge/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/prism/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/chrono/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/echo/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/relay/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/learning/python/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/learning/scratch/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/learning/html-css/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/learning/app-inventor/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aradprogramming.github.io/AdLandSite/learning/tkinter/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
