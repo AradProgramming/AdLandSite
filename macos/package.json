@@ -1,0 +1,14 @@
+{
+  "name": "adland-macos-editions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AdLand Studio macOS editions",
+  "main": "main.cjs",
+  "scripts": {
+    "build:mac": "electron-builder --mac dmg zip --universal"
+  },
+  "devDependencies": {
+    "electron": "^38.3.0",
+    "electron-builder": "^26.0.12"
+  }
+}
