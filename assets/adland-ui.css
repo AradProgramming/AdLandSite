@@ -75,3 +75,27 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 #hero{padding-top:92px!important}
 .al-secure-contact{padding:2px}.secureMark{display:inline-flex;align-items:center;gap:7px;color:#8ff9dc;font:900 10px/1 Manrope,Vazirmatn,sans-serif;letter-spacing:.12em}.secureMark i{width:7px;height:7px;border-radius:50%;background:#8ff9dc;box-shadow:0 0 13px #8ff9dc}.al-secure-contact h3{font-size:24px!important;margin:11px 0 8px!important}.al-secure-contact p{color:#7e898f;font-size:13px;line-height:1.9}.al-secure-contact .contactActions{margin-top:15px}
 @media(max-width:700px){#nav{top:8px!important;margin-top:8px!important;height:58px!important}#hero{padding-top:65px!important}}
+
+
+/* AdLand Studio — macOS live release layer */
+.al-platform.live{border-color:#8ff9dc24;background:linear-gradient(145deg,#8ff9dc09,#ffffff02)}
+.al-platform.mac.live{border-color:#d9b55d45;background:radial-gradient(circle at 15% 20%,#d9b55d12,transparent 42%),linear-gradient(145deg,#d9b55d0d,#ffffff02)}
+.al-platform.live .al-dot{background:#8ff9dc;box-shadow:0 0 13px #8ff9dc}
+.al-mac-action{display:inline-flex!important;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 28px #d9b55d12;transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+.al-mac-action:hover{transform:translateY(-2px);box-shadow:0 14px 38px #d9b55d20;filter:brightness(1.08)}
+.al-card-platforms{align-items:center}
+.al-card-platform.mac{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.al-card-platform.mac:hover{transform:translateY(-2px);border-color:#d9b55d55;background:#d9b55d0d}
+.al-mac-panel.live{border-color:#d9b55d3d;background:radial-gradient(circle at 82% 22%,#d9b55d18,transparent 34%),radial-gradient(circle at 10% 86%,#8ff9dc0a,transparent 32%),linear-gradient(145deg,#ffffff09,#ffffff02)}
+.al-release-live{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#8b969c;font:900 10px/1.3 Manrope,Vazirmatn,sans-serif;letter-spacing:.12em}
+.al-release-live strong{color:#d9b55d}
+.al-release-live>span:last-child{padding:6px 8px;border:1px solid #ffffff0e;border-radius:999px;letter-spacing:.04em;color:#7e898f}
+.al-live-dot{width:7px;height:7px;border-radius:50%;background:#8ff9dc;box-shadow:0 0 14px #8ff9dc;display:inline-block}
+.al-release-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}
+.al-release-btn{min-height:40px;padding:0 14px;border-radius:11px;border:1px solid #ffffff12;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font:900 12px/1.1 Manrope,Vazirmatn,sans-serif;color:#b6bec3;background:#ffffff04;transition:.22s}
+.al-release-btn.primary{border-color:#d9b55d55;background:linear-gradient(135deg,#d9b55d,#a77a2b);color:#161108;box-shadow:0 10px 32px #d9b55d19}
+.al-release-btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+.al-release-note{color:#7c898f;font-size:11px;line-height:1.6}
+.al-home-mac.live{border-color:#d9b55d45;background:#d9b55d0b;color:#d9b55d}
+.al-web-mac-live{border-color:#8ff9dc35!important;color:#8ff9dc!important;background:#8ff9dc08!important}
+@media(max-width:700px){.al-release-actions{align-items:stretch}.al-release-btn,.al-release-note{width:100%}.al-mac-action{width:100%}.al-platform-rail{grid-template-columns:1fr}}
