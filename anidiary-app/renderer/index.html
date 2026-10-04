@@ -57,7 +57,24 @@ main{min-width:0;grid-column:2;grid-row:2;overflow:auto;padding:26px 28px 48px;p
     <button class="navBtn" data-view="add"><i class="navIcon">＋</i><span data-fa="افزودن انیمه" data-en="Add Anime">افزودن انیمه</span></button>
     <button class="navBtn" data-view="discover"><i class="navIcon">◇</i><span data-fa="کشف و انتخاب" data-en="Discover">کشف و انتخاب</span></button>
     <button class="navBtn" data-view="settings"><i class="navIcon">⚙</i><span data-fa="تنظیمات" data-en="Settings">تنظیمات</span></button>
-  </nav>
+function renderDiary(){
+  const list=sortedVisible(),box=$('diaryGrid');
+  if(!list.length){box.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="big">🎌</div><h3>'+esc(text('دفترت خالی یا بدون نتیجه است.','Your diary is empty or has no matches.'))+'</h3><p>'+esc(text('یک عنوان اضافه کن یا فیلترها را تغییر بده.','Add a title or change the filters.'))+'</p></div>';return}
+  box.innerHTML='';
+  list.forEach(function(e){
+    const card=document.createElement('article');card.className='card';
+    const cover=document.createElement('div');cover.className='cardCover';
+    cover.innerHTML=e.poster?'<div class="poster"><img src="'+esc(e.poster)+'" alt="'+esc(e.name||'AniDiary')+'"></div>':'<div class="poster"><div class="posterFallback">'+esc(e.name||'AniDiary')+'</div></div>';
+    const fav=document.createElement('button');fav.className='favorite '+(e.favorite?'on':'');fav.dataset.fav=e.id;fav.textContent=e.favorite?'♥':'♡';fav.setAttribute('aria-label',text('علاقه‌مندی','Favorite'));cover.appendChild(fav);
+    const badge=document.createElement('span');badge.className='badge';badge.textContent=statusText(e.status);cover.appendChild(badge);
+    const body=document.createElement('div');body.className='cardBody';
+    const title=document.createElement('div');title.className='cardTitle';title.innerHTML='<h3>'+esc(e.name)+'</h3><span class="score">★ '+Number(e.rating||0).toFixed(1)+'</span>';body.appendChild(title);
+    const meta=document.createElement('div');meta.className='meta';let metaHtml='<span class="tag">'+esc(typeText(e.type))+'</span><span class="tag">'+calcProgress(e)+'%</span>';(e.genres||[]).slice(0,2).forEach(function(g){metaHtml+='<span class="tag">'+esc(settings.lang==='fa'?genreFa[g]:g)+'</span>'});meta.innerHTML=metaHtml;body.appendChild(meta);
+    const p=document.createElement('p');p.textContent=e.notes||text('بدون یادداشت','No notes');body.appendChild(p);
+    const foot=document.createElement('div');foot.className='cardFoot';foot.innerHTML='<span class="muted">'+(e.type==='movie'?'◷ '+esc(String(e.duration||0))+'m':'EP '+esc(String(e.current||0))+'/'+esc(String(e.episodes||'?')))+'</span><button class="smallBtn" data-open="'+esc(e.id)+'">'+esc(text('جزئیات','Details'))+'</button>';body.appendChild(foot);
+    card.appendChild(cover);card.appendChild(body);box.appendChild(card);
+  });
+}
   <div class="sideStats">
     <h4 data-fa="وضعیت دفتر" data-en="DIARY PULSE">وضعیت دفتر</h4>
     <div class="sideMetric"><span data-fa="کل" data-en="Total">کل</span><b id="sideTotal">0</b></div>
