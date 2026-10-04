@@ -54,7 +54,7 @@ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{accep
 }});
 while(walker.nextNode()){nodes.push(walker.currentNode);originals.set(walker.currentNode,walker.currentNode.nodeValue)}
 const ph=[];document.querySelectorAll('input,textarea').forEach(el=>{const p=el.getAttribute('placeholder');if(p&&pairs[p])ph.push([el,p])});
-let current=stored()||browser();
+let current=stored()||'fa';
 function addButton(){
  let b=document.getElementById('lang')||document.getElementById('al-ai-lang');
  if(!b){const actions=document.querySelector('.actions');if(!actions)return;b=document.createElement('button');b.id='al-ai-lang';b.className='iconBtn';b.type='button';actions.insertBefore(b,actions.firstChild)}
