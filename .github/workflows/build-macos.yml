@@ -2,23 +2,6 @@ name: AdLand macOS Editions
 on:
   push:
     branches: [main]
-    paths:
-      - "macos/**"
-      - "assets/**"
-      - "data/**"
-      - "index.html"
-      - "ai-tools/**"
-      - "atlas/**"
-      - "canvas/**"
-      - "chrono/**"
-      - "echo/**"
-      - "forge/**"
-      - "frame/**"
-      - "nexus/**"
-      - "orbit/**"
-      - "prism/**"
-      - "pulse/**"
-      - "relay/**"
   workflow_dispatch:
 
 concurrency:
@@ -30,10 +13,6 @@ permissions:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        slug: [ai-tools, nexus, canvas, pulse, frame, atlas, forge, prism, relay, echo, chrono, orbit]
     runs-on: macos-14
     steps:
       - name: Checkout
@@ -42,41 +21,47 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: macos/package.json
       - name: Prepare website bundle
         shell: bash
         run: |
-          rm -rf macos/site
+          rm -rf macos/site macos/dist macos/node_modules
           mkdir -p macos/site
           rsync -a --exclude ".git" --exclude "macos/site" --exclude "macos/dist" --exclude "macos/node_modules" --exclude "macos/package.json" --exclude "macos/main.cjs" --exclude "macos/electron-builder.config.cjs" ./ macos/site/
       - name: Install packaging dependencies
         working-directory: macos
         run: npm install
-      - name: Build universal macOS app
+      - name: Build all universal macOS editions
         working-directory: macos
-        env:
-          ADLAND_APP_SLUG: ${{ matrix.slug }}
-        run: npx electron-builder --config electron-builder.config.cjs --mac --universal
-      - name: Upload build
-        uses: actions/upload-artifact@v4
-        with:
-          name: adland-macos-${{ matrix.slug }}
-          path: macos/dist/*
-          if-no-files-found: error
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Download all builds
-        uses: actions/download-artifact@v4
-        with:
-          path: release-assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for slug in ai-tools nexus canvas pulse frame atlas forge prism relay echo chrono orbit; do
+            echo "::group::Building $slug"
+            rm -rf dist
+            ADLAND_APP_SLUG="$slug" npx electron-builder --config electron-builder.config.cjs --mac --universal
+            mkdir -p "/tmp/adland-$slug"
+            cp -f dist/*.dmg dist/*.zip "/tmp/adland-$slug/" || true
+            echo "::endgroup::"
+          done
+          rm -rf /tmp/adland-release
+          mkdir -p /tmp/adland-release
+          find /tmp -maxdepth 2 -type f \( -name "AdLand-*.dmg" -o -name "AdLand-*.zip" \) -exec cp -f {} /tmp/adland-release/ \;
+          ls -lah /tmp/adland-release
+      - name: Collect release assets
+        shell: bash
+        run: |
+          rm -rf release-assets
+          mkdir -p release-assets
+          find /tmp/adland-release -type f -maxdepth 1 -print0 | xargs -0 -r -I{} cp "{}" release-assets/
+          test "$(find release-assets -type f | wc -l | tr -d ' ')" -ge 12
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
+          set -euo pipefail
           TAG="mac-v1.0.0"
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "AdLand Studio macOS Editions v1.0.0" --notes "Universal macOS editions for the AdLand Studio ecosystem. Builds target both Apple Silicon and Intel Macs. These direct-download builds are currently unsigned/not notarized until an Apple Developer ID certificate is configured."
-          find release-assets -type f \( -name "*.dmg" -o -name "*.zip" \) -print0 | xargs -0 -r -n20 gh release upload "$TAG" --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "AdLand Studio macOS Editions v1.0.0" --notes "Universal macOS editions for the AdLand Studio ecosystem. Builds target both Apple Silicon and Intel Macs. Direct-download builds are currently unsigned/not notarized until an Apple Developer ID certificate is configured."
+          find release-assets -type f -print0 | xargs -0 -r -n20 gh release upload "$TAG" --clobber
