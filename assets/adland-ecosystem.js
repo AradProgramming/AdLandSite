@@ -18,6 +18,17 @@
     const s=document.createElement('style');s.id='al-ecosystem-style';s.textContent=`
       .al-platform-rail{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;align-items:stretch}.al-platform{min-width:190px;flex:1;padding:13px 14px;border:1px solid #ffffff10;border-radius:15px;background:linear-gradient(145deg,#ffffff07,#ffffff02);box-shadow:0 14px 45px #0005}.al-platform b{display:block;font-size:13px;line-height:1.5;color:#f1ede3}.al-platform small{display:block;margin-top:4px;font-size:11px;line-height:1.6;color:#7e898f}.al-platform.mac{border-color:#e7d59c28;background:linear-gradient(145deg,#d9b55d10,#ffffff02)}.al-platform .al-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-inline-end:7px;background:#8ff9dc;box-shadow:0 0 12px #8ff9dc66}.al-platform.mac .al-dot{background:#d9b55d;box-shadow:0 0 12px #d9b55d66}.al-mac-action{height:40px!important;min-height:40px!important;padding:0 13px;border:1px solid #d9b55d35;border-radius:11px;background:#d9b55d08;color:#d9b55d;font:800 12px/1.2 Manrope,Vazirmatn,sans-serif;cursor:pointer;opacity:.95}.al-mac-action.disabled,.al-mac-card.disabled{cursor:not-allowed;opacity:.55;pointer-events:none}.al-mac-action:disabled{cursor:not-allowed}.al-mac-panel{margin-top:18px;padding:22px;border-radius:24px;border:1px solid #d9b55d25;background:radial-gradient(circle at 78% 25%,#d9b55d16,transparent 34%),linear-gradient(145deg,#ffffff08,#ffffff02);box-shadow:0 30px 100px #0009;position:relative;overflow:hidden}.al-mac-panel:after{content:'⌘';position:absolute;inset:auto 22px 6px auto;font-size:110px;line-height:1;color:#d9b55d0b;pointer-events:none}.al-mac-panel small{color:#d9b55d;font-weight:800;font-size:10px;letter-spacing:.12em}.al-mac-panel h3{margin:6px 0 7px;font-size:25px;line-height:1.35}.al-mac-panel p{margin:0;max-width:820px;color:#7e898f;font-size:13px;line-height:1.9}.al-mac-panel .al-mac-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.al-mac-pill{padding:7px 9px;border:1px solid #ffffff10;border-radius:999px;color:#a2abb0;background:#ffffff03;font-size:11px}.al-card-platforms{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.al-card-platform{padding:6px 8px;border-radius:999px;border:1px solid #ffffff0d;background:#ffffff03;color:#78858c;font:700 10px/1.2 Manrope,Vazirmatn,sans-serif}.al-card-platform.mac{border-color:#d9b55d22;color:#d9b55d}
       #al-support-launcher{position:fixed;right:18px;bottom:18px;z-index:99998;border:1px solid #d9b55d42;border-radius:15px;background:#090d12ef;color:#e6cf91;backdrop-filter:blur(22px);box-shadow:0 22px 80px #000b;padding:11px 14px;display:flex;align-items:center;gap:9px;font:900 12px/1.1 Manrope,Vazirmatn,sans-serif;cursor:pointer;transition:.25s}#al-support-launcher:hover{transform:translateY(-3px);box-shadow:0 30px 100px #000c}#al-support-launcher i{width:7px;height:7px;border-radius:50%;background:#8ff9dc;box-shadow:0 0 13px #8ff9dc;display:block}#al-support{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:#020305c7;backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.25s}#al-support.open{opacity:1;visibility:visible}.al-support-card{width:min(920px,calc(100% - 24px));max-height:min(86vh,860px);overflow:auto;border:1px solid #d9b55d35;border-radius:26px;background:#090e14fa;box-shadow:0 40px 140px #000d;padding:20px}.al-support-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.al-support-kicker{color:#d9b55d;font-size:10px;font-weight:900;letter-spacing:.14em}.al-support-head h2{margin:5px 0 4px;font-size:30px;line-height:1.25}.al-support-head p{margin:0;color:#7f8b92;font-size:13px;line-height:1.75}.al-support-close{width:36px;height:36px;border:1px solid #ffffff12;border-radius:10px;background:#ffffff05;color:#a8b0b4;font-size:20px;cursor:pointer}.al-support-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;margin-top:16px}.al-support-section{padding:16px;border:1px solid #ffffff0d;border-radius:19px;background:#ffffff03}.al-support-section h3{margin:0 0 10px;font-size:17px}.al-support-section p{color:#7f8b92;font-size:12px;line-height:1.8}.al-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.al-field{display:grid;gap:6px}.al-field.full{grid-column:1/-1}.al-field label{color:#a2abb0;font-size:11px;font-weight:800}.al-field input,.al-field textarea,.al-field select{width:100%;border:1px solid #ffffff10;border-radius:11px;background:#05080c;color:#f0ede6;padding:10px 11px;outline:0;font-size:13px;line-height:1.6}.al-field textarea{min-height:150px;resize:vertical}.al-field input:focus,.al-field textarea:focus,.al-field select:focus{border-color:#d9b55d55;box-shadow:0 0 0 3px #d9b55d0b}.al-support-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.al-support-btn{min-height:40px;padding:0 13px;border:1px solid #ffffff11;border-radius:10px;background:#ffffff04;color:#acb4b8;font:800 12px/1 Manrope,Vazirmatn,sans-serif;cursor:pointer}.al-support-btn.primary{background:linear-gradient(135deg,#d9b55d,#aa7c2b);color:#151005;border:0}.al-support-btn.link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}.al-support-status{margin-top:9px;min-height:22px;color:#8c989e;font-size:11px;line-height:1.7}.al-support-ref{margin-top:9px;padding:9px 11px;border-radius:10px;border:1px dashed #d9b55d25;color:#d2bc7a;background:#d9b55d06;font:800 11px/1.5 ui-monospace,monospace}.al-support-note{margin-top:10px;padding:10px 11px;border-radius:11px;background:#8ff9dc08;border:1px solid #8ff9dc18;color:#82a9a1;font-size:11px;line-height:1.75}@media(max-width:760px){.al-support-grid{grid-template-columns:1fr}.al-fields{grid-template-columns:1fr}.al-field.full{grid-column:auto}.al-support-head h2{font-size:24px}.al-support-card{padding:14px}.al-platform{min-width:0}.al-mac-panel h3{font-size:21px}#al-support-launcher{right:10px;bottom:10px}}@media(prefers-reduced-motion:reduce){#al-support-launcher,.al-platform,.al-mac-panel{transition:none!important}}
+      #al-page-progress{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#d9b55d,#f6df9a,#8ff9dc);z-index:100001;box-shadow:0 0 18px #d9b55d66;transition:width .12s linear}
+      #al-backtop{position:fixed;left:18px;bottom:18px;width:43px;height:43px;z-index:99997;border:1px solid #ffffff16;border-radius:13px;background:#090d12e8;color:#d9b55d;backdrop-filter:blur(18px);box-shadow:0 18px 60px #0009;opacity:0;visibility:hidden;transform:translateY(10px);transition:.28s;cursor:pointer;font-size:17px;font-weight:900}
+      #al-backtop.show{opacity:1;visibility:visible;transform:none}
+      #al-backtop:hover{transform:translateY(-3px);border-color:#d9b55d45;box-shadow:0 24px 75px #000b}
+      .al-enhance-card{position:relative;overflow:hidden}
+      .al-enhance-card:after{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at var(--alx,50%) var(--aly,50%),#d9b55d0c,transparent 28%);pointer-events:none;opacity:0;transition:.35s}
+      .al-enhance-card:hover:after{opacity:1}
+      .al-spark{position:fixed;pointer-events:none;z-index:100002;width:5px;height:5px;border-radius:50%;background:#f6df9a;box-shadow:0 0 16px #d9b55d;animation:alSpark .65s ease-out forwards}
+      @keyframes alSpark{to{transform:translate(var(--dx),var(--dy)) scale(.1);opacity:0}}
+      @media(max-width:700px){#al-backtop{left:10px;bottom:10px;width:40px;height:40px}#al-page-progress{height:2px}}
+
     `;document.head.appendChild(s);
   }
   function setLocalized(scope=document){const l=lang();scope.querySelectorAll?.('[data-fa][data-en]').forEach(el=>el.innerHTML=l==='fa'?el.dataset.fa:el.dataset.en);scope.querySelectorAll?.('[data-fa-placeholder][data-en-placeholder]').forEach(el=>el.placeholder=l==='fa'?el.dataset.faPlaceholder:el.dataset.enPlaceholder);const title=scope.querySelector?.('[data-al-support-title]');if(title)title.textContent=text('پشتیبانی AdLand','AdLand Support Center')}
@@ -64,6 +75,37 @@
       foot.className='al-release-footer';
       foot.innerHTML='<a href="'+release.href+'" target="_blank" rel="noopener noreferrer">'+text('مشاهده صفحه Release ↗','Open release page ↗')+'</a><span>'+text('دانلودها از نسخه رسمی محصول','Downloads from the official product release')+'</span>';
       downloadBlock.appendChild(foot);
+    }
+  }
+  function experience(){
+    style();
+    if(!document.getElementById('al-page-progress')){
+      const p=document.createElement('div');p.id='al-page-progress';document.body.appendChild(p);
+      const update=()=>{const max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};
+      addEventListener('scroll',update,{passive:true});update();
+    }
+    if(!document.getElementById('al-backtop')){
+      const b=document.createElement('button');b.id='al-backtop';b.type='button';b.setAttribute('aria-label',text('بازگشت به بالا','Back to top'));b.textContent='↑';document.body.appendChild(b);
+      const toggle=()=>b.classList.toggle('show',scrollY>520);
+      addEventListener('scroll',toggle,{passive:true});toggle();
+      b.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});tone?.('open')});
+    }
+    document.querySelectorAll('.app,.project,.course,.teamCard,.tool,.feature,.step,.workspace,.panel,.release,.download,.demo').forEach(card=>{
+      if(card.dataset.alEnhanced)return;card.dataset.alEnhanced='1';card.classList.add('al-enhance-card');
+      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--alx',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--aly',((e.clientY-r.top)/r.height*100)+'%')},{passive:true});
+    });
+    document.querySelectorAll('button.btn,button.miniBtn,.appLink,a.btn,.openTool,.tab').forEach(btn=>{
+      if(btn.dataset.alSpark)return;btn.dataset.alSpark='1';
+      btn.addEventListener('pointerdown',e=>{
+        if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;
+        for(let i=0;i<3;i++){const s=document.createElement('i');s.className='al-spark';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.setProperty('--dx',(Math.random()*34-17)+'px');s.style.setProperty('--dy',(Math.random()*-34-8)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),700)}
+      },{passive:true});
+    });
+    if(!document.getElementById('al-keyhelp') && product){
+      const b=document.createElement('button');b.id='al-keyhelp';b.type='button';b.title=text('میانبرهای صفحه','Page shortcuts');b.setAttribute('aria-label',b.title);b.textContent='?';
+      Object.assign(b.style,{position:'fixed',left:'18px',top:'94px',zIndex:'99996',width:'34px',height:'34px',border:'1px solid #ffffff12',borderRadius:'10px',background:'#090d12dd',color:'#89959b',cursor:'pointer',fontWeight:'900',fontSize:'14px',backdropFilter:'blur(16px)'});
+      b.onclick=()=>{const d=text('میانبرهای مفید: Home = بالای صفحه · End = پایین صفحه · / = اولین ورودی','Useful shortcuts: Home = top · End = bottom · / = focus the first input');toast?.(d)};
+      document.body.appendChild(b);
     }
   }
   function productPlatform(){
@@ -156,6 +198,6 @@
   }
   function activateMac(){}
   function adminFeed(){if(document.querySelector('script[data-al-admin]'))return;const s=document.createElement('script');s.src=new URL('../assets/adland-admin.js',document.currentScript?.src||location.href).href;s.defer=true;s.dataset.alAdmin='1';document.head.appendChild(s)}
-  function sync(){setLocalized();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
+  function sync(){setLocalized();experience();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
   document.addEventListener('adland:language',sync);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{support();sync()});else{support();sync()}
 })();
