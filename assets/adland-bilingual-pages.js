@@ -79,7 +79,7 @@
   document.querySelectorAll('input,textarea').forEach(el=>{const p=el.getAttribute('placeholder');if(p&&map[p])ph.push([el,p])});
   function addLangButton(){
     let b=document.getElementById('al-language');
-    if(!b){const nav=document.querySelector('.nav');if(!nav)return;b=document.createElement('button');b.id='al-language';b.type='button';nav.insertBefore(b,nav.firstChild);
+    if(!b){const existing=document.getElementById('lang')||document.getElementById('langBtn');if(existing)return existing;const nav=document.querySelector('.nav');if(!nav)return;b=document.createElement('button');b.id='al-language';b.type='button';nav.insertBefore(b,nav.firstChild);
       const s=document.createElement('style');s.textContent='#al-language{height:33px;padding:0 10px;border:1px solid #ffffff12;border-radius:9px;background:transparent;color:#a8b0b5;font:800 11px/1 Manrope,Vazirmatn,sans-serif;cursor:pointer}#al-language:hover{border-color:#e6c96c44;color:#fff}';
       document.head.appendChild(s);
     }
@@ -92,7 +92,7 @@
     const b=addLangButton();if(b)b.textContent=lang==='fa'?'FA → EN':'EN → FA';
     if(persist)save(lang);
   }
-  let current=stored()||browser();
+  let current=stored()||'fa';
   set(current,false);
-  const b=addLangButton();if(b)b.onclick=()=>{current=root.lang==='fa'?'en':'fa';set(current,true)};
+  const b=addLangButton();if(b&&b.id==='al-language')b.onclick=()=>{current=root.lang==='fa'?'en':'fa';set(current,true)};document.addEventListener('adland:language',e=>{current=e.detail?.lang||current;set(current,false)});
 })();
