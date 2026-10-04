@@ -128,7 +128,9 @@
           const bottom=card.querySelector('.appBottom');
           if(bottom)bottom.parentElement.insertBefore(row,bottom); else card.appendChild(row);
         }
-        row.innerHTML='<span class="al-card-platform">Windows 10/11</span><a class="al-card-platform mac mac-download" href="'+macAsset(file)+'.dmg" target="_blank" rel="noopener noreferrer">⌘ macOS · '+esc(text('دانلود','Download'))+'</a>';
+        row.innerHTML='<span class="al-card-platform">Windows 10/11 · x64</span><a class="al-card-platform mac mac-download" href="'+macAsset(file)+'.dmg" target="_blank" rel="noopener noreferrer">⌘ macOS · '+esc(text('DMG','DMG'))+'</a>';
+        const version=card.querySelector('.version');
+        if(version&&/WINDOWS/i.test(version.textContent||'')) version.textContent='WINDOWS + macOS · UNIVERSAL';
       });
     }
     const anchor=document.querySelector('#apps .appsGrid')||grid;
