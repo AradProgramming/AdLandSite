@@ -13,6 +13,50 @@
   const lang=()=>((localStorage.getItem(KEY)||root.lang||'fa').toLowerCase().startsWith('en')?'en':'fa');
   const text=(fa,en)=>lang()==='fa'?fa:en;
   const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const SFX_KEY='adland-sfx';
+  const sfxState={ctx:null,busy:false};
+  const sfxEnabled=()=>localStorage.getItem(SFX_KEY)!=='off';
+  function sfxTone(kind='tap'){
+    if(!sfxEnabled()||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;
+    try{
+      const C=sfxState.ctx||(sfxState.ctx=new(window.AudioContext||window.webkitAudioContext)());
+      if(C.state==='suspended')C.resume();
+      const now=C.currentTime;
+      const sets={tap:[390,560,.055,.009,'sine'],nav:[480,700,.065,.007,'triangle'],open:[420,780,.12,.014,'sine'],close:[300,210,.09,.012,'sine'],success:[460,920,.18,.014,'triangle'],error:[210,120,.16,.012,'sawtooth'],toggle:[330,520,.07,.008,'square'],tick:[620,620,.035,.005,'sine']};
+      const q=sets[kind]||sets.tap;
+      const o=C.createOscillator(),g=C.createGain(),f=C.createBiquadFilter();
+      o.type=q[4];o.frequency.setValueAtTime(q[0],now);o.frequency.exponentialRampToValueAtTime(Math.max(70,q[1]),now+q[2]*.72);
+      f.type='lowpass';f.frequency.setValueAtTime(2600,now);
+      g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(q[3],now+.008);g.gain.exponentialRampToValueAtTime(.0001,now+q[2]);
+      o.connect(f).connect(g).connect(C.destination);o.start(now);o.stop(now+q[2]+.015);
+    }catch(e){}
+  }
+  function smartSfx(el){
+    if(!el)return 'tap';
+    if(el.dataset.sfx) return el.dataset.sfx;
+    const id=(el.id||'').toLowerCase(),txt=(el.textContent||'').toLowerCase(),cls=(el.className||'').toString().toLowerCase();
+    if(id.includes('sound')||id.includes('lang')||txt.includes('sfx'))return 'toggle';
+    if(/close|cancel|back|بستن|لغو|بازگشت/.test(id+' '+txt))return 'close';
+    if(/delete|remove|error|wrong|fail|حذف|خطا|اشتباه/.test(id+' '+txt))return 'error';
+    if(/save|success|done|copy|ذخیره|کپی|انجام/.test(id+' '+txt))return 'success';
+    if(/open|download|install|start|launch|view|شروع|باز|دانلود|نصب|ورود/.test(id+' '+txt))return 'open';
+    if(cls.includes('nav')||el.closest('.nav,.navlinks,.top,.navactions'))return 'nav';
+    return 'tap';
+  }
+  function wireSfx(){
+    const nodes=[...document.querySelectorAll('button,a,[role="button"],summary,input[type="button"],input[type="submit"]')];
+    nodes.forEach(el=>{
+      if(el.dataset.alSfxBound==='1'||el.dataset.sfxIgnore==='1'||el.closest('.arcadeSection,.arcadeGrid,.memoryBoard,#reflexStage,#meteorCanvas'))return;
+      el.dataset.alSfxBound='1';
+      el.addEventListener('pointerdown',()=>{if(window.tone)window.tone(smartSfx(el));else sfxTone(smartSfx(el))},{passive:true});
+    });
+  }
+  function observeSfx(){
+    wireSfx();
+    if(window.__alSfxObserver)return;
+    window.__alSfxObserver=new MutationObserver(()=>wireSfx());window.__alSfxObserver.observe(document.body,{subtree:true,childList:true});
+  }
+
   function style(){
     if(document.getElementById('al-ecosystem-style'))return;
     const s=document.createElement('style');s.id='al-ecosystem-style';s.textContent=`
@@ -91,6 +135,7 @@
   }
   function experience(){
     style();
+    observeSfx();
     if(!window.alToast){
       window.alToast=(msg)=>{
         let box=document.getElementById('al-toast');
