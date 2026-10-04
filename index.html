@@ -738,7 +738,8 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   qs('#leaderRefresh')?.addEventListener('click',()=>{load();tone('open')});
   load();
 })();
-\n/* ADLAND ARCADE ENGINE */
+
+/* ADLAND ARCADE ENGINE */
 (()=>{
   const bestKey={reflex:'adland-arcade-best-reflex',memory:'adland-arcade-best-memory',meteor:'adland-arcade-best-meteor'};
   const readBest=k=>Number(localStorage.getItem(bestKey[k])||0);
