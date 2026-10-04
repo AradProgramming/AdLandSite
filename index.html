@@ -127,6 +127,29 @@ body{font-size:14px}
 @media(prefers-reduced-motion:reduce){
   .reflexTarget,.memoryCell,.arcadeTicker .arcadeSignal i{animation:none!important}
 }
+
+/* AdLand Learning Catalog */
+.learningCatalog{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.learningCourse{padding:23px!important;display:flex;flex-direction:column;min-height:650px}
+.courseTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px}
+.courseIndex{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;border:1px solid #d9b55d35;background:#d9b55d08;color:var(--gold);font:900 11px Manrope,Vazirmatn,sans-serif}
+.courseLevel{padding:7px 9px;border-radius:999px;border:1px solid #ffffff10;background:#ffffff03;color:#7d8a91;font-size:9px;line-height:1.3}
+.courseKicker{color:var(--gold);font:900 8px/1.4 Manrope,Vazirmatn,sans-serif;letter-spacing:.13em}
+.learningCourse h3{font-size:28px!important;margin:8px 0 8px!important}
+.courseLead{min-height:102px;color:#7e898f;font-size:12px!important;line-height:1.9!important}
+.courseBlock{margin-top:15px;padding:13px;border:1px solid #ffffff0b;border-radius:14px;background:#ffffff03}
+.courseBlock>b{display:block;color:#ded8ca;font-size:11px;margin-bottom:8px}
+.courseBlock ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.courseBlock li{position:relative;padding-inline-start:17px;color:#87939a;font-size:10px;line-height:1.7}
+.courseBlock li:before{content:"";position:absolute;inset-inline-start:0;top:.63em;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 9px #d9b55d66}
+.courseBlock p{margin:0;color:#7d898f;font-size:10px;line-height:1.8!important}
+.courseOutcome{display:flex;flex-direction:column;gap:5px;margin-top:auto;padding:13px 0 14px;border-top:1px solid #ffffff0a;border-bottom:1px solid #ffffff0a}
+.courseOutcome span{color:#68757d;font-size:8px;text-transform:uppercase;letter-spacing:.12em}
+.courseOutcome strong{color:#e2ddd0;font-size:10px;line-height:1.6}
+.learningCourse .contactRow{margin-top:14px}
+.learningCourse .btn{width:100%}
+@media(max-width:1050px){.learningCatalog{grid-template-columns:repeat(2,minmax(0,1fr))}.learningCourse{min-height:620px}}
+@media(max-width:650px){.learningCatalog{grid-template-columns:1fr}.learningCourse{min-height:0}.courseLead{min-height:0}.learningCourse h3{font-size:25px!important}.courseBlock li,.courseBlock p{font-size:11px}.courseOutcome strong{font-size:11px}}
 </style>
 <style id="adland-type">
 html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
@@ -307,10 +330,112 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 <article class="project reveal"><img src="assets/icons/projects/AdLand_Pulse_icon.svg"><div class="projectCopy"><small>WINDOWS + macOS</small><h3>Pulse</h3><p>Live telemetry · signals.</p></div></article>
 </div></div></section>
 
-<section class="section" id="learning"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>04 / LEARNING</small><h2 data-fa="ساختن را یاد بگیر." data-en="Learn to build.">ساختن را یاد بگیر.</h2><p data-fa="مسیرهای آموزشی برای شروع برنامه‌نویسی و ساخت پروژه." data-en="Learning paths for programming fundamentals and building projects.">مسیرهای آموزشی برای شروع برنامه‌نویسی و ساخت پروژه.</p></div></div><div class="learnGrid">
-<article class="course glass reveal"><small style="color:var(--gold);font:800 7px Inter">PYTHON / FOUNDATION → PROJECT</small><h3>Python</h3><p data-fa="از منطق برنامه‌نویسی تا ساخت پروژه‌های واقعی." data-en="From programming logic to real projects.">از منطق برنامه‌نویسی تا ساخت پروژه‌های واقعی.</p><ul><li>مبانی برنامه‌نویسی</li><li>داده‌ها و کتابخانه‌ها</li><li>پروژه‌ی شخصی</li></ul><div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank">Telegram ↗</a></div></article>
-<article class="course glass reveal"><small style="color:var(--gold);font:800 7px Inter">SCRATCH / LOGIC → CREATION</small><h3>Scratch</h3><p data-fa="شروع برنامه‌نویسی با منطق بصری، بازی و انیمیشن." data-en="A visual entry into programming logic, games and animation.">شروع برنامه‌نویسی با منطق بصری، بازی و انیمیشن.</p><ul><li>منطق برنامه</li><li>بازی و انیمیشن</li><li>پروژه‌ی شخصی</li></ul><div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank">Telegram ↗</a></div></article>
-</div></div></section>
+<section class="section" id="learning">
+<div class="container">
+  <div class="sectionHeader reveal">
+    <div class="sectionHeadMain">
+      <small>04 / LEARNING LAB</small>
+      <h2 data-fa="مسیرت را انتخاب کن؛ بساز، تمرین کن، منتشر کن." data-en="Choose a path. Build, practice, publish.">مسیرت را انتخاب کن؛ بساز، تمرین کن، منتشر کن.</h2>
+      <p data-fa="دوره‌های آموزشی AdLand از مفاهیم پایه شروع می‌شوند و قدم‌به‌قدم به ساخت پروژه واقعی می‌رسند. هر مسیر، تمرین، پروژه و مهارت قابل‌استفاده در دنیای واقعی دارد." data-en="AdLand learning paths start from the fundamentals and move step by step toward real projects. Every path includes practice, projects and practical, transferable skills.">دوره‌های آموزشی AdLand از مفاهیم پایه شروع می‌شوند و قدم‌به‌قدم به ساخت پروژه واقعی می‌رسند. هر مسیر، تمرین، پروژه و مهارت قابل‌استفاده در دنیای واقعی دارد.</p>
+    </div>
+    <div class="sectionAside" data-fa="برای دریافت زمان‌بندی، شرایط کلاس و جزئیات ثبت‌نام از طریق Telegram با ما در ارتباط باش." data-en="Contact us on Telegram for schedules, class details and registration information.">برای دریافت زمان‌بندی، شرایط کلاس و جزئیات ثبت‌نام از طریق Telegram با ما در ارتباط باش.</div>
+  </div>
+
+  <div class="learnGrid learningCatalog">
+
+    <article class="course glass reveal learningCourse" data-course="python">
+      <div class="courseTop"><span class="courseIndex">01</span><span class="courseLevel" data-fa="پایه تا پروژه" data-en="Foundation → Project">پایه تا پروژه</span></div>
+      <small class="courseKicker">PYTHON / PROGRAMMING</small>
+      <h3>Python</h3>
+      <p class="courseLead" data-fa="مسیر کامل یادگیری پایتون برای ساخت برنامه، ابزار و پروژه‌های واقعی؛ از اولین خط کد تا طراحی یک پروژه شخصی." data-en="A complete Python path for building programs, utilities and real projects — from the first line of code to a personal application.">مسیر کامل یادگیری پایتون برای ساخت برنامه، ابزار و پروژه‌های واقعی؛ از اولین خط کد تا طراحی یک پروژه شخصی.</p>
+      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
+        <ul>
+          <li data-fa="متغیرها، انواع داده، شرط‌ها و حلقه‌ها" data-en="Variables, data types, conditions and loops">متغیرها، انواع داده، شرط‌ها و حلقه‌ها</li>
+          <li data-fa="توابع، ماژول‌ها، مدیریت خطا و کار با فایل" data-en="Functions, modules, error handling and files">توابع، ماژول‌ها، مدیریت خطا و کار با فایل</li>
+          <li data-fa="لیست، دیکشنری، مجموعه و کار با داده‌ها" data-en="Lists, dictionaries, sets and data handling">لیست، دیکشنری، مجموعه و کار با داده‌ها</li>
+          <li data-fa="طراحی پروژه و نوشتن کد مرتب و قابل‌نگهداری" data-en="Project structure and maintainable code">طراحی پروژه و نوشتن کد مرتب و قابل‌نگهداری</li>
+        </ul>
+      </div>
+      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز." data-en="An advanced calculator, task manager, contact book, text game, file utility and a personal project based on the student's idea.">ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز.</p></div>
+      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت پروژه‌های مستقل پایتونی" data-en="Ability to build independent Python projects">توانایی ساخت پروژه‌های مستقل پایتونی</strong></div>
+      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+    </article>
+
+    <article class="course glass reveal learningCourse" data-course="scratch">
+      <div class="courseTop"><span class="courseIndex">02</span><span class="courseLevel" data-fa="شروع برنامه‌نویسی" data-en="Programming starter">شروع برنامه‌نویسی</span></div>
+      <small class="courseKicker">SCRATCH / LOGIC & CREATIVITY</small>
+      <h3>Scratch</h3>
+      <p class="courseLead" data-fa="یک شروع تصویری و جذاب برای یادگیری منطق برنامه‌نویسی، ساخت بازی و انیمیشن؛ بدون درگیر شدن با پیچیدگی سینتکس." data-en="A visual, engaging start to programming logic, game development and animation without the complexity of syntax.">یک شروع تصویری و جذاب برای یادگیری منطق برنامه‌نویسی، ساخت بازی و انیمیشن؛ بدون درگیر شدن با پیچیدگی سینتکس.</p>
+      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
+        <ul>
+          <li data-fa="رویدادها، متغیرها، شرط و حلقه" data-en="Events, variables, conditions and loops">رویدادها، متغیرها، شرط و حلقه</li>
+          <li data-fa="حرکت، برخورد، امتیاز، جان و مرحله‌بندی" data-en="Movement, collisions, score, lives and levels">حرکت، برخورد، امتیاز، جان و مرحله‌بندی</li>
+          <li data-fa="صدا، انیمیشن، داستان‌گویی و طراحی صحنه" data-en="Sound, animation, storytelling and scene design">صدا، انیمیشن، داستان‌گویی و طراحی صحنه</li>
+          <li data-fa="حل مسئله و تبدیل ایده به بازی قابل‌اجرا" data-en="Problem solving and turning ideas into playable projects">حل مسئله و تبدیل ایده به بازی قابل‌اجرا</li>
+        </ul>
+      </div>
+      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز." data-en="Score-based games, racing challenges, interactive stories, short animations and a final project designed by the student.">بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز.</p></div>
+      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="درک واقعی منطق برنامه‌نویسی و بازی‌سازی" data-en="A real understanding of programming logic and game creation">درک واقعی منطق برنامه‌نویسی و بازی‌سازی</strong></div>
+      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+    </article>
+
+    <article class="course glass reveal learningCourse" data-course="web">
+      <div class="courseTop"><span class="courseIndex">03</span><span class="courseLevel" data-fa="وب از صفر" data-en="Web from zero">وب از صفر</span></div>
+      <small class="courseKicker">HTML + CSS / WEB DESIGN</small>
+      <h3>HTML و CSS</h3>
+      <p class="courseLead" data-fa="ساخت صفحات وب زیبا و واکنش‌گرا از صفر؛ از ساختار HTML تا طراحی حرفه‌ای رابط، بدون نیاز به فریم‌ورک در شروع مسیر." data-en="Build beautiful, responsive web pages from scratch — from HTML structure to polished interface design, without needing a framework at the beginning.">ساخت صفحات وب زیبا و واکنش‌گرا از صفر؛ از ساختار HTML تا طراحی حرفه‌ای رابط، بدون نیاز به فریم‌ورک در شروع مسیر.</p>
+      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
+        <ul>
+          <li data-fa="ساختار معنایی HTML، لینک، تصویر، فرم و جدول" data-en="Semantic HTML, links, images, forms and tables">ساختار معنایی HTML، لینک، تصویر، فرم و جدول</li>
+          <li data-fa="رنگ، فونت، فاصله، Border، Shadow و طراحی کارت‌ها" data-en="Color, typography, spacing, borders, shadows and card design">رنگ، فونت، فاصله، Border، Shadow و طراحی کارت‌ها</li>
+          <li data-fa="Flexbox، Grid و ساخت Layoutهای حرفه‌ای" data-en="Flexbox, Grid and professional responsive layouts">Flexbox، Grid و ساخت Layoutهای حرفه‌ای</li>
+          <li data-fa="Responsive Design، تعامل‌های hover و صفحه‌آرایی تمیز" data-en="Responsive design, hover interactions and polished page layouts">Responsive Design، تعامل‌های hover و صفحه‌آرایی تمیز</li>
+        </ul>
+      </div>
+      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود." data-en="A personal website, landing page, product page, portfolio, game page and a multi-section responsive website that works on mobile and desktop.">سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود.</p></div>
+      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا" data-en="Ability to build polished responsive web pages">توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا</strong></div>
+      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+    </article>
+
+    <article class="course glass reveal learningCourse" data-course="appinventor">
+      <div class="courseTop"><span class="courseIndex">04</span><span class="courseLevel" data-fa="اپلیکیشن‌سازی بصری" data-en="Visual app building">اپلیکیشن‌سازی بصری</span></div>
+      <small class="courseKicker">MIT APP INVENTOR / MOBILE</small>
+      <h3>App Inventor</h3>
+      <p class="courseLead" data-fa="یادگیری ساخت اپلیکیشن موبایل با محیط بلوکی؛ تمرکز روی منطق، رابط کاربری، داده‌ها و تبدیل ایده به یک اپ قابل‌استفاده." data-en="Learn mobile app development with a block-based environment, focusing on logic, UI, data and turning ideas into usable apps.">یادگیری ساخت اپلیکیشن موبایل با محیط بلوکی؛ تمرکز روی منطق، رابط کاربری، داده‌ها و تبدیل ایده به یک اپ قابل‌استفاده.</p>
+      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
+        <ul>
+          <li data-fa="طراحی صفحه، کامپوننت‌ها و اصول رابط کاربری" data-en="Screen design, components and UI fundamentals">طراحی صفحه، کامپوننت‌ها و اصول رابط کاربری</li>
+          <li data-fa="رویدادها، متغیرها، شرط‌ها، لیست‌ها و توابع بلوکی" data-en="Events, variables, conditions, lists and block-based procedures">رویدادها، متغیرها، شرط‌ها، لیست‌ها و توابع بلوکی</li>
+          <li data-fa="دریافت ورودی، ذخیره‌سازی و کار با داده‌ها" data-en="Input handling, storage and working with data">دریافت ورودی، ذخیره‌سازی و کار با داده‌ها</li>
+          <li data-fa="ساخت APK، تست روی موبایل و آماده‌سازی نسخه نهایی" data-en="APK building, mobile testing and final release preparation">ساخت APK، تست روی موبایل و آماده‌سازی نسخه نهایی</li>
+        </ul>
+      </div>
+      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز." data-en="A calculator, notes app, quiz, to-do app, information app and a useful mini app with a student-designed interface.">ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز.</p></div>
+      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت یک اپ موبایل واقعی از ایده تا خروجی" data-en="Build a real mobile app from idea to export">ساخت یک اپ موبایل واقعی از ایده تا خروجی</strong></div>
+      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+    </article>
+
+    <article class="course glass reveal learningCourse" data-course="tkinter">
+      <div class="courseTop"><span class="courseIndex">05</span><span class="courseLevel" data-fa="رابط گرافیکی با Python" data-en="Python GUI">رابط گرافیکی با Python</span></div>
+      <small class="courseKicker">TKINTER / PYTHON GUI</small>
+      <h3>Tkinter</h3>
+      <p class="courseLead" data-fa="ساخت نرم‌افزارهای دسکتاپ با Python و Tkinter؛ از پنجره ساده تا برنامه‌های چندبخشی با فرم، منو، جدول و رویدادهای تعاملی." data-en="Build desktop software with Python and Tkinter — from a simple window to multi-section apps with forms, menus, tables and interactive events.">ساخت نرم‌افزارهای دسکتاپ با Python و Tkinter؛ از پنجره ساده تا برنامه‌های چندبخشی با فرم، منو، جدول و رویدادهای تعاملی.</p>
+      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
+        <ul>
+          <li data-fa="Window، Frame، Label، Button، Entry و عناصر اصلی" data-en="Window, Frame, Label, Button, Entry and core widgets">Window، Frame، Label، Button، Entry و عناصر اصلی</li>
+          <li data-fa="چیدمان با Pack، Grid و Place" data-en="Layout with Pack, Grid and Place">چیدمان با Pack، Grid و Place</li>
+          <li data-fa="رویدادها، فرم‌ها، منو، پیام‌ها و کنترل ورودی" data-en="Events, forms, menus, dialogs and input control">رویدادها، فرم‌ها، منو، پیام‌ها و کنترل ورودی</li>
+          <li data-fa="اتصال رابط گرافیکی به منطق Python و داده‌های پروژه" data-en="Connecting the GUI to Python logic and project data">اتصال رابط گرافیکی به منطق Python و داده‌های پروژه</li>
+        </ul>
+      </div>
+      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل." data-en="A contact manager, expense tracker, unit converter, text editor, file utility and a practical desktop app with a complete interface.">دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل.</p></div>
+      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت برنامه دسکتاپ تعاملی با Python" data-en="Build interactive desktop apps with Python">ساخت برنامه دسکتاپ تعاملی با Python</strong></div>
+      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+    </article>
+
+  </div>
+</div>
+</section>
 
 <section class="section" id="team"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>05 / TEAM</small><h2 data-fa="آدم‌های پشت استودیو." data-en="The people behind the studio.">آدم‌های پشت استودیو.</h2></div></div><div class="teamGrid">
 <article class="teamCard glass reveal"><div class="avatar">AK</div><h3>سید آراد خاندل</h3><p>Founder · Python · AI · Product</p><a class="btn" href="https://t.me/Arad_unk" target="_blank">CONTACT ↗</a></article>
