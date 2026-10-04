@@ -1,0 +1,78 @@
+name: AdLand macOS Editions
+on:
+  push:
+    branches: [main]
+    paths:
+      - "macos/**"
+      - "assets/**"
+      - "data/**"
+      - "index.html"
+      - "ai-tools/**"
+      - "atlas/**"
+      - "canvas/**"
+      - "chrono/**"
+      - "echo/**"
+      - "forge/**"
+      - "frame/**"
+      - "nexus/**"
+      - "orbit/**"
+      - "prism/**"
+      - "pulse/**"
+      - "relay/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: [ai-tools, nexus, canvas, pulse, frame, atlas, forge, prism, relay, echo, chrono, orbit]
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare website bundle
+        shell: bash
+        run: |
+          rm -rf macos/site
+          mkdir -p macos/site
+          rsync -a --exclude ".git" --exclude "macos/site" --exclude "macos/dist" --exclude "macos/node_modules" --exclude "macos/package.json" --exclude "macos/main.cjs" --exclude "macos/electron-builder.config.cjs" ./ macos/site/
+      - name: Install packaging dependencies
+        working-directory: macos
+        run: npm install
+      - name: Build universal macOS app
+        working-directory: macos
+        env:
+          ADLAND_APP_SLUG: ${{ matrix.slug }}
+        run: npx electron-builder --config electron-builder.config.cjs --mac --universal
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: adland-macos-${{ matrix.slug }}
+          path: macos/dist/*
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download all builds
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="mac-v1.0.0"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "AdLand Studio macOS Editions v1.0.0" --notes "Universal macOS editions for the AdLand Studio ecosystem. Builds target both Apple Silicon and Intel Macs. These direct-download builds are currently unsigned/not notarized until an Apple Developer ID certificate is configured."
+          find release-assets -type f \( -name "*.dmg" -o -name "*.zip" \) -print0 | xargs -0 -r -n20 gh release upload "$TAG" --clobber
