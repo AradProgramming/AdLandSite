@@ -4,7 +4,7 @@
   const TG='https://t.me/Arad_unk';
   const BALE='https://ble.ir/AdLandStudio';
   const products={
-    'ai-tools':{name:'AdLand AI Tools',fa:'ابزارهای هوش مصنوعی AdLand',kind:'web'},
+    'ai-tools':{name:'AdLand AI Tools',fa:'ابزارهای هوش مصنوعی AdLand',kind:'web',file:'AdLand-AI-Tools'},
     nexus:{name:'Nexus',fa:'Nexus',version:'1.4.4',file:'AdLand-Nexus'},canvas:{name:'Canvas',fa:'Canvas',version:'1.1.1',file:'AdLand-Canvas'},pulse:{name:'Pulse',fa:'Pulse',version:'1.0.3',file:'AdLand-Pulse'},frame:{name:'Frame',fa:'Frame',version:'1.1.3',file:'AdLand-Frame'},atlas:{name:'Atlas',fa:'Atlas',version:'1.0.1',file:'AdLand-Atlas'},forge:{name:'Forge',fa:'Forge',version:'1.0.1',file:'AdLand-Forge'},prism:{name:'Prism',fa:'Prism',version:'1.0.1',file:'AdLand-Prism'},relay:{name:'Relay',fa:'Relay',version:'1.0.0',file:'AdLand-Relay'},echo:{name:'Echo',fa:'Echo',version:'1.0.0',file:'AdLand-Echo'},chrono:{name:'Chrono',fa:'Chrono',version:'1.0.0',file:'AdLand-Chrono'},orbit:{name:'Orbit',fa:'Orbit',version:'1.0.2',file:'AdLand-Orbit'}
   };
   const path=location.pathname.split('/').filter(Boolean);
@@ -36,7 +36,8 @@
       const actions=document.querySelector('.hero .actions,.hero .heroActions');
       const target=meta||actions;
       if(target&&!target.querySelector('.al-platform')){const s=document.createElement('span');s.className='pill al-platform';s.innerHTML='⌘ macOS / Web';target.appendChild(s)}
-      return;
+      const download=actions||document.querySelector('.actions');
+      if(download&&!download.querySelector('.al-mac-action')){const b=document.createElement('a');b.className='al-mac-action disabled';b.setAttribute('aria-disabled','true');b.href='#';b.textContent=text('macOS · در حال آماده‌شدن','macOS · Preparing');download.appendChild(b)}
     }
     let anchor=document.querySelector('.hero-meta,.heroMeta');
     if(!anchor){const actions=document.querySelector('.hero .actions,.hero .heroActions');if(actions){anchor=document.createElement('div');anchor.className='al-platform-anchor';actions.parentElement.appendChild(anchor)}}
