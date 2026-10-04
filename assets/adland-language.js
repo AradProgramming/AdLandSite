@@ -19,11 +19,7 @@
     if(btn) btn.textContent=lang==='fa'?'FA → EN':'EN → FA';
   }
   function apply(lang,persist){
-    if(!hasBilingual()){
-      const current=(root.lang||'en').toLowerCase().startsWith('fa')?'fa':'en';
-      setAttrs(current);
-      return;
-    }
+    if(!hasBilingual()) return;
     faNodes().forEach(el=>{
       const value=lang==='fa'?el.dataset.fa:el.dataset.en;
       if(value!=null) el.innerHTML=value;
@@ -35,8 +31,13 @@
     if(persist) save(lang);
     document.dispatchEvent(new CustomEvent('adland:language',{detail:{lang}}));
   }
+  if(!hasBilingual()){
+    root.classList.toggle('lang-fa',(root.lang||'en').toLowerCase().startsWith('fa'));
+    root.classList.toggle('lang-en',!root.classList.contains('lang-fa'));
+    return;
+  }
   const initial=stored()||browserLang();
-  apply(hasBilingual()?initial:((root.lang||'en').startsWith('fa')?'fa':'en'),false);
+  apply(initial,false);
   const btn=langButton();
   if(btn) btn.onclick=()=>apply(root.lang==='fa'?'en':'fa',true);
 })();
