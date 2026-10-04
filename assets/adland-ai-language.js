@@ -56,7 +56,7 @@ while(walker.nextNode()){nodes.push(walker.currentNode);originals.set(walker.cur
 const ph=[];document.querySelectorAll('input,textarea').forEach(el=>{const p=el.getAttribute('placeholder');if(p&&pairs[p])ph.push([el,p])});
 let current=stored()||browser();
 function addButton(){
- let b=document.getElementById('al-ai-lang');
+ let b=document.getElementById('lang')||document.getElementById('al-ai-lang');
  if(!b){const actions=document.querySelector('.actions');if(!actions)return;b=document.createElement('button');b.id='al-ai-lang';b.className='iconBtn';b.type='button';actions.insertBefore(b,actions.firstChild)}
  return b;
 }
