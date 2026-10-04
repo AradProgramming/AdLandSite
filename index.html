@@ -275,7 +275,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 <div class="heroActions"><a class="btn primary" href="#apps" data-fa="ورود به دنیای اپ‌ها" data-en="ENTER THE APP UNIVERSE">ورود به دنیای اپ‌ها ↗</a><button class="btn" id="heroCmd" data-fa="باز کردن Command Center" data-en="OPEN COMMAND CENTER">باز کردن Command Center</button></div>
 <div class="heroMeta"><span class="pill"><b>12</b> PRODUCTS</span><span class="pill">11 DESKTOP · 1 WEB</span><span class="pill">WINDOWS + macOS</span><span class="pill">FA / EN</span></div>
 </div>
-<div class="heroCore reveal"><div class="coreGlow"></div><div class="core"><span class="ringA"></span><span class="ringB"></span><span class="ringC"></span><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><span class="orbitLabel o1">CREATIVE CORE</span><span class="orbitLabel o2">SYSTEM ONLINE</span><span class="orbitLabel o3">11 PRODUCTS</span><span class="orbitLabel o4">ADLAND / 2026</span></div></div>
+<div class="heroCore reveal"><div class="coreGlow"></div><div class="core"><span class="ringA"></span><span class="ringB"></span><span class="ringC"></span><img src="assets/logo/ChatGPT_Image_Jul_26,_2026,_06_02_33_PM.png"><span class="orbitLabel o1">CREATIVE CORE</span><span class="orbitLabel o2">SYSTEM ONLINE</span><span class="orbitLabel o3">13 PRODUCTS</span><span class="orbitLabel o4">ADLAND / 2026</span></div></div>
 </div></div>
 <div class="scrollHint"><span>SCROLL TO EXPLORE</span><i></i></div>
 
@@ -640,7 +640,7 @@ function rotateArcadeVibe(){
 }
 rotateArcadeVibe();setInterval(rotateArcadeVibe,6500);
 
-(()=>{const filters=[...qsa('.productFilter')],apps=[...qsa('.appsGrid .app')];const map={focus:['nexus'],creative:['canvas','frame','prism','echo'],developer:['forge'],system:['pulse','atlas','orbit','chrono'],utility:['relay']};const slug=x=>{const h=x.querySelector('a.appIcon')?.getAttribute('href')||'';return h.split('/').filter(Boolean).pop()?.toLowerCase()||''};const applyFilter=f=>{apps.forEach(card=>{const key=slug(card);const visible=f==='all'||(map[f]||[]).includes(key);card.setAttribute('data-hidden-filter',visible?'0':'1');});filters.forEach(b=>b.classList.toggle('active',b.dataset.filter===f));};filters.forEach(b=>b.addEventListener('click',()=>{applyFilter(b.dataset.filter);tone?.('tap')}));applyFilter('all')})();
+(()=>{const filters=[...qsa('.productFilter')],apps=[...qsa('.appsGrid .app')];const map={focus:['nexus'],creative:['canvas','frame','prism','echo','anidiary'],developer:['forge'],system:['pulse','atlas','orbit','chrono'],utility:['relay']};const slug=x=>{const h=x.querySelector('a.appIcon')?.getAttribute('href')||'';return h.split('/').filter(Boolean).pop()?.toLowerCase()||''};const applyFilter=f=>{apps.forEach(card=>{const key=slug(card);const visible=f==='all'||(map[f]||[]).includes(key);card.setAttribute('data-hidden-filter',visible?'0':'1');});filters.forEach(b=>b.classList.toggle('active',b.dataset.filter===f));};filters.forEach(b=>b.addEventListener('click',()=>{applyFilter(b.dataset.filter);tone?.('tap')}));applyFilter('all')})();
 
 const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.createElement('i');s.style.height=(18+Math.random()*70)+'%';bars.appendChild(s)}setInterval(()=>{qsa('#signalBars i').forEach(x=>x.style.height=(18+Math.random()*78)+'%');qs('#energy').textContent=String(82+Math.floor(Math.random()*17))},1250)}
 
