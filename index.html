@@ -172,7 +172,7 @@ body{font-size:14px}
 .identityActions .btn{flex:1;min-width:145px}
 .identityNote{margin-top:11px;color:#5f6b72;font-size:8px}
 @media(max-width:650px){.arcadePlayer{min-width:0;flex:1}.arcadeTicker{align-items:stretch}.arcadeTicker .arcadePlayer{order:-1;width:100%}.arcadeIdentity{padding:12px}}
-.learningCourse{position:relative;overflow:hidden}.learningCourseIcon{position:absolute;inset-inline-end:18px;top:18px;width:66px;height:66px;border-radius:18px;border:1px solid #ffffff10;box-shadow:0 14px 42px #0007;opacity:.94}.learningCourse .courseTop{padding-inline-end:78px}</style>
+.learningCourse{position:relative;overflow:hidden}.learningCourseIcon{position:absolute;inset-inline-end:18px;top:18px;width:66px;height:66px;border-radius:18px;border:1px solid #ffffff10;box-shadow:0 14px 42px #0007;opacity:.94}.learningCourse .courseTop{padding-inline-end:78px}.arcadePlayer em{display:block;margin-top:3px;color:#4f5c63;font:700 7px/1 Manrope,sans-serif;letter-spacing:.08em;font-style:normal}.arcadePlayer .playerEdit{min-width:70px}</style>
 <style id="adland-type">
 html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 body{font-family:Sora,Vazirmatn,sans-serif!important}
@@ -263,8 +263,8 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 
   <div class="arcadeTicker reveal">
     <span class="arcadeSignal"><i></i><b>ARCADE ONLINE</b></span>
-    <div class="arcadePlayer"><span class="playerIcon">◎</span><div><small data-fa="بازیکن فعلی" data-en="Current player">بازیکن فعلی</small><strong id="arcadePlayerName">Guest</strong></div><button class="playerEdit" id="arcadePlayerEdit" type="button" data-fa="ثبت نام" data-en="Set name">ثبت نام</button></div>
-    <p data-fa="نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند." data-en="Set your name so records show who owns them. Scores are stored in this browser.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
+    <div class="arcadePlayer"><span class="playerIcon">◎</span><div><small id="arcadePlayerMode" data-fa="نام ثبت نشده" data-en="Name not set">نام ثبت نشده</small><strong id="arcadePlayerName">Guest</strong><em id="arcadeDeviceId"></em></div><button class="playerEdit" id="arcadePlayerEdit" type="button" data-fa="تغییر نام" data-en="Change name">تغییر نام</button></div>
+    <p data-fa="نامت را یک‌بار ثبت کن تا این دستگاه با همان Player ID شناخته شود و رکوردهایش با نام تو نمایش داده شوند." data-en="Set your name once so this device keeps the same Player ID and your records keep your chosen name.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
     <div class="gameStatRow">
       <div class="gameStat"><small>BEST REFLEX</small><b id="arcadeBestReflex">—</b></div>
       <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
@@ -281,7 +281,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       <label for="arcadePlayerInput" data-fa="نام نمایشی" data-en="Display name">نام نمایشی</label>
       <input id="arcadePlayerInput" maxlength="18" autocomplete="nickname" data-fa-placeholder="کیان" data-en-placeholder="Ethan" placeholder="کیان" />
       <div class="identityActions"><button class="btn primary" id="arcadeIdentitySave" type="button" data-fa="ذخیره نام" data-en="Save name">ذخیره نام</button><button class="btn" id="arcadeIdentityGuest" type="button" data-fa="ادامه به‌عنوان مهمان" data-en="Continue as guest">ادامه به‌عنوان مهمان</button></div>
-      <div class="identityNote" data-fa="نام مناسب و غیرحساس انتخاب کن." data-en="Choose a simple, non-sensitive display name.">نام مناسب و غیرحساس انتخاب کن.</div>
+      <div class="identityNote" data-fa="این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد." data-en="This name is saved to this device profile and remains after refresh or returning to the site.">این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد.</div>
     </div>
   </div>
 
@@ -571,11 +571,23 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
 /* Player identity + record ownership */
 (()=>{
   const PLAYER_KEY='adland-arcade-player-name';
+  const DEVICE_KEY='adland-arcade-device-id';
+  const getOrCreateDeviceId=()=>{
+    let id=localStorage.getItem(DEVICE_KEY);
+    if(!id){
+      id='AL-'+crypto.randomUUID().replaceAll('-','').slice(0,12).toUpperCase();
+      localStorage.setItem(DEVICE_KEY,id);
+    }
+    return id;
+  };
   const defaultName=()=>localStorage.getItem(PLAYER_KEY)||'Guest';
   const playerName=()=>defaultName().trim().slice(0,18)||'Guest';
   const renderPlayer=()=>{
     const name=playerName();
+    const deviceId=getOrCreateDeviceId();
     qs('#arcadePlayerName')&&(qs('#arcadePlayerName').textContent=name);
+    qs('#arcadeDeviceId')&&(qs('#arcadeDeviceId').textContent=deviceId);
+    qs('#arcadePlayerMode')&&(qs('#arcadePlayerMode').textContent=name==='Guest'?text('نام ثبت نشده','Name not set'):text('پروفایل این دستگاه','This device profile'));
     const rb=Number(localStorage.getItem('adland-arcade-best-reflex')||0);
     const mb=Number(localStorage.getItem('adland-arcade-best-memory')||0);
     const xb=Number(localStorage.getItem('adland-arcade-best-meteor')||0);
