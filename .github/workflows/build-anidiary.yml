@@ -1,0 +1,77 @@
+name: AniDiary Desktop Releases
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "anidiary-app/**"
+      - "anidiary/**"
+      - "assets/icons/projects/AniDiary_icon.svg"
+      - ".github/workflows/build-anidiary.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: anidiary-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: anidiary-app/package-lock.json
+      - run: npm install
+      - run: npx electron-builder --win nsis portable
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AniDiary-Windows
+          path: |
+            anidiary-app/dist/*.exe
+            anidiary-app/dist/*.exe.blockmap
+          if-no-files-found: error
+
+  macos:
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: anidiary-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: anidiary-app/package-lock.json
+      - run: npm install
+      - run: npx electron-builder --mac universal dmg zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AniDiary-macOS
+          path: |
+            anidiary-app/dist/*.dmg
+            anidiary-app/dist/*.zip
+          if-no-files-found: error
+
+  release:
+    needs: [windows, macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="anidiary-v1.0.0"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "AniDiary v1.0.0" --notes "AniDiary 1.0.0 by AdLand Studio. Local-first anime journal for Windows x64 and universal macOS (Apple Silicon + Intel)."
+          find release-assets -type f -print0 | xargs -0 -r -n10 gh release upload "$TAG" --clobber
