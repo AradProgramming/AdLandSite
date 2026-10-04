@@ -36,7 +36,7 @@
     root.classList.toggle('lang-en',!root.classList.contains('lang-fa'));
     return;
   }
-  const initial=stored()||browserLang();
+  const initial=stored()||'fa';
   apply(initial,false);
   const btn=langButton();
   if(btn) btn.onclick=()=>apply(root.lang==='fa'?'en':'fa',true);
