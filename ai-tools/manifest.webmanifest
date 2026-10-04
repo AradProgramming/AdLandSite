@@ -1,0 +1,11 @@
+{
+  "name":"AdLand AI Tools",
+  "short_name":"AdLand Tools",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#040507",
+  "theme_color":"#050608",
+  "lang":"fa",
+  "dir":"rtl",
+  "description":"AdLand Studio's AI and developer utility lab."
+}
