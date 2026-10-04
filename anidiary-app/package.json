@@ -1,0 +1,44 @@
+{
+  "name":"anidiary",
+  "version":"1.0.0",
+  "description":"AniDiary — a polished local-first anime journal by AdLand Studio.",
+  "main":"main.cjs",
+  "author":"AdLand Studio",
+  "license":"MIT",
+  "private":true,
+  "scripts":{
+    "start":"electron .",
+    "dist:win":"electron-builder --win nsis portable",
+    "dist:mac":"electron-builder --mac universal dmg zip",
+    "build":"npm run dist:win"
+  },
+  "devDependencies":{
+    "electron":"^39.2.7",
+    "electron-builder":"^26.0.12"
+  },
+  "build":{
+    "appId":"com.adland.aniDiary",
+    "productName":"AniDiary",
+    "asar":true,
+    "directories":{"output":"dist"},
+    "files":["main.cjs","renderer/**","assets/**","package.json"],
+    "artifactName":"AniDiary-${version}-${os}-${arch}.${ext}",
+    "win":{
+      "target":[{"target":"nsis","arch":["x64"]},{"target":"portable","arch":["x64"]}],
+      "artifactName":"AniDiary-${version}-Windows-${arch}.${ext}"
+    },
+    "nsis":{
+      "oneClick":false,
+      "allowToChangeInstallationDirectory":true,
+      "perMachine":false,
+      "createDesktopShortcut":true,
+      "createStartMenuShortcut":true,
+      "shortcutName":"AniDiary"
+    },
+    "mac":{
+      "target":[{"target":"dmg","arch":["universal"]},{"target":"zip","arch":["universal"]}],
+      "category":"public.app-category.entertainment",
+      "artifactName":"AniDiary-${version}-macOS-universal.${ext}"
+    }
+  }
+}
