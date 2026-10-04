@@ -1,4 +1,4 @@
-name: AniDiary Desktop Releases
+name: AniDiary Desktop Releases # v1.0.0 release pipeline
 
 on:
   push:
