@@ -19,7 +19,7 @@
   const fallbackNodes=[];const fallbackOriginals=new WeakMap();const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p||['SCRIPT','STYLE','NOSCRIPT'].includes(p.tagName))return NodeFilter.FILTER_REJECT;const t=n.nodeValue.trim();if(fallback[t]&&!p.closest('[data-fa][data-en]')){fallbackNodes.push(n);fallbackOriginals.set(n,n.nodeValue);return NodeFilter.FILTER_ACCEPT}return NodeFilter.FILTER_SKIP;}});while(walker.nextNode());
   function stored(){try{return localStorage.getItem(key)}catch(e){return null}}
   function save(lang){try{localStorage.setItem(key,lang)}catch(e){}}
-  function langButton(){return document.getElementById('lang')||document.getElementById('langBtn')}
+  function langButton(){let b=document.getElementById('lang')||document.getElementById('langBtn')||document.getElementById('al-language');if(!b){const host=document.querySelector('.nav,.navactions,.actions');if(host){b=document.createElement('button');b.id='al-language';b.type='button';b.className='iconBtn miniBtn';host.appendChild(b)}}return b}
   function setAttrs(lang){
     root.lang=lang==='fa'?'fa':'en';
     root.dir=lang==='fa'?'rtl':'ltr';
@@ -42,11 +42,6 @@
     setAttrs(lang);
     if(persist) save(lang);
     document.dispatchEvent(new CustomEvent('adland:language',{detail:{lang}}));
-  }
-  if(!hasBilingual()){
-    root.classList.toggle('lang-fa',(root.lang||'en').toLowerCase().startsWith('fa'));
-    root.classList.toggle('lang-en',!root.classList.contains('lang-fa'));
-    return;
   }
   const initial=stored()||'fa';
   apply(initial,false);
