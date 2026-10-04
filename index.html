@@ -656,104 +656,152 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   };
 
   /* Reflex Core */
-  const reflex={running:false,round:0,times:[],armed:false,startTime:0,timer:null};
+  const reflex={running:false,round:0,times:[],armed:false,startTime:0,timer:null,streak:0,early:0};
+  const REFLEX_ROUNDS=7;
   const resetReflex=()=>{
-    clearTimeout(reflex.timer);reflex.running=false;reflex.round=0;reflex.times=[];reflex.armed=false;
-    els.reflexTarget.classList.remove('show');els.reflexRound.textContent='0 / 5';els.reflexLast.textContent='—';els.reflexAvg.textContent='—';
+    clearTimeout(reflex.timer);reflex.running=false;reflex.round=0;reflex.times=[];reflex.armed=false;reflex.streak=0;reflex.early=0;
+    els.reflexTarget.classList.remove('show');els.reflexRound.textContent='0 / '+REFLEX_ROUNDS;els.reflexLast.textContent='—';els.reflexAvg.textContent='—';
+    els.reflexTarget.style.transform='translate(-50%,-50%) scale(1)';
     els.reflexMessage.style.display='grid';
     els.reflexMessage.querySelector('strong').textContent=t('آماده‌ای؟','Ready?');
-    els.reflexMessage.querySelector('span').textContent=t('شروع را بزن و منتظر هدف بمان.','Press start, then wait for the target.');
+    els.reflexMessage.querySelector('span').textContent=t('شروع کن؛ هدف هر راند کوچک‌تر و زمان انتظار کوتاه‌تر می‌شود.','Start; the target gets smaller and the wait gets shorter each round.');
     els.reflexStart.textContent=t('شروع چالش','Start challenge');
   };
   const nextReflexRound=()=>{
-    if(reflex.round>=5){
+    if(reflex.round>=REFLEX_ROUNDS){
       const avg=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length);
       els.reflexAvg.textContent=avg+' ms';
       const previous=readBest('reflex');const best=(previous===0||avg<previous)?avg:previous;
       localStorage.setItem(bestKey.reflex,String(best));els.arcadeBestReflex.textContent=best+' ms';
       els.reflexMessage.style.display='grid';
-      els.reflexMessage.querySelector('strong').textContent=t('پایان چالش','Challenge complete');
-      els.reflexMessage.querySelector('span').textContent=t('میانگین شما '+avg+' میلی‌ثانیه بود. دوباره شروع کن و رکوردت را بهتر کن.','Your average was '+avg+' ms. Run it again and beat your record.');
+      els.reflexMessage.querySelector('strong').textContent=t('چالش کامل شد','Challenge complete');
+      els.reflexMessage.querySelector('span').textContent=t('میانگین '+avg+' میلی‌ثانیه · '+reflex.early+' شروع زودهنگام. دوباره تلاش کن و رکوردت را بشکن.','Average '+avg+' ms · '+reflex.early+' early clicks. Run again and beat your record.');
       reflex.running=false;reflexStartIdle();return;
     }
     reflex.armed=false;els.reflexTarget.classList.remove('show');
+    els.reflexTarget.style.transform='translate(-50%,-50%) scale('+Math.max(.62,1-reflex.round*.055).toFixed(2)+')';
     els.reflexMessage.style.display='grid';
-    els.reflexMessage.querySelector('strong').textContent=t('منتظر بمان…','Wait…');
-    els.reflexMessage.querySelector('span').textContent=t('هنوز روی هدف کلیک نکن.','Do not click the target yet.');
-    const delay=650+Math.random()*1800;
+    els.reflexMessage.querySelector('strong').textContent=t('راند '+(reflex.round+1)+' · آماده باش','Round '+(reflex.round+1)+' · Get ready');
+    els.reflexMessage.querySelector('span').textContent=t('روی هدف قبل از روشن شدن نزن.','Do not click before the target appears.');
+    const difficulty=Math.min(1,reflex.round/(REFLEX_ROUNDS-1));
+    const delay=(480+Math.random()*1200)*(1-difficulty*.28);
     reflex.timer=setTimeout(()=>{
       if(!reflex.running)return;
-      const r=els.reflexStage.getBoundingClientRect();
-      const pad=55;
-      els.reflexTarget.style.left=(pad+Math.random()*Math.max(40,r.width-pad*2))+'px';
-      els.reflexTarget.style.top=(pad+Math.random()*Math.max(40,r.height-pad*2))+'px';
+      const r=els.reflexStage.getBoundingClientRect(),pad=58;
+      const safeW=Math.max(50,r.width-pad*2),safeH=Math.max(50,r.height-pad*2);
+      els.reflexTarget.style.left=(pad+Math.random()*safeW)+'px';
+      els.reflexTarget.style.top=(pad+Math.random()*safeH)+'px';
       els.reflexMessage.style.display='none';
       els.reflexTarget.classList.add('show');
       reflex.startTime=performance.now();reflex.armed=true;
     },delay);
   };
   const startReflex=()=>{
-    reflex.running=true;reflex.round=0;reflex.times=[];els.reflexStart.textContent=t('شروع مجدد','Restart');
+    clearTimeout(reflex.timer);
+    reflex.running=true;reflex.round=0;reflex.times=[];reflex.streak=0;reflex.early=0;
+    els.reflexStart.textContent=t('شروع مجدد','Restart');
     nextReflexRound();
   };
-  const reflexStartIdle=()=>{els.reflexStart.textContent=t('شروع چالش','Start challenge');els.reflexRound.textContent='5 / 5';};
+  const reflexStartIdle=()=>{els.reflexStart.textContent=t('شروع چالش','Start challenge');els.reflexRound.textContent=REFLEX_ROUNDS+' / '+REFLEX_ROUNDS;};
   els.reflexStart?.addEventListener('click',()=>{tone('open');startReflex()});
-  els.reflexTarget?.addEventListener('click',()=>{
+  els.reflexTarget?.addEventListener('click',e=>{
+    e.stopPropagation();
     if(!reflex.running||!reflex.armed)return;
-    const ms=Math.max(1,Math.round(performance.now()-reflex.startTime));reflex.armed=false;reflex.times.push(ms);reflex.round++;
-    els.reflexRound.textContent=reflex.round+' / 5';els.reflexLast.textContent=ms+' ms';
-    if(reflex.times.length)els.reflexAvg.textContent=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length)+' ms';
-    tone('tap');nextReflexRound();
+    const ms=Math.max(1,Math.round(performance.now()-reflex.startTime));reflex.armed=false;reflex.times.push(ms);reflex.round++;reflex.streak++;
+    els.reflexRound.textContent=reflex.round+' / '+REFLEX_ROUNDS;els.reflexLast.textContent=ms+' ms';
+    els.reflexAvg.textContent=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length)+' ms';
+    tone('tap');
+    if(reflex.round<REFLEX_ROUNDS){
+      els.reflexMessage.style.display='grid';
+      els.reflexMessage.querySelector('strong').textContent=t(reflex.streak>=3?'سری عالی!':'خوب بود!','Nice streak!');
+      els.reflexMessage.querySelector('span').textContent=t(ms+' میلی‌ثانیه · راند بعدی سخت‌تر می‌شود.',''+ms+' ms · the next round gets harder.');
+    }
+    nextReflexRound();
+  });
+  els.reflexStage?.addEventListener('pointerdown',e=>{
+    if(!reflex.running||reflex.armed)return;
+    reflex.early++;
+    els.reflexMessage.style.display='grid';
+    els.reflexMessage.querySelector('strong').textContent=t('زود بود!','Too early!');
+    els.reflexMessage.querySelector('span').textContent=t('این کلیک ثبت شد؛ راند دوباره از نو آماده می‌شود.','That click was counted; this round resets.');
+    tone('close');
+    clearTimeout(reflex.timer);
+    reflex.armed=false;
+    setTimeout(()=>{if(reflex.running)nextReflexRound()},420);
   });
 
   /* Memory Pulse */
-  const memory={running:false,sequence:[],step:0,locked:false};
+  const memory={running:false,sequence:[],step:0,locked:false,lives:3,token:0};
   const cells=[...qsa('.memoryCell')];
-  const lightCell=(idx,duration=280)=>new Promise(resolve=>{const cell=cells[idx];cell.classList.add('lit');setTimeout(()=>{cell.classList.remove('lit');resolve()},duration)});
-  const runPattern=async()=>{
+  const lightCell=(idx,duration=280,token)=>new Promise(resolve=>{
+    const cell=cells[idx];if(!cell){resolve();return}
+    cell.classList.add('lit');
+    setTimeout(()=>{cell.classList.remove('lit');resolve()},duration);
+  });
+  const runPattern=async(token)=>{
+    if(token!==memory.token||!memory.running)return;
     memory.locked=true;els.memoryMessage.style.display='grid';
-    els.memoryMessage.querySelector('strong').textContent=t('دقت کن','Watch closely');
-    els.memoryMessage.querySelector('span').textContent=t('الگو را به خاطر بسپار…','Memorize the sequence…');
-    await new Promise(r=>setTimeout(r,250));
-    for(const idx of memory.sequence){await lightCell(idx,310);await new Promise(r=>setTimeout(r,90));}
+    const level=memory.sequence.length;
+    els.memoryMessage.querySelector('strong').textContent=t('دقت کن · سطح '+level,'Watch closely · Level '+level);
+    els.memoryMessage.querySelector('span').textContent=t('الگو را به خاطر بسپار · فرصت باقی‌مانده: '+memory.lives,'Memorize it · lives left: '+memory.lives);
+    await new Promise(r=>setTimeout(r,220));
+    const pulse= Math.max(135,300-(level-1)*19);
+    const gap= Math.max(42,92-(level-1)*6);
+    for(const idx of memory.sequence){
+      if(token!==memory.token||!memory.running)return;
+      await lightCell(idx,pulse,token);
+      await new Promise(r=>setTimeout(r,gap));
+    }
+    if(token!==memory.token||!memory.running)return;
     memory.step=0;memory.locked=false;els.memoryMessage.style.display='none';
   };
   const startMemory=()=>{
-    memory.running=true;memory.sequence=[];memory.step=0;
+    memory.token++;memory.running=true;memory.sequence=[];memory.step=0;memory.lives=3;
     els.memoryLevel.textContent='0';els.memoryBest.textContent=String(readBest('memory'));
     els.memoryStart.textContent=t('شروع مجدد','Restart');
     for(const c of cells)c.classList.remove('wrong','correct','lit');
     addMemoryStep();
   };
   const addMemoryStep=()=>{
+    if(!memory.running)return;
     memory.sequence.push(Math.floor(Math.random()*9));els.memoryLevel.textContent=String(memory.sequence.length);
-    tone('open');runPattern();
+    tone('open');runPattern(memory.token);
   };
   cells.forEach(cell=>cell.addEventListener('click',()=>{
     if(!memory.running||memory.locked)return;
     const idx=Number(cell.dataset.index);
     if(idx===memory.sequence[memory.step]){
-      cell.classList.add('correct');setTimeout(()=>cell.classList.remove('correct'),180);tone('tap');memory.step++;
+      cell.classList.add('correct');setTimeout(()=>cell.classList.remove('correct'),150);tone('tap');memory.step++;
       if(memory.step>=memory.sequence.length){
         const level=memory.sequence.length;const best=writeBest('memory',level);els.memoryBest.textContent=String(best);
         els.memoryMessage.style.display='grid';
-        els.memoryMessage.querySelector('strong').textContent=t('درست بود!','Correct!');
-        els.memoryMessage.querySelector('span').textContent=t('مرحله بعدی سخت‌تر است.','The next round gets harder.');
-        setTimeout(()=>{if(memory.running){els.memoryMessage.style.display='none';addMemoryStep()}},380);
+        els.memoryMessage.querySelector('strong').textContent=t('دقیق بود!','Perfect!');
+        els.memoryMessage.querySelector('span').textContent=t('مرحله بعدی سریع‌تر پخش می‌شود. جان: '+memory.lives,'The next level plays faster. Lives: '+memory.lives);
+        setTimeout(()=>{if(memory.running)addMemoryStep()},330);
       }
     }else{
-      cell.classList.add('wrong');setTimeout(()=>cell.classList.remove('wrong'),300);tone('close');
-      memory.running=false;memory.locked=false;els.memoryMessage.style.display='grid';
-      els.memoryMessage.querySelector('strong').textContent=t('الگو شکست خورد','Sequence broken');
-      els.memoryMessage.querySelector('span').textContent=t('تا سطح '+memory.sequence.length+' رسیدی. دوباره تلاش کن.','You reached level '+memory.sequence.length+'. Try again.');
-      els.memoryStart.textContent=t('تلاش دوباره','Try again');
+      cell.classList.add('wrong');setTimeout(()=>cell.classList.remove('wrong'),260);tone('close');
+      memory.lives--;
+      memory.locked=true;
+      if(memory.lives>0){
+        els.memoryMessage.style.display='grid';
+        els.memoryMessage.querySelector('strong').textContent=t('اشتباه!','Miss!');
+        els.memoryMessage.querySelector('span').textContent=t('همین سطح دوباره پخش می‌شود · جان باقی‌مانده: '+memory.lives,'This level repeats · lives left: '+memory.lives);
+        const token=++memory.token;
+        setTimeout(()=>{if(memory.running&&token===memory.token)runPattern(token)},520);
+      }else{
+        memory.token++;memory.running=false;memory.locked=false;els.memoryMessage.style.display='grid';
+        els.memoryMessage.querySelector('strong').textContent=t('حافظه شکست خورد','Memory overload');
+        els.memoryMessage.querySelector('span').textContent=t('تا سطح '+memory.sequence.length+' رسیدی. با ۳ جان دوباره شروع کن.','You reached level '+memory.sequence.length+'. Restart with 3 lives.');
+        els.memoryStart.textContent=t('تلاش دوباره','Try again');
+      }
     }
   }));
   els.memoryStart?.addEventListener('click',()=>{tone('open');startMemory()});
 
   /* Meteor Run */
   const canvas=els.meteorCanvas,ctx=canvas?.getContext('2d');
-  const meteor={running:false,raf:0,last:0,score:0,player:{x:300,y:310,r:10},keys:new Set(),rocks:[],spawn:0};
+  const meteor={running:false,raf:0,last:0,score:0,elapsed:0,player:{x:300,y:310,r:10},keys:new Set(),rocks:[],spawn:0,near:0};
   function resizeMeteor(){
     if(!canvas)return;
     const rect=canvas.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,2);
@@ -761,43 +809,67 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   }
   const meteorW=()=>canvas?.getBoundingClientRect().width||600, meteorH=()=>canvas?.getBoundingClientRect().height||370;
   function resetMeteor(){
-    meteor.score=0;meteor.rocks=[];meteor.spawn=0;meteor.player.x=meteorW()/2;meteor.player.y=meteorH()-45;els.meteorScore.textContent='0';
+    meteor.score=0;meteor.elapsed=0;meteor.near=0;meteor.rocks=[];meteor.spawn=0;
+    meteor.player.x=meteorW()/2;meteor.player.y=meteorH()-45;els.meteorScore.textContent='0';
   }
-  function spawnRock(){
-    const w=meteorW();meteor.rocks.push({x:15+Math.random()*(w-30),y:-25,r:7+Math.random()*13,vy:80+Math.random()*120+Math.min(110,meteor.score*1.6)});
+  function spawnRock(extra=false){
+    const w=meteorW(),difficulty=1+Math.min(2.7,meteor.elapsed/24);
+    const size=7+Math.random()*13+Math.min(5,meteor.elapsed*.035);
+    const drift=(Math.random()<Math.min(.48,.12+meteor.elapsed/180))?(Math.random()>.5?1:-1)*(18+Math.random()*52+meteor.elapsed*.45):0;
+    meteor.rocks.push({x:15+Math.random()*(w-30),y:-28,r:size,vy:105+Math.random()*95+difficulty*52,vx:drift,phase:Math.random()*Math.PI*2,spin:Math.random()*2-1});
+    if(extra)meteor.rocks.push({x:15+Math.random()*(w-30),y:-70,r:8+Math.random()*14,vy:125+Math.random()*90+difficulty*58,vx:(Math.random()>.5?1:-1)*(25+Math.random()*50),phase:Math.random()*Math.PI*2,spin:Math.random()*2-1});
   }
   function drawMeteor(dt){
     const w=meteorW(),h=meteorH();ctx.clearRect(0,0,w,h);
-    const g=ctx.createRadialGradient(w*.5,h*.2,5,w*.5,h*.2,Math.max(w,h)*.8);g.addColorStop(0,'rgba(217,181,93,.08)');g.addColorStop(1,'rgba(4,5,6,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    const difficulty=1+Math.min(2.7,meteor.elapsed/24);
+    const g=ctx.createRadialGradient(w*.5,h*.2,5,w*.5,h*.2,Math.max(w,h)*.8);g.addColorStop(0,'rgba(217,181,93,'+(0.07+Math.min(.07,meteor.elapsed/420))+')');g.addColorStop(1,'rgba(4,5,6,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
     ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;
-    for(let y=20;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
-    const speed=190;
+    const gridShift=(meteor.elapsed*(22+difficulty*18))%38;
+    for(let y=20-gridShift;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+    const speed=Math.min(430,185+meteor.elapsed*3.6);
     if(meteor.keys.has('arrowleft')||meteor.keys.has('a'))meteor.player.x-=speed*dt;
     if(meteor.keys.has('arrowright')||meteor.keys.has('d'))meteor.player.x+=speed*dt;
     if(meteor.keys.has('arrowup')||meteor.keys.has('w'))meteor.player.y-=speed*dt;
     if(meteor.keys.has('arrowdown')||meteor.keys.has('s'))meteor.player.y+=speed*dt;
     meteor.player.x=Math.max(15,Math.min(w-15,meteor.player.x));meteor.player.y=Math.max(15,Math.min(h-15,meteor.player.y));
-    meteor.spawn+=dt;if(meteor.spawn>.52){meteor.spawn=0;spawnRock()}
-    for(const rock of meteor.rocks){rock.y+=rock.vy*dt;ctx.beginPath();ctx.arc(rock.x,rock.y,rock.r,0,Math.PI*2);ctx.fillStyle='rgba(246,223,154,.78)';ctx.fill();ctx.beginPath();ctx.arc(rock.x-rock.r*.28,rock.y-rock.r*.28,Math.max(1.5,rock.r*.22),0,Math.PI*2);ctx.fillStyle='rgba(255,248,219,.8)';ctx.fill();}
-    meteor.rocks=meteor.rocks.filter(r=>r.y< h+35);
-    for(const r of meteor.rocks)if(Math.hypot(r.x-meteor.player.x,r.y-meteor.player.y)<r.r+meteor.player.r){
-      endMeteor();return;
+    meteor.spawn+=dt;
+    const spawnGap=Math.max(.23,.58-meteor.elapsed*.0045);
+    if(meteor.spawn>spawnGap){
+      meteor.spawn=0;spawnRock(meteor.elapsed>20&&Math.random()<Math.min(.55,meteor.elapsed/150));
     }
-    meteor.score+=dt*10;els.meteorScore.textContent=String(Math.floor(meteor.score));
-    const p=meteor.player;const glow=ctx.createRadialGradient(p.x,p.y,1,p.x,p.y,28);glow.addColorStop(0,'rgba(246,223,154,.8)');glow.addColorStop(1,'rgba(217,181,93,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,28,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#f6df9a';ctx.fillRect(p.x-7,p.y-7,14,14);
-    ctx.strokeStyle='#fff7d6';ctx.strokeRect(p.x-7,p.y-7,14,14);
+    for(const rock of meteor.rocks){
+      rock.y+=rock.vy*dt;
+      rock.x+=rock.vx*dt+Math.sin(meteor.elapsed*1.7+rock.phase)*.22;
+      if(rock.x<rock.r||rock.x>w-rock.r)rock.vx*=-1;
+      ctx.save();ctx.translate(rock.x,rock.y);ctx.rotate((meteor.elapsed*rock.spin*.75)+rock.phase);
+      ctx.beginPath();
+      const sides=7;
+      for(let i=0;i<sides;i++){const a=i*Math.PI*2/sides,rr=rock.r*(.78+.22*Math.sin(i*2.7+rock.phase));const px=Math.cos(a)*rr,py=Math.sin(a)*rr;i?ctx.lineTo(px,py):ctx.moveTo(px,py)}
+      ctx.closePath();ctx.fillStyle='rgba(246,223,154,.78)';ctx.fill();ctx.strokeStyle='rgba(255,248,219,.72)';ctx.stroke();
+      ctx.restore();
+    }
+    meteor.rocks=meteor.rocks.filter(r=>r.y<h+45);
+    for(const r of meteor.rocks){
+      const dist=Math.hypot(r.x-meteor.player.x,r.y-meteor.player.y);
+      if(dist<r.r+meteor.player.r){endMeteor();return}
+      if(dist<r.r+meteor.player.r+17&&r.y>meteor.player.y-42&&r.y<meteor.player.y+42)meteor.near++;
+    }
+    meteor.elapsed+=dt;
+    meteor.score+=dt*(10+difficulty*2.3);els.meteorScore.textContent=String(Math.floor(meteor.score));
+    const p=meteor.player;const glow=ctx.createRadialGradient(p.x,p.y,1,p.x,p.y,30+Math.min(14,meteor.elapsed*.1));glow.addColorStop(0,'rgba(246,223,154,.82)');glow.addColorStop(1,'rgba(217,181,93,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,30+Math.min(14,meteor.elapsed*.1),0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#f6df9a';ctx.fillRect(p.x-7,p.y-7,14,14);ctx.strokeStyle='#fff7d6';ctx.strokeRect(p.x-7,p.y-7,14,14);
   }
   function meteorLoop(now){
     if(!meteor.running)return;
     const dt=Math.min(.035,(now-meteor.last)/1000||.016);meteor.last=now;drawMeteor(dt);meteor.raf=requestAnimationFrame(meteorLoop);
   }
   function startMeteor(){
-    meteor.running=true;resetMeteor();resizeMeteor();els.meteorStart.textContent=t('شروع مجدد','Restart');tone('open');meteor.last=performance.now();meteor.raf=requestAnimationFrame(meteorLoop);
+    cancelAnimationFrame(meteor.raf);meteor.running=true;resetMeteor();resizeMeteor();els.meteorStart.textContent=t('شروع مجدد','Restart');tone('open');meteor.last=performance.now();meteor.raf=requestAnimationFrame(meteorLoop);
   }
   function endMeteor(){
-    meteor.running=false;cancelAnimationFrame(meteor.raf);const score=Math.floor(meteor.score);const best=writeBest('meteor',score);els.meteorBest.textContent=String(best);els.arcadeBestMeteor.textContent=String(best);tone('close');
-    if(ctx){const w=meteorW(),h=meteorH();ctx.fillStyle='rgba(3,4,5,.72)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f6df9a';ctx.font='800 18px Manrope';ctx.textAlign='center';ctx.fillText(t('پایان پرواز · امتیاز '+score,'Run over · Score '+score),w/2,h/2);ctx.font='11px Manrope';ctx.fillStyle='#78858d';ctx.fillText(t('دوباره شروع کن و رکورد را بشکن.','Restart and beat the record.'),w/2,h/2+25);}
+    meteor.running=false;cancelAnimationFrame(meteor.raf);
+    const score=Math.floor(meteor.score);const best=writeBest('meteor',score);els.meteorBest.textContent=String(best);els.arcadeBestMeteor.textContent=String(best);tone('close');
+    if(ctx){const w=meteorW(),h=meteorH();ctx.fillStyle='rgba(3,4,5,.72)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f6df9a';ctx.font='800 18px Manrope';ctx.textAlign='center';ctx.fillText(t('پایان پرواز · امتیاز '+score,'Run over · Score '+score),w/2,h/2);ctx.font='11px Manrope';ctx.fillStyle='#78858d';ctx.fillText(t('زمان '+meteor.elapsed.toFixed(1)+' ثانیه · نزدیک‌رد شدن '+meteor.near,'Time '+meteor.elapsed.toFixed(1)+'s · Near misses '+meteor.near),w/2,h/2+25);ctx.fillText(t('سرعت تا پایان به‌تدریج بیشتر شد.','Speed increased progressively until the end.'),w/2,h/2+45);}
     els.meteorStart.textContent=t('تلاش دوباره','Try again');
   }
   els.meteorStart?.addEventListener('click',startMeteor);
