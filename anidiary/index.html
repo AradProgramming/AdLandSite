@@ -99,9 +99,35 @@ html.en body{text-align:left;direction:ltr}
 <div class="toast" id="toast"></div>
 <script>
 (function(){
-var lang='fa';
-function applyLang(){document.documentElement.lang=lang;document.documentElement.classList.toggle('en',lang==='en');document.querySelectorAll('[data-fa][data-en]').forEach(function(e){e.innerHTML=lang==='fa'?e.getAttribute('data-fa'):e.getAttribute('data-en')});document.querySelectorAll('[data-fa-placeholder][data-en-placeholder]').forEach(function(e){e.placeholder=lang==='fa'?e.getAttribute('data-fa-placeholder'):e.getAttribute('data-en-placeholder')});document.getElementById('lang').innerHTML='<span style="display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #d9b55d55;border-radius:6px;margin-inline-end:6px;color:#d9b55d">文</span><b>'+(lang==='fa'?'EN':'FA')+'</b>'}
-document.getElementById('lang').addEventListener('click',function(){lang=lang==='fa'?'en':'fa';applyLang();this.innerHTML='<span style="display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #d9b55d55;border-radius:6px;margin-inline-end:6px;color:#d9b55d">文</span><b>'+(lang==='fa'?'EN':'FA')+'</b>'});
+var lang=(function(){try{return localStorage.getItem('anidiary-landing-lang')||'fa'}catch(e){return 'fa'}})();
+const JA={
+"Features":"機能","Demo":"デモ","Download":"ダウンロード","FAQ":"よくある質問","AdLand":"AdLand",
+"Every anime, <span>a memory.</span>":"すべてのアニメは、<span>ひとつの思い出。</span>",
+"AniDiary is a personal digital journal for everything you watch, save or plan to watch — from posters and genres to progress, scores, tags and notes.":"AniDiaryは、観る・保存する・観る予定の作品をまとめる個人向けデジタルアニメ日記です。ポスター、ジャンル、進捗、評価、タグ、メモまで一つに整理できます。",
+"↓ Download AniDiary":"↓ AniDiaryをダウンロード","✦ View demo":"✦ デモを見る",
+"More than a list.":"ただのリストではありません。","Try the idea before you install.":"インストール前に試してみよう。",
+"Your platform, ready.":"あなたの環境に合わせて。","Questions":"よくある質問",
+"Poster-first library":"ポスター中心のライブラリ","Series, movie or special":"シリーズ・映画・スペシャル",
+"Multi-genre tags":"複数ジャンル","Favorites & status":"お気に入りとステータス","Scores, dates & tags":"評価・日付・タグ",
+"Your data, on your device":"あなたのデータはあなたの端末に",
+"Anime title":"アニメタイトル","Type":"種類","Genre":"ジャンル","Score":"評価",
+"+ Add to shelf":"＋ ライブラリに追加","Clear":"クリア",
+"How do series and movies differ?":"シリーズと映画の違いは？","How do posters work?":"ポスターはどう使いますか？",
+"Which Macs are supported?":"対応するMacは？","Who makes AniDiary?":"AniDiaryの開発元は？"
+};
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+  document.documentElement.classList.toggle('en',lang==='en');
+  document.querySelectorAll('[data-fa][data-en]').forEach(function(e){
+    const val=lang==='fa'?e.getAttribute('data-fa'):lang==='en'?e.getAttribute('data-en'):(JA[e.getAttribute('data-en')]||e.getAttribute('data-en'));
+    e.innerHTML=val;
+  });
+  document.querySelectorAll('[data-fa-placeholder][data-en-placeholder]').forEach(function(e){e.placeholder=lang==='fa'?e.getAttribute('data-fa-placeholder'):e.getAttribute('data-en-placeholder')});
+  const labels={fa:'EN',en:'JA',ja:'FA'};
+  document.getElementById('lang').innerHTML='<span style="display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #d9b55d55;border-radius:6px;margin-inline-end:6px;color:#d9b55d">↔</span><b>'+labels[lang]+'</b>';
+}
+document.getElementById('lang').addEventListener('click',function(){lang=lang==='fa'?'en':lang==='en'?'ja':'fa';try{localStorage.setItem('anidiary-landing-lang',lang)}catch(e){}applyLang();});
 document.querySelectorAll('.faqQ').forEach(function(q){q.addEventListener('click',function(){var item=q.parentElement;item.classList.toggle('open')})});
 var demoShelf=document.getElementById('demoShelf'),toast=document.getElementById('toast');
 function show(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(show.t);show.t=setTimeout(function(){toast.classList.remove('show')},2200)}
