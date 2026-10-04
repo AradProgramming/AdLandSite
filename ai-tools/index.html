@@ -7,7 +7,7 @@
 <meta name="description" content="AdLand AI Tools — ابزارهای هوشمند و توسعه‌دهنده، سریع، زیبا و تا حد ممکن local-first.">
 <meta property="og:title" content="AdLand AI Tools">
 <meta property="og:description" content="A focused toolbox for AI, prompts, text and developer workflows.">
-<title>AdLand AI Tools — Creative Utility Lab</title>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="../assets/icons/projects/AdLand_AI_Tools_icon.svg"><title>AdLand AI Tools — Creative Utility Lab</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
 :root{--bg:#040507;--panel:#0b0e13e8;--panel2:#10141b;--line:#ffffff12;--gold:#e6c96c;--gold2:#fff1ad;--mint:#71f4dc;--violet:#9e90ff;--text:#f4f1e8;--muted:#8a949c;--danger:#ff7d8b;--ok:#78f0ad}
@@ -181,6 +181,6 @@ a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}.
   $('#copyData').onclick=()=>copy($('#dataOut').textContent);
   $('#newUuid').click();$('#makeData').click();textStats();
 })();
-</script>
+</script><script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
 </body>
 </html>
