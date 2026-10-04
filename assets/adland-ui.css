@@ -1,0 +1,54 @@
+/* AdLand Studio — shared interface layer */
+:root{
+  --al-font-latin:"Manrope","Segoe UI",sans-serif;
+  --al-font-fa:"Vazirmatn","Segoe UI",sans-serif;
+  --al-ui-scale:1;
+}
+html.lang-en body{font-family:var(--al-font-latin)!important}
+html.lang-fa body{font-family:var(--al-font-fa)!important}
+html,body{font-size:16px}
+body{line-height:1.65;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+p,li,dd,dt{font-size:max(13px,1em);line-height:1.95}
+button,input,textarea,select{font-family:inherit!important}
+button,a,.btn,.appLink,.nav a,.nav button,.miniBtn,.tab,.openTool{
+  -webkit-tap-highlight-color:transparent;
+}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--gold,var(--b,#e6c96c));
+  outline-offset:3px;
+}
+.brand b,.footerBrand{font-size:13px!important;line-height:1.25}
+.brand small{font-size:9px!important;line-height:1.35}
+.nav a,.nav button,.miniBtn{font-size:12px!important;line-height:1.2}
+.hero h1{letter-spacing:-.045em}
+.hero p,.heroText{font-size:clamp(14px,1.25vw,17px)!important;line-height:2!important}
+.sectionHead h2,.sectionHeadMain h2{letter-spacing:-.045em}
+.sectionHead p,.sectionHeadMain p,.sectionAside{font-size:13px!important;line-height:1.9!important}
+.tool,.app,.project,.course,.teamCard,.workspace,.signal,.story,.faqItem,.finalCard{
+  border-radius:24px!important;
+}
+.tool,.app,.course,.teamCard,.workspace{padding:24px!important}
+.toolHead h3,.appHead h3,.teamCard h3{font-size:18px!important;line-height:1.35}
+.toolHead small,.appHead small{font-size:9px!important;line-height:1.35}
+.tool p,.app p,.teamCard p,.projectCopy p,.course p,.faqA{font-size:13px!important;line-height:1.9!important}
+.toolIcon,.appIcon{flex:0 0 auto}
+.appLink,.btn,.openTool,.tab{font-size:12px!important;min-height:40px}
+.featureMini span,.pill,.metric small,.version{font-size:10px!important;line-height:1.45}
+.field label{font-size:11px!important}
+.field input,.field textarea,.field select{font-size:14px!important;line-height:1.65}
+.out{font-size:13px!important;line-height:1.8}
+.faqQ{font-size:14px!important;line-height:1.6}
+.footer,.footerIn{font-size:11px!important;line-height:1.8}
+@media(max-width:700px){
+  .top{padding-inline:8px!important}
+  .hero{padding-top:78px!important}
+  .section{padding-block:60px!important}
+  .brand b{font-size:12px!important}
+  .hero h1{font-size:clamp(42px,13vw,68px)!important}
+  .hero p{font-size:14px!important}
+  .nav a,.nav button,.miniBtn{font-size:11px!important}
+  .tool,.app,.course,.teamCard,.workspace{padding:19px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
