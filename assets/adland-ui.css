@@ -99,3 +99,77 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .al-home-mac.live{border-color:#d9b55d45;background:#d9b55d0b;color:#d9b55d}
 .al-web-mac-live{border-color:#8ff9dc35!important;color:#8ff9dc!important;background:#8ff9dc08!important}
 @media(max-width:700px){.al-release-actions{align-items:stretch}.al-release-btn,.al-release-note{width:100%}.al-mac-action{width:100%}.al-platform-rail{grid-template-columns:1fr}}
+
+
+/* AdLand Studio — universal cross-product design system v2026.10 */
+:root{--al-radius:22px;--al-radius-sm:12px;--al-gap:10px;--al-ease:cubic-bezier(.16,1,.3,1)}
+html{font-size:16px;overflow-x:hidden}
+body{min-width:0;overflow-x:hidden}
+.top,#nav{box-sizing:border-box!important;position:sticky!important;top:12px!important;left:auto!important;right:auto!important;transform:none!important;width:min(1200px,calc(100% - 24px))!important;min-height:64px!important;height:64px!important;margin:12px auto 0!important;padding:0 12px!important;border-radius:19px!important;backdrop-filter:blur(26px) saturate(125%)!important;-webkit-backdrop-filter:blur(26px) saturate(125%)!important;z-index:100!important}
+.top .brand,#nav .brand,.brand{min-width:0!important;max-width:48%!important}
+.top .nav,.nav{gap:6px!important;align-items:center!important}
+.top .nav a,.top .nav button,.nav a,.nav button{min-height:38px!important;height:38px!important;padding:0 11px!important;border:1px solid #ffffff10!important;border-radius:11px!important;background:#ffffff04!important;font-size:11px!important;line-height:1.3!important;letter-spacing:.01em!important;white-space:nowrap!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.top .nav a:hover,.top .nav button:hover,.nav a:hover,.nav button:hover{transform:translateY(-2px);border-color:#d9b55d35!important;background:#ffffff08!important}
+.top .nav button,.nav button{cursor:pointer!important}
+.brand img,.brandMark{flex:0 0 auto}
+.hero,.hero-grid,.heroGrid{min-width:0}
+.hero{padding-top:82px!important}
+.heroMeta,.hero-meta,.heroBtns,.heroActions,.actions{align-items:center!important}
+.btn,.appLink,.openTool,.tab{box-sizing:border-box!important;min-height:43px!important;height:auto!important;padding:0 15px!important;border-radius:12px!important;font-size:12px!important;line-height:1.35!important;font-weight:800!important;letter-spacing:0!important}
+.btn.primary,.appLink.primary,.openTool.primary{box-shadow:0 12px 34px #0003}
+.pill{min-height:30px;display:inline-flex;align-items:center;gap:6px;padding:7px 10px!important;border-radius:999px!important;font-size:10px!important;line-height:1.35!important}
+.section,.section-alt{scroll-margin-top:100px}
+.section-title,.sectionHead,.head,.sectionHeader{max-width:980px!important}
+.section-title h2,.sectionHead h2,.sectionHeadMain h2,.head h2{line-height:1.18!important}
+.tool,.app,.project,.course,.teamCard,.workspace,.signal,.story,.faqItem,.finalCard,.panel,.release,.download,.demo,.feature,.step{box-shadow:0 22px 80px #0005!important;border-radius:var(--al-radius)!important}
+.tool:hover,.app:hover,.project:hover,.course:hover,.teamCard:hover,.feature:hover,.step:hover{border-color:#d9b55d26!important}
+.featureMini{gap:7px!important}
+.featureMini span{min-height:29px;display:inline-flex;align-items:center!important;padding:6px 9px!important;border-radius:9px!important;font-size:10px!important}
+.al-platform-rail{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px!important;width:100%!important}
+.al-platform{min-width:0!important;width:100%!important}
+.al-platform-download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.al-platform-download{min-width:0;padding:18px;border:1px solid #ffffff10;border-radius:18px;background:linear-gradient(145deg,#ffffff08,#ffffff02);box-shadow:0 18px 65px #0006}
+.al-platform-download.windows{border-color:#8ff9dc22}
+.al-platform-download.macos{border-color:#d9b55d3d;background:radial-gradient(circle at 90% 8%,#d9b55d14,transparent 42%),linear-gradient(145deg,#ffffff08,#ffffff02)}
+.al-platform-download-head{display:flex;align-items:center;gap:10px;min-width:0}
+.al-platform-icon{width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto;border-radius:10px;background:#ffffff08;border:1px solid #ffffff10;font-size:16px}
+.al-platform-download.windows .al-platform-icon{color:#8ff9dc}
+.al-platform-download.macos .al-platform-icon{color:#d9b55d}
+.al-platform-download-head>div{min-width:0;flex:1}
+.al-platform-download-head strong{display:block;font-size:14px;line-height:1.35}
+.al-platform-download-head small{display:block;margin-top:3px;color:#79868d;font-size:10px;line-height:1.6}
+.al-platform-download-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+.al-platform-download-actions .al-release-btn{min-width:0;width:100%}
+.al-release-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:11px;padding-top:12px;border-top:1px solid #ffffff0b}
+.al-release-footer a{color:#d9b55d;font-size:11px;font-weight:800}
+.al-release-footer span{color:#6f7b82;font-size:10px}
+.al-release-actions{gap:9px!important}
+.al-release-note{font-size:10px!important}
+.al-mac-action.al-mac-zip{border-color:#ffffff14;color:#aeb8bd;background:#ffffff04}
+.al-card-platforms{display:flex!important;gap:7px!important;flex-wrap:wrap!important}
+.al-card-platform{min-height:28px;display:inline-flex;align-items:center;padding:6px 9px!important;border-radius:9px!important;font-size:10px!important}
+.al-card-platform.mac{font-weight:800!important}
+.al-mac-panel{margin-left:auto;margin-right:auto;max-width:1180px}
+.al-mac-panel h3{max-width:850px}
+[id=download]{scroll-margin-top:105px}
+@media(max-width:900px){.al-platform-download-grid{grid-template-columns:1fr}.al-platform-rail{grid-template-columns:1fr 1fr}.top .brand{max-width:38%!important}}
+@media(max-width:700px){
+  .top,#nav{top:8px!important;width:calc(100% - 16px)!important;height:58px!important;min-height:58px!important;margin-top:8px!important;padding:0 8px!important}
+  .top .brand,#nav .brand,.brand{max-width:46%!important}
+  .top .brand small,.brand small{display:none}
+  .top .nav a,.top .nav button,.nav a,.nav button{min-height:34px!important;height:34px!important;padding:0 8px!important;font-size:10px!important}
+  .hero{padding-top:70px!important}
+  .al-platform-download-grid{grid-template-columns:1fr;gap:9px}
+  .al-platform-download{padding:15px}
+  .al-platform-download-actions{grid-template-columns:1fr 1fr}
+  .btn,.appLink,.openTool,.tab{width:auto;min-height:42px!important}
+  .heroActions,.heroBtns,.actions{gap:7px!important}
+}
+@media(max-width:520px){
+  .top .nav a,.top .nav button{padding:0 7px!important;font-size:9px!important}
+  .top .nav a:nth-child(n+3){display:none!important}
+  .top .nav{margin-left:auto!important}
+  .al-platform-rail{grid-template-columns:1fr}
+  .al-platform-download-actions{grid-template-columns:1fr}
+  .al-release-footer{align-items:flex-start}
+}
