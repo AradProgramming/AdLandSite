@@ -150,6 +150,28 @@ body{font-size:14px}
 .learningCourse .btn{width:100%}
 @media(max-width:1050px){.learningCatalog{grid-template-columns:repeat(2,minmax(0,1fr))}.learningCourse{min-height:620px}}
 @media(max-width:650px){.learningCatalog{grid-template-columns:1fr}.learningCourse{min-height:0}.courseLead{min-height:0}.learningCourse h3{font-size:25px!important}.courseBlock li,.courseBlock p{font-size:11px}.courseOutcome strong{font-size:11px}}
+
+/* Arcade player identity */
+.arcadeTicker{position:relative}
+.arcadePlayer{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid #d9b55d22;border-radius:12px;background:#d9b55d06;min-width:190px}
+.arcadePlayer .playerIcon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#d9b55d0c;color:var(--gold);font-size:15px}
+.arcadePlayer small{display:block;color:#68757d;font-size:7px;line-height:1.2}
+.arcadePlayer strong{display:block;color:#e8e1d3;font-size:11px;line-height:1.35;max-width:95px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.playerEdit{margin-inline-start:auto;height:30px;padding:0 9px;border:1px solid #d9b55d2e;border-radius:9px;background:#d9b55d08;color:var(--gold);font-size:8px;font-weight:800}
+.arcadeIdentity{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:20px;background:#020304bb;backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.25s}
+.arcadeIdentity.open{opacity:1;visibility:visible}
+.identityCard{width:min(500px,calc(100% - 20px));padding:24px;border:1px solid #d9b55d35;border-radius:22px;background:#090d12f4;box-shadow:0 40px 120px #000d;position:relative}
+.identityClose{position:absolute;top:12px;inset-inline-end:12px;width:32px;height:32px;border-radius:9px;border:1px solid #ffffff10;background:#ffffff04;color:#89959c;font-size:18px}
+.identityCard>small{color:var(--gold);font:900 8px/1 Manrope,sans-serif;letter-spacing:.2em}
+.identityCard h3{margin:10px 0 8px;font-size:26px}
+.identityCard p{margin:0;color:#78858c;font-size:11px;line-height:1.9}
+.identityCard label{display:block;margin-top:18px;margin-bottom:7px;color:#b5bcc0;font-size:10px;font-weight:800}
+.identityCard input{width:100%;height:46px;padding:0 13px;border:1px solid #ffffff12;border-radius:12px;background:#ffffff04;color:#fff;outline:none;font-size:13px}
+.identityCard input:focus{border-color:#d9b55d66;box-shadow:0 0 0 3px #d9b55d0e}
+.identityActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.identityActions .btn{flex:1;min-width:145px}
+.identityNote{margin-top:11px;color:#5f6b72;font-size:8px}
+@media(max-width:650px){.arcadePlayer{min-width:0;flex:1}.arcadeTicker{align-items:stretch}.arcadeTicker .arcadePlayer{order:-1;width:100%}.arcadeIdentity{padding:12px}}
 </style>
 <style id="adland-type">
 html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
@@ -241,11 +263,25 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 
   <div class="arcadeTicker reveal">
     <span class="arcadeSignal"><i></i><b>ARCADE ONLINE</b></span>
-    <p data-fa="رکوردها محلی ذخیره می‌شوند؛ هیچ حسابی لازم نیست." data-en="Scores are stored locally; no account required.">رکوردها محلی ذخیره می‌شوند؛ هیچ حسابی لازم نیست.</p>
+    <div class="arcadePlayer"><span class="playerIcon">◎</span><div><small data-fa="بازیکن فعلی" data-en="Current player">بازیکن فعلی</small><strong id="arcadePlayerName">Guest</strong></div><button class="playerEdit" id="arcadePlayerEdit" type="button" data-fa="ثبت نام" data-en="Set name">ثبت نام</button></div>
+    <p data-fa="نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند." data-en="Set your name so records show who owns them. Scores are stored in this browser.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
     <div class="gameStatRow">
       <div class="gameStat"><small>BEST REFLEX</small><b id="arcadeBestReflex">—</b></div>
       <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
       <div class="gameStat"><small>METEOR SCORE</small><b id="arcadeBestMeteor">—</b></div>
+    </div>
+  </div>
+
+  <div class="arcadeIdentity glass" id="arcadeIdentity" aria-hidden="true">
+    <div class="identityCard">
+      <button class="identityClose" id="arcadeIdentityClose" type="button" aria-label="Close">×</button>
+      <small>ADLAND PLAYER ID</small>
+      <h3 data-fa="نام بازیکنت را ثبت کن." data-en="Set your player name.">نام بازیکنت را ثبت کن.</h3>
+      <p data-fa="این نام کنار رکوردهای تو نمایش داده می‌شود. لازم نیست حساب بسازی؛ نام و رکوردها فقط در همین مرورگر نگه‌داری می‌شوند." data-en="This name appears beside your records. No account is required; your name and scores stay only in this browser.">این نام کنار رکوردهای تو نمایش داده می‌شود. لازم نیست حساب بسازی؛ نام و رکوردها فقط در همین مرورگر نگه‌داری می‌شوند.</p>
+      <label for="arcadePlayerInput" data-fa="نام نمایشی" data-en="Display name">نام نمایشی</label>
+      <input id="arcadePlayerInput" maxlength="18" autocomplete="nickname" placeholder="Arad" />
+      <div class="identityActions"><button class="btn primary" id="arcadeIdentitySave" type="button" data-fa="ذخیره نام" data-en="Save name">ذخیره نام</button><button class="btn" id="arcadeIdentityGuest" type="button" data-fa="ادامه به‌عنوان مهمان" data-en="Continue as guest">ادامه به‌عنوان مهمان</button></div>
+      <div class="identityNote" data-fa="نام مناسب و غیرحساس انتخاب کن." data-en="Choose a simple, non-sensitive display name.">نام مناسب و غیرحساس انتخاب کن.</div>
     </div>
   </div>
 
@@ -358,7 +394,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       </div>
       <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز." data-en="An advanced calculator, task manager, contact book, text game, file utility and a personal project based on the student's idea.">ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز.</p></div>
       <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت پروژه‌های مستقل پایتونی" data-en="Ability to build independent Python projects">توانایی ساخت پروژه‌های مستقل پایتونی</strong></div>
-      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+      <div class="contactRow"><a class="btn" href="learning/python/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
     </article>
 
     <article class="course glass reveal learningCourse" data-course="scratch">
@@ -376,7 +412,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       </div>
       <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز." data-en="Score-based games, racing challenges, interactive stories, short animations and a final project designed by the student.">بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز.</p></div>
       <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="درک واقعی منطق برنامه‌نویسی و بازی‌سازی" data-en="A real understanding of programming logic and game creation">درک واقعی منطق برنامه‌نویسی و بازی‌سازی</strong></div>
-      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+      <div class="contactRow"><a class="btn" href="learning/scratch/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
     </article>
 
     <article class="course glass reveal learningCourse" data-course="web">
@@ -394,7 +430,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       </div>
       <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود." data-en="A personal website, landing page, product page, portfolio, game page and a multi-section responsive website that works on mobile and desktop.">سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود.</p></div>
       <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا" data-en="Ability to build polished responsive web pages">توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا</strong></div>
-      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+      <div class="contactRow"><a class="btn" href="learning/html-css/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
     </article>
 
     <article class="course glass reveal learningCourse" data-course="appinventor">
@@ -412,7 +448,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       </div>
       <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز." data-en="A calculator, notes app, quiz, to-do app, information app and a useful mini app with a student-designed interface.">ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز.</p></div>
       <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت یک اپ موبایل واقعی از ایده تا خروجی" data-en="Build a real mobile app from idea to export">ساخت یک اپ موبایل واقعی از ایده تا خروجی</strong></div>
-      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+      <div class="contactRow"><a class="btn" href="learning/app-inventor/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
     </article>
 
     <article class="course glass reveal learningCourse" data-course="tkinter">
@@ -430,7 +466,7 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       </div>
       <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل." data-en="A contact manager, expense tracker, unit converter, text editor, file utility and a practical desktop app with a complete interface.">دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل.</p></div>
       <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت برنامه دسکتاپ تعاملی با Python" data-en="Build interactive desktop apps with Python">ساخت برنامه دسکتاپ تعاملی با Python</strong></div>
-      <div class="contactRow"><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
+      <div class="contactRow"><a class="btn" href="learning/tkinter/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
     </article>
 
   </div>
@@ -477,6 +513,11 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
 <a href="#arcade"><strong>⚡</strong><div><b>Arcade</b><small data-fa="بازی‌های درون سایت" data-en="Playable web games">بازی‌های درون سایت</small></div><i>03</i></a>
 <a href="#projects"><strong>◇</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>04</i></a>
 <a href="#learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>05</i></a>
+<a href="learning/python/"><strong>Py</strong><div><b>Python Course</b><small data-fa="سایت آموزش Python" data-en="Python learning site">سایت آموزش Python</small></div><i>11</i></a>
+<a href="learning/scratch/"><strong>Sc</strong><div><b>Scratch Course</b><small data-fa="سایت آموزش Scratch" data-en="Scratch learning site">سایت آموزش Scratch</small></div><i>12</i></a>
+<a href="learning/html-css/"><strong>HC</strong><div><b>HTML + CSS</b><small data-fa="سایت طراحی وب" data-en="Web design learning site">سایت طراحی وب</small></div><i>13</i></a>
+<a href="learning/app-inventor/"><strong>AI</strong><div><b>App Inventor</b><small data-fa="سایت ساخت اپ موبایل" data-en="Mobile app learning site">سایت ساخت اپ موبایل</small></div><i>14</i></a>
+<a href="learning/tkinter/"><strong>Tk</strong><div><b>Tkinter</b><small data-fa="سایت ساخت نرم‌افزار دسکتاپ" data-en="Python GUI learning site">سایت ساخت نرم‌افزار دسکتاپ</small></div><i>15</i></a>
 <a href="#team"><strong>+</strong><div><b>Team</b><small>همکاری و عضویت</small></div><i>06</i></a><a href="#contact"><strong>✉</strong><div><b>Contact Admin</b><small>ارسال پیام به ادمین</small></div><i>07</i></a><a href="atlas/" data-cmd="atlas"><strong>◎</strong><div><b>Atlas</b><small>Local file intelligence</small></div><i>07</i></a><a href="forge/" data-cmd="forge"><strong>⌘</strong><div><b>Forge</b><small>Developer workbench</small></div><i>08</i></a><a href="prism/" data-cmd="prism"><strong>◇</strong><div><b>Prism</b><small>Color intelligence lab</small></div><i>09</i></a><a href="ai-tools/" data-cmd="ai-tools"><strong>✦</strong><div><b>AI Tools</b><small>Prompt + developer utility lab</small></div><i>10</i></a>
 </div><div class="cmdFoot"><span><em></em> EXPERIENCE ENGINE ONLINE</span><div><button id="motionBtn">MOTION: HIGH</button><button id="fullBtn">FULLSCREEN</button></div></div></div></div>
 
@@ -490,7 +531,7 @@ const core=qs('.core');addEventListener('pointermove',e=>{if(core&&window.innerW
 let lang=(localStorage.getItem('adland-language-v2')||((navigator.languages?.[0]||navigator.language||'fa').toLowerCase().startsWith('en')?'en':'fa')),sfx=localStorage.getItem('adland-sfx')!=='off',motion=localStorage.getItem('adland-motion')!=='low',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const audioState={ctx:null};
 function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const o=C.createOscillator(),g=C.createGain(),n=C.currentTime;const table={tap:[360,500,.07,.012],open:[430,760,.12,.02],close:[250,330,.08,.014],nav:[520,850,.08,.016]};const [a,b,d,v]=table[kind]||table.tap;o.type=kind==='nav'?'triangle':'sine';o.frequency.setValueAtTime(a,n);o.frequency.exponentialRampToValueAtTime(b,n+d*.65);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(C.destination);o.start(n);o.stop(n+d+.01)}catch(e){}}
-function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';if(window.__refreshArcadeLang)window.__refreshArcadeLang();}
+function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';if(window.__refreshArcadeLang)window.__refreshArcadeLang();if(window.__renderArcadePlayer)window.__renderArcadePlayer();}
 function setSfx(){qs('#soundBtn').textContent='SFX '+(sfx?'ON':'OFF')}
 qs('#langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';applyLang();tone('open')};
 qs('#soundBtn').onclick=()=>{sfx=!sfx;localStorage.setItem('adland-sfx',sfx?'on':'off');setSfx();tone('open')};
@@ -526,6 +567,49 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
 
 
 
+
+/* Player identity + record ownership */
+(()=>{
+  const PLAYER_KEY='adland-arcade-player-name';
+  const defaultName=()=>localStorage.getItem(PLAYER_KEY)||'Guest';
+  const playerName=()=>defaultName().trim().slice(0,18)||'Guest';
+  const renderPlayer=()=>{
+    const name=playerName();
+    qs('#arcadePlayerName')&&(qs('#arcadePlayerName').textContent=name);
+    const rb=Number(localStorage.getItem('adland-arcade-best-reflex')||0);
+    const mb=Number(localStorage.getItem('adland-arcade-best-memory')||0);
+    const xb=Number(localStorage.getItem('adland-arcade-best-meteor')||0);
+    const rows=[
+      ['#arcadeBestReflex',rb?rb+' ms · '+name:'—'],
+      ['#arcadeBestMemory',mb?mb+' · '+name:'—'],
+      ['#arcadeBestMeteor',xb?xb+' · '+name:'—']
+    ];
+    rows.forEach(([sel,val])=>qs(sel)&&(qs(sel).textContent=val));
+  };
+  const modal=qs('#arcadeIdentity');
+  const input=qs('#arcadePlayerInput');
+  const open=()=>{
+    if(!modal)return;
+    input.value=playerName()==='Guest'?'':playerName();
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');setTimeout(()=>input?.focus(),50);
+  };
+  const close=()=>{modal?.classList.remove('open');modal?.setAttribute('aria-hidden','true')};
+  const save=()=>{
+    const name=(input?.value||'').trim().replace(/\s+/g,' ').slice(0,18);
+    if(name)localStorage.setItem(PLAYER_KEY,name);
+    else localStorage.removeItem(PLAYER_KEY);
+    renderPlayer();close();tone('open');
+  };
+  qs('#arcadePlayerEdit')?.addEventListener('click',open);
+  qs('#arcadeIdentityClose')?.addEventListener('click',close);
+  qs('#arcadeIdentityGuest')?.addEventListener('click',()=>{localStorage.removeItem(PLAYER_KEY);renderPlayer();close();tone('tap')});
+  qs('#arcadeIdentitySave')?.addEventListener('click',save);
+  input?.addEventListener('keydown',e=>{if(e.key==='Enter')save();if(e.key==='Escape')close()});
+  modal?.addEventListener('click',e=>{if(e.target===modal)close()});
+  window.__renderArcadePlayer=renderPlayer;
+  renderPlayer();
+})();
+
 /* ADLAND ARCADE ENGINE */
 (()=>{
   const bestKey={reflex:'adland-arcade-best-reflex',memory:'adland-arcade-best-memory',meteor:'adland-arcade-best-meteor'};
@@ -539,9 +623,10 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   };
   const t=(fa,en)=>root.lang==='fa'?fa:en;
   const refreshBest=()=>{
-    const rb=readBest('reflex');els.arcadeBestReflex&&(els.arcadeBestReflex.textContent=rb?rb+' ms':'—');
-    const mb=readBest('memory');els.arcadeBestMemory&&(els.arcadeBestMemory.textContent=mb||'—');
-    const xb=readBest('meteor');els.arcadeBestMeteor&&(els.arcadeBestMeteor.textContent=xb||'—');
+    const name=(localStorage.getItem('adland-arcade-player-name')||'Guest').trim().slice(0,18)||'Guest';
+    const rb=readBest('reflex');els.arcadeBestReflex&&(els.arcadeBestReflex.textContent=rb?rb+' ms · '+name:'—');
+    const mb=readBest('memory');els.arcadeBestMemory&&(els.arcadeBestMemory.textContent=mb?mb+' · '+name:'—');
+    const xb=readBest('meteor');els.arcadeBestMeteor&&(els.arcadeBestMeteor.textContent=xb?xb+' · '+name:'—');
   };
   window.__refreshArcadeLang=()=>{
     refreshBest();
