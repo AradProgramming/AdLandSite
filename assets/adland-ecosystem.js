@@ -34,6 +34,38 @@
   const MAC_RELEASE_URL='https://github.com/AradProgramming/AdLandSite/releases/tag/'+MAC_RELEASE;
   const macAsset=file=> 'https://github.com/AradProgramming/AdLandSite/releases/download/'+MAC_RELEASE+'/'+file+'-1.0.0-universal';
   const slugFromHref=href=>{try{const p=new URL(href,location.href).pathname.split('/').filter(Boolean);return p[p.length-1]==='index.html'?p[p.length-2]||'':p[p.length-1]||''}catch(e){return ''}};
+  function normalizeDownloads(){
+    if(!product||product.kind==='web')return;
+    const host=document.querySelector('#download');
+    const downloadBlock=host?.closest('.download,.release,.panel')||host;
+    const actions=(host?.classList.contains('actions')?host:host?.querySelector('.actions'))||(downloadBlock?.querySelector('.actions'));
+    if(!downloadBlock||!actions||downloadBlock.querySelector('.al-platform-download-grid'))return;
+    const links=[...actions.querySelectorAll('a[href]')];
+    const installer=links.find(a=>/setup|installer/i.test((a.textContent||'')+' '+(a.href||'')))||links[0];
+    const portable=links.find(a=>/portable/i.test((a.textContent||'')+' '+(a.href||'')))||links[1];
+    const release=links.find(a=>/release/i.test((a.textContent||'')+' '+(a.href||'')))||null;
+    if(!installer)return;
+    const card=(cls,title,sub,items)=>'<div class="al-platform-download '+cls+'"><div class="al-platform-download-head"><span class="al-platform-icon">'+(cls==='windows'?'▣':'⌘')+'</span><div><strong>'+title+'</strong><small>'+sub+'</small></div><span class="al-live-dot"></span></div><div class="al-platform-download-actions">'+items.map((it,i)=>'<a class="al-release-btn '+(i===0?'primary':'')+'" href="'+it.href+'" target="_blank" rel="noopener noreferrer">'+it.label+'</a>').join('')+'</div></div>';
+    const macDmg=macAsset(product.file)+'.dmg', macZip=macAsset(product.file)+'.zip';
+    const grid=document.createElement('div');
+    grid.className='al-platform-download-grid';
+    grid.innerHTML=card('windows','Windows 10 / 11','x64 · desktop release',[
+      {href:installer.href,label:text('نصاب Windows','Windows Installer')},
+      ...(portable?[{href:portable.href,label:text('نسخه Portable','Portable')}]:[])
+    ])+card('macos','macOS','Universal · Apple Silicon + Intel',[
+      {href:macDmg,label:text('DMG مک','macOS DMG')},
+      {href:macZip,label:text('ZIP مک','macOS ZIP')}
+    ]);
+    actions.style.display='none';
+    actions.setAttribute('aria-hidden','true');
+    downloadBlock.appendChild(grid);
+    if(release){
+      const foot=document.createElement('div');
+      foot.className='al-release-footer';
+      foot.innerHTML='<a href="'+release.href+'" target="_blank" rel="noopener noreferrer">'+text('مشاهده صفحه Release ↗','Open release page ↗')+'</a><span>'+text('دانلودها از نسخه رسمی محصول','Downloads from the official product release')+'</span>';
+      downloadBlock.appendChild(foot);
+    }
+  }
   function productPlatform(){
     if(!product)return;
     style();
