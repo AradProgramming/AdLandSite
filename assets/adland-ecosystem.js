@@ -22,6 +22,11 @@
       #al-backtop{position:fixed;left:18px;bottom:18px;width:43px;height:43px;z-index:99997;border:1px solid #ffffff16;border-radius:13px;background:#090d12e8;color:#d9b55d;backdrop-filter:blur(18px);box-shadow:0 18px 60px #0009;opacity:0;visibility:hidden;transform:translateY(10px);transition:.28s;cursor:pointer;font-size:17px;font-weight:900}
       #al-backtop.show{opacity:1;visibility:visible;transform:none}
       #al-backtop:hover{transform:translateY(-3px);border-color:#d9b55d45;box-shadow:0 24px 75px #000b}
+      #al-share{position:fixed;left:18px;top:134px;width:34px;height:34px;z-index:99996;border:1px solid #ffffff12;border-radius:10px;background:#090d12dd;color:#8d999f;backdrop-filter:blur(16px);cursor:pointer;font-weight:900;font-size:14px;transition:.22s}
+      #al-share:hover{color:#d9b55d;border-color:#d9b55d45;transform:translateY(-2px)}
+      #al-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);z-index:100005;max-width:min(520px,calc(100% - 30px));padding:10px 14px;border:1px solid #d9b55d35;border-radius:12px;background:#080d12f4;color:#e9e3d5;backdrop-filter:blur(18px);box-shadow:0 20px 80px #000b;font-size:12px;line-height:1.5;opacity:0;visibility:hidden;transition:.25s}
+      #al-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
       .al-enhance-card{position:relative;overflow:hidden}
       .al-enhance-card:after{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at var(--alx,50%) var(--aly,50%),#d9b55d0c,transparent 28%);pointer-events:none;opacity:0;transition:.35s}
       .al-enhance-card:hover:after{opacity:1}
@@ -79,6 +84,13 @@
   }
   function experience(){
     style();
+    if(!window.alToast){
+      window.alToast=(msg)=>{
+        let box=document.getElementById('al-toast');
+        if(!box){box=document.createElement('div');box.id='al-toast';document.body.appendChild(box)}
+        box.textContent=msg;box.classList.add('show');clearTimeout(box._timer);box._timer=setTimeout(()=>box.classList.remove('show'),2300);
+      };
+    }
     if(!document.getElementById('al-page-progress')){
       const p=document.createElement('div');p.id='al-page-progress';document.body.appendChild(p);
       const update=()=>{const max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};
@@ -101,10 +113,20 @@
         for(let i=0;i<3;i++){const s=document.createElement('i');s.className='al-spark';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.setProperty('--dx',(Math.random()*34-17)+'px');s.style.setProperty('--dy',(Math.random()*-34-8)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),700)}
       },{passive:true});
     });
+    if(product && !document.getElementById('al-share')){
+      const s=document.createElement('button');s.id='al-share';s.type='button';s.textContent='↗';s.title=text('اشتراک‌گذاری صفحه','Share this page');s.setAttribute('aria-label',s.title);
+      s.onclick=async()=>{
+        try{
+          if(navigator.share){await navigator.share({title:document.title,url:location.href});}
+          else {await navigator.clipboard.writeText(location.href);alToast(text('لینک صفحه کپی شد.','Page link copied.'));}
+        }catch(e){}
+      };
+      document.body.appendChild(s);
+    }
     if(!document.getElementById('al-keyhelp') && product){
       const b=document.createElement('button');b.id='al-keyhelp';b.type='button';b.title=text('میانبرهای صفحه','Page shortcuts');b.setAttribute('aria-label',b.title);b.textContent='?';
       Object.assign(b.style,{position:'fixed',left:'18px',top:'94px',zIndex:'99996',width:'34px',height:'34px',border:'1px solid #ffffff12',borderRadius:'10px',background:'#090d12dd',color:'#89959b',cursor:'pointer',fontWeight:'900',fontSize:'14px',backdropFilter:'blur(16px)'});
-      b.onclick=()=>{const d=text('میانبرهای مفید: Home = بالای صفحه · End = پایین صفحه · / = اولین ورودی','Useful shortcuts: Home = top · End = bottom · / = focus the first input');toast?.(d)};
+      b.onclick=()=>{const d=text('میانبرهای مفید: Home = بالای صفحه · End = پایین صفحه · / = اولین ورودی','Useful shortcuts: Home = top · End = bottom · / = focus the first input');alToast(d)};
       document.body.appendChild(b);
     }
   }
@@ -198,6 +220,20 @@
   }
   function activateMac(){}
   function adminFeed(){if(document.querySelector('script[data-al-admin]'))return;const s=document.createElement('script');s.src=new URL('../assets/adland-admin.js',document.currentScript?.src||location.href).href;s.defer=true;s.dataset.alAdmin='1';document.head.appendChild(s)}
-  function sync(){setLocalized();experience();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
+    function globalShortcuts(){
+    if(window.__alShortcutsBound)return;window.__alShortcutsBound=true;
+    addEventListener('keydown',e=>{
+      const tag=(e.target?.tagName||'').toLowerCase();
+      const typing=['input','textarea','select'].includes(tag)||e.target?.isContentEditable;
+      if(typing)return;
+      if(e.key==='/' ){
+        const input=document.querySelector('input:not([type="hidden"])');
+        if(input){e.preventDefault();input.focus();alToast(text('ورودی آماده است؛ بزن بریم.','Input focused; ready to go.'));}
+      }else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){
+        e.preventDefault();document.getElementById('al-support-launcher')?.click(); 
+      }
+    });
+  }
+function sync(){setLocalized();experience();globalShortcuts();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
   document.addEventListener('adland:language',sync);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{support();sync()});else{support();sync()}
 })();
