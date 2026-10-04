@@ -64,7 +64,7 @@ function set(lang,persist){
  nodes.forEach(n=>{const o=originals.get(n);if(!o)return;const k=o.trim(),pair=pairs[k];if(pair)n.nodeValue=o.replace(k,pair[lang==='fa'?0:1])});
  ph.forEach(([el,p])=>el.placeholder=pairs[p][lang==='fa'?0:1]);
  root.lang=lang==='fa'?'fa':'en';root.dir=lang==='fa'?'rtl':'ltr';root.classList.toggle('lang-fa',lang==='fa');root.classList.toggle('lang-en',lang==='en');
- const b=addButton();if(b)b.textContent=lang==='fa'?'FA → EN':'EN → FA';if(persist)save(lang);
+ const b=addButton();if(b)b.textContent=lang==='fa'?'FA → EN':'EN → FA';if(persist)save(lang);document.dispatchEvent(new CustomEvent('adland:language',{detail:{lang}}));
 }
 set(current,false);const b=addButton();if(b)b.onclick=()=>{current=root.lang==='fa'?'en':'fa';set(current,true)};
 })();
