@@ -173,3 +173,9 @@ body{min-width:0;overflow-x:hidden}
   .al-platform-download-actions{grid-template-columns:1fr}
   .al-release-footer{align-items:flex-start}
 }
+
+/* Unified, readable language control */
+.al-language-button{min-width:104px!important;min-height:38px!important;height:38px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:0 12px!important;border:1px solid #d9b55d48!important;border-radius:11px!important;background:linear-gradient(135deg,#d9b55d12,#8a7cff0d)!important;color:#f1e6c8!important;font-weight:900!important;box-shadow:0 8px 28px #d9b55d10}
+.al-language-button:hover{border-color:#d9b55d7a!important;background:linear-gradient(135deg,#d9b55d1d,#8a7cff12)!important;transform:translateY(-1px)}
+.al-lang-icon{width:22px;height:22px;display:grid;place-items:center;border:1px solid #d9b55d48;border-radius:7px;color:#d9b55d;background:#d9b55d09;font-size:11px;font-weight:900}
+.al-lang-text{font-size:10px;letter-spacing:.02em}
