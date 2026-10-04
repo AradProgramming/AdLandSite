@@ -26,7 +26,7 @@
     root.classList.toggle('lang-fa',lang==='fa');
     root.classList.toggle('lang-en',lang==='en');
     const btn=langButton();
-    if(btn){btn.classList.add('al-language-button');btn.innerHTML='<span class="al-lang-icon">文</span><span class="al-lang-text">'+(lang==='fa'?'FA → EN':'EN → FA')+'</span>';btn.setAttribute('aria-label',lang==='fa'?'Change language to English':'تغییر زبان به فارسی');}
+    if(btn){btn.classList.add('al-language-button');btn.innerHTML='<span class="al-lang-icon">↔</span><span class="al-lang-text">'+(lang==='fa'?'FA → EN':'EN → FA')+'</span>';btn.setAttribute('aria-label',lang==='fa'?'Change language to English':'تغییر زبان به فارسی');}
   }
   function apply(lang,persist){
     if(hasBilingual()){
