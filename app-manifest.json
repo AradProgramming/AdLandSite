@@ -340,7 +340,9 @@
         "Apple Silicon",
         "Intel"
       ],
-      "releaseTag": "mac-v1.0.0"
+      "releaseTag": "mac-v1.0.0",
+      "releaseUrl": "https://github.com/AradProgramming/AdLandSite/releases/tag/mac-v1.0.0",
+      "releaseVersion": "1.0.0"
     }
   },
   "webTools": [
@@ -352,7 +354,17 @@
         "macos": "web"
       },
       "descFa": "آزمایشگاه ابزارهای سریع برای prompt، متن و توسعه‌دهنده‌ها.",
-      "descEn": "Fast web toolbox for prompts, text and developer workflows."
+      "descEn": "Fast web toolbox for prompts, text and developer workflows.",
+      "nativeMac": {
+        "status": "available",
+        "architectures": [
+          "Apple Silicon",
+          "Intel"
+        ],
+        "version": "1.0.0",
+        "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-AI-Tools-1.0.0-universal.dmg",
+        "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-AI-Tools-1.0.0-universal.zip"
+      }
     }
   ],
   "support": {
@@ -361,5 +373,17 @@
       "bale": "https://ble.ir/AdLandStudio"
     },
     "publicEmailExposure": false
+  },
+  "releaseInfo": {
+    "macos": {
+      "status": "live",
+      "tag": "mac-v1.0.0",
+      "version": "1.0.0",
+      "architectures": [
+        "Apple Silicon",
+        "Intel"
+      ],
+      "universal": true
+    }
   }
 }
