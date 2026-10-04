@@ -182,7 +182,18 @@ body{font-size:14px}
 .identityActions .btn{flex:1;min-width:145px}
 .identityNote{margin-top:11px;color:#5f6b72;font-size:8px}
 @media(max-width:650px){.arcadePlayer{min-width:0;flex:1}.arcadeTicker{align-items:stretch}.arcadeTicker .arcadePlayer{order:-1;width:100%}.arcadeIdentity{padding:12px}}
-.learningCourse{position:relative;overflow:hidden}.learningCourseIcon{position:absolute;inset-inline-end:18px;top:18px;width:66px;height:66px;border-radius:18px;border:1px solid #ffffff10;box-shadow:0 14px 42px #0007;opacity:.94}.learningCourse .courseTop{padding-inline-end:78px}.arcadePlayer em{display:block;margin-top:3px;color:#4f5c63;font:700 7px/1 Manrope,sans-serif;letter-spacing:.08em;font-style:normal}.arcadePlayer .playerEdit{min-width:70px}</style>
+.learningCourse{position:relative;overflow:hidden}.learningCourseIcon{position:absolute;inset-inline-end:18px;top:18px;width:66px;height:66px;border-radius:18px;border:1px solid #ffffff10;box-shadow:0 14px 42px #0007;opacity:.94}.learningCourse .courseTop{padding-inline-end:78px}.arcadePlayer em{display:block;margin-top:3px;color:#4f5c63;font:700 7px/1 Manrope,sans-serif;letter-spacing:.08em;font-style:normal}.arcadePlayer .playerEdit{min-width:70px}/* Global language + leaderboard upgrade */
+#langBtn{min-width:92px;height:38px;padding:0 13px!important;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #d9b55d55!important;background:linear-gradient(135deg,#d9b55d18,#9b8cff0c)!important;color:#f5e7bc!important;border-radius:11px!important;font-weight:900!important;font-size:10px!important;box-shadow:0 8px 28px #d9b55d12;position:relative}
+#langBtn:before{content:"文";width:20px;height:20px;border:1px solid #d9b55d55;border-radius:6px;display:grid;place-items:center;color:#d9b55d;font-size:10px}
+#langBtn:after{content:"↔";color:#8e94a5;font-size:10px}
+#langBtn:hover{border-color:#d9b55d99!important;background:#d9b55d20!important;transform:translateY(-1px)}
+.globalLeaderboard{margin:0 0 28px;padding:18px;border:1px solid #7bf6df1c;border-radius:18px;background:radial-gradient(circle at 90% 0,#7bf6df08,transparent 35%),#ffffff03}
+.leaderHead{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:13px}
+.leaderHead b{display:block;color:#7bf6df;font-size:9px;letter-spacing:.12em}.leaderHead h3{margin:5px 0 0;font-size:20px}.leaderHead p{margin:0;color:#6f7b83;font-size:9px;line-height:1.7}
+.leaderTabs{display:flex;gap:5px;flex-wrap:wrap}.leaderTab{border:1px solid #ffffff10;background:#ffffff03;color:#78858b;border-radius:9px;padding:8px 10px;font:800 9px inherit;cursor:pointer}.leaderTab.active{border-color:#7bf6df45;color:#d9fff5;background:#7bf6df08}
+.leaderGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.leaderTable{border:1px solid #ffffff0c;border-radius:14px;overflow:hidden}.leaderRow{display:grid;grid-template-columns:34px 1fr 110px 80px;align-items:center;gap:8px;padding:9px 11px;border-bottom:1px solid #ffffff08;font-size:10px}.leaderRow:last-child{border-bottom:0}.leaderRow.head{color:#5f6d74;background:#ffffff03;font-size:8px;font-weight:900}.leaderRank{color:#d9b55d;font-weight:900}.leaderName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.leaderScore{font-weight:900;color:#e8edf0;text-align:left}.leaderTime{color:#626f77;text-align:left;font-size:8px}.leaderLoading,.leaderEmpty{padding:22px;text-align:center;color:#69777e;font-size:10px}.leaderSide{padding:14px;border:1px solid #ffffff0c;border-radius:14px;background:#ffffff02}.leaderSide strong{display:block;font-size:13px}.leaderSide p{color:#6d7980;font-size:9px;line-height:1.8;margin:7px 0}.leaderRefresh{border:1px solid #ffffff12;background:#ffffff03;color:#aab3b8;border-radius:9px;padding:8px 10px;font:800 9px inherit;cursor:pointer}.leaderRefresh:hover{border-color:#7bf6df35;color:#dffff8}
+@media(max-width:760px){.leaderGrid{grid-template-columns:1fr}.leaderRow{grid-template-columns:28px 1fr 78px}.leaderTime{display:none}.leaderHead{display:block}.leaderTabs{margin-top:10px}}
+</style>
 <style id="adland-type">
 html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 body{font-family:Sora,Vazirmatn,sans-serif!important}
@@ -290,6 +301,11 @@ html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:ant
       <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
       <div class="gameStat"><small>METEOR SCORE</small><b id="arcadeBestMeteor">—</b></div>
     </div>
+  </div>
+
+  <div class="globalLeaderboard reveal" id="globalLeaderboard">
+    <div class="leaderHead"><div><b>GLOBAL / WORLDWIDE</b><h3 data-fa="رکوردهای جهانی" data-en="Global leaderboard">رکوردهای جهانی</h3><p data-fa="این جدول از یک دیتابیس مشترک خوانده می‌شود؛ رکوردها برای بازیکن‌های دستگاه‌های مختلف قابل مشاهده‌اند." data-en="A shared database powers this board, so scores from different devices can be seen together.">این جدول از یک دیتابیس مشترک خوانده می‌شود؛ رکوردها برای بازیکن‌های دستگاه‌های مختلف قابل مشاهده‌اند.</p></div><div class="leaderTabs"><button class="leaderTab active" data-game="reflex">REFLEX</button><button class="leaderTab" data-game="memory">MEMORY</button><button class="leaderTab" data-game="meteor">METEOR</button></div></div>
+    <div class="leaderGrid"><div class="leaderTable" id="leaderTable"><div class="leaderLoading" data-fa="در حال دریافت رکوردهای جهانی…" data-en="Loading global records…">در حال دریافت رکوردهای جهانی…</div></div><div class="leaderSide"><strong data-fa="رکورد تو هم می‌تواند اینجا باشد." data-en="Your score can appear here.">رکورد تو هم می‌تواند اینجا باشد.</strong><p data-fa="بعد از تمام‌کردن هر چالش، نتیجهٔ تو برای Leaderboard جهانی ارسال می‌شود. نامت را از بخش Player تنظیم کن." data-en="After a challenge, your score is submitted to the global board. Set your player name from the Player panel.">بعد از تمام‌کردن هر چالش، نتیجهٔ تو برای Leaderboard جهانی ارسال می‌شود. نامت را از بخش Player تنظیم کن.</p><button class="leaderRefresh" id="leaderRefresh" data-fa="↻ تازه‌سازی" data-en="↻ Refresh">↻ تازه‌سازی</button></div></div>
   </div>
 
   <div class="arcadeIdentity glass" id="arcadeIdentity" aria-hidden="true">
