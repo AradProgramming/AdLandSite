@@ -709,27 +709,49 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   let game='reflex';
   const label=()=>{const n=(localStorage.getItem('adland-arcade-player-name')||'Guest').trim().slice(0,18);return n||'Guest'};
+  const keyFor=name=>{let h=2166136261;for(const ch of name.trim().toLowerCase()){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return 'name_'+(h>>>0).toString(16)};
   const scoreText=(g,s)=>g==='reflex'?Math.round(s)+' ms':String(Math.round(s));
+  const isBetter=(g,a,b)=>g==='reflex'?Number(a)<Number(b):Number(a)>Number(b);
   const load=async()=>{
     const box=qs('#leaderTable');if(!box)return;
     box.innerHTML='<div class="leaderLoading">'+(root.lang==='fa'?'در حال دریافت رکوردهای جهانی…':'Loading global records…')+'</div>';
     try{
       const order=game==='reflex'?'score.asc,created_at.asc':'score.desc,created_at.asc';
-      const u=SUPA_URL+'/rest/v1/arcade_scores?select=player_name,score,created_at&game=eq.'+encodeURIComponent(game)+'&order='+encodeURIComponent(order)+'&limit=10';
+      const u=SUPA_URL+'/rest/v1/arcade_scores?select=player_name,score,created_at&game=eq.'+encodeURIComponent(game)+'&order='+encodeURIComponent(order)+'&limit=1000';
       const res=await fetch(u,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
       if(!res.ok)throw new Error('leaderboard '+res.status);
       const rows=await res.json();
-      if(!rows.length){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'هنوز رکوردی ثبت نشده. اولین نفر باش!':'No records yet. Be the first!')+'</div>';return}
+      const bestByName=new Map();
+      for(const row of rows){
+        const name=(row.player_name||'Guest').trim().slice(0,24)||'Guest';
+        const prev=bestByName.get(name);
+        if(!prev||isBetter(game,row.score,prev.score))bestByName.set(name,row);
+      }
+      const best=[...bestByName.values()].sort((a,b)=>isBetter(game,a.score,b.score)?-1:isBetter(game,b.score,a.score)?1:new Date(a.created_at)-new Date(b.created_at)).slice(0,10);
+      if(!best.length){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'هنوز رکوردی ثبت نشده. اولین نفر باش!':'No records yet. Be the first!')+'</div>';return}
       const head=root.lang==='fa'?['رتبه','بازیکن','امتیاز','زمان']:['Rank','Player','Score','Date'];
       let h='<div class="leaderRow head"><span>'+head[0]+'</span><span>'+head[1]+'</span><span>'+head[2]+'</span><span>'+head[3]+'</span></div>';
-      rows.forEach((r,i)=>{const d=new Date(r.created_at);h+='<div class="leaderRow"><span class="leaderRank">#'+(i+1)+'</span><span class="leaderName">'+esc(r.player_name||'Guest')+'</span><span class="leaderScore">'+esc(scoreText(game,r.score))+'</span><span class="leaderTime">'+esc(d.toLocaleDateString(root.lang==='fa'?'fa-IR':'en-US',{month:'short',day:'numeric'}))+'</span></div>'});
+      best.forEach((r,i)=>{const d=new Date(r.created_at);h+='<div class="leaderRow"><span class="leaderRank">#'+(i+1)+'</span><span class="leaderName">'+esc(r.player_name||'Guest')+'</span><span class="leaderScore">'+esc(scoreText(game,r.score))+'</span><span class="leaderTime">'+esc(d.toLocaleDateString(root.lang==='fa'?'fa-IR':'en-US',{month:'short',day:'numeric'}))+'</span></div>'});
       box.innerHTML=h;
     }catch(e){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'اتصال Leaderboard فعلاً در دسترس نیست.':'Global leaderboard is temporarily unavailable.')+'</div>'}
   };
   const submit=async(g,score)=>{
     const name=label();if(name==='Guest')return;
+    const key=keyFor(name);
+    const base=SUPA_URL+'/rest/v1/arcade_scores?select=id,score,player_name&game=eq.'+encodeURIComponent(g)+'&player_key=eq.'+encodeURIComponent(key)+'&limit=1';
     try{
-      await fetch(SUPA_URL+'/rest/v1/arcade_scores',{method:'POST',headers,body:JSON.stringify({game:g,player_name:name,player_key:crypto.randomUUID(),score:Math.round(score),device_label:navigator.platform})});
+      const got=await fetch(base,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
+      if(!got.ok)throw new Error('lookup '+got.status);
+      const current=(await got.json())[0];
+      const value=Math.round(score);
+      if(current){
+        if(!isBetter(g,value,current.score))return;
+        const patch=await fetch(SUPA_URL+'/rest/v1/arcade_scores?game=eq.'+encodeURIComponent(g)+'&player_key=eq.'+encodeURIComponent(key),{method:'PATCH',headers,body:JSON.stringify({score:value,player_name:name,device_label:navigator.platform,updated_at:new Date().toISOString()})});
+        if(!patch.ok)throw new Error('update '+patch.status);
+      }else{
+        const post=await fetch(SUPA_URL+'/rest/v1/arcade_scores',{method:'POST',headers,body:JSON.stringify({game:g,player_name:name,player_key:key,score:value,device_label:navigator.platform})});
+        if(!post.ok)throw new Error('insert '+post.status);
+      }
       if(g===game)load();
     }catch(e){}
   };
