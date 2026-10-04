@@ -108,12 +108,13 @@ body{font-size:14px}
 .memoryCell.wrong{border-color:#ff8e8e88;animation:shake .22s linear 2}
 @keyframes shake{25%{transform:translateX(4px)}75%{transform:translateX(-4px)}}
 .memoryStage{padding:0}
-.meteorStage{display:flex;align-items:center;justify-content:center}
+.meteorStage{display:flex;align-items:center;justify-content:center;height:310px;min-height:310px}
 #meteorCanvas{width:100%;height:100%;display:block;touch-action:none}
 .meteorHint{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);padding:5px 8px;border:1px solid #ffffff0e;border-radius:999px;background:#030406b8;color:#6e7b83;font-size:8px;white-space:nowrap;pointer-events:none}
 .arcadeFooterNote{margin-top:14px;color:#5f6c74;font-size:9px;line-height:1.8}
 @media(max-width:980px){.arcadeGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){
+  .meteorStage{height:290px;min-height:290px}
   .arcadeGrid{grid-template-columns:1fr}
   .gameCard{min-height:0}
   .gameStage{min-height:290px}
@@ -445,8 +446,9 @@ const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.cre
   const nextReflexRound=()=>{
     if(reflex.round>=5){
       const avg=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length);
-      els.reflexAvg.textContent=avg+' ms';writeBest('reflex',Math.max(1,Math.min(9999,10000-avg)));
-      const bestRaw=readBest('reflex');els.arcadeBestReflex.textContent=bestRaw+'';
+      els.reflexAvg.textContent=avg+' ms';
+      const previous=readBest('reflex');const best=(previous===0||avg<previous)?avg:previous;
+      localStorage.setItem(bestKey.reflex,String(best));els.arcadeBestReflex.textContent=best+' ms';
       els.reflexMessage.style.display='grid';
       els.reflexMessage.querySelector('strong').textContent=t('پایان چالش','Challenge complete');
       els.reflexMessage.querySelector('span').textContent=t('میانگین شما '+avg+' میلی‌ثانیه بود. دوباره شروع کن و رکوردت را بهتر کن.','Your average was '+avg+' ms. Run it again and beat your record.');
