@@ -1,0 +1,45 @@
+name: Roshd CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'roshd-app/**'
+      - 'assets/icons/projects/Roshd_icon.svg'
+      - '.github/workflows/roshd-ci.yml'
+      - 'app-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze-android:
+    name: Analyze + Android build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.5'
+          channel: stable
+          cache: true
+      - name: Prepare Flutter project
+        shell: bash
+        run: |
+          set -euo pipefail
+          flutter create --platforms=android --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          mkdir -p build-src/assets
+          cp -R roshd-app/assets/. build-src/assets/
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build APK
+        working-directory: build-src
+        run: flutter build apk --release
