@@ -256,4 +256,9 @@ jobs:
           set -euo pipefail
           TAG="roshd-v1.0.0"
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "${{ github.sha }}" --title "Roshd v1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی. Windows x64, macOS, Android APK/AAB and iOS unsigned build. Product of AdLand Studio."
-          gh release upload "$TAG" release-assets/* --clobber
+          found=0
+          while IFS= read -r -d '' asset; do
+            found=1
+            gh release upload "$TAG" "$asset" --clobber
+          done < <(find release-assets -type f -print0)
+          test "$found" -eq 1 || { echo "No release files found"; exit 1; }
