@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-10-04",
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-05",
   "manager": {
     "name": "Orbit",
     "version": "1.0.0",
@@ -323,6 +323,69 @@
           "version": "1.0.0",
           "dmg": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Orbit-1.0.0-universal.dmg",
           "zip": "https://github.com/AradProgramming/AdLandSite/releases/download/mac-v1.0.0/AdLand-Orbit-1.0.0-universal.zip"
+        }
+      }
+    },
+    {
+      "name": "AniDiary",
+      "version": "1.0.0",
+      "tag": "anidiary-v1.0.0",
+      "icon": "assets/icons/projects/AniDiary_icon.svg",
+      "site": "anidiary/",
+      "descFa": "دفتر دیجیتال انیمه برای پوستر، ژانر و پیشرفت.",
+      "descEn": "Local-first anime journal for posters, genres and progress.",
+      "platforms": {
+        "windows": {
+          "status": "release-pending",
+          "architectures": [
+            "x64"
+          ]
+        },
+        "macos": {
+          "status": "release-pending",
+          "architectures": [
+            "Apple Silicon",
+            "Intel"
+          ],
+          "version": "1.0.0",
+          "tag": "anidiary-v1.0.0"
+        }
+      }
+    },
+    {
+      "name": "Roshd",
+      "version": "1.0.0",
+      "tag": "roshd-v1.0.0",
+      "icon": "assets/icons/projects/Roshd_icon.svg",
+      "site": "roshd/",
+      "descFa": "میز مطالعه و برنامه‌ریزی فارسی‌محور؛ ویژه دانش‌آموزان تیزهوشانی.",
+      "descEn": "Persian-first study OS for ambitious students.",
+      "platforms": {
+        "windows": {
+          "status": "ci",
+          "architectures": [
+            "x64"
+          ]
+        },
+        "macos": {
+          "status": "ci",
+          "architectures": [
+            "Apple Silicon",
+            "Intel"
+          ]
+        },
+        "android": {
+          "status": "ci",
+          "architectures": [
+            "arm64",
+            "x64"
+          ]
+        },
+        "ios": {
+          "status": "unsigned-ci",
+          "architectures": [
+            "arm64"
+          ]
         }
       }
     }
