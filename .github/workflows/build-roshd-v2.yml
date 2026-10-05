@@ -242,8 +242,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mv release-assets/app-release.apk release-assets/Roshd-1.0.0-Android.apk
-          mv release-assets/app-release.aab release-assets/Roshd-1.0.0-Android.aab
+          apk="$(find release-assets -type f -name 'app-release.apk' -print -quit)"
+          aab="$(find release-assets -type f -name 'app-release.aab' -print -quit)"
+          test -n "$apk" || { echo "Android APK artifact not found"; find release-assets -maxdepth 6 -type f -print; exit 1; }
+          test -n "$aab" || { echo "Android AAB artifact not found"; find release-assets -maxdepth 6 -type f -print; exit 1; }
+          mv "$apk" release-assets/Roshd-1.0.0-Android.apk
+          mv "$aab" release-assets/Roshd-1.0.0-Android.aab
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
