@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -713,7 +714,7 @@ class RoshdApp extends StatelessWidget {
       title: 'Roshd | رشد',
       theme: theme,
       home: Directionality(
-        textDirection: isFa ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: isFa ? ui.TextDirection.rtl : ui.TextDirection.ltr,
         child: Shell(store: store),
       ),
     );
@@ -1334,7 +1335,7 @@ class PanelHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rtl = Directionality.of(context) == TextDirection.rtl;
+    final rtl = Directionality.of(context) == ui.TextDirection.rtl;
     return Row(
       children: [
         Expanded(
