@@ -44,6 +44,10 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
+          import re
+
+          desugar_kts = 'coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")'
+          desugar_groovy = "coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'"
 
           kts = Path("android/app/build.gradle.kts")
           groovy = Path("android/app/build.gradle")
@@ -51,74 +55,93 @@ jobs:
           if kts.exists():
               path = kts
               text = path.read_text(encoding="utf-8")
+
               if "isCoreLibraryDesugaringEnabled = true" not in text:
-                  if "compileOptions {" in text:
-                      text = text.replace(
-                          "compileOptions {",
-                          "compileOptions {\n        isCoreLibraryDesugaringEnabled = true",
-                          1,
-                      )
+                  m = re.search(r"(?m)^\s*compileOptions\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + "\n        isCoreLibraryDesugaringEnabled = true" + text[m.end():]
                   else:
                       text = text.replace(
                           "android {",
                           "android {\n    compileOptions {\n        isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17\n    }",
                           1,
                       )
+
               if "sourceCompatibility = JavaVersion.VERSION_17" not in text:
                   text = text.replace(
                       "isCoreLibraryDesugaringEnabled = true",
                       "isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17",
                       1,
                   )
+
               if "multiDexEnabled = true" not in text:
-                  if "defaultConfig {" in text:
-                      text = text.replace("defaultConfig {", "defaultConfig {\n        multiDexEnabled = true", 1)
+                  m = re.search(r"(?m)^\s*defaultConfig\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + "\n        multiDexEnabled = true" + text[m.end():]
                   else:
-                      text = text.replace("android {", "android {\n    defaultConfig {\n        multiDexEnabled = true\n    }", 1)
-              if 'coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")' not in text:
-                  text = text.replace(
-                      "dependencies {",
-                      'dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")',
-                      1,
-                  )
+                      text = text.replace(
+                          "android {",
+                          "android {\n    defaultConfig {\n        multiDexEnabled = true\n    }",
+                          1,
+                      )
+
+              if desugar_kts not in text:
+                  m = re.search(r"(?m)^\s*dependencies\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + f"\n    {desugar_kts}" + text[m.end():]
+                  else:
+                      text = text.rstrip() + f"\n\ndependencies {{\n    {desugar_kts}\n}}\n"
+              required = [desugar_kts, "isCoreLibraryDesugaringEnabled = true"]
+
           elif groovy.exists():
               path = groovy
               text = path.read_text(encoding="utf-8")
+
               if "coreLibraryDesugaringEnabled true" not in text:
-                  if "compileOptions {" in text:
-                      text = text.replace(
-                          "compileOptions {",
-                          "compileOptions {\n        coreLibraryDesugaringEnabled true",
-                          1,
-                      )
+                  m = re.search(r"(?m)^\s*compileOptions\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + "\n        coreLibraryDesugaringEnabled true" + text[m.end():]
                   else:
                       text = text.replace(
                           "android {",
                           "android {\n    compileOptions {\n        coreLibraryDesugaringEnabled true\n        sourceCompatibility JavaVersion.VERSION_17\n        targetCompatibility JavaVersion.VERSION_17\n    }",
                           1,
                       )
+
               if "sourceCompatibility JavaVersion.VERSION_17" not in text:
                   text = text.replace(
                       "coreLibraryDesugaringEnabled true",
                       "coreLibraryDesugaringEnabled true\n        sourceCompatibility JavaVersion.VERSION_17\n        targetCompatibility JavaVersion.VERSION_17",
                       1,
                   )
+
               if "multiDexEnabled true" not in text:
-                  if "defaultConfig {" in text:
-                      text = text.replace("defaultConfig {", "defaultConfig {\n        multiDexEnabled true", 1)
+                  m = re.search(r"(?m)^\s*defaultConfig\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + "\n        multiDexEnabled true" + text[m.end():]
                   else:
-                      text = text.replace("android {", "android {\n    defaultConfig {\n        multiDexEnabled true\n    }", 1)
-              if "coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'" not in text:
-                  text = text.replace(
-                      "dependencies {",
-                      "dependencies {\n    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'",
-                      1,
-                  )
+                      text = text.replace(
+                          "android {",
+                          "android {\n    defaultConfig {\n        multiDexEnabled true\n    }",
+                          1,
+                      )
+
+              if desugar_groovy not in text:
+                  m = re.search(r"(?m)^\s*dependencies\s*\{", text)
+                  if m:
+                      text = text[:m.end()] + f"\n    {desugar_groovy}" + text[m.end():]
+                  else:
+                      text = text.rstrip() + f"\n\ndependencies {{\n    {desugar_groovy}\n}}\n"
+              required = [desugar_groovy, "coreLibraryDesugaringEnabled true"]
           else:
               raise SystemExit("Android Gradle file not found")
 
           path.write_text(text, encoding="utf-8")
-          print(f"Configured {path}")
+          final = path.read_text(encoding="utf-8")
+          missing = [item for item in required if item not in final]
+          if missing:
+              raise SystemExit("Android desugaring configuration incomplete: " + ", ".join(missing))
+          print(f"Configured and validated {path}")
           PY
       - name: Analyze
         id: analyze
