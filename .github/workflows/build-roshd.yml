@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: \${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -38,6 +38,89 @@ jobs:
       - name: Dependencies
         working-directory: build-src
         run: flutter pub get
+      - name: Configure Android core library desugaring
+        working-directory: build-src
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          kts = Path("android/app/build.gradle.kts")
+          groovy = Path("android/app/build.gradle")
+
+          if kts.exists():
+              path = kts
+              text = path.read_text(encoding="utf-8")
+              if "isCoreLibraryDesugaringEnabled = true" not in text:
+                  if "compileOptions {" in text:
+                      text = text.replace(
+                          "compileOptions {",
+                          "compileOptions {\n        isCoreLibraryDesugaringEnabled = true",
+                          1,
+                      )
+                  else:
+                      text = text.replace(
+                          "android {",
+                          "android {\n    compileOptions {\n        isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17\n    }",
+                          1,
+                      )
+              if "sourceCompatibility = JavaVersion.VERSION_17" not in text:
+                  text = text.replace(
+                      "isCoreLibraryDesugaringEnabled = true",
+                      "isCoreLibraryDesugaringEnabled = true\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17",
+                      1,
+                  )
+              if "multiDexEnabled = true" not in text:
+                  if "defaultConfig {" in text:
+                      text = text.replace("defaultConfig {", "defaultConfig {\n        multiDexEnabled = true", 1)
+                  else:
+                      text = text.replace("android {", "android {\n    defaultConfig {\n        multiDexEnabled = true\n    }", 1)
+              if 'coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")' not in text:
+                  text = text.replace(
+                      "dependencies {",
+                      'dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")',
+                      1,
+                  )
+          elif groovy.exists():
+              path = groovy
+              text = path.read_text(encoding="utf-8")
+              if "coreLibraryDesugaringEnabled true" not in text:
+                  if "compileOptions {" in text:
+                      text = text.replace(
+                          "compileOptions {",
+                          "compileOptions {\n        coreLibraryDesugaringEnabled true",
+                          1,
+                      )
+                  else:
+                      text = text.replace(
+                          "android {",
+                          "android {\n    compileOptions {\n        coreLibraryDesugaringEnabled true\n        sourceCompatibility JavaVersion.VERSION_17\n        targetCompatibility JavaVersion.VERSION_17\n    }",
+                          1,
+                      )
+              if "sourceCompatibility JavaVersion.VERSION_17" not in text:
+                  text = text.replace(
+                      "coreLibraryDesugaringEnabled true",
+                      "coreLibraryDesugaringEnabled true\n        sourceCompatibility JavaVersion.VERSION_17\n        targetCompatibility JavaVersion.VERSION_17",
+                      1,
+                  )
+              if "multiDexEnabled true" not in text:
+                  if "defaultConfig {" in text:
+                      text = text.replace("defaultConfig {", "defaultConfig {\n        multiDexEnabled true", 1)
+                  else:
+                      text = text.replace("android {", "android {\n    defaultConfig {\n        multiDexEnabled true\n    }", 1)
+              if "coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'" not in text:
+                  text = text.replace(
+                      "dependencies {",
+                      "dependencies {\n    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'",
+                      1,
+                  )
+          else:
+              raise SystemExit("Android Gradle file not found")
+
+          path.write_text(text, encoding="utf-8")
+          print(f"Configured {path}")
+          PY
       - name: Analyze
         working-directory: build-src
         run: |
@@ -57,8 +140,8 @@ jobs:
         shell: bash
         run: |
           mkdir -p release-assets
-          cp build-src/build/app/outputs/flutter-apk/app-release.apk release-assets/Roshd-\${{ env.VERSION }}-Android.apk
-          cp build-src/build/app/outputs/bundle/release/app-release.aab release-assets/Roshd-\${{ env.VERSION }}-Android.aab
+          cp build-src/build/app/outputs/flutter-apk/app-release.apk release-assets/Roshd-${{ env.VERSION }}-Android.apk
+          cp build-src/build/app/outputs/bundle/release/app-release.aab release-assets/Roshd-${{ env.VERSION }}-Android.aab
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-android
@@ -72,7 +155,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: \${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -96,11 +179,11 @@ jobs:
         run: flutter build windows --release
       - name: Package Windows
         shell: pwsh
-        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-\${{ env.VERSION }}-Windows-x64.zip -Force
+        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-${{ env.VERSION }}-Windows-x64.zip -Force
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-windows
-          path: Roshd-\${{ env.VERSION }}-Windows-x64.zip
+          path: Roshd-${{ env.VERSION }}-Windows-x64.zip
           if-no-files-found: error
 
   macos-arm64:
@@ -110,7 +193,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: \${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -139,11 +222,11 @@ jobs:
         run: flutter build macos --release
       - name: Package macOS
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-\${{ env.VERSION }}-macOS-AppleSilicon.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.VERSION }}-macOS-AppleSilicon.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-macos-arm64
-          path: Roshd-\${{ env.VERSION }}-macOS-AppleSilicon.zip
+          path: Roshd-${{ env.VERSION }}-macOS-AppleSilicon.zip
           if-no-files-found: error
 
   macos-intel:
@@ -153,7 +236,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: \${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -182,11 +265,11 @@ jobs:
         run: flutter build macos --release
       - name: Package macOS
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-\${{ env.VERSION }}-macOS-Intel.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.VERSION }}-macOS-Intel.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-macos-intel
-          path: Roshd-\${{ env.VERSION }}-macOS-Intel.zip
+          path: Roshd-${{ env.VERSION }}-macOS-Intel.zip
           if-no-files-found: error
 
   ios:
@@ -196,7 +279,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: \${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -225,11 +308,11 @@ jobs:
         run: flutter build ios --release --no-codesign
       - name: Package iOS
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-\${{ env.VERSION }}-iOS-unsigned.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-${{ env.VERSION }}-iOS-unsigned.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-ios
-          path: Roshd-\${{ env.VERSION }}-iOS-unsigned.zip
+          path: Roshd-${{ env.VERSION }}-iOS-unsigned.zip
           if-no-files-found: error
 
   release:
@@ -245,15 +328,15 @@ jobs:
           merge-multiple: true
       - name: Publish
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          if gh release view "\${{ env.TAG }}" >/dev/null 2>&1; then
-            gh release upload "\${{ env.TAG }}" release-assets/* --clobber
+          if gh release view "${{ env.TAG }}" >/dev/null 2>&1; then
+            gh release upload "${{ env.TAG }}" release-assets/* --clobber
           else
-            gh release create "\${{ env.TAG }}" release-assets/* \
-              --target "\${{ github.sha }}" \
+            gh release create "${{ env.TAG }}" release-assets/* \
+              --target "${{ github.sha }}" \
               --title "Roshd 1.0.0" \
               --notes "Roshd | رشد — میز مطالعهٔ فارسی‌محور از AdLand Studio.
 
