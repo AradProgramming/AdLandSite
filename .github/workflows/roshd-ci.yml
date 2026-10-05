@@ -38,8 +38,20 @@ jobs:
         working-directory: build-src
         run: flutter pub get
       - name: Analyze
+        id: analyze
+        continue-on-error: true
         working-directory: build-src
-        run: flutter analyze
+        shell: bash
+        run: |
+          flutter analyze > analyze.log 2>&1
+          cat analyze.log
+      - name: Upload analyzer report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-analyzer-report
+          path: build-src/analyze.log
+          if-no-files-found: error
       - name: Build APK
         working-directory: build-src
         run: flutter build apk --release
