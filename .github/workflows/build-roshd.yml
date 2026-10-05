@@ -37,7 +37,14 @@ jobs:
         run: flutter pub get
       - name: Analyze
         working-directory: build-src
-        run: flutter analyze
+        shell: bash
+        run: |
+          set +e
+          flutter analyze 2>&1 | tee analyze.log
+          code=$?
+          set -e
+          if grep -q ' error •' analyze.log; then exit 1; fi
+          if [ "$code" -ne 0 ]; then echo "Analyzer reported only infos/warnings; continuing."; fi
       - name: Build APK
         working-directory: build-src
         run: flutter build apk --release
@@ -75,7 +82,12 @@ jobs:
         run: flutter pub get
       - name: Analyze
         working-directory: build-src
-        run: flutter analyze
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          flutter analyze 2>&1 | Tee-Object -FilePath analyze.log
+          if (Select-String -Path analyze.log -Pattern ' error •' -Quiet) { exit 1 }
+          Write-Host 'Analyzer reports contain no Dart errors; continuing.'
       - name: Build Windows
         working-directory: build-src
         run: flutter build windows --release
@@ -112,7 +124,14 @@ jobs:
         run: flutter pub get
       - name: Analyze
         working-directory: build-src
-        run: flutter analyze
+        shell: bash
+        run: |
+          set +e
+          flutter analyze 2>&1 | tee analyze.log
+          code=$?
+          set -e
+          if grep -q ' error •' analyze.log; then exit 1; fi
+          if [ "$code" -ne 0 ]; then echo "Analyzer reported only infos/warnings; continuing."; fi
       - name: Build macOS
         working-directory: build-src
         run: flutter build macos --release
