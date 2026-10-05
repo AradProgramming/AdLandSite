@@ -2563,65 +2563,93 @@ class FlashcardsView extends StatelessWidget {
   }
 }
 
-class SubjectsView extends StatelessWidget {
+class SubjectsView extends StatefulWidget {
   final RoshdStore store;
-
   const SubjectsView({super.key, required this.store});
+  @override State<SubjectsView> createState() => _SubjectsViewState();
+}
+
+class _SubjectsViewState extends State<SubjectsView> {
+  Future<void> addSubject() async {
+    final name = TextEditingController();
+    final goal = TextEditingController(text: '180');
+    var color = 0xff7bf6df;
+    const colors = [0xff7bf6df,0xff8a7cff,0xfff4d47c,0xffff8fb1,0xff7ca8ff,0xffffa35c];
+    await showDialog(
+      context: context,
+      builder: (_) => StatefulBuilder(
+        builder: (context, set) => AlertDialog(
+          title: Text(widget.store.lang == 'fa' ? 'درس جدید' : 'New subject'),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            TextField(controller: name, decoration: InputDecoration(labelText: widget.store.lang == 'fa' ? 'نام درس' : 'Subject name')),
+            const SizedBox(height: 9),
+            TextField(controller: goal, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: widget.store.lang == 'fa' ? 'هدف هفتگی (دقیقه)' : 'Weekly goal (minutes)')),
+            const SizedBox(height: 9),
+            Wrap(spacing: 8, children: colors.map((x) => InkWell(
+              onTap: () => set(() => color = x),
+              borderRadius: BorderRadius.circular(99),
+              child: Container(width: 30, height: 30, decoration: BoxDecoration(
+                color: Color(x), shape: BoxShape.circle,
+                border: Border.all(color: color == x ? Colors.white : Colors.transparent, width: 3),
+              )),
+            )).toList()),
+          ]),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(widget.store.lang == 'fa' ? 'لغو' : 'Cancel')),
+            FilledButton(
+              onPressed: () async {
+                final n = name.text.trim();
+                if (n.isEmpty || widget.store.subjects.any((s) => s.name == n)) return;
+                widget.store.subjects.add(SubjectItem(name: n, goal: max(30, int.tryParse(goal.text) ?? 180), color: color));
+                await widget.store.save();
+                if (mounted) Navigator.pop(context);
+              },
+              child: Text(widget.store.lang == 'fa' ? 'افزودن' : 'Add'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isFa = store.lang == 'fa';
-
+    final fa = widget.store.lang == 'fa';
     return ListView(
       children: [
-        Text(
-          isFa
-              ? 'هدف هفتگی هر درس را مشخص کن.'
-              : 'Set a weekly goal for every subject.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
+        Row(children: [
+          Expanded(child: Text(fa ? 'درس‌ها و هدف‌ها' : 'Subjects & goals', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900))),
+          IconButton.filled(onPressed: addSubject, icon: const Icon(Icons.add_rounded)),
+        ]),
+        Text(fa ? 'برای هر درس هدف هفتگی بگذار و با نوار پیشرفت ببین چقدر به آن نزدیک شده‌ای.' : 'Set a weekly goal for each subject and track it with a progress bar.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant, height: 1.7)),
         const SizedBox(height: 10),
-        ...store.subjects.map(
-          (subject) {
-            final minutes = store.subjectMinutes(subject.name);
-            final progress = subject.goal <= 0
-                ? 0.0
-                : min(1.0, minutes / subject.goal);
-            return GlassPanel(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          subject.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        minutes.toString() +
-                            ' / ' +
-                            subject.goal.toString() +
-                            ' min',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  LinearProgressIndicator(
-                    value: progress,
-                    color: Color(subject.color),
-                    minHeight: 8,
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+        ...widget.store.subjects.map((subject) {
+          final minutes = widget.store.subjectMinutes(subject.name);
+          final progress = subject.goal <= 0 ? 0.0 : min(1.0, minutes / subject.goal);
+          return Dismissible(
+            key: ValueKey(subject.name),
+            background: Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(color: Colors.red.withOpacity(.08), borderRadius: BorderRadius.circular(22)),
+              alignment: AlignmentDirectional.centerEnd,
+              padding: const EdgeInsets.all(18),
+              child: const Icon(Icons.delete_outline_rounded),
+            ),
+            onDismissed: (_) { widget.store.subjects.remove(subject); widget.store.save(); },
+            child: GlassPanel(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(children: [
+                  Container(width: 11, height: 11, decoration: BoxDecoration(color: Color(subject.color), shape: BoxShape.circle)),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(subject.name, style: const TextStyle(fontWeight: FontWeight.w900))),
+                  Text(minutes.toString() + ' / ' + subject.goal.toString() + ' min'),
+                ]),
+                const SizedBox(height: 8),
+                LinearProgressIndicator(value: progress, color: Color(subject.color), backgroundColor: Color(subject.color).withOpacity(.08), minHeight: 8),
+              ]),
+            ),
+          );
+        }),
       ],
     );
   }
