@@ -317,9 +317,7 @@
       img.addEventListener('error',()=>{
         if(img.dataset.alIconReplaced==='1')return;
         img.dataset.alIconReplaced='1';
-        const label=(img.getAttribute('alt')||'A').trim().slice(0,1).toUpperCase();
-        const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7df97"/><stop offset="1" stop-color="#9f772e"/></linearGradient></defs><rect width="128" height="128" rx="28" fill="#080a0e"/><circle cx="64" cy="64" r="39" fill="none" stroke="url(#g)" stroke-width="3"/><text x="64" y="75" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="46" font-weight="900" fill="url(#g)">'+label+'</text></svg>';
-        img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+        img.src='/AdLandSite/assets/logo/adland-studio-user.jpg?v=20261005';
       });
     };
     document.querySelectorAll('img[src*="/icons/"],img[src*="/logo/"]').forEach(makeFallback);
