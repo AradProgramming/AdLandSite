@@ -73,7 +73,9 @@ jobs:
         shell: pwsh
         run: |
           flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
-          Remove-Item -Recurse -Force build-src\lib,build-src\assets,build-src\test
+          Remove-Item -Recurse -Force build-src\lib -ErrorAction SilentlyContinue
+          Remove-Item -Recurse -Force build-src\assets -ErrorAction SilentlyContinue
+          Remove-Item -Recurse -Force build-src\test -ErrorAction SilentlyContinue
           Copy-Item -Recurse roshd-app\lib build-src\lib
           Copy-Item -Recurse roshd-app\assets build-src\assets
           Copy-Item -Force roshd-app\pubspec.yaml build-src\pubspec.yaml
