@@ -1,0 +1,193 @@
+name: Build Roshd v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'roshd-app/**'
+      - 'roshd/**'
+      - 'assets/icons/projects/Roshd_icon.svg'
+      - 'app-manifest.json'
+      - 'index.html'
+      - 'sitemap.xml'
+      - '.github/workflows/build-roshd-v2.yml'
+
+concurrency:
+  group: roshd-v2-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: '3.47.5'
+  APP_VERSION: '1.0.0'
+  TAG: 'roshd-v1.0.0'
+
+jobs:
+  android:
+    name: Android APK + AAB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Prepare project
+        run: |
+          set -euo pipefail
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Get dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: |
+          set +e
+          flutter analyze 2>&1 | tee analyze.log
+          code=${PIPESTATUS[0]}
+          set -e
+          if grep -q ' error •' analyze.log; then exit 1; fi
+          if [ "$code" -ne 0 ]; then echo "No Dart errors; analyzer infos/warnings are non-fatal."; fi
+      - name: Build APK
+        working-directory: build-src
+        run: flutter build apk --release
+      - name: Build AAB
+        working-directory: build-src
+        run: flutter build appbundle --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roshd-android
+          path: |
+            build-src/build/app/outputs/flutter-apk/app-release.apk
+            build-src/build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+
+  windows:
+    name: Windows x64
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Prepare project
+        shell: pwsh
+        run: |
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          Remove-Item -Recurse -Force build-srclib -ErrorAction SilentlyContinue
+          Remove-Item -Recurse -Force build-srcassets -ErrorAction SilentlyContinue
+          Remove-Item -Recurse -Force build-src	est -ErrorAction SilentlyContinue
+          Copy-Item -Recurse roshd-applib build-srclib
+          Copy-Item -Recurse roshd-appassets build-srcassets
+          Copy-Item -Force roshd-apppubspec.yaml build-srcpubspec.yaml
+      - name: Get dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          flutter analyze 2>&1 | Tee-Object -FilePath analyze.log
+          if (Select-String -Path analyze.log -Pattern ' error •' -Quiet) { exit 1 }
+          Write-Host 'No Dart errors; analyzer infos/warnings are non-fatal.'
+      - name: Build Windows
+        working-directory: build-src
+        run: flutter build windows --release
+      - name: Package
+        shell: pwsh
+        run: Compress-Archive -Path build-srcuildwindowsdunnerRelease* -DestinationPath Roshd-${{ env.APP_VERSION }}-Windows-x64.zip -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roshd-windows
+          path: Roshd-${{ env.APP_VERSION }}-Windows-x64.zip
+          if-no-files-found: error
+
+  apple:
+    name: macOS + iPhone
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Prepare project
+        run: |
+          set -euo pipefail
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Get dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: |
+          set +e
+          flutter analyze 2>&1 | tee analyze.log
+          code=${PIPESTATUS[0]}
+          set -e
+          if grep -q ' error •' analyze.log; then exit 1; fi
+          if [ "$code" -ne 0 ]; then echo "No Dart errors; analyzer infos/warnings are non-fatal."; fi
+      - name: Build macOS
+        working-directory: build-src
+        run: flutter build macos --release
+      - name: Package macOS
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.APP_VERSION }}-macOS.zip
+      - name: Build iOS unsigned
+        working-directory: build-src
+        run: flutter build ios --release --no-codesign
+      - name: Package iOS
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roshd-apple
+          path: |
+            Roshd-${{ env.APP_VERSION }}-macOS.zip
+            Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish Roshd 1.0.0
+    needs: [android, windows, apple]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: roshd-*
+          path: release-assets
+          merge-multiple: true
+      - name: Rename Android artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mv release-assets/app-release.apk release-assets/Roshd-${{ env.APP_VERSION }}-Android.apk
+          mv release-assets/app-release.aab release-assets/Roshd-${{ env.APP_VERSION }}-Android.aab
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "${{ env.TAG }}" >/dev/null 2>&1; then
+            gh release upload "${{ env.TAG }}" release-assets/* --clobber
+          else
+            gh release create "${{ env.TAG }}" release-assets/* --target "${{ github.sha }}" --title "Roshd 1.0.0" --notes "رشد | Roshd — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی.
+
+Windows x64 · macOS · Android APK/AAB · iOS unsigned build
+
+Roshd is a product of AdLand Studio. The iOS package is unsigned and requires Apple Developer signing for TestFlight/App Store distribution."
+          fi
