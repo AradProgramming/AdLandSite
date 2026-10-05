@@ -145,9 +145,5 @@ jobs:
         run: |
           set -euo pipefail
           TAG="roshd-v1.0.0"
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "${{ github.sha }}" --title "Roshd v1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی.
-
-Windows x64 · macOS · Android APK/AAB · iOS unsigned build
-
-Roshd is a product of AdLand Studio. The iOS artifact is unsigned and requires Apple Developer signing for TestFlight/App Store distribution."
-          find release-assets -type f -print0 | xargs -0 -r -n10 gh release upload "$TAG" --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "${{ github.sha }}" --title "Roshd v1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی. Windows x64, macOS, Android APK/AAB and iOS unsigned build. Product of AdLand Studio."
+          gh release upload "$TAG" release-assets/* --clobber
