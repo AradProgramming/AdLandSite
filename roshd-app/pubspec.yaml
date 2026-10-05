@@ -1,0 +1,28 @@
+name: roshd
+description: "Roshd — Persian-first study planning and focus workspace by AdLand Studio."
+publish_to: "none"
+version: 1.0.0+1
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^9.0.0
+  shared_preferences: ^2.5.5
+  intl: ^0.20.3
+  fl_chart: ^1.2.0
+  audioplayers: ^6.8.1
+  flutter_local_notifications: ^22.3.1
+  path_provider: ^2.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
