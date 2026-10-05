@@ -1,0 +1,241 @@
+name: Build Roshd
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'roshd-app/**'
+      - 'roshd/**'
+      - 'assets/icons/projects/Roshd_icon.svg'
+      - '.github/workflows/build-roshd.yml'
+      - 'app-manifest.json'
+      - 'index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: '3.47.5'
+  APP_VERSION: '1.0.0'
+  TAG: 'roshd-v1.0.0'
+
+jobs:
+  android:
+    name: Android APK + AAB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Scaffold Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib
+          cp -R roshd-app/lib build-src/lib
+          rm -rf build-src/assets
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Resolve packages
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build APK
+        working-directory: build-src
+        run: flutter build apk --release
+      - name: Build App Bundle
+        working-directory: build-src
+        run: flutter build appbundle --release
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-android
+          path: |
+            build-src/build/app/outputs/flutter-apk/app-release.apk
+            build-src/build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+
+  windows:
+    name: Windows x64
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Scaffold Flutter project
+        shell: pwsh
+        run: |
+          flutter create --platforms=windows,android,ios,macos --org com.adland --project-name roshd build-src
+          Remove-Item -Recurse -Force build-src\lib
+          Copy-Item -Recurse roshd-app\lib build-src\lib
+          Remove-Item -Recurse -Force build-src\assets
+          Copy-Item -Recurse roshd-app\assets build-src\assets
+          Copy-Item -Force roshd-app\pubspec.yaml build-src\pubspec.yaml
+      - name: Resolve packages
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build Windows
+        working-directory: build-src
+        run: flutter build windows --release
+      - name: Package Windows
+        shell: pwsh
+        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-${{ env.APP_VERSION }}-Windows-x64.zip -Force
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-windows
+          path: Roshd-${{ env.APP_VERSION }}-Windows-x64.zip
+          if-no-files-found: error
+
+  macos-arm64:
+    name: macOS Apple Silicon
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Scaffold Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=windows,android,ios,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Resolve packages
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build macOS
+        working-directory: build-src
+        run: flutter build macos --release
+      - name: Package macOS
+        shell: bash
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.APP_VERSION }}-macOS-arm64.zip
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-macos-arm64
+          path: Roshd-${{ env.APP_VERSION }}-macOS-arm64.zip
+          if-no-files-found: error
+
+  macos-intel:
+    name: macOS Intel
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Scaffold Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=windows,android,ios,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Resolve packages
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build macOS
+        working-directory: build-src
+        run: flutter build macos --release
+      - name: Package macOS
+        shell: bash
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.APP_VERSION }}-macOS-intel.zip
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-macos-intel
+          path: Roshd-${{ env.APP_VERSION }}-macOS-intel.zip
+          if-no-files-found: error
+
+  ios:
+    name: iOS unsigned build
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Scaffold Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=windows,android,ios,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Resolve packages
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build iOS (unsigned)
+        working-directory: build-src
+        run: flutter build ios --release --no-codesign
+      - name: Package unsigned iOS app
+        shell: bash
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roshd-ios-unsigned
+          path: Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish Roshd release
+    needs: [android, windows, macos-arm64, macos-intel, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: roshd-*
+          path: release-assets
+          merge-multiple: true
+      - uses: actions/checkout@v4
+      - name: Rename Android artifacts
+        shell: bash
+        run: |
+          mv release-assets/app-release.apk release-assets/Roshd-${{ env.APP_VERSION }}-Android.apk
+          mv release-assets/app-release.aab release-assets/Roshd-${{ env.APP_VERSION }}-Android.aab
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "${{ env.TAG }}" >/dev/null 2>&1; then
+            gh release upload "${{ env.TAG }}" release-assets/* --clobber
+          else
+            gh release create "${{ env.TAG }}" release-assets/* --target "${{ github.sha }}"               --title "Roshd 1.0.0"               --notes "Roshd | رشد — Persian-first study planner and focus workspace by AdLand Studio.
+
+Windows x64, macOS Apple Silicon, macOS Intel, Android APK/AAB and an unsigned iOS build are attached. The iOS artifact is not App Store/TestFlight signed; Apple signing is required for install/distribution."
+          fi
