@@ -5,6 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: roshd-build
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.5'
+
 jobs:
   android:
     name: Android APK + AAB
@@ -13,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.47.5'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - name: Prepare project
@@ -21,7 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
-          rm -rf build-src/lib build-src/assets
+          rm -rf build-src/lib build-src/assets build-src/test
           cp -R roshd-app/lib build-src/lib
           cp -R roshd-app/assets build-src/assets
           cp roshd-app/pubspec.yaml build-src/pubspec.yaml
@@ -43,4 +50,85 @@ jobs:
           path: |
             build-src/build/app/outputs/flutter-apk/app-release.apk
             build-src/build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+
+  windows:
+    name: Windows x64
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Prepare project
+        shell: pwsh
+        run: |
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          Remove-Item -Recurse -Force build-src\lib,build-src\assets,build-src\test
+          Copy-Item -Recurse roshd-app\lib build-src\lib
+          Copy-Item -Recurse roshd-app\assets build-src\assets
+          Copy-Item -Force roshd-app\pubspec.yaml build-src\pubspec.yaml
+      - name: Dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build Windows
+        working-directory: build-src
+        run: flutter build windows --release
+      - name: Package
+        shell: pwsh
+        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-1.0.0-Windows-x64.zip -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roshd-windows
+          path: Roshd-1.0.0-Windows-x64.zip
+          if-no-files-found: error
+
+  apple:
+    name: macOS + iPhone
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Prepare project
+        shell: bash
+        run: |
+          set -euo pipefail
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Analyze
+        working-directory: build-src
+        run: flutter analyze
+      - name: Build macOS
+        working-directory: build-src
+        run: flutter build macos --release
+      - name: Package macOS
+        shell: bash
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-1.0.0-macOS.zip
+      - name: Build iOS unsigned
+        working-directory: build-src
+        run: flutter build ios --release --no-codesign
+      - name: Package iOS
+        shell: bash
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-1.0.0-iOS-unsigned.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roshd-apple
+          path: |
+            Roshd-1.0.0-macOS.zip
+            Roshd-1.0.0-iOS-unsigned.zip
           if-no-files-found: error
