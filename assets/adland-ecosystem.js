@@ -317,7 +317,7 @@
       img.addEventListener('error',()=>{
         if(img.dataset.alIconReplaced==='1')return;
         img.dataset.alIconReplaced='1';
-        img.src='/AdLandSite/assets/logo/adland-studio-user.jpg?v=20261005';
+        img.src='/AdLandSite/assets/logo/adland-studio-user.webp?v=20261005';
       });
     };
     document.querySelectorAll('img[src*="/icons/"],img[src*="/logo/"]').forEach(makeFallback);
