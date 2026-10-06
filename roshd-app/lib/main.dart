@@ -143,6 +143,8 @@ class Flashcard {
   String front;
   String back;
   int mastery;
+  DateTime due;
+  int repetitions;
 
   Flashcard({
     required this.id,
@@ -150,7 +152,9 @@ class Flashcard {
     required this.front,
     required this.back,
     this.mastery = 0,
-  });
+    DateTime? due,
+    this.repetitions = 0,
+  }) : due = due ?? DateTime.now();
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -158,6 +162,8 @@ class Flashcard {
     'front': front,
     'back': back,
     'mastery': mastery,
+    'due': due.toIso8601String(),
+    'repetitions': repetitions,
   };
 
   factory Flashcard.fromJson(Map<String, dynamic> j) => Flashcard(
@@ -166,6 +172,8 @@ class Flashcard {
     front: (j['front'] ?? '').toString(),
     back: (j['back'] ?? '').toString(),
     mastery: (j['mastery'] as num?)?.toInt() ?? 0,
+    due: DateTime.tryParse((j['due'] ?? '').toString()),
+    repetitions: (j['repetitions'] as num?)?.toInt() ?? 0,
   );
 }
 
@@ -361,7 +369,11 @@ class RoshdStore extends ChangeNotifier {
     final dates = sessions
         .map((x) => DateTime(x.at.year, x.at.month, x.at.day))
         .toSet();
+    if (dates.isEmpty) return 0;
     var d = DateTime.now();
+    if (!dates.contains(DateTime(d.year, d.month, d.day))) {
+      d = d.subtract(const Duration(days: 1));
+    }
     var result = 0;
     while (dates.contains(DateTime(d.year, d.month, d.day))) {
       result++;
@@ -395,8 +407,23 @@ class RoshdStore extends ChangeNotifier {
     await save();
   }
 
+  int dueCardCount() {
+    final now = DateTime.now();
+    return cards.where((card) => !card.due.isAfter(now)).length;
+  }
+
   Future<void> rateCard(Flashcard value, bool known) async {
-    value.mastery = max(0, min(5, value.mastery + (known ? 1 : -1)));
+    const intervals = <int>[1, 2, 4, 7, 14, 30];
+    if (known) {
+      value.mastery = min(5, value.mastery + 1);
+      value.repetitions += 1;
+      final days = intervals[min(value.repetitions, intervals.length - 1)];
+      value.due = DateTime.now().add(Duration(days: days));
+    } else {
+      value.mastery = max(0, value.mastery - 1);
+      value.repetitions = 0;
+      value.due = DateTime.now();
+    }
     await save();
   }
 
@@ -591,6 +618,20 @@ class SoundLab {
         if (noise() > .998) {
           x += noise() * .25;
         }
+      } else if (type == 'library') {
+        x = noise() * .006 + sin(t * 2 * pi * 96) * .012 + sin(t * 2 * pi * 144) * .008;
+      } else if (type == 'cafe') {
+        x = noise() * .025 + sin(t * 2 * pi * 178) * .008 + sin(t * 2 * pi * 242) * .006;
+        if (noise() > .998) x += noise() * .16;
+      } else if (type == 'forest') {
+        x = noise() * .018 + sin(t * 2 * pi * 72) * .016 + sin(t * 2 * pi * 210) * .008;
+        if (noise() > .998) x += noise() * .18;
+      } else if (type == 'lofi') {
+        final beat = (t * 72 / 60) % 4;
+        final kick = exp(-pow((beat % 1) * 9, 2)) * .08;
+        final bass = sin(t * 2 * pi * 110) * .026 + sin(t * 2 * pi * 165) * .014;
+        final pad = sin(t * 2 * pi * (220 + 14 * sin(t * .31))) * .012;
+        x = bass + pad + kick + noise() * .002;
       } else {
         x = sin(t * 2 * pi * 110) * .022 +
             sin(t * 2 * pi * 164) * .012 +
@@ -1750,10 +1791,11 @@ class _FocusPageState extends State<FocusPage> {
     super.dispose();
   }
 
-  void setFocusDuration(int minutes) {
+  void setFocusPreset(int minutes, int restMinutes) {
     ticker?.cancel();
     setState(() {
       focusMinutes = minutes;
+      breakMinutes = restMinutes;
       remaining = Duration(minutes: minutes);
       plannedSeconds = minutes * 60;
       running = false;
@@ -1954,16 +1996,15 @@ class _FocusPageState extends State<FocusPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    SegmentedButton<int>(
-                      segments: const [
-                        ButtonSegment(value: 25, label: Text('25')),
-                        ButtonSegment(value: 45, label: Text('45')),
-                        ButtonSegment(value: 60, label: Text('60')),
+                    Wrap(
+                      spacing: 7,
+                      runSpacing: 7,
+                      children: [
+                        _FocusModeChip(label: isFa ? '۱۵+۳ سریع' : '15+3 Quick', active: focusMinutes == 15, onTap: () => setFocusPreset(15, 3)),
+                        _FocusModeChip(label: 'Pomodoro 25+5', active: focusMinutes == 25, onTap: () => setFocusPreset(25, 5)),
+                        _FocusModeChip(label: isFa ? 'تمرکز عمیق ۵۰+۱۰' : 'Deep Focus 50+10', active: focusMinutes == 50, onTap: () => setFocusPreset(50, 10)),
+                        _FocusModeChip(label: isFa ? 'آزمون ۹۰+۱۵' : 'Exam Sprint 90+15', active: focusMinutes == 90, onTap: () => setFocusPreset(90, 15)),
                       ],
-                      selected: {focusMinutes},
-                      onSelectionChanged: (values) {
-                        setFocusDuration(values.first);
-                      },
                     ),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
@@ -2085,6 +2126,28 @@ class _FocusPageState extends State<FocusPage> {
   }
 }
 
+class _FocusModeChip extends StatelessWidget {
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+  const _FocusModeChip({required this.label, required this.active, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(12),
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: active ? Theme.of(context).colorScheme.primary.withOpacity(.16) : Colors.transparent,
+        border: Border.all(color: active ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.outlineVariant.withOpacity(.25)),
+      ),
+      child: Text(label, style: TextStyle(fontWeight: FontWeight.w800, color: active ? Theme.of(context).colorScheme.primary : null)),
+    ),
+  );
+}
+
 class TimerPainter extends CustomPainter {
   final double progress;
   final Color color;
@@ -2147,6 +2210,10 @@ class SoundScenePicker extends StatelessWidget {
       ('focus', isFa ? 'پد تمرکز' : 'Focus Pad', Icons.spa_rounded),
       ('fire', isFa ? 'آتش آرام' : 'Quiet Fire', Icons.local_fire_department_rounded),
       ('night', isFa ? 'هوای شب' : 'Night Air', Icons.nightlight_rounded),
+      ('library', isFa ? 'کتابخانه' : 'Library', Icons.menu_book_rounded),
+      ('cafe', isFa ? 'کافه آرام' : 'Quiet Cafe', Icons.local_cafe_rounded),
+      ('forest', isFa ? 'جنگل' : 'Forest', Icons.park_rounded),
+      ('lofi', isFa ? 'پد لو-فای' : 'Lo-fi Pad', Icons.album_rounded),
     ];
 
     return Column(
@@ -2498,7 +2565,7 @@ class FlashcardsView extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                isFa ? 'کارت‌های مرور' : 'Review cards',
+                isFa ? 'یادآوری فعال · کارت‌های مرور' : 'Active recall · Review cards',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -2528,7 +2595,13 @@ class FlashcardsView extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  card.deck + ' · ' + card.mastery.toString() + '/5',
+                  card.deck +
+                      ' · ' +
+                      card.mastery.toString() +
+                      '/5 · ' +
+                      (card.due.isAfter(DateTime.now())
+                          ? (isFa ? 'مرور زمان‌بندی‌شده' : 'Scheduled review')
+                          : (isFa ? 'مرور امروز' : 'Due today')),
                 ),
                 childrenPadding:
                     const EdgeInsets.fromLTRB(16, 0, 16, 14),
@@ -2838,7 +2911,12 @@ class InsightsPage extends StatelessWidget {
             MetricCard(
               icon: Icons.local_fire_department_rounded,
               value: store.streak().toString(),
-              label: isFa ? 'زنجیره' : 'Streak',
+              label: isFa ? 'زنجیره روزانه' : 'Day streak',
+            ),
+            MetricCard(
+              icon: Icons.psychology_rounded,
+              value: store.dueCardCount().toString(),
+              label: isFa ? 'کارت‌های مرور امروز' : 'Cards due today',
             ),
           ],
         ),
