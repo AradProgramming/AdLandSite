@@ -56,7 +56,7 @@ jobs:
               text = path.read_text(encoding="utf-8")
 
               if "isCoreLibraryDesugaringEnabled = true" not in text:
-                  m = re.search(r"(?m)^\s*compileOptions\s*\{", text)
+                  m = re.search(r"(?m)^          mv "$apk" release-assets/Roshd-1.0.1-Android.apks*compileOptions\s*\{", text)
                   if m:
                       text = text[:m.end()] + "\n        isCoreLibraryDesugaringEnabled = true" + text[m.end():]
                   else:
@@ -147,12 +147,10 @@ jobs:
         run: flutter build apk --release
       - name: Build AAB
         working-directory: build-src
-        run: flutter build appbundle --release
-      - uses: actions/upload-artifact@v4
+        run:       - uses: actions/upload-artifact@v4
         with:
           name: Roshd-Android
-          path: |
-            build-src/build/app/outputs/flutter-apk/app-release.apk
+          path: build-src/build/app/outputs/flutter-apk/app-release.apk
             build-src/build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
 
@@ -183,15 +181,15 @@ jobs:
         run: flutter build windows --release
       - name: Package Windows
         shell: pwsh
-        run: Compress-Archive -Path build-src/build/windows/x64/runner/Release/* -DestinationPath Roshd-1.0.0-Windows-x64.zip -Force
+        run: Compress-Archive -Path build-src/build/windows/x64/runner/Release/* -DestinationPath Roshd-1.0.1-Windows-x64.zip -Force
       - uses: actions/upload-artifact@v4
         with:
           name: Roshd-Windows
-          path: Roshd-1.0.0-Windows-x64.zip
+          path: Roshd-1.0.1-Windows-x64.zip
           if-no-files-found: error
 
-  apple:
-    runs-on: macos-14
+  macos-arm64:
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -210,26 +208,80 @@ jobs:
       - name: Install dependencies
         working-directory: build-src
         run: flutter pub get
-      - name: Build macOS
+      - name: Build macOS Apple Silicon
         working-directory: build-src
         run: flutter build macos --release
-      - name: Package macOS
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-1.0.0-macOS.zip
+      - name: Package macOS Apple Silicon
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-1.0.1-macOS-arm64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Roshd-macOS-arm64
+          path: Roshd-1.0.1-macOS-arm64.zip
+          if-no-files-found: error
+
+  macos-intel:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.5"
+          channel: stable
+          cache: true
+      - name: Prepare Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Install dependencies
+        working-directory: build-src
+        run: flutter pub get
+      - name: Build macOS Intel
+        working-directory: build-src
+        run: flutter build macos --release
+      - name: Package macOS Intel
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-1.0.1-macOS-intel.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Roshd-macOS-intel
+          path: Roshd-1.0.1-macOS-intel.zip
+          if-no-files-found: error
+
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.5"
+          channel: stable
+          cache: true
+      - name: Prepare Flutter project
+        shell: bash
+        run: |
+          flutter create --platforms=android,ios,windows,macos --org com.adland --project-name roshd build-src
+          rm -rf build-src/lib build-src/assets build-src/test
+          cp -R roshd-app/lib build-src/lib
+          cp -R roshd-app/assets build-src/assets
+          cp roshd-app/pubspec.yaml build-src/pubspec.yaml
+      - name: Install dependencies
+        working-directory: build-src
+        run: flutter pub get
       - name: Build iOS unsigned
         working-directory: build-src
         run: flutter build ios --release --no-codesign
       - name: Package iOS
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-1.0.0-iOS-unsigned.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-1.0.1-iOS-unsigned.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: Roshd-Apple
-          path: |
-            Roshd-1.0.0-macOS.zip
-            Roshd-1.0.0-iOS-unsigned.zip
+          name: Roshd-iOS-unsigned
+          path: Roshd-1.0.1-iOS-unsigned.zip
           if-no-files-found: error
-
   release:
-    needs: [android, windows, apple]
+    needs: [android, windows, macos-arm64, macos-intel, ios]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -246,7 +298,7 @@ jobs:
           aab="$(find release-assets -type f -name 'app-release.aab' -print -quit)"
           test -n "$apk" || { echo "Android APK artifact not found"; find release-assets -maxdepth 6 -type f -print; exit 1; }
           test -n "$aab" || { echo "Android AAB artifact not found"; find release-assets -maxdepth 6 -type f -print; exit 1; }
-          mv "$apk" release-assets/Roshd-1.0.0-Android.apk
+          mv "$apk" release-assets/Roshd-1.0.1-Android.apk
           mv "$aab" release-assets/Roshd-1.0.0-Android.aab
       - name: Publish release
         env:
@@ -254,8 +306,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          TAG="roshd-v1.0.0"
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "${{ github.sha }}" --title "Roshd v1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی. Windows x64, macOS, Android APK/AAB and iOS unsigned build. Product of AdLand Studio."
+          TAG="roshd-v1.0.1"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "${{ github.sha }}" --title "Roshd v1.0.1" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی. Windows x64, macOS, Android APK and iOS unsigned build. Product of AdLand Studio."
           found=0
           while IFS= read -r -d '' asset; do
             found=1
