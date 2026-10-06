@@ -121,25 +121,26 @@ function apply(){
  document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
  document.querySelectorAll('[data-fa][data-en]').forEach(function(el){el.textContent=lang==='fa'?el.getAttribute('data-fa'):el.getAttribute('data-en')});
  btn.textContent=lang==='fa'?'EN':'FA';
+ const note=document.getElementById('releaseNote'); if(note && !note.dataset.releaseReady) note.textContent=lang==='fa'?'در حال بررسی آخرین خروجی رسمی Roshd…':'Checking the latest official Roshd build…';
 }
 btn.addEventListener('click',function(){lang=lang==='fa'?'en':'fa';localStorage.setItem('roshd-site-lang',lang);apply()});
 async function loadReleaseDownloads(){
  const note=document.getElementById('releaseNote');
  const items={win:'downloadWin',arm:'downloadMacArm',intel:'downloadMacIntel',android:'downloadAndroid',ios:'downloadIos'};
- const tags=['roshd-v1.0.1','roshd-v1.0.0'];
+ const tags=['roshd-v1.0.0'];
  for(const tag of tags){
   try{
    const res=await fetch('https://api.github.com/repos/AradProgramming/AdLandSite/releases/tags/'+tag,{headers:{Accept:'application/vnd.github+json'}});
    if(!res.ok)continue;
    const data=await res.json(),assets=new Map((data.assets||[]).map(a=>[a.name,a.browser_download_url])),v=tag.replace('roshd-v','');
-   const names={win:'Roshd-'+v+'-Windows-x64.zip',arm:'Roshd-'+v+'-macOS-arm64.zip',intel:'Roshd-'+v+'-macOS-intel.zip',android:'Roshd-'+v+'-Android.apk',ios:'Roshd-'+v+'-iOS-unsigned.zip'};
+   const names={win:'Roshd-'+v+'-Windows-x64.zip',arm:'Roshd-'+v+'-macOS-AppleSilicon.zip',intel:'Roshd-'+v+'-macOS-Intel.zip',android:'Roshd-'+v+'-Android.apk',ios:'Roshd-'+v+'-iOS-unsigned.zip'};
    Object.entries(items).forEach(([key,id])=>{const el=document.getElementById(id);const href=assets.get(names[key]);if(href){el.href=href;el.textContent='دانلود';el.target='_blank';el.rel='noopener noreferrer';el.removeAttribute('aria-disabled')}});
    if(v==='1.0.0'&&assets.has('Roshd-1.0.0-macOS.zip')){const el=document.getElementById('downloadMacArm');el.href=assets.get('Roshd-1.0.0-macOS.zip');el.textContent='دانلود';el.target='_blank';el.rel='noopener noreferrer';el.removeAttribute('aria-disabled');}
-   note.textContent=v==='1.0.1'?'آخرین خروجی رسمی Roshd v1.0.1 است.':'آخرین خروجی رسمی موجود: Roshd v1.0.0؛ نسخهٔ بهبود‌یافتهٔ بعدی پس از build خودکار جایگزین می‌شود.';
+   note.textContent=lang==='fa'?'آخرین خروجی رسمی موجود: Roshd v'+v+'.':'Latest official Roshd release: v'+v+'.';
    return;
   }catch(e){}
  }
- note.textContent='خروجی‌ها در حال آماده‌سازی هستند؛ صفحهٔ Release وضعیت انتشار را نشان می‌دهد.';
+ note.textContent=lang==='fa'?'خروجی‌ها هنوز در حال آماده‌سازی هستند؛ وضعیت انتشار را همین‌جا بررسی می‌کنیم.':'Builds are still being prepared; release status will appear here.';
 }
 loadReleaseDownloads();
 addEventListener('pointermove',function(e){document.body.style.setProperty('--mx',e.clientX+'px');document.body.style.setProperty('--my',e.clientY+'px')},{passive:true});
