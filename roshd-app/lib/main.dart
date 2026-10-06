@@ -2879,7 +2879,8 @@ class InsightsPage extends StatelessWidget {
             .fold<int>(0, (sum, item) => sum + item.minutes);
       },
     );
-    final maxY = max(60, (weekly.reduce(max) + 40)).toDouble();
+    final weeklyMax = weekly.isEmpty ? 0 : weekly.reduce((a, b) => a > b ? a : b);
+    final maxY = max(60, weeklyMax + 40).toDouble();
 
     return ListView(
       children: [
