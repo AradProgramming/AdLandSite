@@ -195,7 +195,12 @@ html[lang="en"] body{font-family:Manrope,Vazirmatn,"Segoe UI",Tahoma,Arial,sans-
 .btn{font-family:inherit!important;font-size:12px!important;min-height:44px!important}
 .faqQ{font-size:13px!important}.faqA{font-size:12px!important;line-height:2!important}
 img[src*="/assets/icons/"],img[src*="/assets/logo/"],img[src*="ChatGPT_Image"]{object-fit:contain!important;image-rendering:auto}
-.brand img,.bootLogo img,.appIcon img,.project img[src*="logo"]{mix-blend-mode:screen!important;background:transparent!important}
+.brand img,.bootLogo img,.appIcon img,.project img[src*="logo"]{background:transparent!important;mix-blend-mode:normal!important}
 .brand img,.bootLogo img{padding:2px!important;border-radius:0!important;filter:drop-shadow(0 0 24px #d9b55d18)!important}
 .al-lang-icon{font-family:Manrope,Vazirmatn,sans-serif!important;font-size:13px!important}
 @media(max-width:700px){body{font-size:15px!important}.hero p{font-size:14px!important}.sectionHeadMain p,.sectionHead p,.sectionAside{font-size:12px!important}.navlinks a,.miniBtn{font-size:11px!important}}
+
+/* Transparent AdLand logo hardening */
+.brand img,.brandMark img,.bootLogo img{background:transparent!important;object-fit:contain!important;border-radius:0!important;mix-blend-mode:normal!important;opacity:1!important;filter:drop-shadow(0 0 18px #d9b55d18)!important}
+.brand img{width:44px!important;height:44px!important;padding:0!important}
+@media(max-width:700px){.brand img{width:40px!important;height:40px!important}}
