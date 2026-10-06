@@ -207,7 +207,7 @@ jobs:
           apk="$(find release-assets -type f -name 'app-release.apk' -print -quit)"
           test -n "$apk" || { echo "Android APK not found"; find release-assets -type f -print; exit 1; }
           mv "$apk" release-assets/Roshd-1.0.1-Android.apk
-      - name: Publish release without AAB
+      - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -218,6 +218,6 @@ jobs:
           else
             gh release create "$TAG" --target "${{ github.sha }}"               --title "Roshd v1.0.1"               --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی. Product of AdLand Studio.
 
-Public downloads: Windows x64, macOS Apple Silicon, macOS Intel, Android APK and an unsigned iOS build. Android AAB is intentionally not published as a public download."
+Public downloads: Windows x64, macOS Apple Silicon, macOS Intel, Android APK and an unsigned iOS build. Android public distribution uses the APK only."
             gh release upload "$TAG" release-assets/* --clobber
           fi
