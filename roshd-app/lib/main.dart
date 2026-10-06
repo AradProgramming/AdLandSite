@@ -1803,6 +1803,54 @@ class _FocusPageState extends State<FocusPage> {
     });
   }
 
+  Future<void> showCustomTimer(BuildContext context) async {
+    final focus = TextEditingController(text: focusMinutes.toString());
+    final rest = TextEditingController(text: breakMinutes.toString());
+    final values = await showDialog<List<int>>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(widget.store.lang == 'fa' ? 'تایمر سفارشی' : 'Custom timer'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: focus,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: widget.store.lang == 'fa' ? 'دقیقهٔ تمرکز' : 'Focus minutes',
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: rest,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: widget.store.lang == 'fa' ? 'دقیقهٔ استراحت' : 'Break minutes',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(widget.store.lang == 'fa' ? 'لغو' : 'Cancel'),
+          ),
+          FilledButton(
+            onPressed: () {
+              final a = int.tryParse(focus.text.trim());
+              final b = int.tryParse(rest.text.trim());
+              if (a == null || b == null || a < 1 || b < 0 || a > 240 || b > 120) return;
+              Navigator.pop(context, [a, b]);
+            },
+            child: Text(widget.store.lang == 'fa' ? 'اعمال' : 'Apply'),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || values == null) return;
+    setFocusPreset(values[0], values[1]);
+  }
+
   Future<void> toggleTimer() async {
     if (running) {
       ticker?.cancel();
@@ -2004,6 +2052,7 @@ class _FocusPageState extends State<FocusPage> {
                         _FocusModeChip(label: 'Pomodoro 25+5', active: focusMinutes == 25, onTap: () => setFocusPreset(25, 5)),
                         _FocusModeChip(label: isFa ? 'تمرکز عمیق ۵۰+۱۰' : 'Deep Focus 50+10', active: focusMinutes == 50, onTap: () => setFocusPreset(50, 10)),
                         _FocusModeChip(label: isFa ? 'آزمون ۹۰+۱۵' : 'Exam Sprint 90+15', active: focusMinutes == 90, onTap: () => setFocusPreset(90, 15)),
+                        _FocusModeChip(label: isFa ? 'سفارشی' : 'Custom', active: ![15, 25, 50, 90].contains(focusMinutes), onTap: () => showCustomTimer(context)),
                       ],
                     ),
                     const SizedBox(height: 10),
