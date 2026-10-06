@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-05",
+  "generatedAt": "2026-10-06",
   "manager": {
     "name": "Orbit",
     "version": "1.0.0",
@@ -354,38 +354,40 @@
     },
     {
       "name": "Roshd",
-      "version": "1.0.0",
-      "tag": "roshd-v1.0.0",
+      "version": "1.0.1",
+      "tag": "roshd-v1.0.1",
       "icon": "assets/icons/projects/Roshd_icon.svg",
       "site": "roshd/",
       "descFa": "میز مطالعه و برنامه‌ریزی فارسی‌محور؛ ویژه دانش‌آموزان تیزهوشانی.",
       "descEn": "Persian-first study OS for ambitious students.",
       "platforms": {
         "windows": {
-          "status": "ci",
+          "status": "build",
           "architectures": [
             "x64"
           ]
         },
         "macos": {
-          "status": "ci",
+          "status": "build",
           "architectures": [
             "Apple Silicon",
             "Intel"
           ]
         },
         "android": {
-          "status": "ci",
+          "status": "build",
           "architectures": [
             "arm64",
             "x64"
-          ]
+          ],
+          "publicFormat": "APK"
         },
         "ios": {
-          "status": "unsigned-ci",
+          "status": "unsigned-build",
           "architectures": [
             "arm64"
-          ]
+          ],
+          "publicFormat": "unsigned ZIP"
         }
       }
     }
