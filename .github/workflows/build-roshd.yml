@@ -28,7 +28,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: ${ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - name: Prepare project
         shell: bash
@@ -69,7 +69,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: ${ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - name: Prepare project
         shell: pwsh
@@ -95,11 +95,11 @@ jobs:
         run: flutter build windows --release
       - name: Package
         shell: pwsh
-        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-${ env.APP_VERSION }}-Windows-x64.zip -Force
+        run: Compress-Archive -Path build-src\build\windows\x64\runner\Release\* -DestinationPath Roshd-${{ env.APP_VERSION }}-Windows-x64.zip -Force
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-windows
-          path: Roshd-${ env.APP_VERSION }}-Windows-x64.zip
+          path: Roshd-${{ env.APP_VERSION }}-Windows-x64.zip
           if-no-files-found: error
 
   macos-arm64:
@@ -109,7 +109,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: ${ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - name: Prepare project
         shell: bash
@@ -134,11 +134,11 @@ jobs:
         run: flutter build macos --release
       - name: Package
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${ env.APP_VERSION }}-macOS-AppleSilicon.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.APP_VERSION }}-macOS-AppleSilicon.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-macos-arm64
-          path: Roshd-${ env.APP_VERSION }}-macOS-AppleSilicon.zip
+          path: Roshd-${{ env.APP_VERSION }}-macOS-AppleSilicon.zip
           if-no-files-found: error
 
   macos-intel:
@@ -148,7 +148,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: ${ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - name: Prepare project
         shell: bash
@@ -173,11 +173,11 @@ jobs:
         run: flutter build macos --release
       - name: Package
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${ env.APP_VERSION }}-macOS-Intel.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/macos/Build/Products/Release/roshd.app Roshd-${{ env.APP_VERSION }}-macOS-Intel.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-macos-intel
-          path: Roshd-${ env.APP_VERSION }}-macOS-Intel.zip
+          path: Roshd-${{ env.APP_VERSION }}-macOS-Intel.zip
           if-no-files-found: error
 
   ios:
@@ -187,7 +187,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: ${ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - name: Prepare project
         shell: bash
@@ -212,15 +212,15 @@ jobs:
         run: flutter build ios --release --no-codesign
       - name: Package unsigned
         shell: bash
-        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-${ env.APP_VERSION }}-iOS-unsigned.zip
+        run: ditto -c -k --sequesterRsrc --keepParent build-src/build/ios/iphoneos/Runner.app Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
       - uses: actions/upload-artifact@v4
         with:
           name: roshd-ios-unsigned
-          path: Roshd-${ env.APP_VERSION }}-iOS-unsigned.zip
+          path: Roshd-${{ env.APP_VERSION }}-iOS-unsigned.zip
           if-no-files-found: error
 
   release:
-    if: ${ github.ref == "refs/heads/main" }}
+    if: ${{ github.ref == "refs/heads/main" }}
     needs: [android, windows, macos-arm64, macos-intel, ios]
     runs-on: ubuntu-latest
     steps:
@@ -233,15 +233,15 @@ jobs:
       - name: Rename Android artifacts
         shell: bash
         run: |
-          mv release-assets/app-release.apk release-assets/Roshd-${ env.APP_VERSION }}-Android.apk
-          mv release-assets/app-release.aab release-assets/Roshd-${ env.APP_VERSION }}-Android.aab
+          mv release-assets/app-release.apk release-assets/Roshd-${{ env.APP_VERSION }}-Android.apk
+          mv release-assets/app-release.aab release-assets/Roshd-${{ env.APP_VERSION }}-Android.aab
       - name: Publish release
         env:
-          GH_TOKEN: ${ github.token }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          if gh release view "${ env.TAG }}" >/dev/null 2>&1; then
-            gh release upload "${ env.TAG }}" release-assets/* --clobber
+          if gh release view "${{ env.TAG }}" >/dev/null 2>&1; then
+            gh release upload "${{ env.TAG }}" release-assets/* --clobber
           else
-            gh release create "${ env.TAG }}" release-assets/* --target "${ github.sha }}" --title "Roshd 1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی؛ محصول AdLand Studio.\n\nWindows x64, macOS Apple Silicon, macOS Intel, Android APK/AAB and unsigned iOS build.\n\nThe iOS artifact is unsigned; Apple signing is required for normal device installation and App Store/TestFlight distribution."
+            gh release create "${{ env.TAG }}" release-assets/* --target "${{ github.sha }}" --title "Roshd 1.0.0" --notes "Roshd | رشد — میز مطالعه و برنامه‌ریزی فارسی‌محور ویژه دانش‌آموزان تیزهوشانی؛ محصول AdLand Studio.\n\nWindows x64, macOS Apple Silicon, macOS Intel, Android APK/AAB and unsigned iOS build.\n\nThe iOS artifact is unsigned; Apple signing is required for normal device installation and App Store/TestFlight distribution."
           fi
