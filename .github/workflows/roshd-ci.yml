@@ -7,7 +7,6 @@ on:
       - 'roshd-app/**'
       - 'assets/icons/projects/Roshd_icon.svg'
       - '.github/workflows/roshd-ci.yml'
-      - 'app-manifest.json'
   workflow_dispatch:
 
 permissions:

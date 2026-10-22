@@ -7,8 +7,6 @@ on:
       - "roshd-app/**"
       - "roshd/**"
       - "assets/icons/projects/Roshd_icon.svg"
-      - "app-manifest.json"
-      - "index.html"
       - "sitemap.xml"
       - ".github/workflows/build-roshd-v2.yml"
   workflow_dispatch:

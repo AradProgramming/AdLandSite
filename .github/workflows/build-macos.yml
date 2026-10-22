@@ -37,25 +37,40 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for slug in ai-tools nexus canvas pulse frame atlas forge prism relay echo chrono orbit; do
+          shopt -s nullglob
+          rm -rf /tmp/adland-release
+          mkdir -p /tmp/adland-release
+          slugs=(ai-tools nexus canvas pulse frame atlas forge prism relay echo chrono orbit)
+          for slug in "${slugs[@]}"; do
             echo "::group::Building $slug"
             rm -rf dist
             ADLAND_APP_SLUG="$slug" npx electron-builder --config electron-builder.config.cjs --mac --universal
-            mkdir -p "/tmp/adland-$slug"
-            cp -f dist/*.dmg dist/*.zip "/tmp/adland-$slug/" || true
+            artifacts=(dist/*.dmg dist/*.zip)
+            if [ "${#artifacts[@]}" -lt 2 ]; then
+              echo "::error::Expected both a DMG and ZIP for $slug; found ${#artifacts[@]} package(s)."
+              ls -lah dist || true
+              exit 1
+            fi
+            cp -f "${artifacts[@]}" /tmp/adland-release/
+            echo "Collected ${#artifacts[@]} packages for $slug."
             echo "::endgroup::"
           done
-          rm -rf /tmp/adland-release
-          mkdir -p /tmp/adland-release
-          find /tmp -maxdepth 2 -type f \( -name "AdLand-*.dmg" -o -name "AdLand-*.zip" \) -exec cp -f {} /tmp/adland-release/ \;
+          count="$(find /tmp/adland-release -type f | wc -l | tr -d ' ')"
+          echo "Collected $count macOS release packages."
+          if [ "$count" -lt "$((${#slugs[@]} * 2))" ]; then
+            echo "::error::Release collection is incomplete: expected at least $((${#slugs[@]} * 2)) packages."
+            exit 1
+          fi
           ls -lah /tmp/adland-release
       - name: Collect release assets
         shell: bash
         run: |
           rm -rf release-assets
           mkdir -p release-assets
-          find /tmp/adland-release -type f -maxdepth 1 -print0 | xargs -0 -r -I{} cp "{}" release-assets/
-          test "$(find release-assets -type f | wc -l | tr -d ' ')" -ge 12
+          find /tmp/adland-release -type f -print0 | xargs -0 -r -I{} cp "{}" release-assets/
+          count="$(find release-assets -type f | wc -l | tr -d ' ')"
+          echo "Prepared $count release assets."
+          test "$count" -ge 24
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}

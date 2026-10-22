@@ -1,15 +1,6 @@
 name: Build Roshd
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "roshd-app/**"
-      - "roshd/**"
-      - "assets/icons/projects/Roshd_icon.svg"
-      - "app-manifest.json"
-      - ".github/workflows/build-roshd.yml"
-      - "index.html"
   workflow_dispatch:
 
 permissions:
