@@ -4,6 +4,12 @@ Public site: https://aradprogramming.github.io/AdLandSite/
 
 This repository contains the bilingual Persian/English AdLand Studio website, product microsites, app manifest, app assets, and GitHub Actions build workflows.
 
+## AdLand Studio brand film
+
+- Promo landing page: [promo/](promo/) — English-first 3D CGI studio film, product catalogue, and responsive playback page.
+- Brand slogan: **Creativity : Ulimited**
+- Film master (35 seconds, 1280×720, H.264 + AAC, electronic score and SFX, no narration): [Watch / download the MP4](https://d2ol7oe51mr4n9.cloudfront.net/user_3L5mG1wji8zJmcoSnEFi79BUGBZ/bdc040ad-0ed7-4246-9491-aa89d5a70cec.mp4)
+
 ## Website architecture
 
 - `index.html` — main studio homepage and product catalogue.
