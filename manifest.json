@@ -1,7 +1,7 @@
 {
   "name": "AdLand Studio",
   "short_name": "AdLand",
-  "description": "Where Creativity Has No Limits.",
+  "description": "Creativity : Ulimited",
   "start_url": "/AdLandSite/",
   "scope": "/AdLandSite/",
   "display": "standalone",
