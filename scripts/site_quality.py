@@ -142,7 +142,36 @@ def main() -> int:
             continue
         run_node_check(js, errors)
 
+    # Keep the studio's requested slogan identical across every locale/bundle/page.
+    slogan = "Creativity : Ulimited"
+    forbidden_slogans = (
+        "اینجا، <span>خلاقیت</span> تبدیل به تجربه می‌شود.",
+        "اینجا، خلاقیت تبدیل به تجربه می‌شود.",
+        "Where <span>creativity</span> becomes an experience.",
+        "Where creativity becomes an experience.",
+        "جایی که خلاقیت هیچ مرزی نمی‌شناسد.",
+        "جایی که خلاقیت هیچ مرزی نمی\\u200cشناسد.",
+        "Where creativity has no limits.",
+        "Where Creativity Has No Limits.",
+        "Creativity never ends.",
+        "خلاقیت، ادامه دارد.",
+    )
+    text_suffixes = {".html", ".js", ".css", ".json", ".md", ".svg", ".xml"}
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or path.suffix.lower() not in text_suffixes:
+            continue
+        if any(part in {".git", "node_modules", "release"} for part in path.parts):
+            continue
+        try:
+            source = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for old in forbidden_slogans:
+            if old.casefold() in source.casefold():
+                errors.append(f"{path.relative_to(ROOT)}: legacy slogan remains: {old}")
     home = (ROOT / "index.html").read_text(encoding="utf-8")
+    if 'data-fa="Creativity : Ulimited" data-en="Creativity : Ulimited"' not in home:
+        errors.append("Homepage hero must use the exact slogan in both language variants.")
     if 'data-app-slug="face2face"' not in home or 'assets/adland-face2face.js' not in home:
         errors.append("Homepage is missing the Face2Face catalogue card or enhancement script.")
     if not (ROOT / "face2face" / "index.html").is_file():
