@@ -40,7 +40,7 @@ const pairs={
 "UUID":["UUID","UUID"],"GENERATE UUID":["ساخت UUID","GENERATE UUID"],"RANDOM TEST DATA":["داده تست تصادفی","RANDOM TEST DATA"],"GENERATE":["تولید","GENERATE"],
 "03 / ADLAND STANDARD":["۰۳ / استاندارد AdLand","03 / ADLAND STANDARD"],"Tools, not clutter.":["ابزار، بدون شلوغی.","Tools, not clutter."],
 "نسخه اول عمداً سریع و بدون وابستگی سنگین ساخته شده. هسته ابزارها local-first است؛ این پایه بعداً می‌تواند به حساب کاربری، workspace ابری، AI Gateway، اعتبار مصرفی و امکانات حرفه‌ای تبدیل شود.":["The first release is intentionally fast and lightweight. Its local-first core can grow into accounts, cloud workspaces, an AI gateway, usage credits and pro features.","نسخه اول عمداً سریع و بدون وابستگی سنگین ساخته شده. هسته ابزارها local-first است؛ این پایه بعداً می‌تواند به حساب کاربری، workspace ابری، AI Gateway، اعتبار مصرفی و امکانات حرفه‌ای تبدیل شود."],
-"جایی که خلاقیت هیچ مرزی نمی‌شناسد.":["Where creativity has no limits.","جایی که خلاقیت هیچ مرزی نمی‌شناسد."],
+"Creativity : Ulimited":["Creativity : Ulimited","Creativity : Ulimited"],
 "ADLAND STUDIO":["ADLAND STUDIO","ADLAND STUDIO"]
 };
 const root=document.documentElement,key='adland-language-v2';
