@@ -8,7 +8,8 @@ This repository contains the bilingual Persian/English AdLand Studio website, pr
 
 - Promo landing page: [promo/](promo/) — English-first 3D CGI studio film, product catalogue, and responsive playback page.
 - Brand slogan: **Creativity : Ulimited**
-- Film master (35 seconds, 1280×720, H.264 + AAC, electronic score and SFX, no narration): [Watch / download the MP4](https://d2ol7oe51mr4n9.cloudfront.net/user_3L5mG1wji8zJmcoSnEFi79BUGBZ/bdc040ad-0ed7-4246-9491-aa89d5a70cec.mp4)
+- Film master (35 seconds, 1920×1080, 60 fps, H.264 + AAC, motion-interpolated, electronic score and SFX, no narration): [Watch / download the MP4](https://d2ol7oe51mr4n9.cloudfront.net/user_3L5mG1wji8zJmcoSnEFi79BUGBZ/10e4ea24-1482-43f9-87ef-ead7a2deef0f.mp4)
+- Mobile/low-decode stream: 720p at 60 fps, selected automatically on narrow screens in the promo player.
 
 ## Website architecture
 
