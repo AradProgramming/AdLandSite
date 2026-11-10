@@ -203,11 +203,13 @@ def main() -> int:
         if filter_group not in home:
             errors.append(f"Homepage category coverage is incomplete: {filter_group}")
     try:
-        icon_sources = [item.get("src") for item in manifest.get("icons", [])]
+        pwa_manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+        pwa_icons = pwa_manifest.get("icons", [])
+        icon_sources = [item.get("src") for item in pwa_icons]
         if len(icon_sources) != len(set(icon_sources)):
             errors.append("manifest.json: duplicate PWA icon sources")
         if not any(str(item.get("type", "")).lower() == "image/svg+xml"
-                   for item in manifest.get("icons", [])):
+                   for item in pwa_icons):
             errors.append("manifest.json: scalable SVG app icon is missing")
     except Exception as exc:
         errors.append(f"manifest.json icons could not be validated: {exc}")
