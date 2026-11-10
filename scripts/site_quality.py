@@ -226,10 +226,14 @@ def main() -> int:
     for control in required_controls:
         if control not in home:
             errors.append(f"Homepage is missing an AdLand system control: {control}")
-    for filter_group in ("focus:['nexus','roshd']",
-                         "developer:['forge','ai-tools','face2face']"):
-        if filter_group not in home:
-            errors.append(f"Homepage category coverage is incomplete: {filter_group}")
+    try:
+        system_js = (ROOT / "assets" / "adland-system.js").read_text(encoding="utf-8")
+        for filter_group in ("focus: ['nexus', 'roshd']",
+                             "developer: ['forge', 'ai-tools', 'face2face']"):
+            if filter_group not in system_js:
+                errors.append(f"System catalogue category coverage is incomplete: {filter_group}")
+    except OSError as exc:
+        errors.append(f"System catalogue controller could not be checked: {exc}")
     try:
         pwa_manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         pwa_icons = pwa_manifest.get("icons", [])
