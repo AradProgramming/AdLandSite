@@ -176,6 +176,34 @@ def main() -> int:
         errors.append("Homepage is missing the Face2Face catalogue card or enhancement script.")
     if not (ROOT / "face2face" / "index.html").is_file():
         errors.append("Face2Face product page is missing.")
+    # Catalogue, visible totals and structured metadata must describe the same products.
+    try:
+        card_count = len(re.findall(r'<article class="app\b', home))
+        if card_count != len(apps):
+            errors.append(f"Homepage product cards ({card_count}) do not match app-manifest entries ({len(apps)}).")
+        if 'id="alProductTotal">15</b> PRODUCTS' not in home:
+            errors.append("Homepage hero product total is stale.")
+        if "13 DESKTOP · 1 WEB · 1 CROSS-PLATFORM" not in home:
+            errors.append("Homepage platform breakdown is stale.")
+        if "const filters=[...qsa('.productFilter')" in home:
+            errors.append("Legacy inline filters conflict with the unified catalogue controller.")
+        schema_match = re.search(
+            r'<script type="application/ld\+json">([\s\S]*?)</script>', home
+        )
+        if not schema_match:
+            errors.append("Homepage JSON-LD structured data is missing.")
+        else:
+            graph = json.loads(schema_match.group(1)).get("@graph", [])
+            organization = next((item for item in graph if item.get("@type") == "Organization"), {})
+            product_list = next((item for item in graph if item.get("@type") == "ItemList"), {})
+            schema_names = {item.get("name") for item in product_list.get("itemListElement", [])}
+            app_names = {item.get("name") for item in apps}
+            if schema_names != app_names:
+                errors.append("Homepage JSON-LD product list does not match app-manifest entries.")
+            if "adland-logo-transparent.svg" not in str(organization.get("logo", "")):
+                errors.append("Organization structured-data logo must use the current SVG brand asset.")
+    except Exception as exc:
+        errors.append(f"Catalogue consistency could not be validated: {exc}")
     # AdLand system layer: search, saved views, diagnostics and logo resilience.
     for asset in ("assets/adland-system.css", "assets/adland-system.js",
                   "assets/logo/adland-logo-transparent.svg", "assets/logo/adland-logo.svg"):
