@@ -10,14 +10,16 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/AdLandSite/assets/logo/adland-logo-transparent.png",
-      "sizes": "126x128",
-      "type": "image/png"
+      "src": "/AdLandSite/assets/logo/adland-logo.svg?v=20261110",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "/AdLandSite/assets/logo/adland-logo-transparent.png",
+      "src": "/AdLandSite/assets/logo/adland-logo-transparent.png?v=20261110",
       "sizes": "126x128",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
