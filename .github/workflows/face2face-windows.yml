@@ -1,0 +1,87 @@
+name: Face2Face Windows build
+
+on:
+  push:
+    branches:
+      - main
+      - refresh/3d-glass-face2face-exe
+    paths:
+      - "face2face/windows-app/READY.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: face2face-windows-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    name: Test and package Face2Face for Windows
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Decode source bundle
+        shell: pwsh
+        run: |
+          $sourceArchive = Join-Path $env:GITHUB_WORKSPACE 'face2face/windows-app/Face2Face-Windows-Source-1.2.1.tar.gz.base64'
+          $encoded = (Get-Content -LiteralPath $sourceArchive -Raw) -replace '\\s', ''
+          if ([string]::IsNullOrWhiteSpace($encoded)) { throw 'The Face2Face source bundle is empty.' }
+          $archivePath = Join-Path $env:RUNNER_TEMP 'Face2Face-Windows-Source-1.2.1.tar.gz'
+          [IO.File]::WriteAllBytes($archivePath, [Convert]::FromBase64String($encoded))
+          $extractPath = Join-Path $env:RUNNER_TEMP 'Face2Face'
+          New-Item -ItemType Directory -Path $extractPath -Force | Out-Null
+          tar -xzf $archivePath -C $extractPath
+          if (-not (Test-Path (Join-Path $extractPath 'Face2Face-site-package/package.json'))) {
+            throw 'The decoded source bundle is missing package.json.'
+          }
+          "F2F_PROJECT=$extractPath/Face2Face-site-package" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Install dependencies
+        shell: pwsh
+        run: npm install --no-audit --no-fund
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Validate JavaScript syntax
+        run: npm run check
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Run project tests
+        run: npm test
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Run build preflight
+        run: npm run preflight
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Build installer and portable executable
+        run: npm run dist
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Verify Windows executables
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem -LiteralPath 'release' -Filter '*.exe' -File
+          $files | Select-Object Name, Length | Format-Table -AutoSize
+          if ($files.Count -lt 2) { throw "Expected both installer and portable EXE; found $($files.Count)." }
+          foreach ($file in $files) {
+            if ($file.Length -lt 1MB) { throw "Unexpectedly small executable: $($file.Name)" }
+          }
+        working-directory: ${{ runner.temp }}/Face2Face/Face2Face-site-package
+
+      - name: Upload Windows installer and portable EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Face2Face-Windows-v1.2.1
+          path: ${{ runner.temp }}/Face2Face/Face2Face-site-package/release/*.exe
+          if-no-files-found: error
+          retention-days: 30
