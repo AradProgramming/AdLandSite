@@ -1,1096 +1,125 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="preload" as="image" href="/AdLandSite/assets/logo/adland-logo-transparent.svg?v=20261110" type="image/svg+xml" fetchpriority="high">
-<meta name="theme-color" content="#050505">
-<link rel="icon" type="image/svg+xml" href="/AdLandSite/assets/logo/adland-logo.svg?v=20261110">
-<title>AdLand Studio | اپ‌های دسکتاپ، ابزارهای دیجیتال و آموزش</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
-:root{
- --bg:#040506;--bg2:#080a0d;--gold:#d9b55d;--gold2:#f6df9a;--white:#f7f3e9;--muted:#7c858b;
- --line:#ffffff12;--glass:#0a0d12cc;--mint:#7bf6df;--violet:#8c7cff;
- --mx:50vw;--my:50vh;--scroll:0;
-}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Manrope,Vazirmatn,Segoe UI,sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at var(--mx) var(--my),#d9b55d0b,transparent 24%),radial-gradient(circle at 15% 15%,#d9b55d0c,transparent 24%),radial-gradient(circle at 85% 70%,#8c7cff07,transparent 26%)}
-a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}
-#space{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-2}
-#scanlines{position:fixed;inset:0;pointer-events:none;z-index:30;opacity:.075;background:repeating-linear-gradient(180deg,transparent 0,transparent 3px,#fff 4px);mix-blend-mode:soft-light}
-#noise{position:fixed;inset:0;pointer-events:none;z-index:29;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
-#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2),#fff);z-index:60;box-shadow:0 0 24px #d9b55d}
-.container{width:min(1240px,calc(100% - 40px));margin:auto}
-.glass{border:1px solid var(--line);background:linear-gradient(145deg,#ffffff08,#ffffff02);backdrop-filter:blur(22px);box-shadow:0 28px 100px #0007}
-#nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1240px,calc(100% - 28px));height:66px;display:flex;align-items:center;gap:10px;padding:0 10px;border:1px solid #ffffff15;border-radius:19px;background:#070a0de6;backdrop-filter:blur(26px);z-index:50;box-shadow:0 18px 70px #0008}
-.brand{display:flex;align-items:center;gap:11px;padding:4px 7px;min-width:210px}.brand img{width:44px;height:44px;border-radius:10px;object-fit:contain;box-shadow:0 0 34px #d9b55d14}.brand b{display:block;font:900 11px Manrope;letter-spacing:.16em}.brand small{display:block;margin-top:3px;color:#68737a;font:600 6px Manrope;letter-spacing:.13em}.navlinks{display:flex;gap:3px;margin-inline:auto}.navlinks a{padding:10px 11px;border-radius:9px;color:#839099;font:700 8px Manrope;transition:.25s}.navlinks a:hover,.navlinks a.active{color:#f4ead1;background:#d9b55d09}.navactions{display:flex;gap:5px}.miniBtn{height:36px;padding:0 10px;border:1px solid #ffffff12;border-radius:10px;background:#ffffff05;color:#aab2b6;font:800 7px Manrope;letter-spacing:.04em;transition:.25s}.miniBtn:hover{border-color:#d9b55d44;color:#fff;transform:translateY(-2px)}
-#hero{min-height:100vh;display:grid;place-items:center;position:relative;padding:140px 20px 110px;overflow:hidden}.heroWrap{width:min(1240px,100%);display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
-.heroCopy{position:relative;z-index:3}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #d9b55d2e;background:#d9b55d08;color:var(--gold);border-radius:999px;font:800 7px Manrope;letter-spacing:.23em}.eyebrow i{width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 1.7s infinite}
-.hero h1{font-size:clamp(48px,7vw,96px);line-height:.94;letter-spacing:-.075em;margin:20px 0 15px}.hero h1 span{background:linear-gradient(90deg,var(--gold),#fff4c2 40%,var(--gold2) 55%,var(--gold));background-size:240% auto;color:transparent;background-clip:text;animation:shine 5.5s linear infinite}.hero p{max-width:650px;color:#8c979d;font-size:12px;line-height:2}
-.heroActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}.btn{height:46px;padding:0 16px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:1px solid #d9b55d35;background:#d9b55d09;color:var(--gold);font:900 8px Manrope;transition:.25s}.btn:hover{transform:translateY(-4px);box-shadow:0 22px 60px #d9b55d14;border-color:#d9b55d77}.btn.primary{background:linear-gradient(135deg,var(--gold),#b88b32);color:#120f08;border:0}.heroMeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.pill{padding:7px 9px;border:1px solid #ffffff10;border-radius:999px;background:#ffffff03;color:#77858c;font:700 7px Manrope}.pill b{color:var(--white)}
-.heroCore{position:relative;min-height:590px;display:grid;place-items:center}.coreGlow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,#d9b55d1a 0, #d9b55d07 30%,transparent 67%);filter:blur(8px);animation:breath 5s ease-in-out infinite}.core{position:relative;width:min(410px,72vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center}.core:before,.core:after{content:"";position:absolute;border-radius:50%;inset:-35px;border:1px solid #d9b55d1f;animation:spin 18s linear infinite}.core:after{inset:-70px;border-style:dashed;border-color:#7bf6df20;animation-duration:28s;animation-direction:reverse}.ringA,.ringB,.ringC{position:absolute;border-radius:50%;border:1px solid #d9b55d18;inset:22px;animation:spin 12s linear infinite}.ringB{inset:54px;border-color:#fff10;animation-duration:17s;animation-direction:reverse}.ringC{inset:88px;border-color:#7bf6df22;animation-duration:25s}.core img{width:58%;max-height:58%;aspect-ratio:auto;border-radius:12px;object-fit:contain;background:transparent;box-shadow:0 0 0 1px #d9b55d3a,0 0 70px #d9b55d22,0 0 140px #d9b55d0d;z-index:2;animation:float 4s ease-in-out infinite}.orbitLabel{position:absolute;z-index:4;padding:7px 9px;border:1px solid #ffffff13;background:#070a0df0;border-radius:9px;color:#839099;font:700 6px Manrope;letter-spacing:.12em;box-shadow:0 10px 30px #0008}.o1{top:7%;right:12%}.o2{bottom:13%;left:6%}.o3{top:39%;left:0}.o4{bottom:2%;right:25%}
-.scrollHint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;color:#5f6a71;font:700 6px Manrope;letter-spacing:.2em}.scrollHint i{width:6px;height:22px;border:1px solid #d9b55d44;border-radius:8px;position:relative}.scrollHint i:after{content:"";position:absolute;left:1px;top:3px;width:2px;height:6px;border-radius:2px;background:var(--gold);animation:scrollDot 1.6s infinite}
-.section{padding:115px 20px;position:relative}.sectionHeader{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:42px}.sectionHeadMain small{color:var(--gold);font:800 7px Manrope;letter-spacing:.24em}.sectionHeadMain h2{font-size:clamp(34px,5vw,62px);letter-spacing:-.065em;margin:10px 0 6px}.sectionHeadMain p{color:#748188;font-size:10px;line-height:1.9;max-width:620px}.sectionAside{max-width:280px;color:#647179;font:600 7px Manrope;line-height:1.8;text-align:end}
-.studioGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}.story{padding:28px;border-radius:24px;min-height:430px;position:relative;overflow:hidden}.story:before{content:"";position:absolute;width:420px;height:420px;right:-180px;top:-200px;border-radius:50%;background:radial-gradient(circle,#d9b55d12,transparent 64%);animation:float 8s ease-in-out infinite}.storyText{position:relative;z-index:2;max-width:690px}.storyText h3{font-size:28px;margin:0 0 13px;letter-spacing:-.05em}.storyText p{color:#7d888f;font-size:11px;line-height:2.05}.storyRows{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:24px}.storyChip{padding:13px;border:1px solid #ffffff0d;border-radius:13px;background:#ffffff03}.storyChip b{display:block;color:var(--gold);font:800 8px Manrope}.storyChip span{display:block;margin-top:7px;color:#707d84;font-size:7px;line-height:1.7}.signal{padding:20px;border-radius:24px}.signalHead{display:flex;justify-content:space-between;align-items:center}.signalHead b{font:800 8px Manrope;letter-spacing:.13em}.signalLive{display:flex;align-items:center;gap:5px;color:var(--mint);font:700 6px Manrope}.signalLive i{width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 11px var(--mint);animation:pulse 1.6s infinite}.bars{height:250px;display:flex;align-items:end;gap:4px;margin-top:18px;padding:12px;border:1px solid #ffffff0a;border-radius:15px;background:#05080b}.bars i{flex:1;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#d9b55d,#8b6828);height:20%;opacity:.76;animation:bar 1.6s ease-in-out infinite alternate}.bars i:nth-child(2n){animation-delay:.12s}.bars i:nth-child(3n){animation-delay:.26s}.bars i:nth-child(4n){animation-delay:.4s}.signalFoot{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}.metric{padding:11px;border:1px solid #ffffff0c;border-radius:11px;background:#ffffff03}.metric small{display:block;color:#66737b;font:700 6px Manrope}.metric b{display:block;margin-top:4px;font:800 14px Manrope}.metric em{color:var(--mint);font-style:normal;font-size:7px}
-.appsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.app{position:relative;overflow:hidden;border-radius:23px;padding:19px;min-height:300px;transition:.35s;transform-style:preserve-3d}.app:hover{box-shadow:0 36px 120px #000a}.app:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at var(--cx,50%) var(--cy,50%),color-mix(in srgb,var(--accent) 15%,transparent),transparent 25%);pointer-events:none}.appHead{display:flex;align-items:center;gap:12px;position:relative}.appIcon{width:58px;height:58px;border-radius:15px;overflow:hidden;border:1px solid #fff14;box-shadow:0 12px 40px #0006}.appIcon img{width:100%;height:100%;object-fit:cover}.appHead h3{margin:0;font-size:20px;letter-spacing:-.04em}.appHead small{display:block;margin-top:4px;color:#6d7a81;font:700 6px Manrope;letter-spacing:.13em}.appTag{margin-inline-start:auto;color:var(--accent);font:800 7px Manrope}.app p{position:relative;color:#77848b;font-size:9px;line-height:1.8;max-width:480px;margin:17px 0}.featureMini{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:relative}.featureMini span{padding:8px 9px;border:1px solid #ffffff0b;border-radius:9px;background:#ffffff03;color:#89949a;font-size:7px}.featureMini span:before{content:"✦";color:var(--accent);margin-left:5px}.appBottom{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:16px;position:relative}.version{color:#5e6a70;font:700 6px Manrope}.appLink{height:36px;padding:0 11px;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:9px;color:var(--accent);display:flex;align-items:center;font:800 7px Manrope;transition:.2s}.appLink:hover{background:color-mix(in srgb,var(--accent) 8%,transparent);transform:translateY(-2px)}
-.projectGrid{display:grid;grid-template-columns:1.35fr .85fr .85fr;grid-auto-rows:minmax(190px,auto);gap:9px}.project{position:relative;overflow:hidden;border-radius:19px;min-height:220px;border:1px solid #ffffff10;background:#080b0f;isolation:isolate}.project:first-child{grid-row:span 2}.project img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.75) contrast(1.1);transition:.45s}.project:hover img{transform:scale(1.06);opacity:.58}.project:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 20%,#030406dd 100%);z-index:1}.projectCopy{position:absolute;z-index:2;left:15px;right:15px;bottom:15px}.projectCopy small{color:var(--gold);font:700 6px Manrope;letter-spacing:.15em}.projectCopy h3{margin:7px 0 4px;font-size:17px}.projectCopy p{margin:0;color:#8d979d;font-size:7px;line-height:1.6}
-.learnGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.course{padding:24px;border-radius:22px;position:relative;overflow:hidden}.course:before{content:"";position:absolute;inset:auto -80px -120px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#d9b55d13,transparent 65%)}.course h3{font-size:24px;margin:0}.course p{color:#77838a;font-size:9px;line-height:1.8}.course ul{list-style:none;padding:0;margin:15px 0;display:grid;gap:7px}.course li{display:flex;gap:8px;align-items:center;color:#8d989e;font-size:8px}.course li:before{content:"→";color:var(--gold);font-family:Manrope}.contactRow{display:flex;gap:7px;flex-wrap:wrap}
-.teamGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.teamCard{padding:24px;border-radius:22px}.avatar{width:64px;height:64px;border-radius:18px;border:1px solid #d9b55d28;background:#d9b55d08;display:grid;place-items:center;color:var(--gold);font:900 21px Manrope}.teamCard h3{margin:12px 0 3px;font-size:17px}.teamCard p{margin:0;color:#77848a;font-size:8px}.teamCard .btn{margin-top:13px;display:inline-flex}
-.faq{max-width:930px;margin:auto;display:grid;gap:7px}.faqItem{border:1px solid #ffffff10;border-radius:14px;background:#ffffff03;overflow:hidden}.faqQ{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border:0;background:transparent;color:#e7e1d4;text-align:right;font-size:9px}.faqQ span{width:25px;height:25px;border:1px solid #d9b55d20;border-radius:7px;color:var(--gold);display:grid;place-items:center;transition:.25s}.faqA{max-height:0;overflow:hidden;color:#6f7c83;font-size:8px;line-height:1.9;padding:0 16px;transition:max-height .3s,padding .3s}.faqItem.open .faqA{max-height:160px;padding:0 16px 15px}.faqItem.open .faqQ span{transform:rotate(45deg);background:#d9b55d09}
-.final{padding:90px 20px 35px}.finalCard{padding:35px;border-radius:28px;text-align:center;position:relative;overflow:hidden}.finalCard:before{content:"";position:absolute;width:480px;height:480px;left:50%;top:-280px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#d9b55d18,transparent 67%)}.finalCard small{position:relative;color:var(--gold);font:800 7px Manrope;letter-spacing:.24em}.finalCard h2{position:relative;font-size:clamp(35px,6vw,65px);margin:10px 0;letter-spacing:-.06em}.finalCard p{position:relative;max-width:600px;margin:0 auto;color:#79868d;font-size:10px;line-height:1.8}.finalCard .heroActions{justify-content:center;position:relative}.footer{padding:20px 20px 45px}.footerIn{display:flex;justify-content:space-between;gap:15px;align-items:center;padding-top:18px;border-top:1px solid #ffffff0d;color:#66727a;font-size:7px}.footerBrand{color:#d9b55d;font:900 9px Manrope}.footerLinks{display:flex;gap:7px}.footerLinks a{padding:7px 9px;border:1px solid #ffffff0d;border-radius:8px}
-#cursor{position:fixed;left:0;top:0;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,#d9b55d11,transparent 68%);filter:blur(3px);pointer-events:none;z-index:40;transform:translate(-50%,-50%);transition:opacity .25s}.cursorDot{position:fixed;left:0;top:0;width:6px;height:6px;border-radius:50%;background:#f2d88f;box-shadow:0 0 18px #d9b55d,0 0 3px #fff;pointer-events:none;z-index:41}
-#command{position:fixed;inset:0;display:grid;place-items:center;background:#020305bb;backdrop-filter:blur(18px);z-index:100;opacity:0;visibility:hidden;transition:.3s}.commandOpen{opacity:1!important;visibility:visible!important}.cmdCard{width:min(720px,calc(100% - 28px));padding:18px;border:1px solid #d9b55d35;border-radius:22px;background:#0a0f15f8;box-shadow:0 40px 150px #000f}.cmdTop{display:flex;justify-content:space-between;align-items:start}.cmdTop small{color:#72808a;font:700 6px Manrope;letter-spacing:.2em}.cmdTop h3{font-size:23px;margin:7px 0 0}.cmdTop button{width:31px;height:31px;border:1px solid #ffffff10;border-radius:8px;background:#ffffff05;color:#87949a}.cmdSearch{height:44px;margin-top:14px;display:flex;gap:9px;align-items:center;padding:0 12px;border:1px solid #ffffff10;border-radius:11px;background:#ffffff03}.cmdSearch span{color:var(--gold);font:900 10px Manrope}.cmdSearch input{flex:1;border:0;outline:0;background:transparent;color:#fff;font-size:10px}.cmdGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.cmdGrid a,.cmdGrid button{display:grid;grid-template-columns:31px 1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid #ffffff0d;border-radius:11px;background:#ffffff03;color:inherit;text-decoration:none;text-align:start;transition:.2s}.cmdGrid a:hover,.cmdGrid button:hover{border-color:#d9b55d44;background:#d9b55d08;transform:translateY(-2px)}.cmdGrid strong{width:31px;height:31px;border-radius:8px;background:#d9b55d08;color:var(--gold);display:grid;place-items:center}.cmdGrid b{font:800 8px Manrope}.cmdGrid small{display:block;color:#65747d;font-size:6px;margin-top:3px}.cmdGrid i{color:#58666e;font:700 6px Manrope;font-style:normal}.cmdFoot{margin-top:11px;padding-top:11px;border-top:1px solid #ffffff0d;display:flex;justify-content:space-between;align-items:center;gap:10px}.cmdFoot span{color:#607079;font:700 6px Manrope}.cmdFoot em{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 9px var(--mint)}.cmdFoot div{display:flex;gap:5px}.cmdFoot button{height:29px;padding:0 9px;border:1px solid #d9b55d28;border-radius:8px;background:#d9b55d08;color:var(--gold);font:800 6px Manrope}
-#boot{position:fixed;inset:0;z-index:200;background:#030405;display:grid;place-items:center;transition:opacity .8s,visibility .8s}.bootWrap{text-align:center}.bootLogo{width:140px;height:140px;border-radius:18px;overflow:hidden;margin:auto;box-shadow:0 0 0 1px #d9b55d28,0 0 75px #d9b55d14;animation:float 3.5s ease-in-out infinite}.bootLogo img{width:100%;height:100%;object-fit:contain}.bootWrap small{display:block;color:#a38a4e;font:800 7px Manrope;letter-spacing:.32em;margin-top:20px}.bootTitle{font:900 23px Manrope;margin-top:8px}.bootBar{width:min(370px,76vw);height:3px;margin:17px auto 8px;background:#ffffff0d;border-radius:20px;overflow:hidden}.bootBar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold),#fff0ac);box-shadow:0 0 17px var(--gold);transition:.15s}.bootMeta{display:flex;justify-content:space-between;color:#55636b;font:700 6px Manrope;letter-spacing:.1em}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes shine{to{background-position:240% center}}@keyframes float{50%{transform:translateY(-8px)}}@keyframes breath{50%{transform:scale(1.06);opacity:.72}}@keyframes pulse{50%{opacity:.45;transform:scale(.78)}}@keyframes scrollDot{70%{transform:translateY(9px);opacity:.1}}@keyframes bar{from{height:15%}to{height:92%}}
-.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.16,1,.3,1)}.reveal.show{opacity:1;transform:none}
-@media(max-width:980px){.heroWrap{grid-template-columns:1fr}.appsGrid{grid-template-columns:1fr 1fr}.heroCopy{text-align:center}.heroCopy p{margin-inline:auto}.heroActions,.heroMeta{justify-content:center}.heroCore{min-height:500px}.studioGrid,.teamGrid{grid-template-columns:1fr}.projectGrid{grid-template-columns:1fr 1fr}.project:first-child{grid-row:span 1}.navlinks{display:none}.brand{min-width:0}.sectionHeader{display:block}.sectionAside{max-width:none;text-align:start;margin-top:12px}}
-@media(max-width:650px){.container{width:min(100% - 24px,1240px)}#nav{top:8px;height:56px}.brand img{width:37px;height:37px}.brand b{font-size:9px}.brand small{display:none}.navactions .miniBtn:nth-child(1){display:none}.hero{padding-top:115px}.hero h1{font-size:52px}.heroCore{min-height:380px}.core{width:300px}.coreGlow{width:330px;height:330px}.o3{left:0}.section{padding:80px 12px}.sectionHeader{margin-bottom:27px}.storyRows,.signalFoot{grid-template-columns:1fr}.appsGrid,.learnGrid{grid-template-columns:1fr}.projectGrid{grid-template-columns:1fr}.project{min-height:230px}.cmdGrid{grid-template-columns:1fr}.final{padding:70px 12px 25px}.footerIn{display:block}.footerLinks{margin-top:10px}.cursorDot,#cursor{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.coreGlow,.core:before,.core:after,.ringA,.ringB,.ringC,.hero h1 span,.bootLogo,.bars i{animation:none!important}.reveal{transition:none!important}}
-.aniArt{position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,#d9b55d28,transparent 24%),linear-gradient(145deg,#11141b,#201a2c);display:grid;place-items:center;z-index:0}.aniArt span{font:900 70px Manrope;color:#d9b55d;text-shadow:0 0 40px #d9b55d22}.aniArt small{position:absolute;left:15px;top:15px;color:#8e7b4c;font:800 6px Manrope;letter-spacing:.22em}.aniProject:after{background:linear-gradient(180deg,transparent 15%,#030406dd 100%)}
-
-/* ADLAND 2026 — readability + arcade layer */
-body{font-size:14px}
-.navlinks a{font-size:10px;letter-spacing:.01em}
-.miniBtn{font-size:9px}
-.brand b{font-size:13px}
-.brand small{font-size:8px}
-.eyebrow{font-size:9px}
-.hero p{font-size:14px;line-height:2.05}
-.pill{font-size:9px}
-.sectionHeadMain small{font-size:9px}
-.sectionHeadMain p{font-size:13px}
-.sectionAside{font-size:9px}
-.storyText p{font-size:13px}
-.storyChip b{font-size:10px}.storyChip span{font-size:9px}
-.signalHead b{font-size:10px}.signalLive{font-size:8px}
-.metric small{font-size:8px}.metric b{font-size:17px}.metric em{font-size:9px}
-.appHead small{font-size:8px}.appTag{font-size:9px}.app p{font-size:11px}
-.featureMini span{font-size:9px}.version{font-size:8px}.appLink{font-size:9px}
-.projectCopy small{font-size:8px}.projectCopy h3{font-size:19px}.projectCopy p{font-size:9px}
-.course p{font-size:11px}.course li{font-size:9px}.course li:before{font-size:11px}
-.teamCard p{font-size:10px}
-.faqQ{font-size:11px}.faqA{font-size:10px}
-.footerIn{font-size:9px}.footerBrand{font-size:11px}
-.cmdTop small{font-size:8px}.cmdSearch input{font-size:12px}.cmdGrid b{font-size:10px}.cmdGrid small{font-size:8px}.cmdGrid i{font-size:8px}.cmdFoot span,.cmdFoot button{font-size:8px}
-
-.arcadeSection{padding-top:95px}
-.arcadeTicker{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:-10px 0 25px;padding:12px 15px;border:1px solid #ffffff10;border-radius:16px;background:linear-gradient(90deg,#d9b55d07,#ffffff03,#7bf6df06)}
-.arcadeTicker .arcadeSignal{display:flex;align-items:center;gap:8px;color:var(--mint);font:800 9px Manrope;letter-spacing:.12em}
-.arcadeTicker .arcadeSignal i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);animation:pulse 1.5s infinite}
-.arcadeTicker p{margin:0;color:#748188;font-size:10px}
-.arcadeVibe{display:flex;align-items:center;gap:12px;margin:-10px 0 14px;padding:13px 15px;border:1px solid #d9b55d1f;border-radius:16px;background:linear-gradient(90deg,#d9b55d09,#ffffff03,#7bf6df06);position:relative;overflow:hidden}
-.arcadeVibe:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#ffffff06,transparent);transform:translateX(-110%);animation:arcadeSweep 5s ease-in-out infinite}
-.arcadeVibeIcon{width:32px;height:32px;display:grid;place-items:center;border:1px solid #d9b55d2d;border-radius:10px;color:var(--gold);background:#d9b55d08;box-shadow:0 0 25px #d9b55d14;flex:none}
-.arcadeVibe strong{display:block;font-size:12px;color:#e8e0cf}.arcadeVibe small{display:block;margin-top:3px;color:#748188;font-size:10px}.arcadeVibeTag{margin-inline-start:auto;padding:7px 9px;border:1px solid #ffffff10;border-radius:999px;color:#77838a;font:800 8px Manrope;letter-spacing:.1em;white-space:nowrap}
-@keyframes arcadeSweep{55%,100%{transform:translateX(110%)}}
-@media(max-width:650px){.arcadeVibe{align-items:flex-start}.arcadeVibeTag{display:none}.arcadeVibe strong{font-size:11px}.arcadeVibe small{font-size:9px}}
-.productFilters{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 7px}
-.productFilter{min-height:36px;padding:0 12px;border:1px solid #ffffff10;border-radius:11px;background:#ffffff03;color:#7f8b92;font-weight:800;font-size:11px;cursor:pointer;transition:.22s}
-.productFilter:hover,.productFilter.active{color:#151005;background:linear-gradient(135deg,#d9b55d,#b98b39);border-color:transparent;transform:translateY(-2px);box-shadow:0 12px 30px #d9b55d18}
-.productFilterHint{margin:0 0 15px;color:#647179;font-size:11px}
-.app[data-hidden-filter="1"]{display:none}
-.arcadeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.gameCard{padding:18px;border-radius:23px;min-height:560px;display:flex;flex-direction:column;position:relative;overflow:hidden}
-.gameCard:before{content:"";position:absolute;inset:-50% auto auto -20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#d9b55d12,transparent 68%);pointer-events:none}
-.gameHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:2}
-.gameKicker{color:var(--gold);font:800 8px Manrope;letter-spacing:.18em}
-.gameHeader h3{margin:6px 0 5px;font-size:21px;letter-spacing:-.04em}
-.gameHeader p{margin:0;color:#748188;font-size:10px;line-height:1.7;max-width:310px}
-.gameBadge{padding:6px 8px;border:1px solid #ffffff10;border-radius:999px;color:#8c979d;font:800 8px Manrope;white-space:nowrap}
-.gameStage{position:relative;margin-top:16px;min-height:310px;border:1px solid #ffffff10;border-radius:18px;background:radial-gradient(circle at 50% 30%,#d9b55d08,transparent 45%),#05080b;overflow:hidden}
-.gameControls{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-top:13px}
-.gameControls .btn{height:42px;font-size:9px}
-.gameStatRow{display:flex;gap:7px;flex-wrap:wrap}
-.gameStat{padding:8px 10px;border:1px solid #ffffff0e;border-radius:10px;background:#ffffff03}
-.gameStat small{display:block;color:#65737b;font-size:7px}.gameStat b{display:block;margin-top:3px;font-size:13px}
-.gameMessage{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:25px;color:#718089;font-size:11px;line-height:1.9}
-.gameMessage strong{display:block;color:#d9b55d;font-size:16px;margin-bottom:5px}
-.reflexTarget{position:absolute;display:none;width:64px;height:64px;border-radius:50%;border:1px solid #f6df9a99;background:radial-gradient(circle at 35% 30%,#fff6cf,#d9b55d 35%,#8f641e 80%);box-shadow:0 0 0 8px #d9b55d08,0 0 35px #d9b55d66;transform:translate(-50%,-50%);animation:targetPulse 1s ease-in-out infinite}
-.reflexTarget.show{display:block}
-.reflexTarget:after{content:"";position:absolute;inset:14px;border:1px solid #fff8d9aa;border-radius:50%}
-@keyframes targetPulse{50%{transform:translate(-50%,-50%) scale(.86)}}
-.memoryBoard{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px;height:100%}
-.memoryCell{border:1px solid #ffffff10;border-radius:13px;background:linear-gradient(145deg,#ffffff05,#ffffff01);position:relative;transition:.18s;min-height:82px}
-.memoryCell:before{content:"";position:absolute;inset:14px;border-radius:9px;background:radial-gradient(circle at 35% 30%,#ffffff12,transparent 55%);opacity:.7}
-.memoryCell.lit{background:linear-gradient(145deg,#f6df9a33,#d9b55d0e);border-color:#d9b55d88;box-shadow:inset 0 0 28px #d9b55d10,0 0 24px #d9b55d22;transform:translateY(-2px)}
-.memoryCell.locked{pointer-events:none}
-.memoryCell.correct{border-color:#7bf6df88;box-shadow:0 0 28px #7bf6df20}
-.memoryCell.wrong{border-color:#ff8e8e88;animation:shake .22s linear 2}
-@keyframes shake{25%{transform:translateX(4px)}75%{transform:translateX(-4px)}}
-.memoryStage{padding:0}
-.meteorStage{display:flex;align-items:center;justify-content:center;height:310px;min-height:310px}
-#meteorCanvas{width:100%;height:100%;display:block;touch-action:none}
-.meteorHint{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);padding:5px 8px;border:1px solid #ffffff0e;border-radius:999px;background:#030406b8;color:#6e7b83;font-size:8px;white-space:nowrap;pointer-events:none}
-.arcadeFooterNote{margin-top:14px;color:#5f6c74;font-size:9px;line-height:1.8}
-@media(max-width:980px){.arcadeGrid{grid-template-columns:1fr 1fr}}
-@media(max-width:650px){
-  .meteorStage{height:290px;min-height:290px}
-  .arcadeGrid{grid-template-columns:1fr}
-  .gameCard{min-height:0}
-  .gameStage{min-height:290px}
-  .memoryCell{min-height:72px}
-  .navlinks a{font-size:9px}
-  .brand b{font-size:11px}
-  .hero p{font-size:13px}
-  .sectionHeadMain p{font-size:12px}
-}
-@media(prefers-reduced-motion:reduce){
-  .reflexTarget,.memoryCell,.arcadeTicker .arcadeSignal i{animation:none!important}
-}
-
-/* AdLand Learning Catalog */
-.learningCatalog{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.learningCourse{padding:23px!important;display:flex;flex-direction:column;min-height:650px}
-.courseTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px}
-.courseIndex{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;border:1px solid #d9b55d35;background:#d9b55d08;color:var(--gold);font:900 11px Manrope,Vazirmatn,sans-serif}
-.courseLevel{padding:7px 9px;border-radius:999px;border:1px solid #ffffff10;background:#ffffff03;color:#7d8a91;font-size:9px;line-height:1.3}
-.courseKicker{color:var(--gold);font:900 8px/1.4 Manrope,Vazirmatn,sans-serif;letter-spacing:.13em}
-.learningCourse h3{font-size:28px!important;margin:8px 0 8px!important}
-.courseLead{min-height:102px;color:#7e898f;font-size:12px!important;line-height:1.9!important}
-.courseBlock{margin-top:15px;padding:13px;border:1px solid #ffffff0b;border-radius:14px;background:#ffffff03}
-.courseBlock>b{display:block;color:#ded8ca;font-size:11px;margin-bottom:8px}
-.courseBlock ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
-.courseBlock li{position:relative;padding-inline-start:17px;color:#87939a;font-size:10px;line-height:1.7}
-.courseBlock li:before{content:"";position:absolute;inset-inline-start:0;top:.63em;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 9px #d9b55d66}
-.courseBlock p{margin:0;color:#7d898f;font-size:10px;line-height:1.8!important}
-.courseOutcome{display:flex;flex-direction:column;gap:5px;margin-top:auto;padding:13px 0 14px;border-top:1px solid #ffffff0a;border-bottom:1px solid #ffffff0a}
-.courseOutcome span{color:#68757d;font-size:8px;text-transform:uppercase;letter-spacing:.12em}
-.courseOutcome strong{color:#e2ddd0;font-size:10px;line-height:1.6}
-.learningCourse .contactRow{margin-top:14px}
-.learningCourse .btn{width:100%}
-@media(max-width:1050px){.learningCatalog{grid-template-columns:repeat(2,minmax(0,1fr))}.learningCourse{min-height:620px}}
-@media(max-width:650px){.learningCatalog{grid-template-columns:1fr}.learningCourse{min-height:0}.courseLead{min-height:0}.learningCourse h3{font-size:25px!important}.courseBlock li,.courseBlock p{font-size:11px}.courseOutcome strong{font-size:11px}}
-
-/* Arcade player identity */
-.arcadeTicker{position:relative}
-.arcadePlayer{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid #d9b55d22;border-radius:12px;background:#d9b55d06;min-width:190px}
-.arcadePlayer .playerIcon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#d9b55d0c;color:var(--gold);font-size:15px}
-.arcadePlayer small{display:block;color:#68757d;font-size:7px;line-height:1.2}
-.arcadePlayer strong{display:block;color:#e8e1d3;font-size:11px;line-height:1.35;max-width:95px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.playerEdit{margin-inline-start:auto;height:30px;padding:0 9px;border:1px solid #d9b55d2e;border-radius:9px;background:#d9b55d08;color:var(--gold);font-size:8px;font-weight:800}
-.arcadeIdentity{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:20px;background:#020304bb;backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.25s}
-.arcadeIdentity.open{opacity:1;visibility:visible}
-.identityCard{width:min(500px,calc(100% - 20px));padding:24px;border:1px solid #d9b55d35;border-radius:22px;background:#090d12f4;box-shadow:0 40px 120px #000d;position:relative}
-.identityClose{position:absolute;top:12px;inset-inline-end:12px;width:32px;height:32px;border-radius:9px;border:1px solid #ffffff10;background:#ffffff04;color:#89959c;font-size:18px}
-.identityCard>small{color:var(--gold);font:900 8px/1 Manrope,sans-serif;letter-spacing:.2em}
-.identityCard h3{margin:10px 0 8px;font-size:26px}
-.identityCard p{margin:0;color:#78858c;font-size:11px;line-height:1.9}
-.identityCard label{display:block;margin-top:18px;margin-bottom:7px;color:#b5bcc0;font-size:10px;font-weight:800}
-.identityCard input{width:100%;height:46px;padding:0 13px;border:1px solid #ffffff12;border-radius:12px;background:#ffffff04;color:#fff;outline:none;font-size:13px}
-.identityCard input:focus{border-color:#d9b55d66;box-shadow:0 0 0 3px #d9b55d0e}
-.identityActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.identityActions .btn{flex:1;min-width:145px}
-.identityNote{margin-top:11px;color:#5f6b72;font-size:8px}
-@media(max-width:650px){.arcadePlayer{min-width:0;flex:1}.arcadeTicker{align-items:stretch}.arcadeTicker .arcadePlayer{order:-1;width:100%}.arcadeIdentity{padding:12px}}
-.learningCourse{position:relative;overflow:hidden}.learningCourseIcon{position:absolute;inset-inline-end:18px;top:18px;width:66px;height:66px;border-radius:18px;border:1px solid #ffffff10;box-shadow:0 14px 42px #0007;opacity:.94}.learningCourse .courseTop{padding-inline-end:78px}.arcadePlayer em{display:block;margin-top:3px;color:#4f5c63;font:700 7px/1 Manrope,sans-serif;letter-spacing:.08em;font-style:normal}.arcadePlayer .playerEdit{min-width:70px}/* Global language + leaderboard upgrade */
-#langBtn{min-width:92px;height:38px;padding:0 13px!important;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #d9b55d55!important;background:linear-gradient(135deg,#d9b55d18,#9b8cff0c)!important;color:#f5e7bc!important;border-radius:11px!important;font-weight:900!important;font-size:10px!important;box-shadow:0 8px 28px #d9b55d12;position:relative}
-#langBtn:before{content:"↔";width:20px;height:20px;border:1px solid #d9b55d55;border-radius:6px;display:grid;place-items:center;color:#d9b55d;font-size:10px}
-#langBtn:after{content:"↔";color:#8e94a5;font-size:10px}
-#langBtn:hover{border-color:#d9b55d99!important;background:#d9b55d20!important;transform:translateY(-1px)}
-.globalLeaderboard{margin:0 0 28px;padding:18px;border:1px solid #7bf6df1c;border-radius:18px;background:radial-gradient(circle at 90% 0,#7bf6df08,transparent 35%),#ffffff03}
-.leaderHead{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:13px}
-.leaderHead b{display:block;color:#7bf6df;font-size:9px;letter-spacing:.12em}.leaderHead h3{margin:5px 0 0;font-size:20px}.leaderHead p{margin:0;color:#6f7b83;font-size:9px;line-height:1.7}
-.leaderTabs{display:flex;gap:5px;flex-wrap:wrap}.leaderTab{border:1px solid #ffffff10;background:#ffffff03;color:#78858b;border-radius:9px;padding:8px 10px;font:800 9px inherit;cursor:pointer}.leaderTab.active{border-color:#7bf6df45;color:#d9fff5;background:#7bf6df08}
-.leaderGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.leaderTable{border:1px solid #ffffff0c;border-radius:14px;overflow:hidden}.leaderRow{display:grid;grid-template-columns:34px 1fr 110px 80px;align-items:center;gap:8px;padding:9px 11px;border-bottom:1px solid #ffffff08;font-size:10px}.leaderRow:last-child{border-bottom:0}.leaderRow.head{color:#5f6d74;background:#ffffff03;font-size:8px;font-weight:900}.leaderRank{color:#d9b55d;font-weight:900}.leaderName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.leaderScore{font-weight:900;color:#e8edf0;text-align:left}.leaderTime{color:#626f77;text-align:left;font-size:8px}.leaderLoading,.leaderEmpty{padding:22px;text-align:center;color:#69777e;font-size:10px}.leaderSide{padding:14px;border:1px solid #ffffff0c;border-radius:14px;background:#ffffff02}.leaderSide strong{display:block;font-size:13px}.leaderSide p{color:#6d7980;font-size:9px;line-height:1.8;margin:7px 0}.leaderRefresh{border:1px solid #ffffff12;background:#ffffff03;color:#aab3b8;border-radius:9px;padding:8px 10px;font:800 9px inherit;cursor:pointer}.leaderRefresh:hover{border-color:#7bf6df35;color:#dffff8}
-@media(max-width:760px){.leaderGrid{grid-template-columns:1fr}.leaderRow{grid-template-columns:28px 1fr 78px}.leaderTime{display:none}.leaderHead{display:block}.leaderTabs{margin-top:10px}}
-</style>
-<style id="adland-type">
-html,body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
-body{font-family:Sora,Vazirmatn,sans-serif!important}
-h1,h2,h3,h4,.sectionHeadMain h2,.hero h1,.head h2,.finalCard h2{font-family:Sora,Vazirmatn,sans-serif!important;font-kerning:normal;text-wrap:balance}
-button,input,textarea,select{font-family:Sora,Vazirmatn,sans-serif!important}
-.small,small,.eyebrow,.kicker,.ey,.version,.pill,.appTag,.featureMini,.footerLinks,.cmdTop small,.cmdFoot,nav{font-variant-numeric:tabular-nums}
-html[lang="fa"] body{font-family:Vazirmatn,Sora,Vazirmatn,sans-serif!important}
-html[lang="fa"] h1,html[lang="fa"] h2,html[lang="fa"] h3{font-family:Vazirmatn,Sora,Vazirmatn,sans-serif!important}
-:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-</style><style id="app-icon-interaction">.appIcon{position:relative;display:block;cursor:pointer;overflow:hidden}.appIcon:after{content:"OPEN SITE ↗";position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#06080bcc,#d9b55d55);color:#fff7df;font:800 7px Sora,Manrope,sans-serif;letter-spacing:.08em;opacity:0;transform:scale(.94);transition:.24s;backdrop-filter:blur(3px)}.appIcon:hover:after{opacity:1;transform:none}.appIcon img{transition:transform .35s}.appIcon:hover img{transform:scale(1.08)}@media(max-width:650px){.appIcon:after{content:"↗"}} </style><style id="adland-readable-type">
-html{font-size:16px}body{font-size:16px!important}
-p{font-size:15px!important;line-height:1.9!important}
-small{font-size:11px!important;line-height:1.5!important;letter-spacing:.04em!important}
-button{font-size:12px!important;line-height:1.3!important}
-a{outline-offset:3px}
-.navlinks a{font-size:11px!important}.miniBtn{font-size:10px!important}.eyebrow,.sectionHeadMain small,.appHead small,.projectCopy small,.version,.appLink{font-size:10px!important}
-.hero p{font-size:16px!important;max-width:720px}.pill{font-size:10px!important}.sectionAside{font-size:11px!important}
-.storyText p{font-size:15px!important}.storyChip b,.metric small,.signalLive{font-size:10px!important}.storyChip span{font-size:10px!important;line-height:1.6!important}
-.app p{font-size:13px!important}.featureMini span{font-size:11px!important}.appHead h3{font-size:20px!important}
-.course p,.course li{font-size:12px!important}.teamCard p{font-size:11px!important}.faqQ{font-size:13px!important}.faqA{font-size:12px!important}
-.footerIn,.footerLinks a{font-size:10px!important}
-</style></style><style id="readability-v2">
-/* READABILITY SYSTEM */
-body{font-size:16px!important}
-.brand b,.hero h1,.sectionHeadMain h2,.storyText h3,.course h3,.teamCard h3,.finalCard h2{font-family:Outfit,Manrope,Vazirmatn,"Segoe UI",sans-serif}
-.brand b{font-size:13px!important}.brand small{font-size:8px!important}
-.navlinks a{font-size:11px!important;padding:10px 12px}.miniBtn{font-size:10px!important}
-.eyebrow{font-size:10px!important}.hero p{font-size:16px!important;line-height:2!important}.btn{font-size:11px!important;height:48px;padding-inline:18px}.pill{font-size:9px!important;padding:8px 10px}
-.sectionHeadMain small{font-size:10px!important}.sectionHeadMain p{font-size:14px!important}.sectionAside{font-size:10px!important}
-.storyText p,.storyChip span{font-size:13px!important}.storyChip b{font-size:10px!important}
-.signalHead b{font-size:10px!important}.signalLive{font-size:9px!important}.metric small{font-size:9px!important}.metric b{font-size:18px!important}.metric em{font-size:9px!important}
-.appHead h3{font-size:22px!important}.appHead small{font-size:9px!important}.appTag{font-size:10px!important}.app p{font-size:13px!important;line-height:1.8!important}.featureMini span{font-size:10px!important;padding:10px}.version{font-size:9px!important}.appLink{font-size:10px!important;height:38px}
-.projectCopy h3{font-size:20px!important}.projectCopy small{font-size:8px!important}.projectCopy p{font-size:10px!important}
-.course p{font-size:13px!important}.course li{font-size:11px!important}.course small{font-size:9px!important}
-.teamCard p{font-size:11px!important}.faqQ{font-size:13px!important}.faqA{font-size:12px!important}
-.footerIn{font-size:9px!important}.footerBrand{font-size:11px!important}.footerLinks a{font-size:9px!important}
-.cmdTop h3{font-size:26px!important}.cmdTop small,.cmdGrid b{font-size:10px!important}.cmdGrid small{font-size:9px!important}.cmdGrid i{font-size:8px!important}.cmdFoot span,.cmdFoot button{font-size:8px!important}.cmdSearch input{font-size:13px!important}
-@media(max-width:650px){.hero p{font-size:14px!important}.appHead h3{font-size:20px!important}.app p{font-size:12px!important}.sectionHeadMain p{font-size:13px!important}.faqQ{font-size:12px!important}.faqA{font-size:11px!important}}
-</style><style id="global-readable-final">
-html{font-size:16px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}body{font-size:16px!important}
-.hero p,.storyText p,.sectionHeadMain p,.course p,.faqA,.projectCopy p{font-size:15px!important;line-height:1.9!important}
-.navlinks a,.miniBtn,.btn,.pill,.featureMini span,.appLink,.footerLinks a{font-size:11px!important;line-height:1.4!important}
-.appHead h3,.teamCard h3,.storyText h3{font-weight:800!important}
-.hero h1,.sectionHeadMain h2,.finalCard h2{font-weight:850!important}
-</style><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aradprogramming.github.io/AdLandSite/#organization","name":"AdLand Studio","url":"https://aradprogramming.github.io/AdLandSite/","logo":"https://aradprogramming.github.io/AdLandSite/assets/logo/adland-logo-transparent.svg?v=20261110","sameAs":["https://t.me/Arad_unk","https://ble.ir/AdLandStudio"]},{"@type":"WebSite","@id":"https://aradprogramming.github.io/AdLandSite/#website","name":"AdLand Studio","url":"https://aradprogramming.github.io/AdLandSite/","inLanguage":["fa-IR","en-US"],"publisher":{"@id":"https://aradprogramming.github.io/AdLandSite/#organization"}},{"@type":"ItemList","@id":"https://aradprogramming.github.io/AdLandSite/#apps","name":"AdLand Studio product catalogue","itemListElement":[{"@type":"ListItem","position":1,"name":"Face2Face","url":"https://aradprogramming.github.io/AdLandSite/face2face/"},{"@type":"ListItem","position":2,"name":"Nexus","url":"https://aradprogramming.github.io/AdLandSite/nexus/"},{"@type":"ListItem","position":3,"name":"Canvas","url":"https://aradprogramming.github.io/AdLandSite/canvas/"},{"@type":"ListItem","position":4,"name":"Pulse","url":"https://aradprogramming.github.io/AdLandSite/pulse/"},{"@type":"ListItem","position":5,"name":"Frame","url":"https://aradprogramming.github.io/AdLandSite/frame/"},{"@type":"ListItem","position":6,"name":"Atlas","url":"https://aradprogramming.github.io/AdLandSite/atlas/"},{"@type":"ListItem","position":7,"name":"Forge","url":"https://aradprogramming.github.io/AdLandSite/forge/"},{"@type":"ListItem","position":8,"name":"Prism","url":"https://aradprogramming.github.io/AdLandSite/prism/"},{"@type":"ListItem","position":9,"name":"Relay","url":"https://aradprogramming.github.io/AdLandSite/relay/"},{"@type":"ListItem","position":10,"name":"Echo","url":"https://aradprogramming.github.io/AdLandSite/echo/"},{"@type":"ListItem","position":11,"name":"Chrono","url":"https://aradprogramming.github.io/AdLandSite/chrono/"},{"@type":"ListItem","position":12,"name":"Orbit","url":"https://aradprogramming.github.io/AdLandSite/orbit/"},{"@type":"ListItem","position":13,"name":"AdLand AI Tools","url":"https://aradprogramming.github.io/AdLandSite/ai-tools/"},{"@type":"ListItem","position":14,"name":"AniDiary","url":"https://aradprogramming.github.io/AdLandSite/anidiary/"},{"@type":"ListItem","position":15,"name":"Roshd","url":"https://aradprogramming.github.io/AdLandSite/roshd/"}]}]}</script><link rel="stylesheet" href="assets/adland-ui.css?v=20261004-unified"><meta name="description" content="AdLand Studio؛ اکوسیستم ابزارهای دیجیتال، اپ‌های دسکتاپ Windows و macOS، پروژه‌های خلاق، آموزش برنامه‌نویسی و ابزارهای کاربردی.">
-<meta name="keywords" content="AdLand, AdLand Studio, اپ دسکتاپ, ابزار دیجیتال, Windows, macOS, برنامه نویسی, آموزش Python, Scratch">
-<link rel="canonical" href="https://aradprogramming.github.io/AdLandSite/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AdLand Studio">
-<meta property="og:title" content="AdLand Studio | اپ‌های دسکتاپ، ابزارهای دیجیتال و آموزش">
-<meta property="og:description" content="AdLand Studio؛ اکوسیستم ابزارهای دیجیتال، اپ‌های دسکتاپ Windows و macOS، پروژه‌های خلاق، آموزش برنامه‌نویسی و ابزارهای کاربردی.">
-<meta property="og:url" content="https://aradprogramming.github.io/AdLandSite/">
-<meta property="og:locale" content="fa_IR">
-<meta property="og:locale:alternate" content="en_US">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AdLand Studio | اپ‌های دسکتاپ، ابزارهای دیجیتال و آموزش">
-<meta name="twitter:description" content="AdLand Studio؛ اکوسیستم ابزارهای دیجیتال، اپ‌های دسکتاپ Windows و macOS، پروژه‌های خلاق، آموزش برنامه‌نویسی و ابزارهای کاربردی.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<style id="adland-mobile-nav-fix">
-.navMenuBtn{display:none!important;align-items:center;justify-content:center;min-width:42px;padding-inline:10px!important;font-size:17px!important;line-height:1!important}
-.navDrawer{display:none;position:fixed;z-index:95;top:86px;left:14px;right:14px;opacity:0;transform:translateY(-10px) scale(.985);pointer-events:none;transition:opacity .24s ease,transform .24s ease}
-.navDrawer.open{opacity:1;transform:none;pointer-events:auto}
-.navDrawerPanel{padding:14px;border-radius:20px;background:linear-gradient(145deg,#0b0f14f2,#070a0df2);border:1px solid #ffffff17;box-shadow:0 28px 90px #000b;backdrop-filter:blur(26px) saturate(130%);-webkit-backdrop-filter:blur(26px) saturate(130%)}
-.navDrawerTitle{padding:7px 9px 11px;color:var(--gold,#d9b55d);font:800 10px/1.4 Manrope,Vazirmatn,sans-serif;letter-spacing:.12em}
-.navDrawerLinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.navDrawerLinks a{min-height:44px;display:flex;align-items:center;justify-content:center;padding:9px 10px;border:1px solid #ffffff10;border-radius:12px;background:#ffffff04;color:#b8c0c4;font:800 12px/1.4 Manrope,Vazirmatn,sans-serif;transition:.22s}
-.navDrawerLinks a:hover,.navDrawerLinks a:focus-visible{color:#fff;border-color:#d9b55d3a;background:#d9b55d0b;transform:translateY(-2px)}
-@media(min-width:981px){.navMenuBtn,.navDrawer{display:none!important}}
-@media(max-width:980px){.navMenuBtn{display:inline-flex!important}.navDrawer{display:block}}
-@media(max-width:650px){.navDrawer{top:72px;left:8px;right:8px}.navDrawerLinks{grid-template-columns:1fr}#soundBtn,#cmdBtn{display:none!important}.navMenuBtn{min-width:40px!important}}
-</style><link rel="stylesheet" href="assets/adland-system.css?v=20261110"></head>
-<body>
-<div id="progress"></div><canvas id="space"></canvas><div id="scanlines"></div><div id="noise"></div><div id="cursor"></div><div class="cursorDot" id="cursorDot"></div>
-
-<div id="boot"><div class="bootWrap"><div class="bootLogo"><img src="assets/logo/adland-logo-transparent.svg?v=20261110" data-adland-brand-logo alt="AdLand Studio logo" width="512" height="512" loading="eager" decoding="async" fetchpriority="high"></div><small>ADLAND STUDIO / CREATIVE CORE</small><div class="bootTitle">EXPERIENCE LOADING</div><div class="bootBar"><i id="bootFill"></i></div><div class="bootMeta"><span>INITIALIZING</span><b id="bootPct">00%</b></div></div></div>
-
-<nav id="nav">
-<a class="brand" href="#home"><img src="assets/logo/adland-logo-transparent.svg?v=20261110" data-adland-brand-logo alt="AdLand Studio logo" width="512" height="512" loading="eager" decoding="async" fetchpriority="high"><div><b>ADLAND STUDIO</b><small>Creativity : Ulimited</small></div></a>
-<div class="navlinks"><a href="#apps" data-fa="اپ‌ها" data-en="APPS">اپ‌ها</a><a href="#arcade" data-fa="آرکید" data-en="ARCADE">آرکید</a><a href="#studio" data-fa="استودیو" data-en="STUDIO">استودیو</a><a href="#projects" data-fa="پروژه‌ها" data-en="PROJECTS">پروژه‌ها</a><a href="orbit/" data-fa="مرکز اپ‌ها" data-en="APP CENTER">مرکز اپ‌ها</a><a href="#learning" data-fa="آموزش" data-en="LEARNING">آموزش</a><a href="#team" data-fa="تیم" data-en="TEAM">تیم</a><a href="#faq" data-fa="سوالات" data-en="FAQ">سوالات</a><a href="#contact" data-fa="ارتباط" data-en="CONTACT">ارتباط</a></div>
-<div class="navactions"><button class="miniBtn" id="langBtn">FA → EN</button><button class="miniBtn" id="soundBtn">SFX ON</button><button class="miniBtn" id="cmdBtn">⌘ K</button><button class="miniBtn al-health-btn" id="alHealthBtn" type="button" data-state="online" aria-label="System health">SYSTEM</button><button class="miniBtn navMenuBtn" id="navMenuBtn" type="button" aria-controls="navDrawer" aria-expanded="false" aria-label="Open navigation">☰</button></div>
-</nav>
-<div id="navDrawer" class="navDrawer" aria-hidden="true">
-  <div class="navDrawerPanel glass" role="dialog" aria-label="Navigation">
-    <div class="navDrawerTitle" data-fa="ناوبری سریع" data-en="QUICK NAV">ناوبری سریع</div>
-    <div class="navDrawerLinks">
-      <a href="#apps" data-fa="اپ‌ها" data-en="APPS">اپ‌ها</a>
-      <a href="#arcade" data-fa="آرکید" data-en="ARCADE">آرکید</a>
-      <a href="#studio" data-fa="استودیو" data-en="STUDIO">استودیو</a>
-      <a href="#projects" data-fa="پروژه‌ها" data-en="PROJECTS">پروژه‌ها</a>
-      <a href="orbit/" data-fa="مرکز اپ‌ها" data-en="APP CENTER">مرکز اپ‌ها</a>
-      <a href="#learning" data-fa="آموزش" data-en="LEARNING">آموزش</a>
-      <a href="#team" data-fa="تیم" data-en="TEAM">تیم</a>
-      <a href="#faq" data-fa="سؤالات" data-en="FAQ">سؤالات</a>
-      <a href="#contact" data-fa="ارتباط" data-en="CONTACT">ارتباط</a>
-    </div>
-  </div>
-</div>
-
-<main>
-<section id="home">
-<div class="hero container"><div class="heroWrap">
-<div class="heroCopy reveal">
-<div class="eyebrow"><i></i><span data-fa="استودیو خلاق دیجیتال" data-en="DIGITAL CREATIVE STUDIO">استودیو خلاق دیجیتال</span></div>
-<h1 data-fa="Creativity : Ulimited" data-en="Creativity : Ulimited">Creativity : Ulimited</h1>
-<p data-fa="AdLand فقط یک سایت یا چند نرم‌افزار نیست؛ یک اکوسیستم از ابزارهای دسکتاپ، پروژه‌های دیجیتال و آموزش است که با حرکت، نور، صدا و جزئیات کوچک زنده می‌شود." data-en="AdLand is more than a site or a few apps — it is an ecosystem of desktop tools, digital projects and learning, brought to life with motion, light, sound and tiny details.">AdLand فقط یک سایت یا چند نرم‌افزار نیست؛ یک اکوسیستم از ابزارهای دسکتاپ، پروژه‌های دیجیتال و آموزش است که با حرکت، نور، صدا و جزئیات کوچک زنده می‌شود.</p>
-<div class="heroActions"><a class="btn primary" href="#apps" data-fa="ورود به دنیای اپ‌ها" data-en="ENTER THE APP UNIVERSE">ورود به دنیای اپ‌ها ↗</a><button class="btn" id="heroCmd" data-fa="باز کردن Command Center" data-en="OPEN COMMAND CENTER">باز کردن Command Center</button><button class="btn" id="adlandSelfTest" type="button" data-fa="بررسی سلامت سیستم" data-en="RUN SYSTEM CHECK">بررسی سلامت سیستم</button></div>
-<div class="promo-inline" style="display:flex;justify-content:center;margin-top:12px"><a class="btn" href="promo/" data-fa="تماشای فیلم معرفی استودیو ↗" data-en="WATCH THE STUDIO FILM ↗">تماشای فیلم معرفی استودیو ↗</a></div>
-<div class="heroMeta"><span class="pill"><b id="alProductTotal">15</b> PRODUCTS</span><span class="pill">13 DESKTOP · 1 WEB · 1 CROSS-PLATFORM</span><span class="pill">WINDOWS · macOS · MOBILE</span><span class="pill">FA / EN</span></div>
-</div>
-<div class="heroCore reveal"><div class="coreGlow"></div><div class="core"><span class="ringA"></span><span class="ringB"></span><span class="ringC"></span><img src="assets/logo/adland-logo-transparent.svg?v=20261110" data-adland-brand-logo alt="AdLand Studio logo" width="512" height="512" loading="eager" decoding="async" fetchpriority="high"><span class="orbitLabel o1">CREATIVE CORE</span><span class="orbitLabel o2">SYSTEM ONLINE</span><span class="orbitLabel o3">15 PRODUCTS</span><span class="orbitLabel o4">ADLAND / 2026</span></div></div>
-</div></div>
-<div class="scrollHint"><span>SCROLL TO EXPLORE</span><i></i></div>
-
-</section>
-
-<section class="section arcadeSection" id="arcade">
-<div class="container">
-  <div class="sectionHeader reveal">
-    <div class="sectionHeadMain">
-      <small>LIVE / ADLAND ARCADE</small>
-      <h2 data-fa="بازی کن. رکورد بزن. دوباره شروع کن." data-en="Play. Chase the record. Run it again.">بازی کن. رکورد بزن. دوباره شروع کن.</h2>
-      <p data-fa="چند بازی کوچک و سریع داخل خود سایت؛ بدون نصب، مناسب دسکتاپ و موبایل، با رکوردهایی که روی همین مرورگر ذخیره می‌شوند." data-en="A few fast games built right into the site — no install, desktop and mobile friendly, with local high scores saved in your browser.">چند بازی کوچک و سریع داخل خود سایت؛ بدون نصب، مناسب دسکتاپ و موبایل، با رکوردهایی که روی همین مرورگر ذخیره می‌شوند.</p>
-    </div>
-    <div class="sectionAside">سه تجربه‌ی کوتاه، اما واقعی: واکنش، حافظه و مهارت حرکتی.</div>
-  </div>
-
-  <div class="arcadeTicker reveal">
-    <span class="arcadeSignal"><i></i><b>ARCADE ONLINE</b></span>
-    <div class="arcadePlayer"><span class="playerIcon">◎</span><div><small id="arcadePlayerMode" data-fa="نام ثبت نشده" data-en="Name not set">نام ثبت نشده</small><strong id="arcadePlayerName">Guest</strong><em id="arcadeDeviceId"></em></div><button class="playerEdit" id="arcadePlayerEdit" type="button" data-fa="تغییر نام" data-en="Change name">تغییر نام</button></div>
-    <p data-fa="نامت را یک‌بار ثبت کن؛ رکوردها در جدول جهانی ثبت می‌شوند و از دستگاه‌های مختلف قابل مشاهده‌اند." data-en="Set your name once; your scores are published to the shared global leaderboard across devices.">نامت را ثبت کن تا رکوردها با نام خودت نمایش داده شوند. رکوردها روی همین مرورگر ذخیره می‌شوند.</p>
-    <div class="gameStatRow">
-      <div class="gameStat"><small>BEST REFLEX</small><b id="arcadeBestReflex">—</b></div>
-      <div class="gameStat"><small>MEMORY LEVEL</small><b id="arcadeBestMemory">—</b></div>
-      <div class="gameStat"><small>METEOR SCORE</small><b id="arcadeBestMeteor">—</b></div>
-    </div>
-  </div>
-
-  <div class="globalLeaderboard reveal" id="globalLeaderboard">
-    <div class="leaderHead"><div><b>GLOBAL / WORLDWIDE</b><h3 data-fa="رکوردهای جهانی" data-en="Global leaderboard">رکوردهای جهانی</h3><p data-fa="این جدول از یک دیتابیس مشترک خوانده می‌شود؛ رکوردها برای بازیکن‌های دستگاه‌های مختلف قابل مشاهده‌اند." data-en="A shared database powers this board, so scores from different devices can be seen together.">این جدول از یک دیتابیس مشترک خوانده می‌شود؛ رکوردها برای بازیکن‌های دستگاه‌های مختلف قابل مشاهده‌اند.</p></div><div class="leaderTabs"><button class="leaderTab active" data-game="reflex">REFLEX</button><button class="leaderTab" data-game="memory">MEMORY</button><button class="leaderTab" data-game="meteor">METEOR</button></div></div>
-    <div class="leaderGrid"><div class="leaderTable" id="leaderTable"><div class="leaderLoading" data-fa="در حال دریافت رکوردهای جهانی…" data-en="Loading global records…">در حال دریافت رکوردهای جهانی…</div></div><div class="leaderSide"><strong data-fa="رکورد تو هم می‌تواند اینجا باشد." data-en="Your score can appear here.">رکورد تو هم می‌تواند اینجا باشد.</strong><p data-fa="بعد از تمام‌کردن هر چالش، نتیجهٔ تو برای Leaderboard جهانی ارسال می‌شود. نامت را از بخش Player تنظیم کن." data-en="After a challenge, your score is submitted to the global board. Set your player name from the Player panel.">بعد از تمام‌کردن هر چالش، نتیجهٔ تو برای Leaderboard جهانی ارسال می‌شود. نامت را از بخش Player تنظیم کن.</p><button class="leaderRefresh" id="leaderRefresh" data-fa="↻ تازه‌سازی" data-en="↻ Refresh">↻ تازه‌سازی</button></div></div>
-  </div>
-
-  <div class="arcadeIdentity glass" id="arcadeIdentity" aria-hidden="true">
-    <div class="identityCard">
-      <button class="identityClose" id="arcadeIdentityClose" type="button" aria-label="Close">×</button>
-      <small>ADLAND PLAYER ID</small>
-      <h3 data-fa="نام بازیکنت را ثبت کن." data-en="Set your player name.">نام بازیکنت را ثبت کن.</h3>
-      <p data-fa="این نام کنار رکوردهای تو نمایش داده می‌شود. لازم نیست حساب بسازی؛ نام و رکوردها فقط در همین مرورگر نگه‌داری می‌شوند." data-en="This name appears beside your records. No account is required; your name and scores stay only in this browser.">این نام کنار رکوردهای تو نمایش داده می‌شود. لازم نیست حساب بسازی؛ نام و رکوردها فقط در همین مرورگر نگه‌داری می‌شوند.</p>
-      <label for="arcadePlayerInput" data-fa="نام نمایشی" data-en="Display name">نام نمایشی</label>
-      <input id="arcadePlayerInput" maxlength="18" autocomplete="nickname" data-fa-placeholder="کیان" data-en-placeholder="Ethan" placeholder="کیان" />
-      <div class="identityActions"><button class="btn primary" id="arcadeIdentitySave" type="button" data-fa="ذخیره نام" data-en="Save name">ذخیره نام</button><button class="btn" id="arcadeIdentityGuest" type="button" data-fa="ادامه به‌عنوان مهمان" data-en="Continue as guest">ادامه به‌عنوان مهمان</button></div>
-      <div class="identityNote" data-fa="این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد." data-en="This name is saved to this device profile and remains after refresh or returning to the site.">این نام برای پروفایل همین دستگاه ذخیره می‌شود و با Refresh یا بازگشت دوباره به سایت حفظ خواهد شد.</div>
-    </div>
-  </div>
-
-  <div class="arcadeVibe reveal" id="arcadeVibe">
-    <span class="arcadeVibeIcon">✦</span>
-    <div><strong id="arcadeVibeTitle" data-fa="امروز رکوردت رو می‌خوایم 😎" data-en="Today, we are hunting your record 😎">امروز رکوردت رو می‌خوایم 😎</strong><small id="arcadeVibeText" data-fa="بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه." data-en="No excuses; run it one more time and see what happens.">بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه.</small></div>
-    <span class="arcadeVibeTag">RANDOM MISSION</span>
-  </div>
-
-  <div class="arcadeGrid">
-    <article class="gameCard glass reveal">
-      <div class="gameHeader">
-        <div><span class="gameKicker">01 / REFLEX CORE</span><h3 data-fa="هسته‌ی واکنش" data-en="Reflex Core">هسته‌ی واکنش</h3><p data-fa="به محض روشن شدن هدف، سریع کلیک کن. هفت راند داری؛ هدف کوچک‌تر می‌شود، انتظار کوتاه‌تر می‌شود و کلیک زودهنگام جریمه دارد." data-en="Click the target the moment it appears. Seven rounds get progressively harder: smaller targets, shorter waits, and early clicks count.">چشات تیزه؟ 😏 به محض روشن شدن هدف بزن! هفت راند داری؛ هدف ریزتر می‌شه و انتظار کم‌تر. زود بزنی، خودت ضرر می‌کنی.</p></div>
-        <span class="gameBadge">REACTION</span>
-      </div>
-      <div class="gameStage" id="reflexStage">
-        <div class="gameMessage" id="reflexMessage"><div><strong data-fa="آماده‌ای؟" data-en="Ready?">آماده‌ای؟</strong><span data-fa="شروع را بزن و منتظر هدف بمان." data-en="Press start, then wait for the target.">شروع را بزن و منتظر هدف بمان.</span></div></div>
-        <button class="reflexTarget" id="reflexTarget" aria-label="Target"></button>
-      </div>
-      <div class="gameControls">
-        <button class="btn primary" id="reflexStart" data-fa="شروع چالش" data-en="Start challenge">شروع چالش</button>
-        <div class="gameStatRow">
-          <div class="gameStat"><small>ROUND</small><b id="reflexRound">0 / 7</b></div>
-          <div class="gameStat"><small>LAST</small><b id="reflexLast">—</b></div>
-          <div class="gameStat"><small>AVG</small><b id="reflexAvg">—</b></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gameCard glass reveal">
-      <div class="gameHeader">
-        <div><span class="gameKicker">02 / MEMORY PULSE</span><h3 data-fa="پالس حافظه" data-en="Memory Pulse">پالس حافظه</h3><p data-fa="خانه‌های روشن را به همان ترتیب تکرار کن. سه جان داری و با هر سطح، سرعت پخش الگو بیشتر می‌شود." data-en="Repeat the glowing tiles in order. You have three lives, and the sequence plays faster every level.">ببین چقدر مغزت خفنه 🧠 هر چی جلوتر بری الگو سریع‌تر می‌ره. سه تا جان داری؛ حواست جمع!</p></div>
-        <span class="gameBadge">MEMORY</span>
-      </div>
-      <div class="gameStage memoryStage">
-        <div class="memoryBoard" id="memoryBoard">
-          <button class="memoryCell" data-index="0" aria-label="Memory tile 1"></button><button class="memoryCell" data-index="1" aria-label="Memory tile 2"></button><button class="memoryCell" data-index="2" aria-label="Memory tile 3"></button>
-          <button class="memoryCell" data-index="3" aria-label="Memory tile 4"></button><button class="memoryCell" data-index="4" aria-label="Memory tile 5"></button><button class="memoryCell" data-index="5" aria-label="Memory tile 6"></button>
-          <button class="memoryCell" data-index="6" aria-label="Memory tile 7"></button><button class="memoryCell" data-index="7" aria-label="Memory tile 8"></button><button class="memoryCell" data-index="8" aria-label="Memory tile 9"></button>
-        </div>
-        <div class="gameMessage" id="memoryMessage"><div><strong data-fa="حافظه را روشن کن." data-en="Power up your memory.">حافظه را روشن کن.</strong><span data-fa="شروع را بزن و الگو را دنبال کن." data-en="Press start and follow the pattern.">شروع را بزن و الگو را دنبال کن.</span></div></div>
-      </div>
-      <div class="gameControls">
-        <button class="btn primary" id="memoryStart" data-fa="شروع الگو" data-en="Start pattern">شروع الگو</button>
-        <div class="gameStatRow">
-          <div class="gameStat"><small>LEVEL</small><b id="memoryLevel">0</b></div>
-          <div class="gameStat"><small>BEST</small><b id="memoryBest">0</b></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gameCard glass reveal">
-      <div class="gameHeader">
-        <div><span class="gameKicker">03 / METEOR RUN</span><h3 data-fa="فرار از شهاب‌ها" data-en="Meteor Run">فرار از شهاب‌ها</h3><p data-fa="مربع نورانی را هدایت کن و زنده بمان؛ سرعت، تراکم شهاب‌ها و حرکت آن‌ها به مرور بیشتر می‌شود. با کلیدها یا لمس حرکت کن." data-en="Steer the glowing square and survive: speed, meteor density, and drifting hazards increase over time. Use keys or touch to move.">بقا شروع شد 🚀 شهاب‌ها کم‌کم دیوونه‌تر می‌شن: سریع‌تر، بیشتر و بعضی‌هاشون هم حرکت می‌کنن. تا جایی که می‌تونی دوام بیار!</p></div>
-        <span class="gameBadge">SKILL</span>
-      </div>
-      <div class="gameStage meteorStage">
-        <canvas id="meteorCanvas" width="600" height="370" aria-label="Meteor Run game"></canvas>
-        <span class="meteorHint" data-fa="WASD / ← ↑ → ↓ / لمس" data-en="WASD / Arrow Keys / Touch">WASD / ← ↑ → ↓ / لمس</span>
-      </div>
-      <div class="gameControls">
-        <button class="btn primary" id="meteorStart" data-fa="شروع پرواز" data-en="Start run">شروع پرواز</button>
-        <div class="gameStatRow">
-          <div class="gameStat"><small>SCORE</small><b id="meteorScore">0</b></div>
-          <div class="gameStat"><small>BEST</small><b id="meteorBest">0</b></div>
-        </div>
-      </div>
-    </article>
-  </div>
-  <div class="arcadeFooterNote reveal" data-fa="نکته: این بازی‌ها هیچ حساب یا سرور جانبی لازم ندارند؛ رکوردها فقط در همین مرورگر باقی می‌مانند." data-en="Note: these games need no account or external server; scores stay only in this browser.">نکته: این بازی‌ها هیچ حساب یا سرور جانبی لازم ندارند؛ رکوردها فقط در همین مرورگر باقی می‌مانند.</div>
-</div>
-
-<section class="section" id="studio"><div class="container">
-<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>01 / THE STUDIO</small><h2 data-fa="یک استودیو، چند جهان." data-en="One studio. Many worlds.">یک استودیو، چند جهان.</h2><p data-fa="هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی." data-en="Every product has its own personality, but they share one design system: precise, fast, interactive and made for real use.">هر محصول شخصیت خودش را دارد، اما همه از یک سیستم طراحی مشترک می‌آیند: دقیق، سریع، تعاملی و ساخته‌شده برای استفاده‌ی واقعی.</p></div><div class="sectionAside">A living studio system built around tools, experiments and polished interactions.</div></div>
-<div class="studioGrid"><article class="story glass reveal"><div class="storyText"><h3 data-fa="جزئیات، تفاوت را می‌سازند." data-en="Details make the difference.">جزئیات، تفاوت را می‌سازند.</h3><p data-fa="از صدای کلیک تا نور دنبال‌کننده‌ی نشانگر، از animationهای ورود تا دموهای تعاملی؛ هدف این است که سایت فقط دیده نشود، بلکه حس شود." data-en="From interaction tones to cursor light, entrance motion and living demos, the goal is for the site to be felt, not just seen.">از صدای کلیک تا نور دنبال‌کننده‌ی نشانگر، از animationهای ورود تا دموهای تعاملی؛ هدف این است که سایت فقط دیده نشود، بلکه حس شود.</p><div class="storyRows"><div class="storyChip"><b>MOTION</b><span>Parallax, orbital motion, reveal systems and responsive micro-interactions.</span></div><div class="storyChip"><b>SOUND</b><span>Generated interface tones with a global SFX control.</span></div><div class="storyChip"><b>CONTROL</b><span>Command palette, language toggle and motion settings.</span></div></div></div></article>
-<article class="signal glass reveal"><div class="signalHead"><b>STUDIO SIGNAL</b><span class="signalLive"><i></i>LIVE</span></div><div class="bars" id="signalBars"></div><div class="signalFoot"><div class="metric"><small>ENERGY</small><b id="energy">92</b><em>↑ ACTIVE</em></div><div class="metric"><small>CREATIONS</small><b>∞</b><em>NO LIMIT</em></div><div class="metric"><small>LANGUAGE</small><b>FA</b><em>READY</em></div></div></article></div>
-</div></section>
-
-<section class="section" id="apps"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>02 / APP UNIVERSE</small><h2 data-fa="همه‌ی ابزارها، یک‌جا." data-en="Every tool, in one place.">همه‌ی ابزارها، یک‌جا.</h2><p data-fa="محصولات AdLand برای کارهای متفاوت ساخته شده‌اند؛ از تمرکز و تصویر تا زمان، فایل، صدا، کدنویسی و مدیریت خودِ اکوسیستم." data-en="The product family covers focus, visuals, time, files, voice, development tools and the management center itself.">محصولات برای کارهای متفاوت ساخته شده‌اند؛ از تمرکز و تصویر تا زمان، فایل، صدا، کدنویسی و مدیریت خودِ اکوسیستم.</p></div><div class="sectionAside">روی تصویر هر محصول کلیک کن تا مستقیم وارد سایت همان محصول شوی.</div></div><div class="productFilters reveal" role="toolbar" aria-label="Product filters">
-  <button class="productFilter active" type="button" data-filter="all" data-fa="همه" data-en="All">همه</button>
-  <button class="productFilter" type="button" data-filter="focus" data-fa="تمرکز" data-en="Focus">تمرکز</button>
-  <button class="productFilter" type="button" data-filter="creative" data-fa="خلاقیت" data-en="Creative">خلاقیت</button>
-  <button class="productFilter" type="button" data-filter="developer" data-fa="توسعه" data-en="Developer">توسعه</button>
-  <button class="productFilter" type="button" data-filter="system" data-fa="سیستم" data-en="System">سیستم</button>
-  <button class="productFilter" type="button" data-filter="utility" data-fa="ابزار" data-en="Utility">ابزار</button>
-  <button class="productFilter" type="button" data-filter="favorites" data-fa="علاقه‌مندی‌ها" data-en="Favorites">☆ علاقه‌مندی‌ها</button>
-  <button class="productFilter" type="button" data-filter="recent" data-fa="بازشده‌های اخیر" data-en="Recently opened">↻ اخیر</button>
-</div>
-<div class="productFilterHint reveal" data-fa="دسته، جست‌وجو، ستاره‌ی علاقه‌مندی یا فهرست بازشده‌های اخیر را برای پیدا کردن سریع‌تر محصولات استفاده کن." data-en="Filter by category, search, save favorites or revisit recently opened products.">دسته، جست‌وجو، ستاره‌ی علاقه‌مندی یا فهرست بازشده‌های اخیر را برای پیدا کردن سریع‌تر محصولات استفاده کن.</div>
-<div class="al-app-toolbar reveal"><label class="al-search"><span aria-hidden="true">⌕</span><input id="adlandAppSearch" type="search" name="app-search" autocomplete="off" spellcheck="false" data-fa-placeholder="جست‌وجوی نام، قابلیت یا محصول…" data-en-placeholder="Search apps, tools and features…" placeholder="جست‌وجوی نام، قابلیت یا محصول…" aria-label="Search AdLand products"></label><div class="al-app-meta"><span class="al-app-count" id="alAppCount" aria-live="polite">14 محصول</span><button class="al-app-reset" id="alAppReset" type="button" data-fa="پاک‌کردن فیلترها" data-en="Reset filters">پاک‌کردن فیلترها</button></div></div><div class="al-app-empty" id="alAppEmpty" hidden></div>
-<div class="appsGrid"><article class="app glass reveal f2f-app-card" data-app-slug="face2face" style="--accent:#a99aff"><div class="appHead"><a class="appIcon f2f-icon-wrap" href="face2face/" aria-label="Open Face2Face"><img src="assets/icons/projects/Face2Face_icon.svg" alt="Face2Face"></a><div><h3>Face2Face</h3><small>LIVE MEETINGS / LAN / COLLABORATION</small></div><span class="appTag">1.2.0</span></div><p data-fa="میزکار جلسه‌های زنده برای ویندوز؛ تماس صوتی و تصویری، اتاق و گروه، اشتراک فایل و کد و انتخاب دستگاه‌های ورودی و خروجی." data-en="A Windows-first live meeting workspace with audio/video, rooms and groups, file and code sharing, and selectable input/output devices.">میزکار جلسه‌های زنده برای ویندوز؛ تماس صوتی و تصویری، اتاق و گروه، اشتراک فایل و کد و انتخاب دستگاه‌های ورودی و خروجی.</p><div class="featureMini"><span data-fa="تماس زنده" data-en="Live audio / video">تماس زنده</span><span data-fa="اشتراک فایل و کد" data-en="File + code sharing">اشتراک فایل و کد</span><span data-fa="کنترل دستگاه‌ها" data-en="Device controls">کنترل دستگاه‌ها</span><span data-fa="شبکه محلی" data-en="Local Wi-Fi">شبکه محلی</span></div><div class="appBottom"><span class="version">WINDOWS · BUILD GUIDE</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="face2face/" data-fa="معرفی محصول ↗" data-en="EXPLORE PRODUCT ↗">معرفی محصول ↗</a><a class="appLink" href="face2face/#setup" data-fa="راهنمای ساخت" data-en="BUILD GUIDE">دانلود سورس</a></div></div></article><article class="app glass reveal" style="--accent:#78f7d0"><div class="appHead"><a class="appIcon" href="nexus/" aria-label="Open Nexus"><img src="assets/icons/projects/AdLand_Nexus_icon.svg" alt="Nexus"></a><div><h3>Nexus</h3><small>FOCUS / WORKSPACE / RELAX</small></div><span class="appTag">1.4.4</span></div><p data-fa="مرکز فرمان دسکتاپ برای کار، تمرکز، یادداشت، برد، ابزارها و آرامش." data-en="A desktop command center for focus, notes, boards, tools and calm.">مرکز فرمان دسکتاپ برای کار، تمرکز، یادداشت، برد، ابزارها و آرامش.</p><div class="featureMini"><span>Focus sessions</span><span>Tasks + Board</span><span>Local playlists</span><span>7 vibe themes</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="nexus/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/v1.4.4/AdLand-Nexus-1.4.4-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#c0783b"><div class="appHead"><a class="appIcon" href="canvas/" aria-label="Open Canvas"><img src="assets/icons/projects/AdLand_Canvas_icon.svg" alt="Canvas"></a><div><h3>Canvas</h3><small>LIBRARY / MOODBOARD / PALETTE</small></div><span class="appTag">1.1.1</span></div><p data-fa="استودیوی تصویری برای جمع‌آوری دارایی‌ها، مودبرد، رنگ و خروجی." data-en="A visual studio for assets, moodboards, palettes and export.">استودیوی تصویری برای جمع‌آوری دارایی‌ها، مودبرد، رنگ و خروجی.</p><div class="featureMini"><span>Image library</span><span>Moodboard</span><span>Palette lab</span><span>PNG export</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="canvas/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/canvas-v1.1.1/AdLand-Canvas-1.1.1-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#56f4ff"><div class="appHead"><a class="appIcon" href="pulse/" aria-label="Open Pulse"><img src="assets/icons/projects/AdLand_Pulse_icon.svg" alt="Pulse"></a><div><h3>Pulse</h3><small>TELEMETRY / SIGNAL / SYSTEM</small></div><span class="appTag">1.0.3</span></div><p data-fa="پایانه‌ی زنده برای دیدن CPU، حافظه، پردازش، uptime و شبکه." data-en="A live console for CPU, memory, process, uptime and network telemetry.">پایانه‌ی زنده برای دیدن CPU، حافظه، پردازش، uptime و شبکه.</p><div class="featureMini"><span>CPU telemetry</span><span>Memory</span><span>Process RSS</span><span>Network signals</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="pulse/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/pulse-v1.0.3/AdLand-Pulse-1.0.3-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#ffb86b"><div class="appHead"><a class="appIcon" href="frame/" aria-label="Open Frame"><img src="assets/icons/projects/AdLand_Frame_icon.svg" alt="Frame"></a><div><h3>Frame</h3><small>IMAGE / EFFECTS / EXPORT</small></div><span class="appTag">1.1.3</span></div><p data-fa="کارگاه محلی تصویر برای دیدن، اصلاح، مرتب‌سازی و خروجی گرفتن." data-en="A local image workshop for viewing, adjusting, organizing and exporting.">کارگاه محلی تصویر برای دیدن، اصلاح، مرتب‌سازی و خروجی گرفتن.</p><div class="featureMini"><span>Gallery + favorites</span><span>Image effects</span><span>Metadata</span><span>PNG export</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="frame/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/frame-v1.1.3/AdLand-Frame-1.1.3-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#75f1d2"><div class="appHead"><a class="appIcon" href="atlas/" aria-label="Open Atlas"><img src="assets/icons/projects/Atlas_icon.svg" alt="Atlas"></a><div><h3>Atlas</h3><small>FILES / SEARCH / INTELLIGENCE</small></div><span class="appTag">1.0.1</span></div><p data-fa="مرکز فرمان فایل‌های محلی برای اسکن، جست‌وجو، دسته‌بندی و مدیریت سریع." data-en="A local file command desk for scanning, searching and navigating quickly.">مرکز فرمان فایل‌های محلی برای اسکن، جست‌وجو، دسته‌بندی و مدیریت سریع.</p><div class="featureMini"><span>Folder intelligence</span><span>Fast search</span><span>Size insights</span><span>Open + reveal</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="atlas/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/atlas-v1.0.1/Atlas-1.0.1-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#9da6ff"><div class="appHead"><a class="appIcon" href="forge/" aria-label="Open Forge"><img src="assets/icons/projects/Forge_icon.svg" alt="Forge"></a><div><h3>Forge</h3><small>JSON / TEXT / ENCODE</small></div><span class="appTag">1.0.1</span></div><p data-fa="میزکار توسعه‌دهنده برای JSON، تحلیل متن و تبدیل داده‌های محلی." data-en="A local developer workbench for JSON, text analysis and data encoding.">میزکار توسعه‌دهنده برای JSON، تحلیل متن و تبدیل داده‌های محلی.</p><div class="featureMini"><span>JSON formatter</span><span>Minify / pretty</span><span>Text analysis</span><span>Encode tools</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="forge/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/forge-v1.0.1/Forge-1.0.1-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#ff7ad9"><div class="appHead"><a class="appIcon" href="prism/" aria-label="Open Prism"><img src="assets/icons/projects/Prism_icon.svg" alt="Prism"></a><div><h3>Prism</h3><small>COLOR / CONTRAST / GRADIENT</small></div><span class="appTag">1.0.1</span></div><p data-fa="لابراتوار رنگ برای پالت، کنتراست، گرادیان و انتخاب رنگ دقیق." data-en="A color lab for palettes, contrast, gradients and color picking.">لابراتوار رنگ برای پالت، کنتراست، گرادیان و انتخاب رنگ دقیق.</p><div class="featureMini"><span>Palette generator</span><span>Contrast ratio</span><span>Gradient lab</span><span>Color mixing</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="prism/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/prism-v1.0.1/Prism-1.0.1-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#8ff9dc"><div class="appHead"><a class="appIcon" href="relay/" aria-label="Open Relay"><img src="assets/icons/projects/Relay_icon.svg" alt="Relay"></a><div><h3>Relay</h3><small>CLIPBOARD / MEMORY / FLOW</small></div><span class="appTag">1.0.0</span></div><p data-fa="مدیر کلیپ‌بورد محلی برای تاریخچه، سنجاق‌کردن و کپی سریع." data-en="A local clipboard center for history, pinning and instant reuse.">مدیر کلیپ‌بورد محلی برای تاریخچه، سنجاق‌کردن و کپی سریع.</p><div class="featureMini"><span>Clipboard history</span><span>Pin + search</span><span>Quick copy</span><span>Local memory</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="relay/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/relay-v1.0.0/Relay-1.0.0-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#ffcc80"><div class="appHead"><a class="appIcon" href="echo/" aria-label="Open Echo"><img src="assets/icons/projects/Echo_icon.svg" alt="Echo"></a><div><h3>Echo</h3><small>VOICE / MEMORY / RECORD</small></div><span class="appTag">1.0.0</span></div><p data-fa="ضبط‌کننده‌ی صدای محلی برای یادداشت‌های صوتی، پخش و خروجی." data-en="A local voice recorder for notes, playback and export.">ضبط‌کننده‌ی صدای محلی برای یادداشت‌های صوتی، پخش و خروجی.</p><div class="featureMini"><span>Waveform</span><span>Local recordings</span><span>Replay</span><span>Export audio</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="echo/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/echo-v1.0.0/Echo-1.0.0-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#8da2ff"><div class="appHead"><a class="appIcon" href="chrono/" aria-label="Open Chrono"><img src="assets/icons/projects/Chrono_icon.svg" alt="Chrono"></a><div><h3>Chrono</h3><small>TIME / ZONES / COUNTDOWN</small></div><span class="appTag">1.0.0</span></div><p data-fa="لابراتوار زمان با ساعت جهانی، کرنومتر و شمارش‌معکوس." data-en="A time lab with world clocks, stopwatch and countdown.">لابراتوار زمان با ساعت جهانی، کرنومتر و شمارش‌معکوس.</p><div class="featureMini"><span>World clocks</span><span>Stopwatch</span><span>Countdown</span><span>Time zones</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="chrono/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/chrono-v1.0.0/Chrono-1.0.0-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#e8c96f"><div class="appHead"><a class="appIcon" href="orbit/" aria-label="Open Orbit"><img src="assets/icons/projects/Orbit_icon.svg" alt="Orbit"></a><div><h3>Orbit</h3><small>VERSION / DOWNLOAD / DISCOVERY</small></div><span class="appTag">1.0.2</span></div><p data-fa="مرکز مدیریت برنامه‌ها برای نسخه‌ها، آپدیت‌ها، دانلودها و سایت‌های محصولات." data-en="Application center for versions, updates, downloads and product sites.">مرکز مدیریت برنامه‌ها برای نسخه‌ها، آپدیت‌ها، دانلودها و سایت‌های محصولات.</p><div class="featureMini"><span>Update checker</span><span>Installer + Portable</span><span>App search</span><span>Product sites</span></div><div class="appBottom"><span class="version">WINDOWS · x64 · MANAGEMENT</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="orbit/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/orbit-v1.0.2/Orbit-1.0.2-Setup.exe">DOWNLOAD</a></div></div></article><article class="app glass reveal" style="--accent:#e6c96c"><div class="appHead"><a class="appIcon" href="ai-tools/" aria-label="Open AdLand AI Tools"><img src="assets/icons/projects/AdLand_AI_Tools_icon.svg" alt="AdLand AI Tools"></a><div><h3>AdLand AI Tools</h3><small>AI / PROMPTS / DEVELOPER UTILITIES</small></div><span class="appTag">0.1.0</span></div><p data-fa="جعبه‌ابزار وب AdLand برای prompt، JSON، متن، Base64، Regex و داده‌های تست؛ سریع و بدون نصب." data-en="AdLand's web toolbox for prompts, JSON, text, Base64, Regex and quick developer utilities — fast and install-free.">جعبه‌ابزار وب AdLand برای prompt، JSON، متن، Base64، Regex و داده‌های تست؛ سریع و بدون نصب.</p><div class="featureMini"><span>Prompt Architect</span><span>JSON + Text Lab</span><span>Regex + Base64</span><span>Browser-first</span></div><div class="appBottom"><span class="version">WEB · NO INSTALL · BILINGUAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="ai-tools/">OPEN PRODUCT ↗</a></div></div></article><article class="app glass reveal" style="--accent:#ff72b4"><div class="appHead"><a class="appIcon" href="anidiary/" aria-label="Open AniDiary"><img src="assets/icons/projects/AniDiary_icon.svg" alt="AniDiary"></a><div><h3>AniDiary</h3><small>ANIME JOURNAL / POSTERS / PROGRESS</small></div><span class="appTag">1.0.0</span></div><p data-fa="دفتر دیجیتال انیمه برای پوستر، ژانر، سریال یا فیلم، وضعیت، امتیاز، قسمت‌ها، تگ‌ها و یادداشت." data-en="A digital anime journal for posters, genres, series or movies, status, scores, episodes, tags and notes.">دفتر دیجیتال انیمه برای پوستر، ژانر، سریال یا فیلم، وضعیت، امتیاز، قسمت‌ها، تگ‌ها و یادداشت.</p><div class="featureMini"><span>Poster library</span><span>Series / Movie</span><span>Progress tracking</span><span>FA / EN</span></div><div class="appBottom"><span class="version">WINDOWS · macOS · LOCAL</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="anidiary/">OPEN PRODUCT ↗</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/anidiary-v1.0.0/AniDiary-1.0.0-Windows-x64-Setup.exe">WIN SETUP</a><a class="appLink" href="https://github.com/AradProgramming/AdLandSite/releases/download/anidiary-v1.0.0/AniDiary-1.0.0-macOS-universal.dmg">MAC DMG</a></div></div></article><article class="app glass reveal" style="--accent:#7bf6df"><div class="appHead"><a class="appIcon" href="roshd/" aria-label="Open Roshd"><img src="assets/icons/projects/Roshd_icon.svg" alt="Roshd"></a><div><h3>Roshd</h3><small>STUDY OS / PLANNER / FOCUS</small></div><span class="appTag">1.0.0</span></div><p data-fa="رشد؛ میز مطالعه و برنامه‌ریزی فارسی‌محور، ویژه دانش‌آموزان تیزهوشانی؛ از برنامه و تایمر تا آزمون، فلش‌کارت، یادداشت، تحلیل و فضای مطالعه." data-en="Roshd is a Persian-first study OS for high-achieving students — planning, focus, exams, flashcards, notes, analytics and study ambience in one place.">رشد؛ میز مطالعه و برنامه‌ریزی فارسی‌محور، ویژه دانش‌آموزان تیزهوشانی؛ از برنامه و تایمر تا آزمون، فلش‌کارت، یادداشت، تحلیل و فضای مطالعه.</p><div class="featureMini"><span>Smart Planner</span><span>Focus Timer</span><span>Flashcards</span><span>FA / EN</span></div><div class="appBottom"><span class="version">WINDOWS · macOS · ANDROID · iOS</span><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="appLink" href="roshd/">OPEN PRODUCT ↗</a><a class="appLink" href="roshd/#download">DOWNLOADS</a></div></div></article></div></div></section>
-<section class="section" id="projects"><div class="container">
-<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>03 / PROJECTS</small><h2 data-fa="پروژه‌هایی که ساخته‌ایم." data-en="Projects we've built.">چیزهایی که ساخته‌ایم.</h2><p data-fa="پروژه‌های قدیمی و آزمایش‌های جدید کنار هم می‌مانند؛ چیزی از مسیر AdLand حذف نمی‌شود." data-en="Legacy projects and newer experiments stay together; the studio story keeps its history.">پروژه‌های قدیمی و آزمایش‌های جدید کنار هم می‌مانند؛ چیزی از مسیر AdLand حذف نمی‌شود.</p></div><div class="sectionAside">Legacy work stays here too: Image Showdown, Pyramid and AniDiary remain part of the Studio story.</div></div>
-<div class="projectGrid">
-<article class="project reveal"><img src="assets/icons/projects/Image_show_down_icon.jpg"><div class="projectCopy"><small>WEB / PYTHON</small><h3>Image Showdown</h3><p data-fa="تبدیل ایده به تصویرهای واقع‌گرایانه." data-en="Turning ideas into realistic imagery.">تبدیل ایده به تصویرهای واقع‌گرایانه.</p></div></article>
-<article class="project reveal"><img src="assets/icons/projects/Pyramid_icon.jpg"><div class="projectCopy"><small>WEB</small><h3>Pyramid</h3><p>Voting · rankings · social competition.</p></div></article>
-<article class="project reveal"><img src="assets/icons/projects/AdLand_Nexus_icon.svg"><div class="projectCopy"><small>WINDOWS + macOS</small><h3>Nexus</h3><p>Focus · productivity · calm.</p></div></article>
-<article class="project reveal"><img src="assets/icons/projects/AdLand_Canvas_icon.svg"><div class="projectCopy"><small>WINDOWS + macOS</small><h3>Canvas</h3><p>Visual library · moodboard.</p></div></article>
-<article class="project reveal aniProject"><div class="aniArt"><span>AD</span><small>ANIDIARY</small></div><div class="projectCopy"><small>DESKTOP / COLLECTION</small><h3>AniDiary</h3><p data-fa="دفترچه‌ی شخصی انیمه برای سازمان‌دهی مجموعه و یادداشت‌ها." data-en="A personal anime journal for organizing a collection and notes.">دفترچه‌ی شخصی انیمه برای سازمان‌دهی مجموعه و یادداشت‌ها.</p></div></article>
-<article class="project reveal"><img src="assets/icons/projects/AdLand_Pulse_icon.svg"><div class="projectCopy"><small>WINDOWS + macOS</small><h3>Pulse</h3><p>Live telemetry · signals.</p></div></article>
-</div></div></section>
-
-<section class="section" id="learning">
-<div class="container">
-  <div class="sectionHeader reveal">
-    <div class="sectionHeadMain">
-      <small>04 / LEARNING LAB</small>
-      <h2 data-fa="مسیرت را انتخاب کن؛ بساز، تمرین کن، منتشر کن." data-en="Choose a path. Build, practice, publish.">مسیرت را انتخاب کن؛ بساز، تمرین کن، منتشر کن.</h2>
-      <p data-fa="دوره‌های آموزشی AdLand از مفاهیم پایه شروع می‌شوند و قدم‌به‌قدم به ساخت پروژه واقعی می‌رسند. هر مسیر، تمرین، پروژه و مهارت قابل‌استفاده در دنیای واقعی دارد." data-en="AdLand learning paths start from the fundamentals and move step by step toward real projects. Every path includes practice, projects and practical, transferable skills.">دوره‌های آموزشی AdLand از مفاهیم پایه شروع می‌شوند و قدم‌به‌قدم به ساخت پروژه واقعی می‌رسند. هر مسیر، تمرین، پروژه و مهارت قابل‌استفاده در دنیای واقعی دارد.</p>
-    </div>
-    <div class="sectionAside" data-fa="برای دریافت زمان‌بندی، شرایط کلاس و جزئیات ثبت‌نام از طریق Telegram با ما در ارتباط باش." data-en="Contact us on Telegram for schedules, class details and registration information.">برای دریافت زمان‌بندی، شرایط کلاس و جزئیات ثبت‌نام از طریق Telegram با ما در ارتباط باش.</div>
-  </div>
-
-  <div class="learnGrid learningCatalog">
-
-    <article class="course glass reveal learningCourse" data-course="python">
-      <div class="courseTop"><span class="courseIndex">01</span><span class="courseLevel" data-fa="پایه تا پروژه" data-en="Foundation → Project">پایه تا پروژه</span></div><img class="learningCourseIcon" src="assets/icons/learning/python.svg" alt="python course icon">
-      <small class="courseKicker">PYTHON / PROGRAMMING</small>
-      <h3>Python</h3>
-      <p class="courseLead" data-fa="مسیر کامل یادگیری پایتون برای ساخت برنامه، ابزار و پروژه‌های واقعی؛ از اولین خط کد تا طراحی یک پروژه شخصی." data-en="A complete Python path for building programs, utilities and real projects — from the first line of code to a personal application.">مسیر کامل یادگیری پایتون برای ساخت برنامه، ابزار و پروژه‌های واقعی؛ از اولین خط کد تا طراحی یک پروژه شخصی.</p>
-      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
-        <ul>
-          <li data-fa="متغیرها، انواع داده، شرط‌ها و حلقه‌ها" data-en="Variables, data types, conditions and loops">متغیرها، انواع داده، شرط‌ها و حلقه‌ها</li>
-          <li data-fa="توابع، ماژول‌ها، مدیریت خطا و کار با فایل" data-en="Functions, modules, error handling and files">توابع، ماژول‌ها، مدیریت خطا و کار با فایل</li>
-          <li data-fa="لیست، دیکشنری، مجموعه و کار با داده‌ها" data-en="Lists, dictionaries, sets and data handling">لیست، دیکشنری، مجموعه و کار با داده‌ها</li>
-          <li data-fa="طراحی پروژه و نوشتن کد مرتب و قابل‌نگهداری" data-en="Project structure and maintainable code">طراحی پروژه و نوشتن کد مرتب و قابل‌نگهداری</li>
-        </ul>
-      </div>
-      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز." data-en="An advanced calculator, task manager, contact book, text game, file utility and a personal project based on the student's idea.">ماشین‌حساب پیشرفته، مدیریت کارها، دفترچه مخاطبان، بازی متنی، ابزار تبدیل فایل و یک پروژه شخصی بر اساس ایده دانش‌آموز.</p></div>
-      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت پروژه‌های مستقل پایتونی" data-en="Ability to build independent Python projects">توانایی ساخت پروژه‌های مستقل پایتونی</strong></div>
-      <div class="contactRow"><a class="btn" href="learning/python/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
-    </article>
-
-    <article class="course glass reveal learningCourse" data-course="scratch">
-      <div class="courseTop"><span class="courseIndex">02</span><span class="courseLevel" data-fa="شروع برنامه‌نویسی" data-en="Programming starter">شروع برنامه‌نویسی</span></div><img class="learningCourseIcon" src="assets/icons/learning/scratch.svg" alt="scratch course icon">
-      <small class="courseKicker">SCRATCH / LOGIC & CREATIVITY</small>
-      <h3>Scratch</h3>
-      <p class="courseLead" data-fa="یک شروع تصویری و جذاب برای یادگیری منطق برنامه‌نویسی، ساخت بازی و انیمیشن؛ بدون درگیر شدن با پیچیدگی سینتکس." data-en="A visual, engaging start to programming logic, game development and animation without the complexity of syntax.">یک شروع تصویری و جذاب برای یادگیری منطق برنامه‌نویسی، ساخت بازی و انیمیشن؛ بدون درگیر شدن با پیچیدگی سینتکس.</p>
-      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
-        <ul>
-          <li data-fa="رویدادها، متغیرها، شرط و حلقه" data-en="Events, variables, conditions and loops">رویدادها، متغیرها، شرط و حلقه</li>
-          <li data-fa="حرکت، برخورد، امتیاز، جان و مرحله‌بندی" data-en="Movement, collisions, score, lives and levels">حرکت، برخورد، امتیاز، جان و مرحله‌بندی</li>
-          <li data-fa="صدا، انیمیشن، داستان‌گویی و طراحی صحنه" data-en="Sound, animation, storytelling and scene design">صدا، انیمیشن، داستان‌گویی و طراحی صحنه</li>
-          <li data-fa="حل مسئله و تبدیل ایده به بازی قابل‌اجرا" data-en="Problem solving and turning ideas into playable projects">حل مسئله و تبدیل ایده به بازی قابل‌اجرا</li>
-        </ul>
-      </div>
-      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز." data-en="Score-based games, racing challenges, interactive stories, short animations and a final project designed by the student.">بازی‌های امتیازی، مسابقه‌ای، داستان تعاملی، انیمیشن کوتاه و پروژه نهایی با شخصیت‌ها و قوانین طراحی‌شده توسط خود دانش‌آموز.</p></div>
-      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="درک واقعی منطق برنامه‌نویسی و بازی‌سازی" data-en="A real understanding of programming logic and game creation">درک واقعی منطق برنامه‌نویسی و بازی‌سازی</strong></div>
-      <div class="contactRow"><a class="btn" href="learning/scratch/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
-    </article>
-
-    <article class="course glass reveal learningCourse" data-course="web">
-      <div class="courseTop"><span class="courseIndex">03</span><span class="courseLevel" data-fa="وب از صفر" data-en="Web from zero">وب از صفر</span></div><img class="learningCourseIcon" src="assets/icons/learning/html-css.svg" alt="web course icon">
-      <small class="courseKicker">HTML + CSS / WEB DESIGN</small>
-      <h3>HTML و CSS</h3>
-      <p class="courseLead" data-fa="ساخت صفحات وب زیبا و واکنش‌گرا از صفر؛ از ساختار HTML تا طراحی حرفه‌ای رابط، بدون نیاز به فریم‌ورک در شروع مسیر." data-en="Build beautiful, responsive web pages from scratch — from HTML structure to polished interface design, without needing a framework at the beginning.">ساخت صفحات وب زیبا و واکنش‌گرا از صفر؛ از ساختار HTML تا طراحی حرفه‌ای رابط، بدون نیاز به فریم‌ورک در شروع مسیر.</p>
-      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
-        <ul>
-          <li data-fa="ساختار معنایی HTML، لینک، تصویر، فرم و جدول" data-en="Semantic HTML, links, images, forms and tables">ساختار معنایی HTML، لینک، تصویر، فرم و جدول</li>
-          <li data-fa="رنگ، فونت، فاصله، Border، Shadow و طراحی کارت‌ها" data-en="Color, typography, spacing, borders, shadows and card design">رنگ، فونت، فاصله، Border، Shadow و طراحی کارت‌ها</li>
-          <li data-fa="Flexbox، Grid و ساخت Layoutهای حرفه‌ای" data-en="Flexbox, Grid and professional responsive layouts">Flexbox، Grid و ساخت Layoutهای حرفه‌ای</li>
-          <li data-fa="Responsive Design، تعامل‌های hover و صفحه‌آرایی تمیز" data-en="Responsive design, hover interactions and polished page layouts">Responsive Design، تعامل‌های hover و صفحه‌آرایی تمیز</li>
-        </ul>
-      </div>
-      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود." data-en="A personal website, landing page, product page, portfolio, game page and a multi-section responsive website that works on mobile and desktop.">سایت شخصی، Landing Page، صفحه معرفی محصول، Portfolio، صفحه بازی و یک وب‌سایت چندبخشی که در موبایل و دسکتاپ درست نمایش داده شود.</p></div>
-      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا" data-en="Ability to build polished responsive web pages">توانایی ساخت صفحات وب حرفه‌ای و واکنش‌گرا</strong></div>
-      <div class="contactRow"><a class="btn" href="learning/html-css/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
-    </article>
-
-    <article class="course glass reveal learningCourse" data-course="appinventor">
-      <div class="courseTop"><span class="courseIndex">04</span><span class="courseLevel" data-fa="اپلیکیشن‌سازی بصری" data-en="Visual app building">اپلیکیشن‌سازی بصری</span></div><img class="learningCourseIcon" src="assets/icons/learning/app-inventor.svg" alt="appinventor course icon">
-      <small class="courseKicker">MIT APP INVENTOR / MOBILE</small>
-      <h3>App Inventor</h3>
-      <p class="courseLead" data-fa="یادگیری ساخت اپلیکیشن موبایل با محیط بلوکی؛ تمرکز روی منطق، رابط کاربری، داده‌ها و تبدیل ایده به یک اپ قابل‌استفاده." data-en="Learn mobile app development with a block-based environment, focusing on logic, UI, data and turning ideas into usable apps.">یادگیری ساخت اپلیکیشن موبایل با محیط بلوکی؛ تمرکز روی منطق، رابط کاربری، داده‌ها و تبدیل ایده به یک اپ قابل‌استفاده.</p>
-      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
-        <ul>
-          <li data-fa="طراحی صفحه، کامپوننت‌ها و اصول رابط کاربری" data-en="Screen design, components and UI fundamentals">طراحی صفحه، کامپوننت‌ها و اصول رابط کاربری</li>
-          <li data-fa="رویدادها، متغیرها، شرط‌ها، لیست‌ها و توابع بلوکی" data-en="Events, variables, conditions, lists and block-based procedures">رویدادها، متغیرها، شرط‌ها، لیست‌ها و توابع بلوکی</li>
-          <li data-fa="دریافت ورودی، ذخیره‌سازی و کار با داده‌ها" data-en="Input handling, storage and working with data">دریافت ورودی، ذخیره‌سازی و کار با داده‌ها</li>
-          <li data-fa="ساخت APK، تست روی موبایل و آماده‌سازی نسخه نهایی" data-en="APK building, mobile testing and final release preparation">ساخت APK، تست روی موبایل و آماده‌سازی نسخه نهایی</li>
-        </ul>
-      </div>
-      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز." data-en="A calculator, notes app, quiz, to-do app, information app and a useful mini app with a student-designed interface.">ماشین‌حساب، یادداشت‌بردار، Quiz، اپ فهرست کارها، اپ اطلاعاتی و یک برنامه کاربردی کوچک با رابط طراحی‌شده توسط دانش‌آموز.</p></div>
-      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت یک اپ موبایل واقعی از ایده تا خروجی" data-en="Build a real mobile app from idea to export">ساخت یک اپ موبایل واقعی از ایده تا خروجی</strong></div>
-      <div class="contactRow"><a class="btn" href="learning/app-inventor/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
-    </article>
-
-    <article class="course glass reveal learningCourse" data-course="tkinter">
-      <div class="courseTop"><span class="courseIndex">05</span><span class="courseLevel" data-fa="رابط گرافیکی با Python" data-en="Python GUI">رابط گرافیکی با Python</span></div><img class="learningCourseIcon" src="assets/icons/learning/tkinter.svg" alt="tkinter course icon">
-      <small class="courseKicker">TKINTER / PYTHON GUI</small>
-      <h3>Tkinter</h3>
-      <p class="courseLead" data-fa="ساخت نرم‌افزارهای دسکتاپ با Python و Tkinter؛ از پنجره ساده تا برنامه‌های چندبخشی با فرم، منو، جدول و رویدادهای تعاملی." data-en="Build desktop software with Python and Tkinter — from a simple window to multi-section apps with forms, menus, tables and interactive events.">ساخت نرم‌افزارهای دسکتاپ با Python و Tkinter؛ از پنجره ساده تا برنامه‌های چندبخشی با فرم، منو، جدول و رویدادهای تعاملی.</p>
-      <div class="courseBlock"><b data-fa="سرفصل‌ها" data-en="What you learn">سرفصل‌ها</b>
-        <ul>
-          <li data-fa="Window، Frame، Label، Button، Entry و عناصر اصلی" data-en="Window, Frame, Label, Button, Entry and core widgets">Window، Frame، Label، Button، Entry و عناصر اصلی</li>
-          <li data-fa="چیدمان با Pack، Grid و Place" data-en="Layout with Pack, Grid and Place">چیدمان با Pack، Grid و Place</li>
-          <li data-fa="رویدادها، فرم‌ها، منو، پیام‌ها و کنترل ورودی" data-en="Events, forms, menus, dialogs and input control">رویدادها، فرم‌ها، منو، پیام‌ها و کنترل ورودی</li>
-          <li data-fa="اتصال رابط گرافیکی به منطق Python و داده‌های پروژه" data-en="Connecting the GUI to Python logic and project data">اتصال رابط گرافیکی به منطق Python و داده‌های پروژه</li>
-        </ul>
-      </div>
-      <div class="courseBlock"><b data-fa="پروژه‌های پیشنهادی" data-en="Project ideas">پروژه‌های پیشنهادی</b><p data-fa="دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل." data-en="A contact manager, expense tracker, unit converter, text editor, file utility and a practical desktop app with a complete interface.">دفترچه مخاطبان، مدیریت هزینه، ابزار تبدیل واحد، Text Editor، مدیریت فایل و یک برنامه دسکتاپ کاربردی با رابط کامل.</p></div>
-      <div class="courseOutcome"><span data-fa="نتیجه مسیر" data-en="Outcome">نتیجه مسیر</span><strong data-fa="ساخت برنامه دسکتاپ تعاملی با Python" data-en="Build interactive desktop apps with Python">ساخت برنامه دسکتاپ تعاملی با Python</strong></div>
-      <div class="contactRow"><a class="btn" href="learning/tkinter/" data-fa="سایت دوره" data-en="Course site">سایت دوره</a><a class="btn primary" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="اطلاعات و ثبت‌نام" data-en="Details & registration">اطلاعات و ثبت‌نام</a></div>
-    </article>
-
-  </div>
-</div>
-</section>
-
-<section class="section" id="team"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>05 / TEAM</small><h2 data-fa="آدم‌های پشت استودیو." data-en="The people behind the studio.">آدم‌های پشت استودیو.</h2></div></div><div class="teamGrid">
-<article class="teamCard glass reveal"><div class="avatar">AK</div><h3>سید آراد خاندل</h3><p>Founder · Python · AI · Product</p><a class="btn" href="https://t.me/Arad_unk" target="_blank">CONTACT ↗</a></article>
-<article class="teamCard glass reveal"><div class="avatar">+</div><h3 data-fa="جای تو هم می‌تواند اینجا باشد." data-en="There is room for you.">جای تو هم می‌تواند اینجا باشد.</h3><p data-fa="برای همکاری و پیوستن به تیم با ما در تماس باش." data-en="Reach out about collaboration and joining the team.">برای همکاری و پیوستن به تیم با ما در تماس باش.</p><a class="btn primary" href="https://ble.ir/AdLandStudio" target="_blank">JOIN THE TEAM ↗</a></article>
-</div></div></section>
-
-<section class="section" id="feedback"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>06 / FEEDBACK</small><h2 data-fa="نظرت را تبدیل به تغییر کن." data-en="Turn feedback into change.">نظرت را تبدیل به تغییر کن.</h2><p data-fa="نظر عمومی، گزارش باگ یا پیشنهاد قابلیت را از مسیر رسمی AdLand بفرست. پیام‌های رسمی ادمین جداگانه و با نشان تأیید نمایش داده می‌شوند." data-en="Send public feedback, a bug report or a feature idea through AdLand's official support path. Official admin messages are shown separately with verification.">نظر عمومی، گزارش باگ یا پیشنهاد قابلیت را از مسیر رسمی AdLand بفرست. پیام‌های رسمی ادمین جداگانه و با نشان تأیید نمایش داده می‌شوند.</p></div></div><div class="feedbackLayout"><article class="feedbackCard reveal"><h3 data-fa="فضای بازخورد" data-en="Feedback space">فضای بازخورد</h3><p data-fa="این بخش برای تجربهٔ واقعی کاربر طراحی شده؛ خبری از نظر ساختگی نیست. نوع پیام را انتخاب کن و از پنل پشتیبانی جزئیات را بفرست." data-en="This space is designed for real user feedback; there are no fabricated testimonials. Choose a message type and send details through the support center.">این بخش برای تجربهٔ واقعی کاربر طراحی شده؛ خبری از نظر ساختگی نیست. نوع پیام را انتخاب کن و از پنل پشتیبانی جزئیات را بفرست.</p><div class="feedbackKinds"><div class="feedbackKind"><b data-fa="گزارش باگ" data-en="Bug report">گزارش باگ</b><small data-fa="مشکل دقیق را ثبت کن." data-en="Describe what went wrong.">مشکل دقیق را ثبت کن.</small></div><div class="feedbackKind"><b data-fa="پیشنهاد قابلیت" data-en="Feature idea">پیشنهاد قابلیت</b><small data-fa="ایده‌ای که محصول را بهتر می‌کند." data-en="An idea that improves the product.">ایده‌ای که محصول را بهتر می‌کند.</small></div><div class="feedbackKind"><b data-fa="نظر تجربه" data-en="Experience note">نظر تجربه</b><small data-fa="بگو چه چیزی خوب بود یا نبود." data-en="Tell us what worked or did not.">بگو چه چیزی خوب بود یا نبود.</small></div></div><div class="feedbackAction"><button class="btn primary" type="button" onclick="document.getElementById('al-support-launcher')?.click()" data-fa="باز کردن مرکز پشتیبانی" data-en="Open support center">باز کردن مرکز پشتیبانی</button><a class="btn" href="" data-fa="ایمیل مستقیم" data-en="Direct email">ایمیل مستقیم</a></div></article><aside class="feedbackSecure reveal"><span class="secureMark"><i></i><span data-fa="ADMIN IDENTITY" data-en="ADMIN IDENTITY">ADMIN IDENTITY</span></span><h3 data-fa="ادمین را از کاربر جدا نگه می‌داریم." data-en="Admin and visitor identities stay separate.">ادمین را از کاربر جدا نگه می‌داریم.</h3><p data-fa="کاربر عادی هیچ فیلدی برای نوشتن «به نام ادمین» ندارد. پیام رسمی ادمین فقط از فید رسمی سایت خوانده می‌شود و قبل از نمایش، integrity آن بررسی می‌شود." data-en="Visitors have no field for writing “as admin”. Official admin messages are loaded only from the site's official feed and their integrity is checked before display.">کاربر عادی هیچ فیلدی برای نوشتن «به نام ادمین» ندارد. پیام رسمی ادمین فقط از فید رسمی سایت خوانده می‌شود و قبل از نمایش، integrity آن بررسی می‌شود.</p><div class="secureRows"><div class="secureRow" data-fa="✓ نشان «تأییدشده توسط ادمین» فقط برای پیام رسمی" data-en="✓ “Verified admin” badge only for official messages">✓ نشان «تأییدشده توسط ادمین» فقط برای پیام رسمی</div><div class="secureRow" data-fa="✓ پیام‌های بازدیدکنندگان با هویت خودشان" data-en="✓ Visitor feedback stays attributed to the visitor">✓ پیام‌های بازدیدکنندگان با هویت خودشان</div><div class="secureRow" data-fa="✓ بدون فرم عمومی برای جعل نقش ادمین" data-en="✓ No public form for impersonating admin">✓ بدون فرم عمومی برای جعل نقش ادمین</div></div></aside></div></div></section>
-
-<section class="section" id="faq"><div class="container">
-<div class="sectionHeader reveal"><div class="sectionHeadMain"><small>07 / FAQ</small><h2 data-fa="سؤال‌های پرتکرار، جواب‌های درست." data-en="The questions people actually ask.">سؤال‌های پرتکرار، جواب‌های درست.</h2><p data-fa="اینجا قرار نیست دور خودمون بچرخیم؛ درباره محصولات، دانلود، آپدیت، آموزش، پشتیبانی و بازی‌ها جواب مستقیم می‌گیری." data-en="No maze of generic answers here — just direct help about products, downloads, updates, learning, support and the arcade.">اینجا قرار نیست دور خودمون بچرخیم؛ درباره محصولات، دانلود، آپدیت، آموزش، پشتیبانی و بازی‌ها جواب مستقیم می‌گیری.</p></div></div>
-<div class="faq">
-<div class="faqItem reveal"><button class="faqQ" data-fa="AdLand دقیقاً چیه؟<span>＋</span>" data-en="So, what exactly is AdLand?<span>＋</span>">AdLand دقیقاً چیه؟<span>＋</span></button><div class="faqA" data-fa="AdLand یک استودیوی نرم‌افزار و فناوری زیرمجموعه AdLand Studio است؛ از ابزارهای کاربردی و اپ‌های دسکتاپ تا پروژه‌های خلاق و آموزش را در یک اکوسیستم جمع می‌کند." data-en="AdLand is a software and technology studio under AdLand Studio, bringing useful tools, desktop apps, creative projects and learning into one ecosystem.">AdLand یک استودیوی نرم‌افزار و فناوری زیرمجموعه AdLand Studio است؛ از ابزارهای کاربردی و اپ‌های دسکتاپ تا پروژه‌های خلاق و آموزش را در یک اکوسیستم جمع می‌کند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="محصولات روی چه دستگاه‌هایی اجرا می‌شن؟<span>＋</span>" data-en="Which devices do the products run on?<span>＋</span>">محصولات روی چه دستگاه‌هایی اجرا می‌شن؟<span>＋</span></button><div class="faqA" data-fa="نسخه‌های دسکتاپ فعلی برای Windows 10/11 x64 و macOS Universal ارائه می‌شوند؛ نسخه Universal هم Apple Silicon و هم Intel را پوشش می‌دهد. ابزارهای وب هم از داخل مرورگر قابل استفاده‌اند." data-en="Current desktop builds target Windows 10/11 x64 and Universal macOS; the Universal build covers both Apple Silicon and Intel. Web tools run directly in the browser.">نسخه‌های دسکتاپ فعلی برای Windows 10/11 x64 و macOS Universal ارائه می‌شوند؛ نسخه Universal هم Apple Silicon و هم Intel را پوشش می‌دهد. ابزارهای وب هم از داخل مرورگر قابل استفاده‌اند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="چطور بفهمم آخرین نسخهٔ یک محصول کدومه؟<span>＋</span>" data-en="How do I know which version is the latest?<span>＋</span>">چطور بفهمم آخرین نسخهٔ یک محصول کدومه؟<span>＋</span></button><div class="faqA" data-fa="صفحهٔ هر محصول حالا یک مرکز آپدیت دارد که نسخهٔ فعلی، وضعیت Windows و macOS و لینک‌های دانلود همان نسخه را یک‌جا نشان می‌دهد." data-en="Each product page now has an update center showing the current version plus Windows and macOS status and downloads in one place.">صفحهٔ هر محصول حالا یک مرکز آپدیت دارد که نسخهٔ فعلی، وضعیت Windows و macOS و لینک‌های دانلود همان نسخه را یک‌جا نشان می‌دهد.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="فرق نسخهٔ Windows و macOS چیه؟<span>＋</span>" data-en="What is different between Windows and macOS builds?<span>＋</span>">فرق نسخهٔ Windows و macOS چیه؟<span>＋</span></button><div class="faqA" data-fa="قابلیت‌های اصلی هر محصول تا جای ممکن هم‌راستا نگه داشته می‌شوند، اما جزئیات سیستم‌عامل مثل مسیر فایل، میانبرها، دسترسی‌ها و رفتار بعضی قابلیت‌های محلی می‌تواند متفاوت باشد. مرکز آپدیت لینک دقیق هر سیستم‌عامل را جدا می‌کند." data-en="Core features stay aligned where practical, while OS-specific details such as file paths, shortcuts, permissions and some local behaviors can differ. The update center separates the exact download for each OS.">قابلیت‌های اصلی هر محصول تا جای ممکن هم‌راستا نگه داشته می‌شوند، اما جزئیات سیستم‌عامل مثل مسیر فایل، میانبرها، دسترسی‌ها و رفتار بعضی قابلیت‌های محلی می‌تواند متفاوت باشد. مرکز آپدیت لینک دقیق هر سیستم‌عامل را جدا می‌کند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="Nexus به درد چه کاری می‌خوره؟<span>＋</span>" data-en="What is Nexus good for?<span>＋</span>">Nexus به درد چه کاری می‌خوره؟<span>＋</span></button><div class="faqA" data-fa="برای جمع‌کردن تمرکز، تسک‌ها، برد، یادداشت و ابزارهای روزمره در یک فضای دسکتاپ طراحی شده؛ یعنی کمتر بین ده تا پنجره بپری." data-en="Nexus brings focus sessions, tasks, boards, notes and everyday tools into one desktop workspace, so you jump between fewer windows.">برای جمع‌کردن تمرکز، تسک‌ها، برد، یادداشت و ابزارهای روزمره در یک فضای دسکتاپ طراحی شده؛ یعنی کمتر بین ده تا پنجره بپری.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="ابزارهای محلی یعنی چی؟<span>＋</span>" data-en="What does local-first mean here?<span>＋</span>">ابزارهای محلی یعنی چی؟<span>＋</span></button><div class="faqA" data-fa="وقتی محصولی local-first معرفی شده، بخش اصلی پردازش یا ذخیره‌سازی آن برای اجرا روی خود دستگاه طراحی شده است. قابلیت‌های آنلاین یا AI ممکن است رفتار جداگانه داشته باشند و باید در همان محصول بررسی شوند." data-en="When a product is marked local-first, its core processing or storage is designed to stay on the device. Online or AI features can behave differently, so check the specific product.">وقتی محصولی local-first معرفی شده، بخش اصلی پردازش یا ذخیره‌سازی آن برای اجرا روی خود دستگاه طراحی شده است. قابلیت‌های آنلاین یا AI ممکن است رفتار جداگانه داشته باشند و باید در همان محصول بررسی شوند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="AdLand AI Tools رو باید نصب کنم؟<span>＋</span>" data-en="Do I need to install AdLand AI Tools?<span>＋</span>">AdLand AI Tools رو باید نصب کنم؟<span>＋</span></button><div class="faqA" data-fa="نه؛ نسخهٔ فعلی به‌صورت وب اجرا می‌شود. مستقیم وارد ابزار شو و از قابلیت‌های موجود در مرورگر استفاده کن." data-en="No. The current version runs on the web, so you can open the tool and use the available features directly in your browser.">نه؛ نسخهٔ فعلی به‌صورت وب اجرا می‌شود. مستقیم وارد ابزار شو و از قابلیت‌های موجود در مرورگر استفاده کن.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="یه باگ پیدا کردم؛ چی بفرستم که سریع‌تر حل بشه؟<span>＋</span>" data-en="Found a bug — what should I send?<span>＋</span>">یه باگ پیدا کردم؛ چی بفرستم که سریع‌تر حل بشه؟<span>＋</span></button><div class="faqA" data-fa="اسم محصول، نسخه، سیستم‌عامل، کاری که انجام دادی، نتیجه‌ای که انتظار داشتی و اگر شد اسکرین‌شات یا ویدیو را بفرست. همین چند مورد خیلی کمک می‌کند." data-en="Send the product name, version, operating system, what you did, what you expected, and a screenshot or video when possible. Those details speed things up a lot.">اسم محصول، نسخه، سیستم‌عامل، کاری که انجام دادی، نتیجه‌ای که انتظار داشتی و اگر شد اسکرین‌شات یا ویدیو را بفرست. همین چند مورد خیلی کمک می‌کند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="چطور برای کلاس‌ها ثبت‌نام کنم؟<span>＋</span>" data-en="How do I join a class?<span>＋</span>">چطور برای کلاس‌ها ثبت‌نام کنم؟<span>＋</span></button><div class="faqA" data-fa="برای کلاس‌های Python، Scratch و دوره‌های آموزشی سایت از بخش آموزش وارد صفحهٔ دوره شو و برای زمان‌بندی و شرایط از راه ارتباطی رسمی پیام بده." data-en="For Python, Scratch and the other learning tracks, open the course page and use the official contact channel for schedule and enrollment details.">برای کلاس‌های Python، Scratch و دوره‌های آموزشی سایت از بخش آموزش وارد صفحهٔ دوره شو و برای زمان‌بندی و شرایط از راه ارتباطی رسمی پیام بده.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="چطور به تیم AdLand ملحق شم؟<span>＋</span>" data-en="How can I join the AdLand team?<span>＋</span>">چطور به تیم AdLand ملحق شم؟<span>＋</span></button><div class="faqA" data-fa="از بخش «عضویت در تیم» شروع کن و نمونه‌کار، مهارت‌ها و اینکه دوست داری روی چه نوع پروژه‌ای کار کنی را بگو. ارتباط رسمی تیم در همان بخش قرار دارد." data-en="Start from the Join the Team section and share your skills, work samples and the kind of projects you want to work on. The official team contact is listed there.">از بخش «عضویت در تیم» شروع کن و نمونه‌کار، مهارت‌ها و اینکه دوست داری روی چه نوع پروژه‌ای کار کنی را بگو. ارتباط رسمی تیم در همان بخش قرار دارد.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="رکوردهای Arcade کجا ذخیره می‌شن؟<span>＋</span>" data-en="Where are Arcade records stored?<span>＋</span>">رکوردهای Arcade کجا ذخیره می‌شن؟<span>＋</span></button><div class="faqA" data-fa="فعلاً رکوردهای بازی روی همان مرورگر ذخیره می‌شوند و Player ID همان دستگاه را نگه می‌دارد. یعنی با Refresh و برگشت دوباره، پروفایلت می‌ماند؛ اما پاک‌کردن دادهٔ سایت یا عوض‌کردن مرورگر می‌تواند آن را از بین ببرد." data-en="For now, Arcade records stay in the same browser and the device keeps its Player ID. Your profile survives refreshes and returns, but clearing site data or switching browsers can reset it.">فعلاً رکوردهای بازی روی همان مرورگر ذخیره می‌شوند و Player ID همان دستگاه را نگه می‌دارد. یعنی با Refresh و برگشت دوباره، پروفایلت می‌ماند؛ اما پاک‌کردن دادهٔ سایت یا عوض‌کردن مرورگر می‌تواند آن را از بین ببرد.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="می‌تونم پیشنهاد قابلیت جدید بدم؟<span>＋</span>" data-en="Can I suggest a feature?<span>＋</span>">می‌تونم پیشنهاد قابلیت جدید بدم؟<span>＋</span></button><div class="faqA" data-fa="حتماً. فقط بگو این قابلیت چه مشکلی را حل می‌کند، برای چه کسی مفید است و چه شکلی تصورش می‌کنی؛ پیشنهادهای واضح خیلی راحت‌تر تبدیل به قابلیت واقعی می‌شوند." data-en="Absolutely. Tell us what problem it solves, who benefits from it and roughly how you imagine it working. Clear suggestions are much easier to turn into real features.">حتماً. فقط بگو این قابلیت چه مشکلی را حل می‌کند، برای چه کسی مفید است و چه شکلی تصورش می‌کنی؛ پیشنهادهای واضح خیلی راحت‌تر تبدیل به قابلیت واقعی می‌شوند.</div></div>
-<div class="faqItem reveal"><button class="faqQ" data-fa="پشتیبانی رو از کجا بگیرم؟<span>＋</span>" data-en="Where do I get support?<span>＋</span>">پشتیبانی رو از کجا بگیرم؟<span>＋</span></button><div class="faqA" data-fa="از دکمهٔ پشتیبانی شناور پایین صفحه استفاده کن؛ همان پنل برای آماده‌کردن پیام و ارسال از راه‌های رسمی AdLand طراحی شده است." data-en="Use the floating support button at the bottom of the page; its panel prepares a message for the official AdLand contact channels.">از دکمهٔ پشتیبانی شناور پایین صفحه استفاده کن؛ همان پنل برای آماده‌کردن پیام و ارسال از راه‌های رسمی AdLand طراحی شده است.</div></div>
-</div></div></section>
-
-<section class="section" id="contact"><div class="container"><div class="sectionHeader reveal"><div class="sectionHeadMain"><small>08 / CONTACT</small><h2 data-fa="مستقیم با پشتیبانی AdLand در ارتباط باش." data-en="Connect directly with AdLand support.">مستقیم با پشتیبانی AdLand در ارتباط باش.</h2><p data-fa="برای سؤال، گزارش باگ، پیشنهاد قابلیت یا همکاری، از کانال‌های رسمی استفاده کن. ایمیل مدیر در سایت عمومی نمایش داده نمی‌شود." data-en="For questions, bug reports, feature ideas or collaboration, use the official channels. The administrator's email is not exposed on the public site.">برای سؤال، گزارش باگ، پیشنهاد قابلیت یا همکاری، از کانال‌های رسمی استفاده کن. ایمیل مدیر در سایت عمومی نمایش داده نمی‌شود.</p></div></div>
-<div class="contactGrid">
-<div class="contactPanel reveal"><h3 data-fa="کانال‌های رسمی" data-en="Official channels">کانال‌های رسمی</h3><p data-fa="پیامت را از طریق یکی از کانال‌های زیر بفرست. این مسیرها هویت رسمی AdLand را مشخص می‌کنند و به جای نمایش آدرس ایمیل خصوصی استفاده می‌شوند." data-en="Send your message through one of the channels below. These channels identify the official AdLand contact path without exposing a private administrator email.">پیامت را از طریق یکی از کانال‌های زیر بفرست. این مسیرها هویت رسمی AdLand را مشخص می‌کنند و به جای نمایش آدرس ایمیل خصوصی استفاده می‌شوند.</p>
-<div class="contactMeta">
-<a class="contactChip" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer"><strong>TELEGRAM</strong><span>@Arad_unk</span></a>
-<a class="contactChip" href="https://ble.ir/AdLandStudio" target="_blank" rel="noreferrer"><strong>BALE</strong><span>ble.ir/AdLandStudio</span></a>
-</div></div>
-<div class="contactPanel reveal"><div class="al-secure-contact"><span class="secureMark"><i></i>OFFICIAL CONTACT</span><h3 data-fa="ارتباط بدون افشای ایمیل" data-en="Contact without exposing the email">ارتباط بدون افشای ایمیل</h3><p data-fa="فرم عمومی فقط اطلاعات پیام را جمع می‌کند و هیچ فیلدی برای واردکردن «به نام ادمین» ندارد. برای پاسخ، تیم AdLand از کانال رسمی با شما ارتباط می‌گیرد." data-en="The public form collects message details only and has no field for posting “as admin”. The AdLand team can reply through an official channel.">فرم عمومی فقط اطلاعات پیام را جمع می‌کند و هیچ فیلدی برای واردکردن «به نام ادمین» ندارد. برای پاسخ، تیم AdLand از کانال رسمی با شما ارتباط می‌گیرد.</p><div class="contactActions"><button class="btn primary" type="button" onclick="document.getElementById('al-support-launcher')?.click()" data-fa="باز کردن مرکز پشتیبانی" data-en="Open support center">باز کردن مرکز پشتیبانی</button><a class="btn" href="https://t.me/Arad_unk" target="_blank" rel="noreferrer" data-fa="پیام در Telegram" data-en="Message on Telegram">پیام در Telegram</a></div><div class="contactStatus" id="contactStatus" aria-live="polite" data-fa="بدون نمایش عمومی ایمیل ادمین." data-en="Administrator email is not exposed publicly.">بدون نمایش عمومی ایمیل ادمین.</div></div></div>
-</div></div></section>
-<section class="final"><div class="container"><div class="finalCard glass reveal"><small>THE NEXT CREATION STARTS HERE</small><h2 data-fa="Creativity : Ulimited" data-en="Creativity : Ulimited">Creativity : Ulimited</h2><p data-fa="محصول بعدی هنوز ساخته نشده. شاید ایده‌ی بعدی از تو بیاید." data-en="The next product has not been built yet. Maybe the next idea starts with you.">محصول بعدی هنوز ساخته نشده. شاید ایده‌ی بعدی از تو بیاید.</p><div class="heroActions"><a class="btn primary" href="https://ble.ir/AdLandStudio" target="_blank">JOIN ADLAND ↗</a><a class="btn" href="#apps">EXPLORE PRODUCTS</a></div></div></div></section>
-<footer class="footer"><div class="container"><div class="footerIn"><div><div class="footerBrand">ADLAND STUDIO</div><span>Creativity : Ulimited</span></div><div class="footerLinks"><a href="https://t.me/Arad_unk" target="_blank">Telegram</a><a href="https://ble.ir/AdLandStudio" target="_blank">Bale</a><a href="#home">↑ TOP</a></div></div></div></footer>
-</main>
-
-<div id="command"><div class="cmdCard"><div class="cmdTop"><div><small>ADLAND COMMAND CENTER</small><h3 data-fa="مسیرت را انتخاب کن." data-en="Choose your path.">مسیرت را انتخاب کن.</h3></div><button id="cmdClose">×</button></div><div class="cmdSearch"><span>⌘</span><input id="cmdInput" placeholder="Search AdLand..." autocomplete="off"></div><div class="cmdGrid">
-<a href="#home"><strong>⌂</strong><div><b>Home</b><small>شروع تجربه</small></div><i>01</i></a>
-<a href="#apps"><strong>◈</strong><div><b>Apps</b><small>یازده محصول دسکتاپ</small></div><i>02</i></a>
-<a href="#studio"><strong>✦</strong><div><b>Studio</b><small>سیستم طراحی</small></div><i>03</i></a>
-<a href="#arcade"><strong>⚡</strong><div><b>Arcade</b><small data-fa="بازی‌های درون سایت" data-en="Playable web games">بازی‌های درون سایت</small></div><i>03</i></a>
-<a href="#projects"><strong>◇</strong><div><b>Projects</b><small>چیزهایی که ساخته‌ایم</small></div><i>04</i></a>
-<a href="#learning"><strong>⌬</strong><div><b>Learning</b><small>Python و Scratch</small></div><i>05</i></a>
-<a href="learning/python/"><strong>Py</strong><div><b>Python Course</b><small data-fa="سایت آموزش Python" data-en="Python learning site">سایت آموزش Python</small></div><i>11</i></a>
-<a href="learning/scratch/"><strong>Sc</strong><div><b>Scratch Course</b><small data-fa="سایت آموزش Scratch" data-en="Scratch learning site">سایت آموزش Scratch</small></div><i>12</i></a>
-<a href="learning/html-css/"><strong>HC</strong><div><b>HTML + CSS</b><small data-fa="سایت طراحی وب" data-en="Web design learning site">سایت طراحی وب</small></div><i>13</i></a>
-<a href="learning/app-inventor/"><strong>AI</strong><div><b>App Inventor</b><small data-fa="سایت ساخت اپ موبایل" data-en="Mobile app learning site">سایت ساخت اپ موبایل</small></div><i>14</i></a>
-<a href="learning/tkinter/"><strong>Tk</strong><div><b>Tkinter</b><small data-fa="سایت ساخت نرم‌افزار دسکتاپ" data-en="Python GUI learning site">سایت ساخت نرم‌افزار دسکتاپ</small></div><i>15</i></a>
-<a href="#team"><strong>+</strong><div><b>Team</b><small>همکاری و عضویت</small></div><i>06</i></a><a href="#contact"><strong>✉</strong><div><b>Contact Admin</b><small>ارسال پیام به ادمین</small></div><i>07</i></a><a href="atlas/" data-cmd="atlas"><strong>◎</strong><div><b>Atlas</b><small>Local file intelligence</small></div><i>07</i></a><a href="forge/" data-cmd="forge"><strong>⌘</strong><div><b>Forge</b><small>Developer workbench</small></div><i>08</i></a><a href="prism/" data-cmd="prism"><strong>◇</strong><div><b>Prism</b><small>Color intelligence lab</small></div><i>09</i></a><a href="ai-tools/" data-cmd="ai-tools"><strong>✦</strong><div><b>AI Tools</b><small>Prompt + developer utility lab</small></div><i>10</i></a>
-</div><div class="cmdFoot"><span><em></em> EXPERIENCE ENGINE ONLINE</span><div><button id="motionBtn">MOTION: HIGH</button><button id="fullBtn">FULLSCREEN</button></div></div></div></div>
-
-<script>
-(()=> {
-const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
-const root=document.documentElement;
-const spaceCanvas=qs('#space');if(spaceCanvas){const sc=spaceCanvas.getContext('2d');let sw=0,sh=0,sd=1,stars=[],comets=[];function resizeSpace(){sd=Math.min(devicePixelRatio||1,2);sw=innerWidth;sh=innerHeight;spaceCanvas.width=sw*sd;spaceCanvas.height=sh*sd;sc.setTransform(sd,0,0,sd,0,0);stars=Array.from({length:Math.min(150,Math.floor(sw/8))},()=>({x:Math.random()*sw,y:Math.random()*sh,r:.25+Math.random()*1.4,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.11,a:.12+Math.random()*.58,phase:Math.random()*6.28}));comets=Array.from({length:4},()=>({x:Math.random()*sw,y:Math.random()*sh,vx:1.2+Math.random()*1.8,vy:(Math.random()-.5)*.35,len:40+Math.random()*90,a:.08+Math.random()*.14}))}function drawSpace(t){sc.clearRect(0,0,sw,sh);const pulse=.5+.5*Math.sin(t*.0007);for(let i=0;i<stars.length;i++){const s=stars[i];s.x+=s.vx;s.y+=s.vy;if(s.x<-5)s.x=sw+5;if(s.x>sw+5)s.x=-5;if(s.y<-5)s.y=sh+5;if(s.y>sh+5)s.y=-5;const tw=s.a*(.65+.35*Math.sin(t*.001+s.phase));sc.beginPath();sc.arc(s.x,s.y,s.r,0,Math.PI*2);sc.fillStyle='rgba(232,215,161,'+tw+')';sc.fill();if(i%6===0){const q=stars[(i*13+17)%stars.length],dx=s.x-q.x,dy=s.y-q.y,dist=Math.hypot(dx,dy);if(dist<105){sc.beginPath();sc.moveTo(s.x,s.y);sc.lineTo(q.x,q.y);sc.strokeStyle='rgba(217,181,93,'+((1-dist/105)*.045)+')';sc.stroke()}}}for(const m of comets){m.x+=m.vx;m.y+=m.vy;if(m.x>sw+m.len){m.x=-m.len;m.y=Math.random()*sh}sc.beginPath();sc.moveTo(m.x,m.y);sc.lineTo(m.x-m.len,m.y-m.vy*14);const gr=sc.createLinearGradient(m.x,m.y,m.x-m.len,m.y-m.vy*14);gr.addColorStop(0,'rgba(246,223,154,'+(.22+.09*pulse)+')');gr.addColorStop(1,'rgba(246,223,154,0)');sc.strokeStyle=gr;sc.lineWidth=1.2;sc.stroke()}requestAnimationFrame(drawSpace)}resizeSpace();addEventListener('resize',resizeSpace,{passive:true});requestAnimationFrame(drawSpace);
-const core=qs('.core');addEventListener('pointermove',e=>{if(core&&window.innerWidth>900&&!reduced){const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);core.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*7)+'deg)';}},{passive:true});addEventListener('pointerleave',()=>{if(core)core.style.transform=''});
-}
-let lang=(localStorage.getItem('adland-language-v2')||((navigator.languages?.[0]||navigator.language||'fa').toLowerCase().startsWith('en')?'en':'fa')),sfx=localStorage.getItem('adland-sfx')!=='off',motion=localStorage.getItem('adland-motion')!=='low',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const audioState={ctx:null};
-function tone(kind='tap'){if(!sfx||reduced)return;try{const C=audioState.ctx||(audioState.ctx=new(window.AudioContext||window.webkitAudioContext)());if(C.state==='suspended')C.resume();const n=C.currentTime,table={tap:[390,560,.055,.009,'sine'],open:[420,780,.12,.014,'sine'],close:[300,210,.09,.012,'sine'],nav:[480,700,.065,.007,'triangle'],success:[460,920,.18,.014,'triangle'],error:[210,120,.16,.012,'sawtooth'],toggle:[330,520,.07,.008,'square'],tick:[620,620,.035,.005,'sine']},q=table[kind]||table.tap,o=C.createOscillator(),g=C.createGain(),f=C.createBiquadFilter();o.type=q[4];o.frequency.setValueAtTime(q[0],n);o.frequency.exponentialRampToValueAtTime(Math.max(70,q[1]),n+q[2]*.72);f.type='lowpass';f.frequency.setValueAtTime(2600,n);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(q[3],n+.008);g.gain.exponentialRampToValueAtTime(.0001,n+q[2]);o.connect(f).connect(g).connect(C.destination);o.start(n);o.stop(n+q[2]+.015)}catch(e){}}
-function applyLang(){root.lang=lang;root.dir=lang==='fa'?'rtl':'ltr';qsa('[data-fa]').forEach(x=>x.innerHTML=lang==='fa'?x.dataset.fa:x.dataset.en);qs('#langBtn').textContent=lang==='fa'?'FA → EN':'EN → FA';if(window.__refreshArcadeLang)window.__refreshArcadeLang();if(window.__renderArcadePlayer)window.__renderArcadePlayer();}
-function setSfx(){qs('#soundBtn').textContent='SFX '+(sfx?'ON':'OFF')}
-qs('#langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';applyLang();tone('open')};
-qs('#soundBtn').onclick=()=>{sfx=!sfx;localStorage.setItem('adland-sfx',sfx?'on':'off');setSfx();tone('open')};
-setSfx();applyLang();
-
-const navMenuBtn=qs('#navMenuBtn'),navDrawer=qs('#navDrawer');
-function setNavDrawer(open){if(!navDrawer)return;navDrawer.classList.toggle('open',!!open);navDrawer.setAttribute('aria-hidden',String(!open));navMenuBtn?.setAttribute('aria-expanded',String(!!open));navMenuBtn?.setAttribute('aria-label',open?'Close navigation':'Open navigation');}
-navMenuBtn?.addEventListener('click',()=>setNavDrawer(!navDrawer.classList.contains('open')));
-navDrawer?.addEventListener('click',e=>{if(e.target.closest('a'))setNavDrawer(false);});
-addEventListener('keydown',e=>{if(e.key==='Escape')setNavDrawer(false);});
-addEventListener('resize',()=>{if(innerWidth>980)setNavDrawer(false)},{passive:true});
-const command=qs('#command');const input=qs('#cmdInput');
-function openCmd(){command.classList.add('commandOpen');document.body.style.overflow='hidden';setTimeout(()=>input?.focus(),70);tone('open')}
-function closeCmd(){command.classList.remove('commandOpen');document.body.style.overflow='';tone('close')}
-qs('#cmdBtn').onclick=openCmd;qs('#heroCmd').onclick=openCmd;qs('#cmdClose').onclick=closeCmd;command.addEventListener('click',e=>{if(e.target===command)closeCmd()});
-addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();command.classList.contains('commandOpen')?closeCmd():openCmd()}if(e.key==='Escape'&&command.classList.contains('commandOpen'))closeCmd()});
-input.addEventListener('input',()=>{const v=input.value.trim().toLowerCase();qsa('.cmdGrid a').forEach(a=>a.style.display=!v||a.textContent.toLowerCase().includes(v)?'grid':'none')});
-qsa('.cmdGrid a').forEach(a=>a.addEventListener('click',()=>{closeCmd();tone('nav')}));
-
-qs('#motionBtn').onclick=e=>{motion=!motion;localStorage.setItem('adland-motion',motion?'high':'low');e.target.textContent='MOTION: '+(motion?'HIGH':'LOW');tone('tap')};
-qs('#fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();tone('open')}catch(e){}};
-
-const boot=qs('#boot');if(localStorage.getItem('adland-boot-seen')==='1'||reduced){boot.remove()}else{let p=0;const id=setInterval(()=>{p=Math.min(100,p+Math.round(7+Math.random()*17));qs('#bootFill').style.width=p+'%';qs('#bootPct').textContent=String(p).padStart(2,'0')+'%';if(p>=100){clearInterval(id);localStorage.setItem('adland-boot-seen','1');boot.style.opacity='0';boot.style.visibility='hidden';setTimeout(()=>boot.remove(),850);tone('open')}},85)}
-
-let mx=innerWidth/2,my=innerHeight/2,ax=mx,ay=my;const cursor=qs('#cursor'),dot=qs('#cursorDot');
-addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;root.style.setProperty('--mx',mx+'px');root.style.setProperty('--my',my+'px')},{passive:true});
-function pointerLoop(){ax+=(mx-ax)*.12;ay+=(my-ay)*.12;cursor.style.left=ax+'px';cursor.style.top=ay+'px';dot.style.left=mx+'px';dot.style.top=my+'px';requestAnimationFrame(pointerLoop)}if(!reduced)pointerLoop();
-qsa('a,button').forEach(el=>{
-  if(el.dataset.alSfxBound==='1'||el.dataset.sfxIgnore==='1'||el.closest('.arcadeSection,.arcadeGrid'))return;
-  el.dataset.alSfxBound='1';
-  const id=(el.id||'').toLowerCase(),txt=(el.textContent||'').toLowerCase();
-  const kind=/lang|sound|sfx/.test(id+' '+txt)?'toggle':/close|cancel|back|بازگشت|بستن|لغو/.test(id+' '+txt)?'close':/save|copy|success|ذخیره|کپی/.test(id+' '+txt)?'success':/open|start|download|install|view|شروع|دانلود|نصب|ورود/.test(id+' '+txt)?'open':el.closest('.navlinks,.navactions')?'nav':'tap';
-  el.addEventListener('pointerdown',()=>tone(kind),{passive:true});
-});
-
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.09});qsa('.reveal').forEach(x=>io.observe(x));
-const navLinks=[...qsa('.navlinks a')],sections=['apps','arcade','studio','projects','learning','team','faq','contact'].map(id=>qs('#'+id)).filter(Boolean);const activeIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -45% 0px'});sections.forEach(s=>activeIO.observe(s));
-function scroll(){const d=document.documentElement.scrollHeight-innerHeight;qs('#progress').style.width=(d>0?scrollY/d*100:0)+'%'}addEventListener('scroll',scroll,{passive:true});scroll();
-
-qsa('.app').forEach(card=>{card.addEventListener('pointermove',e=>{if(reduced)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*7)+'deg) translateZ(4px)';card.style.setProperty('--cx',(x+0.5)*100+'%');card.style.setProperty('--cy',(y+0.5)*100+'%')},{passive:true});card.addEventListener('pointerleave',()=>card.style.transform='')});
-qsa('.project').forEach(x=>x.addEventListener('pointerdown',()=>tone('open'),{passive:true}));
-qsa('.faqQ').forEach(b=>b.onclick=()=>{b.parentElement.classList.toggle('open');tone('tap')});
-
-const arcadeVibeData=[
-  ['امروز رکوردت رو می‌خوایم 😎','بدون بهونه؛ یه دور دیگه بزن و ببین چی می‌شه.','Today, we are hunting your record 😎','No excuses; run it one more time and see what happens.'],
-  ['این دفعه جدی بازی کن 🔥','سه تا بازی هست؛ حداقل یکی‌ش رو تا آخر برو.','Take this run seriously 🔥','Three games are waiting; take at least one all the way.'],
-  ['رفلکس یا حافظه؟ 🤔','ببین کدوم یکی بیشتر کم میاره!','Reflex or memory? 🤔','Let’s see which one gives up first!'],
-  ['شهاب‌ها منتظرن 🚀','یه دور Meteor Run بزن؛ فقط حواست به سرعت باشه.','The meteors are waiting 🚀','Try Meteor Run; just keep an eye on the speed.'],
-  ['فقط یه رکورد دیگه... 👀','آره، همون جمله‌ای که همیشه باعث یه دور اضافه می‌شه.','Just one more record... 👀','Yep, the sentence that always turns into one extra run.']
-];
-let arcadeVibeIndex=(new Date().getDate()+new Date().getMonth())%arcadeVibeData.length;
-function rotateArcadeVibe(){
-  const title=qs('#arcadeVibeTitle'),copy=qs('#arcadeVibeText');if(!title||!copy)return;
-  const v=arcadeVibeData[arcadeVibeIndex++%arcadeVibeData.length];
-  const en=root.lang==='en';title.textContent=en?v[2]:v[0];copy.textContent=en?v[3]:v[1];
-}
-rotateArcadeVibe();setInterval(rotateArcadeVibe,6500);
-
-/* Product category/search/favorites state is owned by assets/adland-system.js. */
-
-const bars=qs('#signalBars');if(bars){for(let i=0;i<34;i++){const s=document.createElement('i');s.style.height=(18+Math.random()*70)+'%';bars.appendChild(s)}setInterval(()=>{qsa('#signalBars i').forEach(x=>x.style.height=(18+Math.random()*78)+'%');qs('#energy').textContent=String(82+Math.floor(Math.random()*17))},1250)}
-
-
-
-
-/* Player identity + record ownership */
-(()=>{
-  const PLAYER_KEY='adland-arcade-player-name';
-  const DEVICE_KEY='adland-arcade-device-id';
-  const getOrCreateDeviceId=()=>{
-    let id=localStorage.getItem(DEVICE_KEY);
-    if(!id){
-      id='AL-'+crypto.randomUUID().replaceAll('-','').slice(0,12).toUpperCase();
-      localStorage.setItem(DEVICE_KEY,id);
-    }
-    return id;
-  };
-  const defaultName=()=>localStorage.getItem(PLAYER_KEY)||'Guest';
-  const playerName=()=>defaultName().trim().slice(0,18)||'Guest';
-  const renderPlayer=()=>{
-    const name=playerName();
-    const deviceId=getOrCreateDeviceId();
-    qs('#arcadePlayerName')&&(qs('#arcadePlayerName').textContent=name);
-    qs('#arcadeDeviceId')&&(qs('#arcadeDeviceId').textContent=deviceId);
-    qs('#arcadePlayerMode')&&(qs('#arcadePlayerMode').textContent=name==='Guest'?(root.lang==='fa'?'نام ثبت نشده':'Name not set'):(root.lang==='fa'?'پروفایل این دستگاه':'This device profile'));
-    const rb=Number(localStorage.getItem('adland-arcade-best-reflex')||0);
-    const mb=Number(localStorage.getItem('adland-arcade-best-memory')||0);
-    const xb=Number(localStorage.getItem('adland-arcade-best-meteor')||0);
-    const rows=[
-      ['#arcadeBestReflex',rb?rb+' ms · '+name:'—'],
-      ['#arcadeBestMemory',mb?mb+' · '+name:'—'],
-      ['#arcadeBestMeteor',xb?xb+' · '+name:'—']
-    ];
-    rows.forEach(([sel,val])=>qs(sel)&&(qs(sel).textContent=val));
-  };
-  const modal=qs('#arcadeIdentity');
-  const input=qs('#arcadePlayerInput');
-  const open=()=>{
-    if(!modal)return;
-    input.value=playerName()==='Guest'?'':playerName();
-    modal.classList.add('open');modal.setAttribute('aria-hidden','false');setTimeout(()=>input?.focus(),50);
-  };
-  const close=()=>{modal?.classList.remove('open');modal?.setAttribute('aria-hidden','true')};
-  const save=()=>{
-    const name=(input?.value||'').trim().replace(/\s+/g,' ').slice(0,18);
-    if(name)localStorage.setItem(PLAYER_KEY,name);
-    else localStorage.removeItem(PLAYER_KEY);
-    renderPlayer();close();tone('open');
-  };
-  qs('#arcadePlayerEdit')?.addEventListener('click',open);
-  qs('#arcadeIdentityClose')?.addEventListener('click',close);
-  qs('#arcadeIdentityGuest')?.addEventListener('click',()=>{localStorage.removeItem(PLAYER_KEY);renderPlayer();close();tone('tap')});
-  qs('#arcadeIdentitySave')?.addEventListener('click',save);
-  input?.addEventListener('keydown',e=>{if(e.key==='Enter')save();if(e.key==='Escape')close()});
-  modal?.addEventListener('click',e=>{if(e.target===modal)close()});
-  window.__renderArcadePlayer=renderPlayer;
-  renderPlayer();
-})();
-
-/* GLOBAL ARCADE LEADERBOARD */
-(()=>{
-  const SUPA_URL='https://pnfenluypujlqidwreyd.supabase.co';
-  const SUPA_KEY='sb_publishable_oSZNJe0LLKoIVqOIMymu7w_lDFOxPe2';
-  const headers={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'};
-  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  let game='reflex';
-  const label=()=>{const n=(localStorage.getItem('adland-arcade-player-name')||'Guest').trim().slice(0,18);return n||'Guest'};
-  const keyFor=name=>{let h=2166136261;for(const ch of name.trim().toLowerCase()){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return 'name_'+(h>>>0).toString(16)};
-  const scoreText=(g,s)=>g==='reflex'?Math.round(s)+' ms':String(Math.round(s));
-  const isBetter=(g,a,b)=>g==='reflex'?Number(a)<Number(b):Number(a)>Number(b);
-  const load=async()=>{
-    const box=qs('#leaderTable');if(!box)return;
-    box.innerHTML='<div class="leaderLoading">'+(root.lang==='fa'?'در حال دریافت رکوردهای جهانی…':'Loading global records…')+'</div>';
-    try{
-      const order=game==='reflex'?'score.asc,created_at.asc':'score.desc,created_at.asc';
-      const u=SUPA_URL+'/rest/v1/arcade_scores?select=player_name,score,created_at&game=eq.'+encodeURIComponent(game)+'&order='+encodeURIComponent(order)+'&limit=1000';
-      const res=await fetch(u,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
-      if(!res.ok)throw new Error('leaderboard '+res.status);
-      const rows=await res.json();
-      const bestByName=new Map();
-      for(const row of rows){
-        const name=(row.player_name||'Guest').trim().slice(0,24)||'Guest';
-        const prev=bestByName.get(name);
-        if(!prev||isBetter(game,row.score,prev.score))bestByName.set(name,row);
-      }
-      const best=[...bestByName.values()].sort((a,b)=>isBetter(game,a.score,b.score)?-1:isBetter(game,b.score,a.score)?1:new Date(a.created_at)-new Date(b.created_at)).slice(0,10);
-      if(!best.length){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'هنوز رکوردی ثبت نشده. اولین نفر باش!':'No records yet. Be the first!')+'</div>';return}
-      const head=root.lang==='fa'?['رتبه','بازیکن','امتیاز','زمان']:['Rank','Player','Score','Date'];
-      let h='<div class="leaderRow head"><span>'+head[0]+'</span><span>'+head[1]+'</span><span>'+head[2]+'</span><span>'+head[3]+'</span></div>';
-      best.forEach((r,i)=>{const d=new Date(r.created_at);h+='<div class="leaderRow"><span class="leaderRank">#'+(i+1)+'</span><span class="leaderName">'+esc(r.player_name||'Guest')+'</span><span class="leaderScore">'+esc(scoreText(game,r.score))+'</span><span class="leaderTime">'+esc(d.toLocaleDateString(root.lang==='fa'?'fa-IR':'en-US',{month:'short',day:'numeric'}))+'</span></div>'});
-      box.innerHTML=h;
-    }catch(e){box.innerHTML='<div class="leaderEmpty">'+(root.lang==='fa'?'اتصال Leaderboard فعلاً در دسترس نیست.':'Global leaderboard is temporarily unavailable.')+'</div>'}
-  };
-  const submit=async(g,score)=>{
-    const name=label();if(name==='Guest')return;
-    const key=keyFor(name);
-    const base=SUPA_URL+'/rest/v1/arcade_scores?select=id,score,player_name&game=eq.'+encodeURIComponent(g)+'&player_key=eq.'+encodeURIComponent(key)+'&limit=1';
-    try{
-      const got=await fetch(base,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
-      if(!got.ok)throw new Error('lookup '+got.status);
-      const current=(await got.json())[0];
-      const value=Math.round(score);
-      if(current){
-        if(!isBetter(g,value,current.score))return;
-        const patch=await fetch(SUPA_URL+'/rest/v1/arcade_scores?game=eq.'+encodeURIComponent(g)+'&player_key=eq.'+encodeURIComponent(key),{method:'PATCH',headers,body:JSON.stringify({score:value,player_name:name,device_label:navigator.platform,updated_at:new Date().toISOString()})});
-        if(!patch.ok)throw new Error('update '+patch.status);
-      }else{
-        const post=await fetch(SUPA_URL+'/rest/v1/arcade_scores',{method:'POST',headers,body:JSON.stringify({game:g,player_name:name,player_key:key,score:value,device_label:navigator.platform})});
-        if(!post.ok)throw new Error('insert '+post.status);
-      }
-      if(g===game)load();
-    }catch(e){}
-  };
-  window.__submitGlobalArcadeScore=submit;window.__loadGlobalArcade=load;
-  qsa('.leaderTab').forEach(b=>b.addEventListener('click',()=>{qsa('.leaderTab').forEach(x=>x.classList.remove('active'));b.classList.add('active');game=b.dataset.game;load();tone('tap')}));
-  qs('#leaderRefresh')?.addEventListener('click',()=>{load();tone('open')});
-  load();
-})();
-
-/* ADLAND ARCADE ENGINE */
-(()=>{
-  const bestKey={reflex:'adland-arcade-best-reflex',memory:'adland-arcade-best-memory',meteor:'adland-arcade-best-meteor'};
-  const readBest=k=>Number(localStorage.getItem(bestKey[k])||0);
-  const writeBest=(k,v)=>{const prev=readBest(k);if(v>prev){localStorage.setItem(bestKey[k],String(v));return v}return prev};
-  const els={
-    reflexStage:qs('#reflexStage'), reflexTarget:qs('#reflexTarget'), reflexStart:qs('#reflexStart'),
-    reflexMessage:qs('#reflexMessage'), reflexRound:qs('#reflexRound'), reflexLast:qs('#reflexLast'), reflexAvg:qs('#reflexAvg'), arcadeBestReflex:qs('#arcadeBestReflex'),
-    memoryBoard:qs('#memoryBoard'), memoryStart:qs('#memoryStart'), memoryMessage:qs('#memoryMessage'), memoryLevel:qs('#memoryLevel'), memoryBest:qs('#memoryBest'), arcadeBestMemory:qs('#arcadeBestMemory'),
-    meteorCanvas:qs('#meteorCanvas'), meteorStart:qs('#meteorStart'), meteorScore:qs('#meteorScore'), meteorBest:qs('#meteorBest'), arcadeBestMeteor:qs('#arcadeBestMeteor')
-  };
-  const t=(fa,en)=>root.lang==='fa'?fa:en;
-  const refreshBest=()=>{
-    const name=(localStorage.getItem('adland-arcade-player-name')||'Guest').trim().slice(0,18)||'Guest';
-    const rb=readBest('reflex');els.arcadeBestReflex&&(els.arcadeBestReflex.textContent=rb?rb+' ms · '+name:'—');
-    const mb=readBest('memory');els.arcadeBestMemory&&(els.arcadeBestMemory.textContent=mb?mb+' · '+name:'—');
-    const xb=readBest('meteor');els.arcadeBestMeteor&&(els.arcadeBestMeteor.textContent=xb?xb+' · '+name:'—');
-  };
-  window.__refreshArcadeLang=()=>{
-    refreshBest();
-    if(els.reflexMessage&&els.reflexTarget&&!reflex.running){
-      els.reflexMessage.querySelector('strong').textContent=t('آماده‌ای؟','Ready?');
-      els.reflexMessage.querySelector('span').textContent=t('شروع را بزن و منتظر هدف بمان.','Press start, then wait for the target.');
-    }
-    if(els.memoryMessage&&!memory.running){
-      els.memoryMessage.querySelector('strong').textContent=t('حافظه را روشن کن.','Power up your memory.');
-      els.memoryMessage.querySelector('span').textContent=t('شروع را بزن و الگو را دنبال کن.','Press start and follow the pattern.');
-    }
-    if(els.reflexStart&&!reflex.running)els.reflexStart.textContent=t('شروع چالش','Start challenge');
-    if(els.memoryStart&&!memory.running)els.memoryStart.textContent=t('شروع الگو','Start pattern');
-    if(els.meteorStart&&!meteor.running)els.meteorStart.textContent=t('شروع پرواز','Start run');
-  };
-
-  /* Reflex Core */
-  const reflex={running:false,round:0,times:[],armed:false,startTime:0,timer:null,streak:0,early:0};
-  const REFLEX_ROUNDS=7;
-  const resetReflex=()=>{
-    clearTimeout(reflex.timer);reflex.running=false;reflex.round=0;reflex.times=[];reflex.armed=false;reflex.streak=0;reflex.early=0;
-    els.reflexTarget.classList.remove('show');els.reflexRound.textContent='0 / '+REFLEX_ROUNDS;els.reflexLast.textContent='—';els.reflexAvg.textContent='—';
-    els.reflexTarget.style.transform='translate(-50%,-50%) scale(1)';
-    els.reflexMessage.style.display='grid';
-    els.reflexMessage.querySelector('strong').textContent=t('آماده‌ای؟','Ready?');
-    els.reflexMessage.querySelector('span').textContent=t('شروع کن؛ هدف هر راند کوچک‌تر و زمان انتظار کوتاه‌تر می‌شود.','Start; the target gets smaller and the wait gets shorter each round.');
-    els.reflexStart.textContent=t('شروع چالش','Start challenge');
-  };
-  const nextReflexRound=()=>{
-    if(reflex.round>=REFLEX_ROUNDS){
-      const avg=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length);
-      els.reflexAvg.textContent=avg+' ms';
-      const previous=readBest('reflex');const best=(previous===0||avg<previous)?avg:previous;
-      localStorage.setItem(bestKey.reflex,String(best));els.arcadeBestReflex.textContent=best+' ms';
-      window.__submitGlobalArcadeScore?.('reflex',best);window.__loadGlobalArcade?.();
-      els.reflexMessage.style.display='grid';
-      els.reflexMessage.querySelector('strong').textContent=t('چالش کامل شد','Challenge complete');
-      els.reflexMessage.querySelector('span').textContent=t('میانگین '+avg+' میلی‌ثانیه · '+reflex.early+' شروع زودهنگام. دوباره تلاش کن و رکوردت را بشکن.','Average '+avg+' ms · '+reflex.early+' early clicks. Run again and beat your record.');
-      reflex.running=false;reflexStartIdle();return;
-    }
-    reflex.armed=false;els.reflexTarget.classList.remove('show');
-    els.reflexTarget.style.transform='translate(-50%,-50%) scale('+Math.max(.62,1-reflex.round*.055).toFixed(2)+')';
-    els.reflexMessage.style.display='grid';
-    els.reflexMessage.querySelector('strong').textContent=t('راند '+(reflex.round+1)+' · آماده باش','Round '+(reflex.round+1)+' · Get ready');
-    els.reflexMessage.querySelector('span').textContent=t('روی هدف قبل از روشن شدن نزن.','Do not click before the target appears.');
-    const difficulty=Math.min(1,reflex.round/(REFLEX_ROUNDS-1));
-    const delay=(480+Math.random()*1200)*(1-difficulty*.28);
-    reflex.timer=setTimeout(()=>{
-      if(!reflex.running)return;
-      const r=els.reflexStage.getBoundingClientRect(),pad=58;
-      const safeW=Math.max(50,r.width-pad*2),safeH=Math.max(50,r.height-pad*2);
-      els.reflexTarget.style.left=(pad+Math.random()*safeW)+'px';
-      els.reflexTarget.style.top=(pad+Math.random()*safeH)+'px';
-      els.reflexMessage.style.display='none';
-      els.reflexTarget.classList.add('show');
-      reflex.startTime=performance.now();reflex.armed=true;
-    },delay);
-  };
-  const startReflex=()=>{
-    clearTimeout(reflex.timer);
-    reflex.running=true;reflex.round=0;reflex.times=[];reflex.streak=0;reflex.early=0;
-    els.reflexStart.textContent=t('شروع مجدد','Restart');
-    nextReflexRound();
-  };
-  const reflexStartIdle=()=>{els.reflexStart.textContent=t('شروع چالش','Start challenge');els.reflexRound.textContent=REFLEX_ROUNDS+' / '+REFLEX_ROUNDS;};
-  els.reflexStart?.addEventListener('click',()=>{tone('open');startReflex()});
-  els.reflexTarget?.addEventListener('click',e=>{
-    e.stopPropagation();
-    if(!reflex.running||!reflex.armed)return;
-    const ms=Math.max(1,Math.round(performance.now()-reflex.startTime));reflex.armed=false;reflex.times.push(ms);reflex.round++;reflex.streak++;
-    els.reflexRound.textContent=reflex.round+' / '+REFLEX_ROUNDS;els.reflexLast.textContent=ms+' ms';
-    els.reflexAvg.textContent=Math.round(reflex.times.reduce((a,b)=>a+b,0)/reflex.times.length)+' ms';
-    tone('tap');
-    if(reflex.round<REFLEX_ROUNDS){
-      els.reflexMessage.style.display='grid';
-      els.reflexMessage.querySelector('strong').textContent=t(reflex.streak>=3?'سری عالی!':'خوب بود!','Nice streak!');
-      els.reflexMessage.querySelector('span').textContent=t(ms+' میلی‌ثانیه · راند بعدی سخت‌تر می‌شود.',''+ms+' ms · the next round gets harder.');
-    }
-    nextReflexRound();
-  });
-  els.reflexStage?.addEventListener('pointerdown',e=>{
-    if(!reflex.running||reflex.armed)return;
-    reflex.early++;
-    els.reflexMessage.style.display='grid';
-    els.reflexMessage.querySelector('strong').textContent=t('زود بود!','Too early!');
-    els.reflexMessage.querySelector('span').textContent=t('این کلیک ثبت شد؛ راند دوباره از نو آماده می‌شود.','That click was counted; this round resets.');
-    tone('close');
-    clearTimeout(reflex.timer);
-    reflex.armed=false;
-    setTimeout(()=>{if(reflex.running)nextReflexRound()},420);
-  });
-
-  /* Memory Pulse */
-  const memory={running:false,sequence:[],step:0,locked:false,lives:3,token:0};
-  const cells=[...qsa('.memoryCell')];
-  const lightCell=(idx,duration=280,token)=>new Promise(resolve=>{
-    const cell=cells[idx];if(!cell){resolve();return}
-    cell.classList.add('lit');
-    setTimeout(()=>{cell.classList.remove('lit');resolve()},duration);
-  });
-  const runPattern=async(token)=>{
-    if(token!==memory.token||!memory.running)return;
-    memory.locked=true;els.memoryMessage.style.display='grid';
-    const level=memory.sequence.length;
-    els.memoryMessage.querySelector('strong').textContent=t('دقت کن · سطح '+level,'Watch closely · Level '+level);
-    els.memoryMessage.querySelector('span').textContent=t('الگو را به خاطر بسپار · فرصت باقی‌مانده: '+memory.lives,'Memorize it · lives left: '+memory.lives);
-    await new Promise(r=>setTimeout(r,220));
-    const pulse= Math.max(135,300-(level-1)*19);
-    const gap= Math.max(42,92-(level-1)*6);
-    for(const idx of memory.sequence){
-      if(token!==memory.token||!memory.running)return;
-      await lightCell(idx,pulse,token);
-      await new Promise(r=>setTimeout(r,gap));
-    }
-    if(token!==memory.token||!memory.running)return;
-    memory.step=0;memory.locked=false;els.memoryMessage.style.display='none';
-  };
-  const startMemory=()=>{
-    memory.token++;memory.running=true;memory.sequence=[];memory.step=0;memory.lives=3;
-    els.memoryLevel.textContent='0';els.memoryBest.textContent=String(readBest('memory'));
-    els.memoryStart.textContent=t('شروع مجدد','Restart');
-    for(const c of cells)c.classList.remove('wrong','correct','lit');
-    addMemoryStep();
-  };
-  const addMemoryStep=()=>{
-    if(!memory.running)return;
-    memory.sequence.push(Math.floor(Math.random()*9));els.memoryLevel.textContent=String(memory.sequence.length);
-    tone('open');runPattern(memory.token);
-  };
-  cells.forEach(cell=>cell.addEventListener('click',()=>{
-    if(!memory.running||memory.locked)return;
-    const idx=Number(cell.dataset.index);
-    if(idx===memory.sequence[memory.step]){
-      cell.classList.add('correct');setTimeout(()=>cell.classList.remove('correct'),150);tone('tap');memory.step++;
-      if(memory.step>=memory.sequence.length){
-        const level=memory.sequence.length;const best=writeBest('memory',level);els.memoryBest.textContent=String(best);
-        window.__submitGlobalArcadeScore?.('memory',best);window.__loadGlobalArcade?.();
-        els.memoryMessage.style.display='grid';
-        els.memoryMessage.querySelector('strong').textContent=t('دقیق بود!','Perfect!');
-        els.memoryMessage.querySelector('span').textContent=t('مرحله بعدی سریع‌تر پخش می‌شود. جان: '+memory.lives,'The next level plays faster. Lives: '+memory.lives);
-        setTimeout(()=>{if(memory.running)addMemoryStep()},330);
-      }
-    }else{
-      cell.classList.add('wrong');setTimeout(()=>cell.classList.remove('wrong'),260);tone('close');
-      memory.lives--;
-      memory.locked=true;
-      if(memory.lives>0){
-        els.memoryMessage.style.display='grid';
-        els.memoryMessage.querySelector('strong').textContent=t('اشتباه!','Miss!');
-        els.memoryMessage.querySelector('span').textContent=t('همین سطح دوباره پخش می‌شود · جان باقی‌مانده: '+memory.lives,'This level repeats · lives left: '+memory.lives);
-        const token=++memory.token;
-        setTimeout(()=>{if(memory.running&&token===memory.token)runPattern(token)},520);
-      }else{
-        memory.token++;memory.running=false;memory.locked=false;els.memoryMessage.style.display='grid';
-        els.memoryMessage.querySelector('strong').textContent=t('حافظه شکست خورد','Memory overload');
-        els.memoryMessage.querySelector('span').textContent=t('تا سطح '+memory.sequence.length+' رسیدی. با ۳ جان دوباره شروع کن.','You reached level '+memory.sequence.length+'. Restart with 3 lives.');
-        els.memoryStart.textContent=t('تلاش دوباره','Try again');
-      }
-    }
-  }));
-  els.memoryStart?.addEventListener('click',()=>{tone('open');startMemory()});
-
-  /* Meteor Run */
-  const canvas=els.meteorCanvas,ctx=canvas?.getContext('2d');
-  const meteor={running:false,raf:0,last:0,score:0,elapsed:0,player:{x:300,y:310,r:10},keys:new Set(),rocks:[],spawn:0,near:0};
-  function resizeMeteor(){
-    if(!canvas)return;
-    const rect=canvas.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,2);
-    canvas.width=Math.max(1,Math.floor(rect.width*d));canvas.height=Math.max(1,Math.floor(rect.height*d));ctx.setTransform(d,0,0,d,0,0);
-  }
-  const meteorW=()=>canvas?.getBoundingClientRect().width||600, meteorH=()=>canvas?.getBoundingClientRect().height||370;
-  function resetMeteor(){
-    meteor.score=0;meteor.elapsed=0;meteor.near=0;meteor.rocks=[];meteor.spawn=0;
-    meteor.player.x=meteorW()/2;meteor.player.y=meteorH()-45;els.meteorScore.textContent='0';
-  }
-  function spawnRock(extra=false){
-    const w=meteorW(),difficulty=1+Math.min(2.7,meteor.elapsed/24);
-    const size=7+Math.random()*13+Math.min(5,meteor.elapsed*.035);
-    const drift=(Math.random()<Math.min(.48,.12+meteor.elapsed/180))?(Math.random()>.5?1:-1)*(18+Math.random()*52+meteor.elapsed*.45):0;
-    meteor.rocks.push({x:15+Math.random()*(w-30),y:-28,r:size,vy:105+Math.random()*95+difficulty*52,vx:drift,phase:Math.random()*Math.PI*2,spin:Math.random()*2-1});
-    if(extra)meteor.rocks.push({x:15+Math.random()*(w-30),y:-70,r:8+Math.random()*14,vy:125+Math.random()*90+difficulty*58,vx:(Math.random()>.5?1:-1)*(25+Math.random()*50),phase:Math.random()*Math.PI*2,spin:Math.random()*2-1});
-  }
-  function drawMeteor(dt){
-    const w=meteorW(),h=meteorH();ctx.clearRect(0,0,w,h);
-    const difficulty=1+Math.min(2.7,meteor.elapsed/24);
-    const g=ctx.createRadialGradient(w*.5,h*.2,5,w*.5,h*.2,Math.max(w,h)*.8);g.addColorStop(0,'rgba(217,181,93,'+(0.07+Math.min(.07,meteor.elapsed/420))+')');g.addColorStop(1,'rgba(4,5,6,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;
-    const gridShift=(meteor.elapsed*(22+difficulty*18))%38;
-    for(let y=20-gridShift;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
-    const speed=Math.min(430,185+meteor.elapsed*3.6);
-    if(meteor.keys.has('arrowleft')||meteor.keys.has('a'))meteor.player.x-=speed*dt;
-    if(meteor.keys.has('arrowright')||meteor.keys.has('d'))meteor.player.x+=speed*dt;
-    if(meteor.keys.has('arrowup')||meteor.keys.has('w'))meteor.player.y-=speed*dt;
-    if(meteor.keys.has('arrowdown')||meteor.keys.has('s'))meteor.player.y+=speed*dt;
-    meteor.player.x=Math.max(15,Math.min(w-15,meteor.player.x));meteor.player.y=Math.max(15,Math.min(h-15,meteor.player.y));
-    meteor.spawn+=dt;
-    const spawnGap=Math.max(.23,.58-meteor.elapsed*.0045);
-    if(meteor.spawn>spawnGap){
-      meteor.spawn=0;spawnRock(meteor.elapsed>20&&Math.random()<Math.min(.55,meteor.elapsed/150));
-    }
-    for(const rock of meteor.rocks){
-      rock.y+=rock.vy*dt;
-      rock.x+=rock.vx*dt+Math.sin(meteor.elapsed*1.7+rock.phase)*.22;
-      if(rock.x<rock.r||rock.x>w-rock.r)rock.vx*=-1;
-      ctx.save();ctx.translate(rock.x,rock.y);ctx.rotate((meteor.elapsed*rock.spin*.75)+rock.phase);
-      ctx.beginPath();
-      const sides=7;
-      for(let i=0;i<sides;i++){const a=i*Math.PI*2/sides,rr=rock.r*(.78+.22*Math.sin(i*2.7+rock.phase));const px=Math.cos(a)*rr,py=Math.sin(a)*rr;i?ctx.lineTo(px,py):ctx.moveTo(px,py)}
-      ctx.closePath();ctx.fillStyle='rgba(246,223,154,.78)';ctx.fill();ctx.strokeStyle='rgba(255,248,219,.72)';ctx.stroke();
-      ctx.restore();
-    }
-    meteor.rocks=meteor.rocks.filter(r=>r.y<h+45);
-    for(const r of meteor.rocks){
-      const dist=Math.hypot(r.x-meteor.player.x,r.y-meteor.player.y);
-      if(dist<r.r+meteor.player.r){endMeteor();return}
-      if(dist<r.r+meteor.player.r+17&&r.y>meteor.player.y-42&&r.y<meteor.player.y+42)meteor.near++;
-    }
-    meteor.elapsed+=dt;
-    meteor.score+=dt*(10+difficulty*2.3);els.meteorScore.textContent=String(Math.floor(meteor.score));
-    const p=meteor.player;const glow=ctx.createRadialGradient(p.x,p.y,1,p.x,p.y,30+Math.min(14,meteor.elapsed*.1));glow.addColorStop(0,'rgba(246,223,154,.82)');glow.addColorStop(1,'rgba(217,181,93,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,30+Math.min(14,meteor.elapsed*.1),0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#f6df9a';ctx.fillRect(p.x-7,p.y-7,14,14);ctx.strokeStyle='#fff7d6';ctx.strokeRect(p.x-7,p.y-7,14,14);
-  }
-  function meteorLoop(now){
-    if(!meteor.running)return;
-    const dt=Math.min(.035,(now-meteor.last)/1000||.016);meteor.last=now;drawMeteor(dt);meteor.raf=requestAnimationFrame(meteorLoop);
-  }
-  function startMeteor(){
-    cancelAnimationFrame(meteor.raf);meteor.running=true;resetMeteor();resizeMeteor();els.meteorStart.textContent=t('شروع مجدد','Restart');tone('open');meteor.last=performance.now();meteor.raf=requestAnimationFrame(meteorLoop);
-  }
-  function endMeteor(){
-    meteor.running=false;cancelAnimationFrame(meteor.raf);
-    const score=Math.floor(meteor.score);const best=writeBest('meteor',score);els.meteorBest.textContent=String(best);els.arcadeBestMeteor.textContent=String(best);tone('close');
-    window.__submitGlobalArcadeScore?.('meteor',best);window.__loadGlobalArcade?.();
-    if(ctx){const w=meteorW(),h=meteorH();ctx.fillStyle='rgba(3,4,5,.72)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f6df9a';ctx.font='800 18px Manrope';ctx.textAlign='center';ctx.fillText(t('پایان پرواز · امتیاز '+score,'Run over · Score '+score),w/2,h/2);ctx.font='11px Manrope';ctx.fillStyle='#78858d';ctx.fillText(t('زمان '+meteor.elapsed.toFixed(1)+' ثانیه · نزدیک‌رد شدن '+meteor.near,'Time '+meteor.elapsed.toFixed(1)+'s · Near misses '+meteor.near),w/2,h/2+25);ctx.fillText(t('سرعت تا پایان به‌تدریج بیشتر شد.','Speed increased progressively until the end.'),w/2,h/2+45);}
-    els.meteorStart.textContent=t('تلاش دوباره','Try again');
-  }
-  els.meteorStart?.addEventListener('click',startMeteor);
-  addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s','A','D','W','S'].includes(e.key)){meteor.keys.add(e.key.toLowerCase());if(meteor.running)e.preventDefault()}});
-  addEventListener('keyup',e=>meteor.keys.delete(e.key.toLowerCase()));
-  canvas?.addEventListener('pointermove',e=>{if(!meteor.running)return;const r=canvas.getBoundingClientRect();meteor.player.x=Math.max(15,Math.min(r.width-15,e.clientX-r.left));meteor.player.y=Math.max(15,Math.min(r.height-15,e.clientY-r.top));});
-  canvas?.addEventListener('pointerdown',e=>{if(!meteor.running){startMeteor();return}const r=canvas.getBoundingClientRect();meteor.player.x=Math.max(15,Math.min(r.width-15,e.clientX-r.left));meteor.player.y=Math.max(15,Math.min(r.height-15,e.clientY-r.top));});
-  addEventListener('resize',resizeMeteor,{passive:true});
-  setTimeout(resizeMeteor,80);
-
-  refreshBest();
-  resetReflex();
-})();
-
-let dataCount=0;
-setInterval(()=>{dataCount++;root.style.setProperty('--scroll',scrollY)},240);
-})();
-</script>
-<script defer src="assets/adland-language.js"></script><script defer src="assets/adland-ecosystem.js?v=20261004-mac-live"></script><script id="adland-asset-hardening">
-(function(){
-  var base='/AdLandSite/';
-  document.querySelectorAll('img[src]').forEach(function(img){
-    var src=img.getAttribute('src');
-    if(!src || /^(?:https?:|data:|blob:|\/)/i.test(src) || !/^assets\//i.test(src)) return;
-    var fallback=base+src;
-    var swap=function(){
-      if(img.dataset.adlandAssetFallback) return;
-      img.dataset.adlandAssetFallback='1';
-      img.src=fallback;
-    };
-    img.addEventListener('error',swap,{once:true});
-    if(img.complete && img.naturalWidth===0) swap();
-  });
-})();
-</script><script id="adland-reveal-failsafe">
-(function(){
-  function showReveals(){
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('show');});
-  }
-  if(typeof IntersectionObserver!=='function') showReveals();
-  setTimeout(showReveals,1800);
-})();
-</script><script defer src="assets/adland-face2face.js?v=20261022"></script><script defer src="assets/adland-system.js?v=20261110"></script></body></html>
+<!doctype html><html lang="fa" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090b16">
+<meta name="description" content="AdLand Studio builds thoughtful desktop software, creative tools and digital experiences. Explore the studio and its product universe.">
+<meta property="og:type" content="website"><meta property="og:title" content="AdLand Studio — Creativity : Ulimited"><meta property="og:description" content="A universe of desktop apps, creative tools and digital experiences."><meta property="og:image" content="https://aradprogramming.github.io/AdLandSite/assets/logo/adland-logo-transparent.svg">
+<link rel="canonical" href="https://aradprogramming.github.io/AdLandSite/"><link rel="preload" as="image" href="assets/logo/adland-logo-transparent.svg" fetchpriority="high"><link rel="icon" href="assets/logo/adland-logo.svg" type="image/svg+xml"><link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/adland-system.css?v=20261110"><link rel="stylesheet" href="assets/adland-ui.css?v=20261110"><link rel="stylesheet" href="assets/adland-studio-3d.css?v=20261110">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"AdLand Studio","url":"https://aradprogramming.github.io/AdLandSite/","logo":"https://aradprogramming.github.io/AdLandSite/assets/logo/adland-logo-transparent.svg","slogan":"Creativity : Ulimited"},{"@type":"ItemList","name":"AdLand Studio products","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"SoftwareApplication","name":"Nexus","url":"https://aradprogramming.github.io/AdLandSite/nexus/"}},{"@type":"ListItem","position":2,"item":{"@type":"SoftwareApplication","name":"Canvas","url":"https://aradprogramming.github.io/AdLandSite/canvas/"}},{"@type":"ListItem","position":3,"item":{"@type":"SoftwareApplication","name":"Pulse","url":"https://aradprogramming.github.io/AdLandSite/pulse/"}},{"@type":"ListItem","position":4,"item":{"@type":"SoftwareApplication","name":"Frame","url":"https://aradprogramming.github.io/AdLandSite/frame/"}},{"@type":"ListItem","position":5,"item":{"@type":"SoftwareApplication","name":"Atlas","url":"https://aradprogramming.github.io/AdLandSite/atlas/"}},{"@type":"ListItem","position":6,"item":{"@type":"SoftwareApplication","name":"Forge","url":"https://aradprogramming.github.io/AdLandSite/forge/"}},{"@type":"ListItem","position":7,"item":{"@type":"SoftwareApplication","name":"Prism","url":"https://aradprogramming.github.io/AdLandSite/prism/"}},{"@type":"ListItem","position":8,"item":{"@type":"SoftwareApplication","name":"Chrono","url":"https://aradprogramming.github.io/AdLandSite/chrono/"}},{"@type":"ListItem","position":9,"item":{"@type":"SoftwareApplication","name":"Echo","url":"https://aradprogramming.github.io/AdLandSite/echo/"}},{"@type":"ListItem","position":10,"item":{"@type":"SoftwareApplication","name":"Relay","url":"https://aradprogramming.github.io/AdLandSite/relay/"}},{"@type":"ListItem","position":11,"item":{"@type":"SoftwareApplication","name":"Orbit","url":"https://aradprogramming.github.io/AdLandSite/orbit/"}},{"@type":"ListItem","position":12,"item":{"@type":"SoftwareApplication","name":"AniDiary","url":"https://aradprogramming.github.io/AdLandSite/anidiary/"}},{"@type":"ListItem","position":13,"item":{"@type":"SoftwareApplication","name":"Roshd","url":"https://aradprogramming.github.io/AdLandSite/roshd/"}},{"@type":"ListItem","position":14,"item":{"@type":"SoftwareApplication","name":"AdLand AI Tools","url":"https://aradprogramming.github.io/AdLandSite/ai-tools/"}},{"@type":"ListItem","position":15,"item":{"@type":"SoftwareApplication","name":"Face2Face","url":"https://aradprogramming.github.io/AdLandSite/face2face/"}}]}]}</script><title>AdLand Studio | Creativity : Ulimited</title></head><body class="al-home">
+<div class="al-progress" id="progress" aria-hidden="true"></div><canvas id="space" aria-hidden="true"></canvas><div class="al-ambient al-ambient-a" aria-hidden="true"></div><div class="al-ambient al-ambient-b" aria-hidden="true"></div>
+<div class="al-boot" id="bootScreen" aria-hidden="true"><div class="al-boot-orbit"><img src="assets/logo/adland-logo-transparent.svg" data-adland-brand-logo alt="AdLand Studio logo"></div><span>ADLAND STUDIO</span><small>CREATIVITY : ULIMITED</small></div>
+<a class="skip-link" href="#main" data-fa="رفتن به محتوای اصلی" data-en="Skip to main content">رفتن به محتوای اصلی</a>
+<header id="nav" class="al-nav glass"><a class="brand" href="#home" aria-label="AdLand Studio home"><img src="assets/logo/adland-logo-transparent.svg" data-adland-brand-logo alt="AdLand Studio brand logo"><span><b>ADLAND</b><small>STUDIO / DIGITAL UNIVERSE</small></span></a>
+<nav class="al-navlinks" id="primaryNav" aria-label="Primary navigation"><a href="#studio" data-fa="استودیو" data-en="Studio">استودیو</a><a href="#apps" data-fa="محصولات" data-en="Products">محصولات</a><a href="#worlds" data-fa="جهان‌ها" data-en="Worlds">جهان‌ها</a><a href="#learn" data-fa="یادگیری" data-en="Learning">یادگیری</a><a href="#command" data-fa="ارتباط" data-en="Contact">ارتباط</a></nav>
+<div class="al-nav-actions"><button class="al-icon-button" type="button" id="lang" aria-label="Change language">FA ↔ EN</button><button class="al-icon-button" type="button" id="motionBtn" aria-pressed="true" title="Toggle motion">MOTION: HIGH</button><button class="al-menu-button" type="button" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button><a class="al-nav-cta" href="#apps"><span data-fa="کاوش محصولات" data-en="Explore apps">کاوش محصولات</span><b>↗</b></a></div></header>
+<main id="main">
+<section id="home" class="al-hero"><div class="al-hero-grid"><div class="al-hero-copy">
+<div class="al-kicker"><span class="al-live-dot"></span><span data-fa="استودیوی مستقل نرم‌افزار و تجربه‌های دیجیتال" data-en="Independent software & digital experience studio">استودیوی مستقل نرم‌افزار و تجربه‌های دیجیتال</span></div>
+<p class="al-slogan" data-fa="Creativity : Ulimited" data-en="Creativity : Ulimited">Creativity : Ulimited</p>
+<h1><span data-fa="ایده‌ها را به" data-en="Turn ideas into">ایده‌ها را به</span> <em data-fa="جهان‌های دیجیتال" data-en="digital worlds">جهان‌های دیجیتال</em> <span data-fa="تبدیل می‌کنیم." data-en="you can explore.">تبدیل می‌کنیم.</span></h1>
+<p class="al-hero-lede" data-fa="از ابزارهای دسکتاپ تا تجربه‌های خلاقانه؛ هر محصول با هدفی روشن، جزئیاتی دقیق و حس یکپارچه ساخته می‌شود." data-en="From focused desktop software to expressive creative tools, every product is built with clear purpose, thoughtful details and a coherent experience.">از ابزارهای دسکتاپ تا تجربه‌های خلاقانه؛ هر محصول با هدفی روشن، جزئیاتی دقیق و حس یکپارچه ساخته می‌شود.</p>
+<div class="al-hero-actions"><a class="al-button al-button-primary" href="#apps"><span data-fa="ورود به جهان محصولات" data-en="Explore the product universe">ورود به جهان محصولات</span><b>↗</b></a><a class="al-button al-button-quiet" href="#studio"><span data-fa="درباره استودیو" data-en="Discover the studio">درباره استودیو</span><b>↓</b></a></div>
+<div class="al-hero-metrics"><div><strong><b id="alProductTotal">15</b> PRODUCTS</strong><span data-fa="محصول در یک اکوسیستم" data-en="products in one ecosystem">محصول در یک اکوسیستم</span><small>13 DESKTOP · 1 WEB · 1 CROSS-PLATFORM</small></div><div><strong>01</strong><span data-fa="استودیوی مستقل" data-en="independent studio">استودیوی مستقل</span><small>DESIGN / BUILD / REFINE</small></div><div><strong>∞</strong><span data-fa="ایده برای ساختن" data-en="ideas to explore">ایده برای ساختن</span><small>ALWAYS IN PROGRESS</small></div></div>
+</div><div class="al-hero-visual" aria-label="AdLand 3D identity"><div class="al-orb-scene al-tilt"><div class="al-orb-halo"></div><div class="al-orb-ring al-ring-one"></div><div class="al-orb-ring al-ring-two"></div><div class="al-orb-ring al-ring-three"></div><div class="al-orb-core"><div class="al-orb-glow"></div><img src="assets/logo/adland-logo-transparent.svg" data-adland-brand-logo alt="AdLand Studio logo"></div><div class="al-orb-axis"></div><div class="al-orb-chip al-chip-top"><span class="al-chip-dot"></span> CREATIVE SYSTEMS <b>01</b></div><div class="al-orb-chip al-chip-left"><span>✦</span> SOFTWARE / ART</div><div class="al-orb-chip al-chip-bottom"><span class="al-chip-dot"></span> BUILT TO EXPLORE</div><div class="al-float-card al-float-card-a"><span class="al-float-icon">◈</span><div><b>15 PRODUCTS</b><small>ONE CREATIVE ECOSYSTEM</small></div></div><div class="al-float-card al-float-card-b"><span class="al-float-icon">⌘</span><div><b>DESKTOP FIRST</b><small>TOOLS THAT FEEL AT HOME</small></div></div><div class="al-visual-caption"><span class="al-caption-line"></span><span data-fa="یک جهان؛ تجربه‌های متفاوت" data-en="One universe. Many experiences.">یک جهان؛ تجربه‌های متفاوت</span></div></div></div></div><a class="al-scroll-cue" href="#studio"><span></span><small data-fa="برای کاوش اسکرول کن" data-en="Scroll to explore">برای کاوش اسکرول کن</small></a></section>
+<section id="studio" class="al-section"><div class="al-section-head" data-reveal><div><span class="al-eyebrow">01 / THE STUDIO</span><h2 data-fa="ساختن، با فکر و شخصیت." data-en="Built with intent and identity.">ساختن، با فکر و شخصیت.</h2></div><p data-fa="AdLand یک مجموعه پراکنده از ابزارها نیست؛ یک زبان طراحی و مهندسی مشترک است که در محصولات مختلف ادامه پیدا می‌کند." data-en="AdLand is more than a collection of separate tools. It is a shared design and engineering language carried across distinct products.">AdLand یک مجموعه پراکنده از ابزارها نیست؛ یک زبان طراحی و مهندسی مشترک است که در محصولات مختلف ادامه پیدا می‌کند.</p></div>
+<div class="al-feature-grid"><article class="al-feature-card al-tilt" data-reveal><span class="al-feature-index">01</span><div class="al-feature-symbol">◉</div><h3 data-fa="نرم‌افزارهای هدفمند" data-en="Purposeful software">نرم‌افزارهای هدفمند</h3><p data-fa="ابزارهایی که برای یک کار واقعی ساخته می‌شوند؛ سریع، قابل‌فهم و منسجم." data-en="Tools made for real workflows: focused, understandable and cohesive.">ابزارهایی که برای یک کار واقعی ساخته می‌شوند؛ سریع، قابل‌فهم و منسجم.</p><span class="al-feature-foot">PRODUCT DESIGN / ENGINEERING</span></article><article class="al-feature-card al-tilt" data-reveal><span class="al-feature-index">02</span><div class="al-feature-symbol">✳</div><h3 data-fa="تجربه‌های بصری" data-en="Expressive experiences">تجربه‌های بصری</h3><p data-fa="هویت بصری، حرکت و جزئیات رابط در خدمت تجربه‌اند؛ نه شلوغی بی‌دلیل." data-en="Visual identity, motion and interface details serve the experience—not noise.">هویت بصری، حرکت و جزئیات رابط در خدمت تجربه‌اند؛ نه شلوغی بی‌دلیل.</p><span class="al-feature-foot">VISUAL SYSTEMS / MOTION</span></article><article class="al-feature-card al-tilt" data-reveal><span class="al-feature-index">03</span><div class="al-feature-symbol">⌘</div><h3 data-fa="یادگیری و ساختن" data-en="Learning by building">یادگیری و ساختن</h3><p data-fa="از مسیرهای آموزشی تا ابزارهای توسعه؛ یادگیری با تجربه و پروژه معنا پیدا می‌کند." data-en="From learning paths to developer utilities, knowledge grows through building.">از مسیرهای آموزشی تا ابزارهای توسعه؛ یادگیری با تجربه و پروژه معنا پیدا می‌کند.</p><span class="al-feature-foot">LEARN / EXPERIMENT / SHIP</span></article></div></section>
+<section id="apps" class="al-section"><div class="al-section-head" data-reveal><div><span class="al-eyebrow">02 / PRODUCT UNIVERSE</span><h2 data-fa="ابزار مناسبِ کار را پیدا کن." data-en="Find the right tool for the work.">ابزار مناسبِ کار را پیدا کن.</h2></div><p data-fa="محصولات را جست‌وجو کن، دسته‌ها را فیلتر کن و ابزارهای موردعلاقه‌ات را ذخیره کن." data-en="Search the catalogue, filter by category and save the tools you want close at hand.">محصولات را جست‌وجو کن، دسته‌ها را فیلتر کن و ابزارهای موردعلاقه‌ات را ذخیره کن.</p></div>
+<div class="al-catalog-shell"><div class="al-catalog-top"><div class="al-catalog-number"><span>ADLAND / APPS</span><b id="alAppCount">15 محصول از 15</b></div><div class="al-app-toolbar"><label class="al-search"><span aria-hidden="true">⌕</span><input id="adlandAppSearch" type="search" placeholder="جست‌وجوی محصول..." data-fa-placeholder="جست‌وجوی محصول..." data-en-placeholder="Search products..." autocomplete="off"></label><button type="button" id="alAppReset" class="al-reset" data-fa="پاک‌کردن فیلترها" data-en="Reset filters">پاک‌کردن فیلترها</button></div></div>
+<div class="al-filter-row" role="group" aria-label="Product filters"><button class="productFilter active" data-filter="all" type="button" data-fa="همه محصولات" data-en="All products">همه محصولات</button><button class="productFilter" data-filter="focus" type="button" data-fa="تمرکز" data-en="Focus">تمرکز</button><button class="productFilter" data-filter="creative" type="button" data-fa="خلاقیت" data-en="Creative">خلاقیت</button><button class="productFilter" data-filter="developer" type="button" data-fa="توسعه‌دهنده" data-en="Developer">توسعه‌دهنده</button><button class="productFilter" data-filter="system" type="button" data-fa="سیستم" data-en="System">سیستم</button><button class="productFilter" data-filter="utility" type="button" data-fa="کاربردی" data-en="Utility">کاربردی</button><button class="productFilter" data-filter="favorites" type="button" data-fa="★ علاقه‌مندی‌ها" data-en="★ Favorites">★ علاقه‌مندی‌ها</button><button class="productFilter" data-filter="recent" type="button" data-fa="اخیر" data-en="Recent">اخیر</button><button type="button" id="alHealthBtn" class="al-health-btn" data-state="online">آنلاین</button><button type="button" id="adlandSelfTest" class="al-selftest" data-fa="تست سیستم" data-en="System test">تست سیستم</button></div><div class="appsGrid al-app-grid"><article class="app al-app-card al-tilt" data-app-slug="nexus" data-app-kind="focus" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.4.4</span></div>
+<a class="appIcon" href="nexus/" aria-label="Nexus"><img src="assets/icons/projects/AdLand_Nexus_icon.svg" alt="Nexus app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="تمرکز و یادگیری" data-en="Focus & learning">تمرکز و یادگیری</div><h3><a href="nexus/">Nexus</a></h3>
+<p data-fa="مرکز فرمان تمرکز، کار و آرامش." data-en="Command center for focus, work and calm.">مرکز فرمان تمرکز، کار و آرامش.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="nexus/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="canvas" data-app-kind="creative" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.1.1</span></div>
+<a class="appIcon" href="canvas/" aria-label="Canvas"><img src="assets/icons/projects/AdLand_Canvas_icon.svg" alt="Canvas app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="خلاقیت و طراحی" data-en="Creative suite">خلاقیت و طراحی</div><h3><a href="canvas/">Canvas</a></h3>
+<p data-fa="استودیوی تصویری و مودبرد." data-en="Visual asset studio and moodboard.">استودیوی تصویری و مودبرد.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="canvas/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="pulse" data-app-kind="system" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.3</span></div>
+<a class="appIcon" href="pulse/" aria-label="Pulse"><img src="assets/icons/projects/AdLand_Pulse_icon.svg" alt="Pulse app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="مدیریت سیستم" data-en="System utilities">مدیریت سیستم</div><h3><a href="pulse/">Pulse</a></h3>
+<p data-fa="پایش زنده‌ی عملکرد سیستم." data-en="Live system performance telemetry.">پایش زنده‌ی عملکرد سیستم.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="pulse/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="frame" data-app-kind="creative" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.1.3</span></div>
+<a class="appIcon" href="frame/" aria-label="Frame"><img src="assets/icons/projects/AdLand_Frame_icon.svg" alt="Frame app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="خلاقیت و طراحی" data-en="Creative suite">خلاقیت و طراحی</div><h3><a href="frame/">Frame</a></h3>
+<p data-fa="کارگاه محلی تصویر." data-en="Local image workshop.">کارگاه محلی تصویر.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="frame/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="atlas" data-app-kind="system" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.1</span></div>
+<a class="appIcon" href="atlas/" aria-label="Atlas"><img src="assets/icons/projects/Atlas_icon.svg" alt="Atlas app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="مدیریت سیستم" data-en="System utilities">مدیریت سیستم</div><h3><a href="atlas/">Atlas</a></h3>
+<p data-fa="جست‌وجو و مدیریت هوشمند فایل‌ها." data-en="Local file intelligence and search.">جست‌وجو و مدیریت هوشمند فایل‌ها.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="atlas/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="forge" data-app-kind="developer" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.1</span></div>
+<a class="appIcon" href="forge/" aria-label="Forge"><img src="assets/icons/projects/Forge_icon.svg" alt="Forge app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="توسعه و ارتباط" data-en="Build & connect">توسعه و ارتباط</div><h3><a href="forge/">Forge</a></h3>
+<p data-fa="میزکار JSON، متن و تبدیل داده." data-en="JSON, text and data conversion workbench.">میزکار JSON، متن و تبدیل داده.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="forge/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="prism" data-app-kind="creative" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.1</span></div>
+<a class="appIcon" href="prism/" aria-label="Prism"><img src="assets/icons/projects/Prism_icon.svg" alt="Prism app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="خلاقیت و طراحی" data-en="Creative suite">خلاقیت و طراحی</div><h3><a href="prism/">Prism</a></h3>
+<p data-fa="لابراتوار رنگ و کنتراست." data-en="Color and contrast laboratory.">لابراتوار رنگ و کنتراست.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="prism/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="chrono" data-app-kind="system" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.0</span></div>
+<a class="appIcon" href="chrono/" aria-label="Chrono"><img src="assets/icons/projects/Chrono_icon.svg" alt="Chrono app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="مدیریت سیستم" data-en="System utilities">مدیریت سیستم</div><h3><a href="chrono/">Chrono</a></h3>
+<p data-fa="ساعت جهانی، کرنومتر و شمارش‌معکوس." data-en="World clocks, stopwatch and countdown.">ساعت جهانی، کرنومتر و شمارش‌معکوس.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="chrono/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="echo" data-app-kind="creative" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.0</span></div>
+<a class="appIcon" href="echo/" aria-label="Echo"><img src="assets/icons/projects/Echo_icon.svg" alt="Echo app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="خلاقیت و طراحی" data-en="Creative suite">خلاقیت و طراحی</div><h3><a href="echo/">Echo</a></h3>
+<p data-fa="ضبط و نگهداری یادداشت‌های صوتی." data-en="Local voice notes and recordings.">ضبط و نگهداری یادداشت‌های صوتی.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="echo/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="relay" data-app-kind="utility" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.0</span></div>
+<a class="appIcon" href="relay/" aria-label="Relay"><img src="assets/icons/projects/Relay_icon.svg" alt="Relay app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="ابزار کاربردی" data-en="Everyday utility">ابزار کاربردی</div><h3><a href="relay/">Relay</a></h3>
+<p data-fa="تاریخچه‌ی کلیپ‌بورد و کپی سریع." data-en="Clipboard history and instant reuse.">تاریخچه‌ی کلیپ‌بورد و کپی سریع.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="relay/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="orbit" data-app-kind="system" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.2</span></div>
+<a class="appIcon" href="orbit/" aria-label="Orbit"><img src="assets/icons/projects/Orbit_icon.svg" alt="Orbit app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="مدیریت سیستم" data-en="System utilities">مدیریت سیستم</div><h3><a href="orbit/">Orbit</a></h3>
+<p data-fa="مرکز مدیریت، نسخه و دانلود همه‌ی ابزارها." data-en="App management, versions, sites and downloads.">مرکز مدیریت، نسخه و دانلود همه‌ی ابزارها.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="orbit/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="anidiary" data-app-kind="creative" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.0.0</span></div>
+<a class="appIcon" href="anidiary/" aria-label="AniDiary"><img src="assets/icons/projects/AniDiary_icon.svg" alt="AniDiary app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="خلاقیت و طراحی" data-en="Creative suite">خلاقیت و طراحی</div><h3><a href="anidiary/">AniDiary</a></h3>
+<p data-fa="دفتر دیجیتال انیمه برای پوستر، ژانر و پیشرفت." data-en="Local-first anime journal for posters, genres and progress.">دفتر دیجیتال انیمه برای پوستر، ژانر و پیشرفت.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="anidiary/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="roshd" data-app-kind="focus" data-reveal>
+<div class="appHead"><span class="appTag">CROSS-PLATFORM</span><span class="al-app-version">v1.0.1</span></div>
+<a class="appIcon" href="roshd/" aria-label="Roshd"><img src="assets/icons/projects/Roshd_icon.svg" alt="Roshd app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="تمرکز و یادگیری" data-en="Focus & learning">تمرکز و یادگیری</div><h3><a href="roshd/">Roshd</a></h3>
+<p data-fa="میز مطالعه و برنامه‌ریزی فارسی‌محور؛ ویژه دانش‌آموزان تیزهوشانی." data-en="Persian-first study OS for ambitious students.">میز مطالعه و برنامه‌ریزی فارسی‌محور؛ ویژه دانش‌آموزان تیزهوشانی.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">CROSS-PLATFORM</span><a class="appLink" href="roshd/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="ai-tools" data-app-kind="developer" data-reveal>
+<div class="appHead"><span class="appTag">WEB TOOL</span><span class="al-app-version">v0.1.0</span></div>
+<a class="appIcon" href="ai-tools/" aria-label="AdLand AI Tools"><img src="assets/icons/projects/AdLand_AI_Tools_icon.svg" alt="AdLand AI Tools app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="توسعه و ارتباط" data-en="Build & connect">توسعه و ارتباط</div><h3><a href="ai-tools/">AdLand AI Tools</a></h3>
+<p data-fa="جعبه‌ابزار وب برای prompt، JSON، متن، Base64 و Regex." data-en="A browser-first toolbox for prompts, JSON, text, Base64 and Regex.">جعبه‌ابزار وب برای prompt، JSON، متن، Base64 و Regex.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">WEB TOOL</span><a class="appLink" href="ai-tools/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article>
+<article class="app al-app-card al-tilt" data-app-slug="face2face" data-app-kind="developer" data-reveal>
+<div class="appHead"><span class="appTag">DESKTOP APP</span><span class="al-app-version">v1.2.0</span></div>
+<a class="appIcon" href="face2face/" aria-label="Face2Face"><img src="assets/icons/projects/Face2Face_icon.svg" alt="Face2Face app icon" loading="lazy" decoding="async"></a>
+<div class="appCopy"><div class="al-app-category" data-fa="توسعه و ارتباط" data-en="Build & connect">توسعه و ارتباط</div><h3><a href="face2face/">Face2Face</a></h3>
+<p data-fa="جلسه‌های زنده ویندوز با تصویر، صدا و اشتراک فایل و کد." data-en="Windows-first live meetings with audio/video, file and code collaboration.">جلسه‌های زنده ویندوز با تصویر، صدا و اشتراک فایل و کد.</p></div>
+<div class="al-app-foot"><span class="al-app-platform">DESKTOP APP</span><a class="appLink" href="face2face/"><span data-fa="ورود به محصول" data-en="Explore product">ورود به محصول</span><b aria-hidden="true">↗</b></a></div></article></div><div id="alAppEmpty" class="al-empty" hidden>محصولی پیدا نشد.</div><div class="al-catalog-foot"><span data-fa="فهرست محصولات از داده‌های رسمی اپلیکیشن‌ها ساخته شده است." data-en="The product catalogue is aligned with the official app manifest.">فهرست محصولات از داده‌های رسمی اپلیکیشن‌ها ساخته شده است.</span><span>15 / 15 <b>SYNCED</b></span></div></div></section>
+<section id="worlds" class="al-section"><div class="al-section-head" data-reveal><div><span class="al-eyebrow">03 / FEATURED WORLDS</span><h2 data-fa="سه مسیر برای شروع." data-en="Three worlds to step into.">سه مسیر برای شروع.</h2></div><p data-fa="چند محصول شاخص که بخش‌های متفاوت جهان AdLand را نشان می‌دهند." data-en="A few featured products that reveal different sides of the AdLand universe.">چند محصول شاخص که بخش‌های متفاوت جهان AdLand را نشان می‌دهند.</p></div><div class="al-world-grid">
+<a class="al-world-card al-tilt" href="face2face/" data-reveal><div class="al-world-top"><span>REAL-TIME / COLLABORATION</span><b>↗</b></div><div class="al-world-art"><div class="al-face-orbit"></div><div class="al-face-core">F<span>2</span>F</div><i></i><i></i><i></i></div><div class="al-world-copy"><span data-fa="ارتباط و همکاری" data-en="Communication & collaboration">ارتباط و همکاری</span><h3>Face2Face</h3><p data-fa="جلسه‌های زنده، تماس تصویری، اتاق‌ها و همکاری در لحظه." data-en="Live meetings, video calls, rooms and real-time collaboration.">جلسه‌های زنده، تماس تصویری، اتاق‌ها و همکاری در لحظه.</p></div></a>
+<a class="al-world-card al-tilt" href="roshd/" data-reveal><div class="al-world-top"><span>FOCUS / LEARNING</span><b>↗</b></div><div class="al-world-art"><div class="al-roshd-stack"><i></i><i></i><i></i><b>R</b></div><div class="al-roshd-spark">✦</div></div><div class="al-world-copy"><span data-fa="یادگیری و تمرکز" data-en="Learning & focus">یادگیری و تمرکز</span><h3>Roshd</h3><p data-fa="میز مطالعه و برنامه‌ریزی برای یادگیری هدفمند." data-en="A focused study space for deliberate learning.">میز مطالعه و برنامه‌ریزی برای یادگیری هدفمند.</p></div></a>
+<a class="al-world-card al-tilt" href="canvas/" data-reveal><div class="al-world-top"><span>CREATIVE / VISUAL</span><b>↗</b></div><div class="al-world-art"><div class="al-canvas-sheets"><i></i><i></i><i></i><b>✧</b></div></div><div class="al-world-copy"><span data-fa="طراحی و خلاقیت" data-en="Design & creativity">طراحی و خلاقیت</span><h3>Canvas</h3><p data-fa="فضایی برای ایده‌پردازی و ساخت تجربه‌های بصری." data-en="A space for ideas, visual exploration and creative work.">فضایی برای ایده‌پردازی و ساخت تجربه‌های بصری.</p></div></a></div></section>
+<section id="learn" class="al-section"><div class="al-learn-panel" data-reveal><div class="al-learn-copy"><span class="al-eyebrow">04 / LEARNING LAB</span><h2 data-fa="مهارت را با ساختن یاد بگیر." data-en="Learn the skill by building.">مهارت را با ساختن یاد بگیر.</h2><p data-fa="مسیرهای آموزشی AdLand از مبانی شروع می‌شوند و با تمرین‌های قابل‌اجرا جلو می‌روند." data-en="AdLand learning paths begin with solid foundations and move forward through practical exercises.">مسیرهای آموزشی AdLand از مبانی شروع می‌شوند و با تمرین‌های قابل‌اجرا جلو می‌روند.</p><a class="al-button al-button-primary" href="learning/python/"><span data-fa="شروع یادگیری" data-en="Start learning">شروع یادگیری</span><b>↗</b></a></div><div class="al-learn-links"><a href="learning/python/"><span class="al-learn-icon">Py</span><span><b>Python</b><small data-fa="از منطق تا پروژه" data-en="Logic to projects">از منطق تا پروژه</small></span><b>↗</b></a><a href="learning/html-css/"><span class="al-learn-icon">⌘</span><span><b>HTML & CSS</b><small data-fa="ساخت وب از پایه" data-en="Build the web from scratch">ساخت وب از پایه</small></span><b>↗</b></a><a href="learning/app-inventor/"><span class="al-learn-icon">◈</span><span><b>App Inventor</b><small data-fa="اپلیکیشن با منطق بصری" data-en="Apps with visual logic">اپلیکیشن با منطق بصری</small></span><b>↗</b></a><a href="learning/scratch/"><span class="al-learn-icon">✳</span><span><b>Scratch</b><small data-fa="یادگیری برنامه‌نویسی با ساختن" data-en="Learn coding by creating">یادگیری برنامه‌نویسی با ساختن</small></span><b>↗</b></a></div></div></section>
+<section id="command" class="al-section"><div class="al-command-panel" data-reveal><div class="al-command-mark"><img src="assets/logo/adland-logo-transparent.svg" data-adland-brand-logo alt="AdLand Studio logo"></div><div class="al-command-copy"><span class="al-eyebrow">05 / LET'S BUILD</span><h2 data-fa="ایده‌ی بعدی از کجا شروع می‌شود؟" data-en="Where does the next idea begin?">ایده‌ی بعدی از کجا شروع می‌شود؟</h2><p data-fa="برای پیشنهاد، همکاری یا دنبال‌کردن مسیر محصولات، از راه‌های ارتباطی استودیو استفاده کن." data-en="For suggestions, collaboration or product updates, use the studio's official channels.">برای پیشنهاد، همکاری یا دنبال‌کردن مسیر محصولات، از راه‌های ارتباطی استودیو استفاده کن.</p></div><div class="al-command-actions"><a class="al-button al-button-primary" href="https://t.me/Arad_unk" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="al-button al-button-quiet" href="https://ble.ir/AdLandStudio" target="_blank" rel="noopener noreferrer">Bale ↗</a></div></div></section>
+</main><footer class="al-footer"><a class="al-footer-brand" href="#home"><img src="assets/logo/adland-logo-transparent.svg" alt="AdLand Studio" loading="lazy"><b>ADLAND STUDIO</b></a><span>Creativity : Ulimited</span><a href="#home" data-fa="بازگشت به بالا ↑" data-en="Back to top ↑">بازگشت به بالا ↑</a><small>© <span id="alYear">2026</span> ADLAND STUDIO · BUILT WITH INTENT</small></footer>
+<script defer src="assets/adland-language.js?v=20261110"></script><script defer src="assets/adland-ecosystem.js?v=20261110"></script><script defer src="assets/adland-face2face.js?v=20261110"></script><script defer src="assets/adland-system.js?v=20261110"></script><script defer src="assets/adland-studio-3d.js?v=20261110"></script></body></html>
