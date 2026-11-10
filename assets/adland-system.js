@@ -48,20 +48,25 @@
     const current = new URL(img.getAttribute('src') || '', document.baseURI).href;
     let index = candidates.indexOf(current);
     if (index < 0) index = -1;
-    img.addEventListener('load', () => {
-      if (img.naturalWidth > 0) img.dataset.adlandLogoState = 'ready';
-    });
-    img.addEventListener('error', () => {
+    const advanceFallback = () => {
       const next = index + 1;
       if (next < candidates.length) {
         index = next;
         img.dataset.adlandLogoState = 'fallback';
         img.src = candidates[index];
-      } else {
-        img.dataset.adlandLogoState = 'inline-fallback';
-        img.src = inlineLogoUrl;
+        return;
       }
+      // Do not reassign the same failed URL: stop cleanly after the inline fallback.
+      img.dataset.adlandLogoState = 'unavailable';
+      img.alt = 'AdLand Studio';
+      img.classList.add('adland-logo-unavailable');
+    };
+    img.addEventListener('load', () => {
+      if (img.naturalWidth > 0) img.dataset.adlandLogoState = 'ready';
     });
+    img.addEventListener('error', advanceFallback);
+    // The initial request may fail before deferred scripts run.
+    if (img.complete && img.naturalWidth === 0) advanceFallback();
   }
 
   $$('[data-adland-brand-logo]').forEach(protectLogo);
