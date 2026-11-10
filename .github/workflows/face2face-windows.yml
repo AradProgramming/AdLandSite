@@ -34,7 +34,7 @@ jobs:
         shell: pwsh
         run: |
           $sourceArchive = Join-Path $env:GITHUB_WORKSPACE 'face2face/windows-app/Face2Face-Windows-Source-1.2.1.tar.gz.base64'
-          $encoded = (Get-Content -LiteralPath $sourceArchive -Raw) -replace '\\s', ''
+          $encoded = (Get-Content -LiteralPath $sourceArchive -Raw) -replace '\s', ''
           if ([string]::IsNullOrWhiteSpace($encoded)) { throw 'The Face2Face source bundle is empty.' }
           $archivePath = Join-Path $env:RUNNER_TEMP 'Face2Face-Windows-Source-1.2.1.tar.gz'
           [IO.File]::WriteAllBytes($archivePath, [Convert]::FromBase64String($encoded))
