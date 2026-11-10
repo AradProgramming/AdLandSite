@@ -176,6 +176,49 @@ def main() -> int:
         errors.append("Homepage is missing the Face2Face catalogue card or enhancement script.")
     if not (ROOT / "face2face" / "index.html").is_file():
         errors.append("Face2Face product page is missing.")
+    # AdLand system layer: search, saved views, diagnostics and logo resilience.
+    for asset in ("assets/adland-system.css", "assets/adland-system.js",
+                  "assets/logo/adland-logo-transparent.svg", "assets/logo/adland-logo.svg"):
+        if not (ROOT / asset).is_file():
+            errors.append(f"Required system asset is missing: {asset}")
+    for ref in ("assets/adland-system.css", "assets/adland-system.js",
+                "assets/logo/adland-logo-transparent.svg"):
+        if ref not in home:
+            errors.append(f"Homepage is missing the system asset reference: {ref}")
+    brand_tags = re.findall(r"<img\b[^>]*data-adland-brand-logo[^>]*>", home, re.IGNORECASE)
+    if len(brand_tags) < 3:
+        errors.append("Homepage must protect the boot, navigation and hero brand logos.")
+    for tag in brand_tags:
+        if not re.search(r"\balt\s*=\s*['\"][^'\"]+['\"]", tag, re.IGNORECASE):
+            errors.append("Every protected AdLand logo must have descriptive alt text.")
+    required_controls = ("id=\"adlandAppSearch\"", "id=\"alAppCount\"",
+                         "id=\"alAppReset\"", "id=\"alAppEmpty\"",
+                         "id=\"alHealthBtn\"", "id=\"adlandSelfTest\"",
+                         "data-filter=\"favorites\"", "data-filter=\"recent\"")
+    for control in required_controls:
+        if control not in home:
+            errors.append(f"Homepage is missing an AdLand system control: {control}")
+    for filter_group in ("focus:['nexus','roshd']",
+                         "developer:['forge','ai-tools','face2face']"):
+        if filter_group not in home:
+            errors.append(f"Homepage category coverage is incomplete: {filter_group}")
+    try:
+        pwa_manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+        pwa_icons = pwa_manifest.get("icons", [])
+        icon_sources = [item.get("src") for item in pwa_icons]
+        if len(icon_sources) != len(set(icon_sources)):
+            errors.append("manifest.json: duplicate PWA icon sources")
+        if not any(str(item.get("type", "")).lower() == "image/svg+xml"
+                   for item in pwa_icons):
+            errors.append("manifest.json: scalable SVG app icon is missing")
+    except Exception as exc:
+        errors.append(f"manifest.json icons could not be validated: {exc}")
+    try:
+        not_found = (ROOT / "404.html").read_text(encoding="utf-8")
+        if "data-adland-brand-logo" not in not_found or "adland-logo-transparent.svg" not in not_found:
+            errors.append("404 page is missing its protected SVG brand logo.")
+    except OSError as exc:
+        errors.append(f"404 page could not be checked: {exc}")
     if errors:
         print("SITE QUALITY CHECK FAILED:")
         print("\n".join(f"- {err}" for err in errors))

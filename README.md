@@ -18,6 +18,7 @@ This repository contains the bilingual Persian/English AdLand Studio website, pr
 - `assets/adland-language.js` — shared Persian/English language behavior.
 - `assets/adland-ecosystem.js` — shared app experience helpers, support UI and optional sound effects.
 - `assets/adland-face2face.js` — Face2Face feature panel and accessible motion polish.
+- `assets/adland-system.css` / `assets/adland-system.js` — shared interface refresh, resilient logo loading, product search, favorites, recent apps, reduced-motion behavior and in-browser diagnostics.
 - `face2face/index.html` — bilingual Face2Face product page.
 - `face2face/index.html` — Face2Face product page and Windows build guide. A public source bundle and prebuilt installer have not yet been published in this repository.
 - `scripts/site_quality.py` — internal-link, asset, manifest and script-syntax checks.
@@ -29,6 +30,7 @@ Requirements: Python 3.10+ and Node.js 20+.
 ```bash
 python scripts/site_quality.py
 node --check assets/adland-face2face.js
+node --check assets/adland-system.js
 ```
 
 GitHub Actions runs the same quality checks on pushes and pull requests.
@@ -47,3 +49,7 @@ A Windows source ZIP was generated and is available as a separate conversation a
 ## Publishing
 
 The site is published using GitHub Pages from the repository. Keep asset paths relative or prefixed for the `/AdLandSite/` project path. Do not publish credentials, signing keys, local certificates or private customer data.
+
+## AdLand system refresh
+
+The homepage includes a browser-only self-test (also available from the navigation health control), product search, category filters, favorites and recently opened products. Preferences are stored only in the current browser. Brand marks use an SVG-first loading path with a second local SVG and inline-vector fallback; the PWA manifest contains distinct SVG and PNG icon entries. The self-test reports page structure, logo rendering, core script references, image loading, network state and runtime errors without sending telemetry.
