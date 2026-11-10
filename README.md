@@ -19,6 +19,8 @@ This repository contains the bilingual Persian/English AdLand Studio website, pr
 - `assets/adland-ecosystem.js` — shared app experience helpers, support UI and optional sound effects.
 - `assets/adland-face2face.js` — Face2Face feature panel and accessible motion polish.
 - `assets/adland-system.css` / `assets/adland-system.js` — shared interface refresh, resilient logo loading, product search, favorites, recent apps, reduced-motion behavior and in-browser diagnostics.
+- `assets/adland-studio-3d.css` / `assets/adland-studio-3d.js` — rebuilt 3D homepage, scroll-triggered reveals, pointer-depth interactions and lightweight ambient motion.
+- `assets/adland-universal-glass.css` / `assets/adland-universal-motion.js` — shared glass surfaces and accessible scroll-triggered motion across product, learning and AniDiary renderer pages.
 - `face2face/index.html` — bilingual Face2Face product page.
 - `face2face/index.html` — Face2Face product page and Windows build guide. A public source bundle and prebuilt installer have not yet been published in this repository.
 - `scripts/site_quality.py` — internal-link, asset, manifest and script-syntax checks.
