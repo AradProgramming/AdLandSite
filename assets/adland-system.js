@@ -174,6 +174,8 @@
     });
   }
   function renderCatalog() {
+    const totalBadge = $('#alProductTotal');
+    if (totalBadge) totalBadge.textContent = String(cards.length);
     let visible = 0;
     cards.forEach(card => {
       const slug = getSlug(card);
