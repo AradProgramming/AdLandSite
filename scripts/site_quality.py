@@ -187,6 +187,8 @@ def main() -> int:
             errors.append("Homepage platform breakdown is stale.")
         if "const filters=[...qsa('.productFilter')" in home:
             errors.append("Legacy inline filters conflict with the unified catalogue controller.")
+        if "const required = ['#nav', '#hero', '#apps', '#command'];" not in system_js:
+            errors.append("Browser self-test should only require persistent page sections.")
         schema_match = re.search(
             r'<script type="application/ld\+json">([\s\S]*?)</script>', home
         )
