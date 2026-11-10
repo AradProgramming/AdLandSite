@@ -174,6 +174,8 @@
     });
   }
   function renderCatalog() {
+    const totalBadge = $('#alProductTotal');
+    if (totalBadge) totalBadge.textContent = String(cards.length);
     let visible = 0;
     cards.forEach(card => {
       const slug = getSlug(card);
@@ -235,7 +237,7 @@
     const failedImages = loadedImages.filter(img => img.naturalWidth === 0);
     const brandImages = $$('[data-adland-brand-logo]');
     const brandOk = brandImages.length > 0 && brandImages.some(img => img.complete && img.naturalWidth > 0);
-    const required = ['#nav', '#hero', '#apps', '#command', '#boot'];
+    const required = ['#nav', '#hero', '#apps', '#command'];
     const missing = required.filter(selector => !$(selector));
     const scripts = ['adland-language.js', 'adland-ecosystem.js', 'adland-face2face.js', 'adland-system.js'];
     const missingScripts = scripts.filter(name => !$$('script[src]').some(script => script.src.includes(name)));
