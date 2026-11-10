@@ -11,7 +11,19 @@
  const menu=$('#menuToggle'),nav=$('#nav');
  menu?.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close menu':'Open menu')});
  $$('#primaryNav a').forEach(a=>a.addEventListener('click',()=>{nav?.classList.remove('is-open');menu?.setAttribute('aria-expanded','false')}));
- $('#motionBtn')?.addEventListener('click',()=>{try{const next=low()?'high':'low';localStorage.setItem('adland-motion',next);body.classList.toggle('al-motion-low',next==='low'||reduce)}catch(_){}});
+ const motionButton=$('#motionBtn');
+ const applyMotion=()=>{
+  const active=!motionOff();
+  body.classList.toggle('al-motion-low',!active);
+  if(motionButton){
+   motionButton.textContent=active?'MOTION: HIGH':'MOTION: LOW';
+   motionButton.setAttribute('aria-pressed',String(active));
+   motionButton.title=reduce?'Reduced motion is required by your device settings':'Toggle interface motion';
+  }
+ };
+ applyMotion();
+ motionButton?.addEventListener('click',()=>{try{localStorage.setItem('adland-motion',low()?'high':'low')}catch(_){}applyMotion()});
+ window.matchMedia?.('(prefers-reduced-motion: reduce)').addEventListener?.('change',applyMotion);
  function setupReveal(){
   const items=$$('[data-reveal]');
   items.forEach((el,i)=>el.style.setProperty('--reveal-delay',((i%4)*75)+'ms'));
