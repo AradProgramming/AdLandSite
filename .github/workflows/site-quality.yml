@@ -1,7 +1,7 @@
 name: Site quality
 on:
   push:
-    branches: [main, 'codex/**']
+    branches: [main, 'codex/**', 'rebuild/**']
   pull_request:
     branches: [main]
   workflow_dispatch:
