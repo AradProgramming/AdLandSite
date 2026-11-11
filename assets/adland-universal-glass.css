@@ -16,3 +16,5 @@ html.al-motion-ready .al-global-reveal.al-global-visible{opacity:1;transform:non
 :where(.app,.tool,.course,.project,.feature,.workspace):hover img{filter:drop-shadow(0 10px 16px rgba(167,139,250,.18))}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.al-global-reveal{opacity:1!important;transform:none!important;transition:none!important}*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 body.al-motion-low .al-global-reveal{opacity:1!important;transform:none!important;transition:none!important}
+body.al-motion-low,body.al-motion-low * ,body.al-motion-low *::before,body.al-motion-low *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+body.al-motion-low :where(.app,.tool,.course,.project,.teamCard,.workspace,.feature,.featureCard,.glassCard,.faqItem,.story,.finalCard,.al-panel,.al-card,.toolCard,button,.btn,.appLink,.openTool,.tab):hover{transform:none!important}
