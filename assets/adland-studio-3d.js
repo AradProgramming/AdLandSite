@@ -3,7 +3,7 @@
  'use strict';
  const root=document.documentElement,body=document.body,motionQuery=window.matchMedia?.('(prefers-reduced-motion: reduce)');
  const low=()=>{try{return localStorage.getItem('adland-motion')==='low'}catch(_){return false}};
- const motionOff=()=>!!motionQuery?.matches||low(),$=s=>document.querySelector(s),$=s=>Array.from(document.querySelectorAll(s));
+ const motionOff=()=>!!motionQuery?.matches||low(),$=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
  const boot=$('#bootScreen'),finishBoot=()=>boot?.classList.add('is-done');
  if(document.readyState==='complete')setTimeout(finishBoot,380);else window.addEventListener('load',()=>setTimeout(finishBoot,350),{once:true});
  setTimeout(finishBoot,1800);
