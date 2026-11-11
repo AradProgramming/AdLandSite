@@ -326,6 +326,7 @@
     window.__alIconObserver.observe(document.body,{subtree:true,childList:true});
   }
 
-function sync(){iconIntegrity();setLocalized();experience();globalShortcuts();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
+function installUniversalMotion(){const source=[...document.scripts].find(s=>/adland-ecosystem\.js(?:\?|$)/.test(s.src));if(!source)return;const base=new URL('.',source.src);if(!document.querySelector('link[data-adland-universal-glass]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('adland-universal-glass.css?v=20261110',base).href;link.dataset.adlandUniversalGlass='1';document.head.appendChild(link)}if(!document.querySelector('script[data-adland-universal-motion]')){const script=document.createElement('script');script.src=new URL('adland-universal-motion.js?v=20261110',base).href;script.defer=true;script.dataset.adlandUniversalMotion='1';document.head.appendChild(script)}}
+function sync(){installUniversalMotion();iconIntegrity();setLocalized();experience();globalShortcuts();productPlatform();homeMac();heroHome();upgradeUniverse();adminFeed();activateMac()}
   document.addEventListener('adland:language',sync);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{support();sync()});else{support();sync()}
 })();
